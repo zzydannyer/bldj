@@ -1,0 +1,56 @@
+// **************************************************************************************
+/**
+  * 媒体资源
+  */
+
+// 资源通过审核pass图标
+.company-pass {
+    font-size: 14PX;
+    font-weight: 800;
+    right: -25PX;
+    top: 15PX;
+    width: 100PX;
+    height: 20PX;
+    color: #fff;
+    line-height: 20PX;
+    background: #8deb28;
+    text-align: center;
+    transform: rotate(45deg);
+    position: absolute;
+    box-shadow: 8PX 2PX 6PX 2PX rgba(0, 0, 0, 0.2);
+}
+
+//审核选中标记
+.review-check {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30PX;
+    height: 30PX;
+
+    @mixin check {
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 50%;
+        left: -50%;
+        border-left: 30PX solid transparent;
+        /* 左边框为透明 */
+        border-right: 30PX solid transparent;
+        /* 右边框为透明 */
+        /* 底边框为红色，可以修改颜色为您需要的颜色 */
+        transform: rotate(-45deg);
+        transform-origin: 0;
+    }
+
+    .review-checked {
+        @include check;
+        border-bottom: 30PX solid orangered;
+
+    }
+
+    .review-unchecked {
+        @include check;
+        border-bottom: 60px solid gainsboro;
+    }
+}

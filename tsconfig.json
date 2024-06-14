@@ -1,0 +1,56 @@
+//@ts-ignore
+{
+  "compilerOptions": {
+    "target": "ESNext", // 指定要将代码编译为的目标ECMAScript版本
+    "module": "ESNext", // 指定生成的模块代码的模块系统
+    "moduleResolution": "Node", // 指定模块解析策略为Node.js风格
+    "jsx": "preserve", // 保留JSX代码不进行转换
+    "strict": true, // 禁用所有严格类型检查选项
+    "strictFunctionTypes": true, // 禁用严格的函数类型检查
+    "useDefineForClassFields": true,
+    "experimentalDecorators": true, // 启用实验性的装饰器特性
+    "importHelpers": true, // 在编译的输出中包含辅助函数以减小文件大小
+    "skipLibCheck": true, // 跳过对声明文件的类型检查
+    "sourceMap": true, // 生成源映射文件以便进行调试件
+    "declaration": true, // 生成相应的 .d.ts 文件
+    "noEmit": true,
+    "allowImportingTsExtensions": true, // 允许导入tsx
+    "resolveJsonModule": true, // 允许导入JSON文件作为模块
+    "forceConsistentCasingInFileNames": true, //要求文件名的大小写一致
+    "allowSyntheticDefaultImports": true, // 允许导入默认导出的模块
+    "isolatedModules": true, // 将每个文件作为独立的模块处理
+    "esModuleInterop": true, // 启用默认的ES模块导入/导出Interop
+    "allowJs": false, // 禁止导入JavaScript文件
+    "lib": [
+      "ESNext",
+      "DOM"
+    ], // 指定要包含的库文件，这里包含了DOM和ESNext
+    "baseUrl": ".", // 设置模块解析的基本目录
+    "paths": {
+      //路径映射，将特定的导入路径映射到实际的
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ] // 指定类型声明文件的根目录
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/*.d.ts",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js"
+  ]
+}

@@ -1,0 +1,92 @@
+/* base styles */
+@tailwind base;
+/* component classes */
+@tailwind components;
+/* utility classes */
+@tailwind utilities;
+/* hover, focus,
+ * responsive, dark mode, and other variants of each class. */
+@tailwind variants;
+
+// ****************************************************************************************************
+@mixin v-icon-gap {
+  @apply flex items-center gap-1;
+}
+
+@layer base {
+  .v-list-title {
+    @apply text-base font-semibold leading-5;
+  }
+
+  .v-list-item {
+    @apply flex flex-col gap-2 p-4 rounded overflow-hidden;
+  }
+
+  .v-detail-title {
+    @apply text-base font-semibold text-gray-700 mb-2 text-center;
+  }
+
+  .v-detail-content {
+    @apply;
+  }
+
+  // 滑块右下角的提示图标
+  .v-swipe-cell-tips {
+    @apply absolute right-0 bottom-0 p-4 text-gray-400 flex gap-1;
+  }
+
+  .v-file,
+  .v-date,
+  .v-author,
+  .v-company {
+    @apply text-xs text-gray-400;
+    @include v-icon-gap;
+  }
+
+  .v-label {
+    @apply text-sm text-gray-400;
+  }
+
+  .v-danger {
+    @apply text-red-500;
+  }
+
+  .v-animation {
+    @apply transition-all duration-200 ease-in-out delay-75;
+  }
+
+  // ***********************************************************************************
+  .between-start {
+    @apply flex justify-between items-start;
+  }
+
+  .between-center {
+    @apply flex justify-between items-center;
+  }
+
+  .between-end {
+    @apply flex justify-between items-end;
+  }
+
+  .around-center {
+    @apply flex justify-around items-center;
+  }
+
+  .center-center {
+    @apply flex justify-center items-center;
+  }
+
+  .start-center {
+    @apply flex justify-start items-center;
+  }
+
+  .absolute-center {
+    @apply absolute inset-x-1/2 inset-y-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+}

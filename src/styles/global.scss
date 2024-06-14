@@ -1,0 +1,31 @@
+// 默认值
+
+$theme-color: #1962fb !default;
+$body-padding: 16PX !default;
+$border-radius: 10PX !default;
+$background-color: #fff !default;
+$small-font-size: 14PX !default;
+$min-font-size: 12PX !default;
+$body-bg: #f5f5f5 !default;
+
+$list-gap: 10PX !default;
+$tag-gap: 6PX !default;
+$badge-gap: 10PX !default;
+
+$time-width: 100PX !default;
+
+$search-offsetTop: 46PX !default;
+
+$home-list-gap: 24PX;
+$home-nav-margin: -57PX;
+$home-card-height: 130PX;
+$home-card-padding: 16PX;
+$home-border-radius: 5PX;
+
+//默认计算值
+$navbar-height: calc(var(--van-nav-bar-height) - 1PX);
+$search-height: calc(var(--van-search-input-height) + 20PX);
+$dropmenu-height: var(--van-dropdown-menu-height) !default;
+$dropmenu-height: 48PX;
+$tabs-height: var(--van-tabs-line-height);
+$notice-height: calc(var(--van-notice-bar-height) / 2);
