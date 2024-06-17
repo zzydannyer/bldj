@@ -20,6 +20,16 @@ export default {
         keepAlive: true,
         visible: false
       }
+    },
+    {
+      path: '/mine',
+      name: 'Mine',
+      component: () => import('@/views/mine.vue'),
+      meta: {
+        title: '我的',
+        keepAlive: true,
+        visible: false
+      }
     }
   ]
-} as RouteConfigsTable;
+};

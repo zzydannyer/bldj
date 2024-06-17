@@ -1,9 +1,9 @@
 import request from '@/utils/request';
-import { LoginReq, LoginResult, UserInfo } from '@/types/auth';
+import { LoginReq, LoginRes, UserInfo } from '@/types/user';
 
 // 登录
 export function USER_LOGIN(data?: LoginReq) {
-  return request<LoginReq, LoginResult>({
+  return request<LoginReq, LoginRes>({
     url: '/login',
     method: 'post',
     data

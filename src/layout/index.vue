@@ -1,16 +1,19 @@
 <template>
-  <section class="mask-layer" @click="closeNavPanel"><RouterView /></section>
-  <BottomNav ref="BottomNavRef" />
+  <RouterView />
+  <section
+    class="mask-layer"
+    :style="{
+      opacity: visible ? 1 : 0,
+      pointerEvents: visible ? 'auto' : 'none'
+    }"
+    @click.self="visible = false"
+  />
+  <BottomNav v-model:visible="visible" />
 </template>
 
 <script setup lang="ts">
   import BottomNav from './BottomNav.vue';
-
-  const BottomNavRef = ref<typeof BottomNav | null>(null);
-
-  function closeNavPanel() {
-    BottomNavRef.value?.changeVisible(false);
-  }
+  const visible = ref(false);
 </script>
 
 <style lang="scss" scoped>
@@ -22,5 +25,6 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9;
+    transition: all 0.3s;
   }
 </style>

@@ -1,21 +1,4 @@
-export class BaseEntity {
-  // * 创建人
-  creatorId?: string
 
-  // * 更新人
-  updaterId?: string
-
-  // * 创建时间
-  createTime?: string
-
-  // * 更新时间
-  updateTime?: string
-}
-export class BaseQuery {
-  orderByColumn?: string;
-
-  isAsc?: string;
-}
 export type PaginationProps = {
   /** 是否使用小型分页样式，默认值：`false` */
   small?: boolean;

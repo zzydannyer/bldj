@@ -2,7 +2,7 @@ export default [
   {
     path: '/:pathMatch(.*)*',
     redirect: '/home',
-    meta: { visible: false },
+    meta: { visible: false }
   },
   {
     path: '/login',
@@ -10,7 +10,7 @@ export default [
     component: () => import('@/views/login.vue'),
     meta: {
       title: '登录',
-      visible: false,
-    },
-  },
-] as Array<RouteConfigsTable>
+      visible: false
+    }
+  }
+];

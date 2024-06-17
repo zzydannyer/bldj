@@ -70,11 +70,11 @@ instance.interceptors.response.use(
   }
 );
 
-export default function request<T, D>(config: AxiosRequestConfig<T>): Promise<Resp<D>> {
+export default function request<T, D>(config: AxiosRequestConfig<T>): Promise<D> {
   return new Promise((resolve, reject) => {
     instance
       .request(config)
-      .then(({ data }: AxiosResponse<Resp<D>>) => resolve(data))
+      .then(({ data }: AxiosResponse<D>) => resolve(data))
       .catch(reject);
   });
 }

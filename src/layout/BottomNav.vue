@@ -1,16 +1,69 @@
+<script setup lang="ts">
+  import { useIcon } from '@/utils/assets';
+  import { debounce } from 'lodash';
+  import { RouteRecordRaw } from 'vue-router'; // Import the RouteRecordRaw type
+
+  const route = useRoute();
+  const router = useRouter();
+
+  const rotates = ['-75', '-45', '-15', '15', '45', '75'];
+  const curItem = ref('');
+  const curIndex = ref(0);
+
+  const visible = defineModel('visible', {
+    default: false
+  });
+
+  const isHome = computed(() => route.path === '/home');
+  const isMine = computed(() => route.path === '/mine');
+  const isOther = computed(() => !isHome.value && !isMine.value);
+  const moreList = computed(() =>
+    router.options.routes
+      .filter((route: RouteRecordRaw) => {
+        if (!route.meta) return false;
+        return route.meta.more;
+      })
+      .sort((a: RouteRecordRaw, b) => {
+        if (!a.meta || !b.meta) return 0;
+        const rankA = a.meta.rank as number;
+        const rankB = b.meta.rank as number;
+        return rankA - rankB;
+      })
+  );
+
+  const loading = ref(false);
+  function changeRoute(item: string, index: number) {
+    if (loading.value) return;
+    loading.value = true;
+    curItem.value = item;
+    curIndex.value = index;
+    router.push(item);
+    setTimeout(() => {
+      visible.value = false;
+      loading.value = false;
+    }, 300);
+  }
+</script>
+
 <template>
   <main class="bottom-nav-container">
     <!-- 中间更多菜单按钮 -->
     <section class="nav-trigger" @click="visible = !visible">
-      <div class="icon-border">
-        <img class="icon-more" :src="useIcon('nav-more')" />
+      <div :class="[isOther ? 'more-bg' : 'more-border', 'nav-more']">
+        <img class="nav-icon-more" :src="isOther ? useIcon('nav-more-active') : useIcon('nav-more')" />
       </div>
     </section>
     <!-- 底部导航 -->
     <section class="bottom-nav">
-      <van-grid clickable :column-num="2">
-        <van-grid-item icon="photo-o" text="首页" />
-        <van-grid-item icon="photo-o" text="我的" />
+      <van-grid clickable :column-num="2" :border="false">
+        <van-grid-item to="/home">
+          <van-image class="w-[24PX]" :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')" />
+          <span class="mt-1" :class="isHome ? 'text-[#e20949]' : 'text-[#a9867e]'">首页</span>
+        </van-grid-item>
+        <van-grid-item to="/mine">
+          <van-image class="w-[24PX]" :src="isMine ? useIcon('icon-mine-active') : useIcon('icon-mine')" />
+          <span class="mt-1" :class="isMine ? 'text-[#e20949]' : 'text-[#a9867e]'">我的</span>
+        </van-grid-item>
       </van-grid>
     </section>
     <!-- 更多菜单 -->
@@ -20,7 +73,9 @@
         visible: visible
       }"
     >
-      <span class="nav-text" v-for="(item, index) in list" :key="item" @click="changeRoute(item, index)"> {{ item }}</span>
+      <span class="nav-text" v-for="(route, index) in moreList" :key="route.path" @click="changeRoute(route.path, index)">
+        {{ route.meta?.title }}
+      </span>
       <div
         class="nav-panel-active"
         :style="{
@@ -30,28 +85,6 @@
     </section>
   </main>
 </template>
-
-<script setup lang="ts">
-  import { useIcon } from '@/utils/assets';
-  const list = ['政治', '思想', '组织', '记录', '工团', '文化'];
-  const rotates = ['-75', '-45', '-15', '15', '45', '75'];
-  const visible = ref(false);
-  const curItem = ref('');
-  const curIndex = ref(0);
-
-  function changeRoute(item: string, index: number) {
-    curItem.value = item;
-    curIndex.value = index;
-    // visible.value = false;
-  }
-
-  function changeVisible(val: boolean) {
-    visible.value = val;
-  }
-  defineExpose({
-    changeVisible
-  });
-</script>
 
 <style lang="scss" scoped>
   .bottom-nav-container {
@@ -65,13 +98,18 @@
     .nav-trigger {
       @apply w-[70PX] h-[70PX] bg-white rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2;
       z-index: 1;
-      .icon-border {
+      .nav-more {
         @apply absolute-center w-[90%] h-[90%] rounded-full;
-        border: 1px solid #ebdfdd;
-        background-image: linear-gradient(to bottom, #fff, #fef0ee);
-        .icon-more {
+        .nav-icon-more {
           @apply absolute-center w-[50%] h-[50%];
         }
+      }
+      .more-border {
+        border: 1px solid #ebdfdd;
+        background-image: linear-gradient(to bottom, #fff, #fef0ee);
+      }
+      .more-bg {
+        background-image: linear-gradient(#f84200 0%, #e10101 100%);
       }
     }
     .nav-panel {

@@ -64,10 +64,10 @@ export default ({ command, mode }: ConfigEnv) => {
       }),
       viteVConsole({
         entry: resolve('src/main.ts'), // 入口文件
-        localEnabled: true, // 本地是否启用
-        enabled: mode === 'development', // 是否启用
+        localEnabled: env.VITE_BUILD_VCONSOLE === 'true', // 本地是否启用
+        enabled: env.VITE_BUILD_VCONSOLE === 'true', // 是否启用
         config: {
-          maxLogNumber: 1000, // 日志最大数量
+          maxLogNumber: 100, // 日志最大数量
           theme: 'dark', // 主题颜色
           onReady() {
             this.setSwitchPosition(9999, 0);

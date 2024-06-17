@@ -2,14 +2,20 @@ const Layout = () => import('@/layout/index.vue');
 // '政治', '思想', '组织', '记录', '工团', '文化'
 export default [
   {
-    name: 'Politics',
     path: '/politics',
-    component: 'Layout',
-    meta: {
-      title: '政治建设',
-      icon: 'dict'
-    },
+    redirect: '/politics/index',
+    component: Layout,
+    meta: { more: true, title: '政治', rank: 1 },
     children: [
+      {
+        name: 'Politics',
+        path: 'index',
+        component: () => import('@/views/politics/index.vue'),
+        meta: {
+          title: '政治建设',
+          icon: ''
+        }
+      },
       {
         name: 'TopicSys',
         path: 'topicSys',
@@ -466,14 +472,20 @@ export default [
     ]
   },
   {
-    name: 'Think',
     path: '/think',
-    component: 'Layout',
-    meta: {
-      title: '思想建设',
-      icon: 'naviesx'
-    },
+    redirect: '/think/index',
+    meta: { more: true, title: '思想', rank: 2 },
+    component: Layout,
     children: [
+      {
+        name: 'Think',
+        path: 'index',
+        component: () => import('@/views/think/index.vue'),
+        meta: {
+          title: '思想建设',
+          icon: ''
+        }
+      },
       {
         name: 'Index',
         path: 'index',
@@ -746,14 +758,20 @@ export default [
     ]
   },
   {
-    name: 'Org',
     path: '/org',
-    component: 'Layout',
-    meta: {
-      title: '组织建设',
-      icon: 'naviezz'
-    },
+    redirect: '/org/index',
+    meta: { more: true, title: '组织', rank: 3 },
+    component: Layout,
     children: [
+      {
+        name: 'Org',
+        path: 'index',
+        component: () => import('@/views/org/index.vue'),
+        meta: {
+          title: '组织建设',
+          icon: ''
+        }
+      },
       {
         name: 'Index',
         path: 'index',
@@ -1219,14 +1237,20 @@ export default [
     ]
   },
   {
-    name: 'Discipline',
     path: '/discipline',
-    component: 'Layout',
-    meta: {
-      title: '纪律作风建设',
-      icon: 'form'
-    },
+    redirect: '/discipline/index',
+    meta: { more: true, title: '纪律', rank: 4 },
+    component: Layout,
     children: [
+      {
+        name: 'Discipline',
+        path: 'index',
+        component: () => import('@/views/discipline/index.vue'),
+        meta: {
+          title: '组织建设',
+          icon: ''
+        }
+      },
       {
         name: 'Index',
         path: 'index',
@@ -1237,45 +1261,45 @@ export default [
           icon: '#'
         }
       },
-      {
-        name: 'Honest',
-        path: 'honest',
-        component: 'ParentView',
-        meta: {
-          title: '廉情动态',
-          icon: 'discipline_honest'
-        },
-        children: [
-          {
-            name: 'Discipline',
-            path: 'discipline',
-            component: 'public/content/index',
-            meta: {
-              title: '党纪宣贯',
-              icon: '#'
-            }
-          },
-          {
-            name: 'TopicStudy',
-            path: 'topicStudy',
+      // {
+      //   name: 'Honest',
+      //   path: 'honest',
+      //   component: 'ParentView',
+      //   meta: {
+      //     title: '廉情动态',
+      //     icon: 'discipline_honest'
+      //   },
+      //   children: [
+      //     {
+      //       name: 'Discipline',
+      //       path: 'discipline',
+      //       component: 'public/content/index',
+      //       meta: {
+      //         title: '党纪宣贯',
+      //         icon: '#'
+      //       }
+      //     },
+      //     {
+      //       name: 'TopicStudy',
+      //       path: 'topicStudy',
 
-            component: 'public/content/index',
-            meta: {
-              title: '专题学习',
-              icon: '#'
-            }
-          },
-          {
-            name: 'Supervise',
-            path: 'supervise',
-            component: 'public/content/index',
-            meta: {
-              title: '监督检查',
-              icon: '#'
-            }
-          }
-        ]
-      },
+      //       component: 'public/content/index',
+      //       meta: {
+      //         title: '专题学习',
+      //         icon: '#'
+      //       }
+      //     },
+      //     {
+      //       name: 'Supervise',
+      //       path: 'supervise',
+      //       component: 'public/content/index',
+      //       meta: {
+      //         title: '监督检查',
+      //         icon: '#'
+      //       }
+      //     }
+      //   ]
+      // },
       {
         name: 'ZeroBased',
         path: 'zeroBased',
@@ -1415,14 +1439,20 @@ export default [
     ]
   },
   {
-    name: 'WorkGroup',
     path: '/workGroup',
-    component: 'Layout',
-    meta: {
-      title: '工团建设',
-      icon: 'naviegt'
-    },
+    redirect: '/workGroup/index',
+    meta: { more: true, title: '工团', rank: 5 },
+    component: Layout,
     children: [
+      {
+        name: 'WorkGroup',
+        path: 'index',
+        component: () => import('@/views/workGroup/index.vue'),
+        meta: {
+          title: '工团建设',
+          icon: ''
+        }
+      },
       {
         name: 'Index',
         path: 'index',
@@ -2097,14 +2127,20 @@ export default [
     ]
   },
   {
-    name: 'Culture',
     path: '/culture',
-    component: 'Layout',
-    meta: {
-      title: '文化建设',
-      icon: 'naviewh'
-    },
+    redirect: '/culture/index',
+    meta: { more: true, title: '文化', rank: 6 },
+    component: Layout,
     children: [
+      {
+        name: 'Culture',
+        path: 'index',
+        component: () => import('@/views/culture/index.vue'),
+        meta: {
+          title: '文化建设',
+          icon: ''
+        }
+      },
       {
         name: 'Index',
         path: 'index',
@@ -2318,7 +2354,7 @@ export default [
   {
     name: 'Public',
     path: '/public',
-    component: 'Layout',
+    component: Layout,
     meta: {
       title: '公共管理',
       icon: 'naviegggl'
@@ -2475,7 +2511,7 @@ export default [
   {
     name: 'Manage',
     path: '/manage',
-    component: 'Layout',
+    component: Layout,
     meta: {
       title: '管理中心',
       icon: 'system'
@@ -2530,7 +2566,7 @@ export default [
         name: '11',
         path: '11',
 
-        component: 'Layout',
+        component: Layout,
         meta: {
           title: '百联党校栏目管理',
           icon: '#'
@@ -3217,4 +3253,4 @@ export default [
   //     },
   //   ],
   // },
-] as RouteConfigsTable[];
+];

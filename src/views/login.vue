@@ -1,7 +1,6 @@
 <script lang="ts" setup>
   import useUserInfoStore from '@/store/modules/userInfo';
   import { showFailToast, showSuccessToast } from 'vant';
-  import { useTimeoutFn } from '@vueuse/core';
   import { useIcon, useImage } from '@/utils/assets';
   import { encrypt } from '@/plugins/encrypt';
 
@@ -14,20 +13,43 @@
 
   const login = async () => {
     try {
-      const { code, msg } = await useUserInfoStore().login({
+      await useUserInfoStore().login({
         password: encrypt(form.password),
         username: encrypt(form.username),
         captcha: 'mobile'
       });
-      if (code !== 200) throw new Error(msg);
       showSuccessToast('登录成功');
-      useTimeoutFn(() => {
+      setTimeout(() => {
         router.push('/home');
       }, 1000);
     } catch (e: unknown) {
-      showFailToast(e);
+      showFailToast(e as string);
     }
   };
+  function init(code: string, state: string) {
+    const data = {
+      socialCode: code,
+      socialState: state,
+      source: 'feishu'
+    };
+  }
+  // window.h5sdk?.ready(() => {
+  //   //  lark.ready参数为回调函数，在环境准备就绪时触发
+  //   console.log('ok');
+  //   window.tt?.requestAccess({
+  //     appID: 'cli_a38ad1626cb99013',
+  //     scopeList: [],
+  //     // 获取成功后的回调
+  //     success(res: any) {
+  //       console.log(res);
+  //       // init(res.code, res.state)
+  //     },
+  //     // 获取失败后的回调
+  //     fail(err: unknown) {
+  //       console.log(JSON.stringify(err));
+  //     }
+  //   });
+  // });
 </script>
 
 <template>
