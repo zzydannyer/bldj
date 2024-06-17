@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { listActivitiesByMainId, getMedia, updateMedia, listActiveMediaActivities } from '@/api/media'
-import { MediaMain } from '@/types/media'
+import { MediaMain } from '@/types/_media'
 import {
   PickerOption,
   closeToast,

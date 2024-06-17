@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 审批
 import {listAuditPropaganda} from '@/api/media/propaganda'
-import {PropagandaMainQuery} from '@/types/media/propaganda'
+import {PropagandaMainQuery} from '@/types/_media/propaganda'
 import {useGlobal} from '@/utils'
 import useUserInfoStore from '@/store/modules/userInfo'
 import {storeToRefs} from 'pinia'

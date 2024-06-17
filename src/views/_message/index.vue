@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import { listMessageManage, readOne } from '@/api/media/index'
-import {MessageQuery} from '@/types/message'
+import {MessageQuery} from '@/types/_message'
 import {Icon} from '@iconify/vue'
 import {showDialog, showConfirmDialog} from 'vant'
 import {useGlobal} from '@/utils'

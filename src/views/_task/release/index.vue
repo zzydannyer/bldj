@@ -7,7 +7,7 @@ import {
 } from '@/api/media/taskRelease'
 import {showConfirmDialog, showFailToast, showSuccessToast} from 'vant'
 import {useGlobal} from '@/utils'
-import {WorkQuery} from '@/types/media/task'
+import {WorkQuery} from '@/types/_media/task'
 import {Icon} from '@iconify/vue'
 import {emitter} from '@/plugins/mitt'
 import {hasAuth} from '@/utils/auth'

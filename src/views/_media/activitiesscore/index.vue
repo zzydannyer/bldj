@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { reactive, ref } from 'vue'
-  import { MediaMainQuery } from '@/types/media'
+  import { MediaMainQuery } from '@/types/_media'
   import {
     listMediaActivitiesScoreWithPending,
     listMediaActivitiesScoreWithCompleted,

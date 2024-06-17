@@ -6,7 +6,7 @@
     submitGroup,
     listActivitiesByMainId,
   } from '@/api/media'
-  import { MediaMain } from '@/types/media'
+  import { MediaMain } from '@/types/_media/index.ts'
   import {
     PickerOption,
     closeToast,

@@ -4,7 +4,7 @@
   import { getPublicMediaActivitiesScoreDetail, addUserCollect } from '@/api/media/index';
 
   import { formatDate } from '@/utils/date';
-  import { MediaPublic } from '@/types/media';
+  import { MediaPublic } from '@/types/_media';
 
   const route = useRoute();
   const detail = ref<MediaPublic>({});

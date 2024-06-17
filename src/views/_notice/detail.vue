@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { getNotice } from '@/api/system/notice'
-  import { SysNotice } from '@/types/system/sysNotice'
+  import { SysNotice } from '@/types/_system/sysNotice'
   import { useGlobal } from '@/utils'
   import { formatDate } from '@/utils/date'
   import { showLoadingToast, closeToast } from 'vant/es'

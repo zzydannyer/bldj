@@ -13,7 +13,7 @@ import {
   Overlay,
   PickerOption,
 } from 'vant'
-import { MediaMain } from '@/types/media'
+import { MediaMain } from '@/types/_media'
 import { Icon } from '@iconify/vue'
 import VPreview from '@/components/VPreview/index.vue'
 import VideoClip from '@/components/VideoClip/index.vue'

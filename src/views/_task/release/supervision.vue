@@ -6,7 +6,7 @@ import {
   completionWork,
   supervisionWork,
 } from '@/api/media/taskRelease'
-import { SysRole, DetailList } from '@/types/media'
+import { SysRole, DetailList } from '@/types/_media'
 import { useGlobal } from '@/utils'
 import {
   showConfirmDialog,
@@ -21,7 +21,7 @@ import {
 } from '@/api/media/taskExecution'
 import { emitter } from '@/plugins/mitt'
 import { join } from 'lodash'
-import { Work, WorkFeedback } from '@/types/media/task'
+import { Work, WorkFeedback } from '@/types/_media/task'
 
 const route = useRoute()
 const { $useDict, $parse, $value_to_label } = useGlobal<GlobalPropertiesApi>()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PaginationProps } from "@/types/index";
-import { activitiesLists } from '@/types/media'
+import { activitiesLists } from '@/types/_media'
 import { onBeforeMount, onMounted, reactive, ref } from 'vue';
 import { listMediaActivitiesRanking } from "@/api/media";
 const activitiesList = ref<any[]>([])

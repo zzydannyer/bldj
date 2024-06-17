@@ -4,7 +4,7 @@
     recallWorkFeedback,
   } from '@/api/media/taskExecution'
   import { useGlobal } from '@/utils'
-  import { WorkQuery } from '@/types/media/task'
+  import { WorkQuery } from '@/types/_media/task'
   import { Icon } from '@iconify/vue'
   import { showConfirmDialog, showSuccessToast, showFailToast } from 'vant'
   import { emitter } from '@/plugins/mitt'

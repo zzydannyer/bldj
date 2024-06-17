@@ -1,7 +1,7 @@
 import http from '@/utils/request';
 import { PaginationProps } from '@/types/list';
 import { Resp } from '@/utils/http/types.d';
-import { WorkFeedback, Work, WorkQuery, WorkFeedbackQuery } from '@/types/media/task';
+import { WorkFeedback, Work, WorkQuery, WorkFeedbackQuery } from '@/types/_media/task';
 // 查询日常任务执行列表
 export function listworkFeedback(query: WorkQuery, page?: PaginationProps): Promise<Resp<Work[]>> {
   return http.request('get', `/work/workFeedback/list`, {

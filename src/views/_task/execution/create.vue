@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { MediaMain } from '@/types/media'
+  import { MediaMain } from '@/types/_media'
   import { addMedia, directSubmitMedia } from '@/api/media/index'
   import { _5_years_ago } from '@/utils/date'
   import { showSuccessToast } from 'vant'

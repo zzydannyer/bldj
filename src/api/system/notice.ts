@@ -1,4 +1,4 @@
-import { SysNoticeQuery, SysNotice } from '@/types/system/sysNotice';
+import { SysNoticeQuery, SysNotice } from '@/types/_system/sysNotice';
 import http from '@/utils/request';
 import { Resp } from '@/utils/http/types.d';
 import { PaginationProps } from '@/types/list';

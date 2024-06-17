@@ -1,7 +1,7 @@
 import http from '@/utils/request';
 import { Resp } from '@/utils/http/types.d';
-import { CrccUserImport, SysUser, SysUserQuery } from '@/types/system/sysUser';
-import { SysRole } from '@/types/system/sysRole';
+import { CrccUserImport, SysUser, SysUserQuery } from '@/types/_system/sysUser';
+import { SysRole } from '@/types/_system/sysRole';
 
 export type UserDetailed = {
   roles: SysRole[];

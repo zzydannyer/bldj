@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { getUserCollect } from '@/api/media'
-  import { UserCollect } from '@/types/media/collect'
+  import { UserCollect } from '@/types/_media/collect'
   import { showImagePreview } from 'vant'
   const route = useRoute()
   const collectDetail = ref<UserCollect>({})

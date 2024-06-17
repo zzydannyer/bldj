@@ -10,7 +10,7 @@ import {
   WorkFeedback,
   WorkFeedbackQuery,
   WorkMust,
-} from '@/types/media/task'
+} from '@/types/_media/task'
 import { useGlobal } from '@/utils'
 import { join } from 'lodash'
 const { $useDict, $parse, $value_to_label } = useGlobal<GlobalPropertiesApi>()

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropagandaAuditBo, PropagandaMain } from '@/types/media/propaganda'
+import { PropagandaAuditBo, PropagandaMain } from '@/types/_media/propaganda'
 import {
   addPropagandaAudit,
   checkRole,

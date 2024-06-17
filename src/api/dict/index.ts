@@ -1,4 +1,4 @@
-import { SysDictData } from '@/types/system/sysDictData';
+import { SysDictData } from '@/types/_system/sysDictData';
 import http from '@/utils/request';
 import { Resp } from '@/utils/http/types.d';
 

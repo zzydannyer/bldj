@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { onBeforeMount } from 'vue'
-  import { Activitiesscore, MediaActivitiesScore } from '@/types/media'
+  import { Activitiesscore, MediaActivitiesScore } from '@/types/_media'
   import {
     closeToast,
     showImagePreview,

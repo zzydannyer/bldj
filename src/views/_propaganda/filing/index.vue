@@ -4,7 +4,7 @@ import {
   listPropaganda,
   submitPropaganda,
 } from '@/api/media/propaganda'
-import {PropagandaMainQuery} from '@/types/media/propaganda'
+import {PropagandaMainQuery} from '@/types/_media/propaganda'
 import {useGlobal} from '@/utils'
 import {showConfirmDialog, showSuccessToast, FormInstance} from 'vant'
 import {appealPropaganda} from '@/api/media/propaganda'

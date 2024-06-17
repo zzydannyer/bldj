@@ -1,6 +1,6 @@
 import http from '@/utils/request';
 import { Resp } from '@/utils/http/types.d';
-import { MessageViewVo } from '@/types/message';
+import { MessageViewVo } from '@/types/_message';
 
 export function getActionMap(): Promise<Resp<Record<string, boolean>>> {
   return http.request('get', `/messageConfig/wap/actions`);

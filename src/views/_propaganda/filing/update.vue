@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { PropagandaMain } from '@/types/media/propaganda';
+  import { PropagandaMain } from '@/types/_media/propaganda';
   import { checkScoreDetail, getDateRange, getNewMediaConfirm, listOption, listStandCascadeList } from '@/api/media/scoreStandard';
   import { checkRole, getPropaganda } from '@/api/media/propaganda';
   import { PickerOption, closeToast, showConfirmDialog, showLoadingToast, showSuccessToast, showToast } from 'vant';

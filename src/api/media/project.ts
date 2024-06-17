@@ -1,7 +1,7 @@
 import http from '@/utils/request';
 import { Resp } from '@/utils/http/types.d';
 import { PaginationProps } from '@/types/list';
-import { ProjectQuery, Project } from '@/types/media/project';
+import { ProjectQuery, Project } from '@/types/_media/project';
 
 // 查询【项目】项目清单列表
 export function listProject(query: ProjectQuery, page?: PaginationProps): Promise<Resp<Project[]>> {

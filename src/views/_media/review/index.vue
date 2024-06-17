@@ -2,7 +2,7 @@
 import {backInBackAudit, submitGroup} from '@/api/media'
 import {listAudited, listAuditing} from '@/api/media/index'
 import {useGlobal} from '@/utils'
-import {MediaMainQuery} from '@/types/media'
+import {MediaMainQuery} from '@/types/_media/index.ts'
 import {FormInstance, showConfirmDialog, showSuccessToast} from 'vant'
 import BackDialog from './backDialog.tsx'
 import ResourceType from '@/views/media/resourceType.tsx'

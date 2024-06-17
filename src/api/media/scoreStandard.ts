@@ -1,6 +1,6 @@
 import http from '@/utils/request';
 import { Resp } from '@/utils/http/types.d';
-import { ScoreStandard, ScoreStandardMainBo, ScoreStandardDetail } from '@/types/media/scoreStandard';
+import { ScoreStandard, ScoreStandardMainBo, ScoreStandardDetail } from '@/types/_media/scoreStandard';
 
 // 查询【评分依据】标准列表
 export function listScoreStandard(): Promise<Resp<any>> {

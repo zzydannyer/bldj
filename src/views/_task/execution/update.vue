@@ -6,7 +6,7 @@
     viewWorkFeedback,
   } from '@/api/media/taskExecution'
   import { emitter } from '@/plugins/mitt'
-  import { WorkFeedback, WorkFeedbackList } from '@/types/media/task'
+  import { WorkFeedback, WorkFeedbackList } from '@/types/_media/task'
   import { showSuccessToast, showFailToast, showToast } from 'vant'
   const form = ref<WorkFeedback>({})
   const route = useRoute()

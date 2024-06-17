@@ -1,5 +1,5 @@
 import { BaseEntity } from '@/types'
-import { PropagandaFile } from '@/types/media/propagandaFile'
+import { PropagandaFile } from '@/types/_media/propagandaFile'
 
 export class PropagandaMain extends BaseEntity {
   self?: string

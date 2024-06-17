@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropagandaAuditBo, PropagandaMain } from '@/types/media/propaganda'
+import { PropagandaAuditBo, PropagandaMain } from '@/types/_media/propaganda'
 import {
   addPropagandaAudit,
   checkRole,
@@ -20,7 +20,7 @@ import {
   validateImportantClue
 } from "@/api/media/propagandaClue.ts";
 import {formatDate} from "@/utils/date.ts";
-import {PropagandaClue} from "@/types/media/propagandaClue.ts";
+import {PropagandaClue} from "@/types/_media/propagandaClue";
 
 
 const userInfoStore = useUserInfoStore()

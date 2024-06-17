@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { MediaMain } from '@/types/media'
+import { MediaMain } from '@/types/_media'
 import { PickerOption, closeToast, showDialog, showLoadingToast } from 'vant'
 import { addMedia, listActiveMediaActivities, } from '@/api/media/index'
 import { _5_years_ago } from '@/utils/date'

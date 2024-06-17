@@ -11,11 +11,11 @@ import {
   MediaActivitiesScore,
   MediaActivitiesScoreDetail,
   MediaActivitiesRankings
-} from '@/types/media';
+} from '@/types/_media';
 import { PaginationProps } from '@/types/list';
-import { MediaAudit } from '@/types/media';
-import { UserCollect } from '@/types/media/collect';
-import { Message, MessageQuery } from '@/types/message';
+import { MediaAudit } from '@/types/_media';
+import { UserCollect } from '@/types/_media/collect';
+import { Message, MessageQuery } from '@/types/_message';
 
 // 查询媒体信息列表
 export function listMedia(query: MediaMainQuery, page: PaginationProps): Promise<Resp<MediaMain[]>> {

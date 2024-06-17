@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { PropagandaMain } from '@/types/media/propaganda'
+  import { PropagandaMain } from '@/types/_media/propaganda'
   import { listOption, listStandCascadeList } from '@/api/media/scoreStandard'
   import { PickerOption, showSuccessToast } from 'vant'
   import { _5_years_ago } from '@/utils/date'

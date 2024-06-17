@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropagandaMain } from '@/types/media/propaganda'
+import { PropagandaMain } from '@/types/_media/propaganda'
 import {
   getDateRange,
   getNewMediaConfirm,

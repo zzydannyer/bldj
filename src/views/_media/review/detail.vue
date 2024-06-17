@@ -3,7 +3,7 @@
   import { _5_years_ago, formatDate } from '@/utils/date'
   import { closeToast, showImagePreview, showLoadingToast } from 'vant'
   import ReviewTimeline from '@/views/media/reviewTimeline'
-  import { MediaAudit, MediaMain } from '@/types/media'
+  import { MediaAudit, MediaMain } from '@/types/_media'
   import { Icon } from '@iconify/vue'
   
   const route = useRoute()

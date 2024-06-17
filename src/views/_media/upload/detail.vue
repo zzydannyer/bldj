@@ -4,7 +4,7 @@
   import { _5_years_ago, formatDate } from '@/utils/date';
 
   import { useGlobal } from '@/utils';
-  import { MediaAudit, MediaMain } from '@/types/media';
+  import { MediaAudit, MediaMain } from '@/types/_media';
   import { Icon } from '@iconify/vue';
   import ReviewTimeline from '@/views/media/reviewTimeline';
   const activitiesName = ref<any>([]);

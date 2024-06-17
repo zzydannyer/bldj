@@ -13,11 +13,11 @@
   import { listPublicResourceLatest } from '@/api/media/publicResource';
   import { getNotice, listNotice } from '@/api/system/notice';
   import { listMediaPublicLast, listMessageManage } from '@/api/media';
-  import { MediaPublic } from '@/types/media';
-  import { SysNotice } from '@/types/system/sysNotice';
-  import { PropagandaAuditAlertVo } from '@/types/media/propaganda';
-  import { PublicResourceFile } from '@/types/media/publicResource';
-  import { Message } from '@/types/message';
+  import { MediaPublic } from '@/types/_media';
+  import { SysNotice } from '@/types/_system/sysNotice';
+  import { PropagandaAuditAlertVo } from '@/types/_media/propaganda';
+  import { PublicResourceFile } from '@/types/_media/publicResource';
+  import { Message } from '@/types/_message';
   import { Icon } from '@iconify/vue';
 
   defineOptions({

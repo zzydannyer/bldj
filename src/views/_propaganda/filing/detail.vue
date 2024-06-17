@@ -7,7 +7,7 @@ import {
   showToast,
 } from 'vant'
 import { getPropaganda, listAuditRecord } from '@/api/media/propaganda'
-import { PropagandaAuditBo, PropagandaAuditVo, PropagandaMain } from '@/types/media/propaganda'
+import { PropagandaAuditBo, PropagandaAuditVo, PropagandaMain } from '@/types/_media/propaganda'
 import { useGlobal } from '@/utils'
 
 const {$useDict, $parse} = useGlobal<GlobalPropertiesApi>()

@@ -1,7 +1,7 @@
 import http from '@/utils/request';
 import { Resp } from '@/utils/http/types.d';
 import { PaginationProps } from '@/types/list';
-import { PublicResourceFileQuery, PublicResourceFile } from '@/types/media/publicResource';
+import { PublicResourceFileQuery, PublicResourceFile } from '@/types/_media/publicResource';
 
 // 查询【公共】公共资源附件列表
 export function listPublicResourceFile(query: PublicResourceFileQuery, page?: PaginationProps): Promise<Resp<PublicResourceFile[]>> {

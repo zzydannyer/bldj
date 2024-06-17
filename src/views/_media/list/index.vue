@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { listMediaPublic } from '@/api/media'
-  import { MediaMainQuery } from '@/types/media'
+  import { MediaMainQuery } from '@/types/_media'
   import { useGlobal } from '@/utils'
   import ResourceType from '@/views/media/resourceType.tsx'
   const { $parse } = useGlobal<GlobalPropertiesApi>()

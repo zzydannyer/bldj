@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {checkRole,} from '@/api/media/propaganda'
-import {PropagandaMainQuery} from '@/types/media/propaganda'
+import {PropagandaMainQuery} from '@/types/_media/propaganda'
 import {useGlobal} from '@/utils'
 import useUserInfoStore from '@/store/modules/userInfo'
 import {emitter} from '@/plugins/mitt'

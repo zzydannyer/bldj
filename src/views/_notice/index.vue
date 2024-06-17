@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {listNotice} from '@/api/system/notice'
-import {SysNoticeQuery} from '@/types/system/sysNotice'
+import {SysNoticeQuery} from '@/types/_system/sysNotice'
 import {useGlobal} from '@/utils'
 import {formatDate} from '@/utils/date'
 

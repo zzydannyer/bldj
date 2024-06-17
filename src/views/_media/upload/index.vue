@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { listMedia, delMedia } from '@/api/media'
   import { submitMedia } from '@/api/media'
-  import { MediaMainQuery } from '@/types/media'
+  import { MediaMainQuery } from '@/types/_media'
   import { showConfirmDialog } from 'vant'
   import { showSuccessToast } from 'vant'
   import { hasRole } from '@/directives/auth/index'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { onBeforeMount } from 'vue'
-  import { Activitiesscore } from '@/types/media'
+  import { Activitiesscore } from '@/types/_media'
   import { closeToast, showImagePreview, showLoadingToast } from 'vant'
   import Player from 'xgplayer'
   import { useGlobal } from '@/utils'

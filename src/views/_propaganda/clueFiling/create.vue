@@ -13,7 +13,7 @@ import { dateFormatter } from '@/utils/date'
 import ProjectPicker from '@/views/media/projectPicker.tsx'
 import {storeToRefs} from "pinia";
 import useUserInfoStore from '@/store/modules/userInfo'
-import {PropagandaClue} from "@/types/media/propagandaClue.ts";
+import {PropagandaClue} from "@/types/_media/propagandaClue";
 import {addPropagandaClue} from "@/api/media/propagandaClue.ts";
 import dayjs from "dayjs";
 const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>()

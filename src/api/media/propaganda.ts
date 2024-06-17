@@ -1,7 +1,7 @@
 import http from '@/utils/request';
 import { Resp } from '@/utils/http/types.d';
 import { PaginationProps } from '@/types/list';
-import { PropagandaMainQuery, PropagandaMain, PropagandaAuditBo, PropagandaSubmitToGroupVo, PropagandaAuditVo } from '@/types/media/propaganda';
+import { PropagandaMainQuery, PropagandaMain, PropagandaAuditBo, PropagandaSubmitToGroupVo, PropagandaAuditVo } from '@/types/_media/propaganda';
 
 // 查询【宣传考核】主列表 新增页面
 export function listPropaganda(query: PropagandaMainQuery, page?: PaginationProps): Promise<Resp<PropagandaMain[]>> {

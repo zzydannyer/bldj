@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { getPublicResourceFile } from '@/api/media/publicResource'
-  import { PublicResourceFile } from '@/types/media/publicResource'
+  import { PublicResourceFile } from '@/types/_media/publicResource'
   import { closeToast, showImagePreview, showLoadingToast } from 'vant'
   import { fileType } from '@/constants'
   import Player from 'xgplayer'

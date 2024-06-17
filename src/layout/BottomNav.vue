@@ -93,7 +93,8 @@
     .bottom-nav {
       @apply h-[90PX];
       z-index: 0;
-      background-image: linear-gradient(to bottom, #fce9e7, #fff);
+      box-shadow: #fff0 0px 0px 1px;
+      background-image: linear-gradient(to bottom, #fce8e6, #fff);
     }
     .nav-trigger {
       @apply w-[70PX] h-[70PX] bg-white rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2;

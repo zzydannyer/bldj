@@ -7,10 +7,10 @@ import {
   showToast,
 } from 'vant'
 import { getPropaganda, listAuditRecord } from '@/api/media/propaganda'
-import { PropagandaAuditBo, PropagandaAuditVo, PropagandaMain } from '@/types/media/propaganda'
+import { PropagandaAuditBo, PropagandaAuditVo, PropagandaMain } from '@/types/_media/propaganda'
 import { useGlobal } from '@/utils'
 import {getPropagandaClue} from "@/api/media/propagandaClue.ts";
-import {PropagandaClue} from "@/types/media/propagandaClue.ts";
+import {PropagandaClue} from "@/types/_media/propagandaClue";
 
 const route = useRoute()
 const detail = ref<PropagandaClue>(new PropagandaClue())

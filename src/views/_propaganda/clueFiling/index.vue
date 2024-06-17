@@ -6,7 +6,7 @@ import {storeToRefs} from 'pinia'
 import {showConfirmDialog, showSuccessToast} from "vant";
 import {delPropagandaClue, listPropagandaClue, submitPropagandaClue} from "@/api/media/propagandaClue.ts";
 import {hasAuth} from "@/utils/auth.ts";
-import {PropagandaClueQuery} from "@/types/media/propagandaClue.ts";
+import {PropagandaClueQuery} from "@/types/_media/propagandaClue";
 import {emitter} from '@/plugins/mitt'
 
 defineOptions({

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { PropagandaMain } from '@/types/media/propaganda';
+  import { PropagandaMain } from '@/types/_media/propaganda';
   import { checkScoreDetail, getDateRange, getNewMediaConfirm, listOption, listStandCascadeList } from '@/api/media/scoreStandard';
   import { checkRole, getPropaganda } from '@/api/media/propaganda';
   import { PickerOption, closeToast, showConfirmDialog, showLoadingToast, showSuccessToast, showToast } from 'vant';
@@ -12,7 +12,7 @@
   import { useGlobal } from '@/utils';
   import ProjectPicker from '@/views/media/projectPicker.tsx';
   import StandardPicker from '@/views/_propaganda/filing/standardPicker';
-  import { PropagandaClue } from '@/types/media/propagandaClue.ts';
+  import { PropagandaClue } from '@/types/_media/propagandaClue';
   import { getPropagandaClue, updatePropagandaClue } from '@/api/media/propagandaClue.ts';
 
   const form = ref<PropagandaClue>(new PropagandaClue());

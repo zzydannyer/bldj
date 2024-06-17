@@ -6,7 +6,7 @@ import {
   PropagandaMainAndClue,
   PropagandaMainAndClueBo,
   PropagandaMainAndClueVo
-} from '@/types/media/propagandaClue';
+} from '@/types/_media/propagandaClue';
 import { PaginationProps } from '@/types/list';
 
 // 查询宣传考核申报-新闻线索列表
