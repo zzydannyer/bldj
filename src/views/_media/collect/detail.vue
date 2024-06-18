@@ -1,31 +1,26 @@
 <script setup lang="ts">
-  import { getUserCollect } from '@/api/media'
-  import { UserCollect } from '@/types/_media/collect'
-  import { showImagePreview } from 'vant'
-  const route = useRoute()
-  const collectDetail = ref<UserCollect>({})
+  import { getUserCollect } from '@/api/media';
+  import { UserCollect } from '@/types/_media/collect';
+  import { showImagePreview } from 'vant';
+  const route = useRoute();
+  const collectDetail = ref<UserCollect>({});
   const collectList = async () => {
-    const { id } = route.params
-    console.log('🚀 ~ file: detail.vue:8 ~ collectList ~ id:', id)
+    const { id } = route.params;
+    console.log('🚀 ~ file: detail.vue:8 ~ collectList ~ id:', id);
     // 首次加载请求
-    let { data } = await getUserCollect(id as string)
-    collectDetail.value = data!
-  }
+    let { data } = await getUserCollect(id as string);
+    collectDetail.value = data!;
+  };
   // 放大预览图片
   const showImage = (url: string) => {
-    showImagePreview([url])
-  }
-  onBeforeMount(collectList)
+    showImagePreview([url]);
+  };
+  onBeforeMount(collectList);
 </script>
 <template>
   <section class="detail-container">
     <section class="detail-img-container">
-      <van-image
-        class="w-full"
-        fit="cover"
-        :src="collectDetail.thumbUrl"
-        @click="showImage(collectDetail.thumbUrl)"
-      >
+      <van-image class="w-full" fit="cover" :src="collectDetail.thumbUrl" @click="showImage(collectDetail.thumbUrl)">
         <template #loading>
           <van-loading type="spinner" size="20" />
         </template>

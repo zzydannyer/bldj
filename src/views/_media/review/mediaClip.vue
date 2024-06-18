@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import VideoClip from '@/components/VideoClip/index.vue'
+  import VideoClip from '@/components/VideoClip/index.vue';
 </script>
 <template>
   <div class="detail-container">

@@ -1,16 +1,16 @@
-import { Field, Form } from 'vant'
+import { Field, Form } from 'vant';
 
 export default defineComponent({
   name: 'BackDialog',
   props: {
     maxLength: {
       type: Number,
-      default: 100,
-    },
+      default: 100
+    }
   },
   setup(props, { slots, emit }) {
-    const appealBrief = ref('')
-    const formRef = ref()
+    const appealBrief = ref('');
+    const formRef = ref();
 
     return () => (
       <Form ref={formRef}>
@@ -27,6 +27,6 @@ export default defineComponent({
         />
         {slots.default!([formRef.value, appealBrief.value])}
       </Form>
-    )
-  },
-})
+    );
+  }
+});

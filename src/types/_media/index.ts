@@ -1,4 +1,4 @@
-import { BaseQuery,BaseEntity } from '@/types'
+import { BaseQuery, BaseEntity } from '@/types';
 
 /**
  * @id 主键id
@@ -9,61 +9,61 @@ export class MediaMain extends BaseEntity {
   /**
    * 主键id
    */
-  id?: Numeric
+  id?: Numeric;
   // * 项目id
-  projectId?: string
+  projectId?: string;
   // * 项目名称
-  projectName?: string
+  projectName?: string;
   /**
    * @description 批次类型
    * @enum 1:图片 2：视频
    */
-  mediaType?: '1' | '2'
+  mediaType?: '1' | '2';
   // * 作者
-  author?: string
+  author?: string;
   /**
    * 资源类别
    */
-  resourceType?: number
+  resourceType?: number;
   /**
    * 拍摄时间
    */
-  shootingTime: any
+  shootingTime: any;
   /**
    * 拍摄地点
    */
-  shootingArea?: string
+  shootingArea?: string;
   // * 素材简介
-  materialBrief?: string
+  materialBrief?: string;
   // * 0:编辑 1：提交 2：基层审核通过 3：基层审核退回 6：集团审核通过 7：集团审核退回
-  mediaStatus?: string
+  mediaStatus?: string;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   // * 提交时间
-  submitTime?: string
+  submitTime?: string;
 
-  mediaList?: any[]
-  scoreDetailId?: string
+  mediaList?: any[];
+  scoreDetailId?: string;
   /**
    * 资源类别名称
    */
-  resourceTypeName?: string
+  resourceTypeName?: string;
 
   // * 重点待办任务id
-  workFeedbackId?: Numeric
+  workFeedbackId?: Numeric;
   // 是否关联项目
-  project?: boolean
+  project?: boolean;
   // 媒体类型
-  mediaTitle?:string
-  orgName?: string
+  mediaTitle?: string;
+  orgName?: string;
   // 征集活动
-  activitiesIdList?: any[]
+  activitiesIdList?: any[];
   // 征集活动id
-  activitiesId?:Numeric
+  activitiesId?: Numeric;
   // 评分依据
-  score?:number
+  score?: number;
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
   }
 }
@@ -92,143 +92,143 @@ export class MediaActivities extends BaseEntity {
   endTime: string;
 
   // * 活动状态
-  status: "0" | "1";
+  status: '0' | '1';
   // * 阶段
   stage: string;
   constructor() {
     super();
     //  * 根据自身业务需要的初始化值修改
-    this.status = "0";
-    this.activitiesName = "";
-    this.startTime = "";
-    this.endTime = "";
-    this.stage = "0";
+    this.status = '0';
+    this.activitiesName = '';
+    this.startTime = '';
+    this.endTime = '';
+    this.stage = '0';
   }
 }
 
 export class MediaMainQuery {
   // * 项目名称
-  projectName?: string
+  projectName?: string;
   // * 资源类别
-  resourceType?: number
+  resourceType?: number;
   // * 拍摄时间
-  shootingTime?: any
+  shootingTime?: any;
   // * 0:编辑 1：提交 2：基层审核通过 3：基层审核退回 6：集团审核通过 7：集团审核退回
-  mediaStatus?: string
+  mediaStatus?: string;
   // 媒体类型
-  mediaType?: string
+  mediaType?: string;
   // 活动资源
-  activitiesName?:string
+  activitiesName?: string;
   // 资源名称
-  resourceName?: string
+  resourceName?: string;
 }
 
 export interface File {
-  id: number
-  name: string
-  originalName: string
-  ossId: string
-  thumbnail?: string
-  url: string
-  fileSize: string
-  shootingTime?: any
-  feature?: string
-  md5?: string
+  id: number;
+  name: string;
+  originalName: string;
+  ossId: string;
+  thumbnail?: string;
+  url: string;
+  fileSize: string;
+  shootingTime?: any;
+  feature?: string;
+  md5?: string;
 }
 
 export class MediaPublic {
-  id?: Numeric
+  id?: Numeric;
   // * 项目名称
-  projectName?: string
+  projectName?: string;
 
   // * 资源类型
-  resourceType?: number
-  resourceTypeName?: string
+  resourceType?: number;
+  resourceTypeName?: string;
 
   //  * 拍摄时间
-  shootingTime?: string
-  resourceName?:string
+  shootingTime?: string;
+  resourceName?: string;
   // * 媒体地点
-  shootingArea?: string
+  shootingArea?: string;
 
   //  * 媒体类型
-  mediaType?: string
+  mediaType?: string;
 
   // * 公司名称
-  orgName?: string
+  orgName?: string;
 
   // * 缩略图
-  thumbnailUrl?: string
+  thumbnailUrl?: string;
 
   // * 路径
-  url?: string
+  url?: string;
 
-  materialBrief?: string
+  materialBrief?: string;
 
   // * 作者
-  author?: string
+  author?: string;
 
   // * 是否收藏
-  collect?: boolean
+  collect?: boolean;
   //分数
-  score?:string
+  score?: string;
 }
 export class MediaList {
-  workTitle?: string
+  workTitle?: string;
   // 任务类型
-  workType?: string
+  workType?: string;
   // 截止时间
-  publishDate?: number | any
+  publishDate?: number | any;
   // 任务内容
-  workDesc?: string
+  workDesc?: string;
   // 任务附件
-  workFiles?: string | any
+  workFiles?: string | any;
   // 接收类型
-  receiveType?: string
+  receiveType?: string;
   // 接收群组
-  receivePackage?: any
+  receivePackage?: any;
 }
 export class MediaAudit {
   /**
    * 主键
    */
-  id?: number
+  id?: number;
 
   /**
    * 主表id
    */
-  mainId?: number
+  mainId?: number;
 
   /**
    * 1:公司层级 2：集团层级
    */
-  auditLevel?: string
+  auditLevel?: string;
 
   /**
    * 0:创建 1：完成
    */
-  auditStatus?: string
+  auditStatus?: string;
 
   /**
    * 1:通过 2：退回
    */
-  auditResult?: string
+  auditResult?: string;
 
   /**
    * 审核意见
    */
-  auditDesc?: string
+  auditDesc?: string;
 
   /**
    * 审核时间
    */
-  auditTime?: string
+  auditTime?: string;
 
   /**
    *
    * 审核人
    */
-  auditUser?: string
+  auditUser?: string;
 }
 
 /**
@@ -239,83 +239,83 @@ export class SysRole {
   /**
    * @description 角色ID
    */
-  roleId?: number
+  roleId?: number;
 
   // * 角色名称
-  roleName?: string
+  roleName?: string;
 
   // * 角色权限
-  roleKey?: string
+  roleKey?: string;
 
   // * 角色排序
-  roleSort?: number
+  roleSort?: number;
 
   // * 数据范围（1：所有数据权限；2：自定义数据权限；3：本机构数据权限；4：本机构及以下数据权限；5：仅本人数据权限）
-  dataScope?: number
+  dataScope?: number;
 
   // * 菜单树选择项是否关联显示（ 0：父子不互相关联显示 1：父子互相关联显示）
-  menuCheckStrictly?: boolean
+  menuCheckStrictly?: boolean;
 
   // * 机构树选择项是否关联显示（0：父子不互相关联显示 1：父子互相关联显示 ）
-  orgCheckStrictly?: boolean
+  orgCheckStrictly?: boolean;
 
   // * 角色状态（0正常 1停用）
-  status?: string
+  status?: string;
 
   // * 删除标志（1代表存在 0代表删除）
-  isActive?: string
+  isActive?: string;
 
   // * 备注
-  remark?: string
+  remark?: string;
 
   // * 用户是否存在此角色标识 默认不存在
-  flag?: boolean
+  flag?: boolean;
 
   //** 菜单组
-  menuIds?: string[]
+  menuIds?: string[];
 
   // * 机构组（数据权限）
-  orgIds?: string[]
+  orgIds?: string[];
   // 组织名字
-  orgName?: string
+  orgName?: string;
   /**
    * @description 提交状态
    * @enum 3.已提交
    * @enum -1.未提交
    */
-  submitStatus?: string
+  submitStatus?: string;
   // 提交人
-  belongToName?: string
+  belongToName?: string;
   // 提交时间
-  updateTime?: any
+  updateTime?: any;
   // 反馈内容
-  feedbackDesc?: string
+  feedbackDesc?: string;
   /**
    * 完成状态
    * 1.已完成
    * 2.未完成
    */
-  isDone?: string
+  isDone?: string;
   // 更新时间
-  receivePackage?: any
+  receivePackage?: any;
   // 接收类型
-  receiveType?: string
+  receiveType?: string;
 }
 export class DetailList {
   // 任务名称
-  workTitle?: string
+  workTitle?: string;
   // 截止时间
-  publishDate?: any
+  publishDate?: any;
   // 工作类型
-  workType?: any
+  workType?: any;
   // 任务内容
-  workDesc?: string
+  workDesc?: string;
   // 任务附件
-  workFiles?: any
+  workFiles?: any;
   // 接收类型
-  receiveType?: string
+  receiveType?: string;
   // 接收群组
-  receivePackage?: any
+  receivePackage?: any;
 }
 
 export type CropVideoParams = {
@@ -323,21 +323,21 @@ export type CropVideoParams = {
    * 视频裁剪开始时间
    * 00:02:30
    */
-  startTime: string
+  startTime: string;
 
   /**
    * 视频裁剪结束时间
    * 00:05:00
    */
-  endTime: string
+  endTime: string;
 
   /**
    * 视频裁剪时长
    * 00:02:30
    */
 
-  duration: string
-}
+  duration: string;
+};
 export class MediaActivitiesScoreQuery {
   resourceName?: string;
 
@@ -376,7 +376,7 @@ export class MediaActivitiesScore extends BaseEntity {
 
   // 活动id
   activitiesName?: string;
-  
+
   // 资源名称
   mediaType?: string;
 
@@ -391,23 +391,23 @@ export class MediaActivitiesScore extends BaseEntity {
 export class MediaActivitiesScoreDetail extends MediaPublic {
   scoreList?: MediaActivitiesScore[];
 }
-export class Activitiesscore{
+export class Activitiesscore {
   // 媒体id
-  id?:string
+  id?: string;
   // 媒体类型
-  mediaType?:string
+  mediaType?: string;
   // 地址
-  url?:string
+  url?: string;
   // 项目名称
-  projectName?:string
+  projectName?: string;
   // 时间
-  shootingTime?:string
+  shootingTime?: string;
   // 资源类型
-  resourceTypeName?:string
+  resourceTypeName?: string;
   // 媒体标题
-  resTitle?:string
+  resTitle?: string;
   // 评分
-  score?:string
+  score?: string;
 }
 export class MediaActivitiesRankings {
   // 活动编号
@@ -421,5 +421,5 @@ export class MediaActivitiesRankings {
 // 活动排名
 export class activitiesLists {
   // 活动名称
-  activitiesName?:string
+  activitiesName?: string;
 }

@@ -1,11 +1,11 @@
-import type { SwipeCellInstance } from 'vant'
+import type { SwipeCellInstance } from 'vant';
 
 export default function useSwipeCellRef() {
-  const swipeCellRef = ref<SwipeCellInstance[]>([])
+  const swipeCellRef = ref<SwipeCellInstance[]>([]);
 
   function resetSwipeCell() {
-    swipeCellRef.value = []
+    swipeCellRef.value = [];
   }
-  onBeforeUpdate(resetSwipeCell)
-  return { swipeCellRef }
+  onBeforeUpdate(resetSwipeCell);
+  return { swipeCellRef };
 }

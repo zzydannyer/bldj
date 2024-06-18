@@ -1,6 +1,8 @@
-import type { App } from 'vue'
-import { setupAuthDirective } from './auth'
+import type { App } from 'vue';
+import useAuth from './auth/index';
+import useLazyLoad from './lazyload/index';
 
 export default function setupDirectives(app: App) {
-  setupAuthDirective(app)
+  useAuth(app);
+  useLazyLoad(app);
 }

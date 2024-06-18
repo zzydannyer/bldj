@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import useResource from './hooks'
-  const { columns, form, onSubmit } = useResource()
+  import useResource from './hooks';
+  const { columns, form, onSubmit } = useResource();
 </script>
 
 <template>
@@ -17,22 +17,12 @@
         />
         <van-field name="switch" label="主页显示">
           <template #input>
-            <van-switch
-              v-model="form.isHomeShow"
-              active-value="1"
-              inactive-value="0"
-              size="14px"
-            />
+            <van-switch v-model="form.isHomeShow" active-value="1" inactive-value="0" size="14px" />
           </template>
         </van-field>
         <van-field name="switch" label="是否置顶">
           <template #input>
-            <van-switch
-              v-model="form.isTop"
-              active-value="1"
-              inactive-value="0"
-              size="14px"
-            />
+            <van-switch v-model="form.isTop" active-value="1" inactive-value="0" size="14px" />
           </template>
         </van-field>
         <van-field label="排列序号" placeholder="请选择排列序号">
@@ -52,58 +42,25 @@
         />
 
         <!-- 普通附件 -->
-        <van-field
-          label="普通附件"
-          required
-          :rules="[{ required: true, message: '请上传普通附件' }]"
-          v-if="form.fileType == '1'"
-        >
+        <van-field label="普通附件" required :rules="[{ required: true, message: '请上传普通附件' }]" v-if="form.fileType == '1'">
           <template #input>
-            <v-uploader
-              :max-count="1"
-              :max-size="50 * 1024 * 1024"
-              v-model="form.mediaList"
-              url="oss"
-              type="file"
-            />
+            <v-uploader :max-count="1" :max-size="50 * 1024 * 1024" v-model="form.mediaList" url="oss" type="file" />
           </template>
         </van-field>
         <!-- 视频素材 -->
-        <van-field
-          label="视频素材"
-          required
-          :rules="[{ required: true, message: '请上传视频素材' }]"
-          v-if="form.fileType == '3'"
-        >
+        <van-field label="视频素材" required :rules="[{ required: true, message: '请上传视频素材' }]" v-if="form.fileType == '3'">
           <template #input>
-            <v-uploader
-              :max-count="1"
-              url="oss"
-              v-model="form.mediaList"
-              type="video"
-            />
+            <v-uploader :max-count="1" url="oss" v-model="form.mediaList" type="video" />
           </template>
         </van-field>
         <!-- 图片素材 -->
-        <van-field
-          label="图片素材"
-          required
-          :rules="[{ required: true, message: '请上传图片素材' }]"
-          v-if="form.fileType == '2'"
-        >
+        <van-field label="图片素材" required :rules="[{ required: true, message: '请上传图片素材' }]" v-if="form.fileType == '2'">
           <template #input>
-            <v-uploader
-              :max-count="1"
-              url="oss"
-              v-model="form.mediaList"
-              type="image"
-            />
+            <v-uploader :max-count="1" url="oss" v-model="form.mediaList" type="image" />
           </template>
         </van-field>
       </van-cell-group>
-      <van-button class="my-4" round block type="success" native-type="submit">
-        提交
-      </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
     </van-form>
   </section>
 </template>

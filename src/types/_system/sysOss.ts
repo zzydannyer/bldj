@@ -1,68 +1,68 @@
-import { BaseEntity } from '@/types'
+import { BaseEntity } from '@/types';
 
 export class SysOss extends BaseEntity {
   // * 主键
-  id?: string
+  id?: string;
 
   // * 文件名
-  fileName?: string
+  fileName?: string;
 
   // * 原名
-  originalName?: string
+  originalName?: string;
 
   // * 文件后缀名
-  fileSuffix?: string
+  fileSuffix?: string;
 
   // * URL地址
-  url?: string
+  url?: string;
 
   // * service服务商
-  service?: string
+  service?: string;
 }
 
 export class SysOssQuery {
   // 文件名
-  fileName?: string
+  fileName?: string;
 
   // 原名
-  originalName?: string
+  originalName?: string;
 
   // 文件后缀
-  fileSuffix?: string
+  fileSuffix?: string;
 
   // 服务商
-  service?: string
+  service?: string;
 
   // * 时间范围
-  dateRange?: any
+  dateRange?: any;
 
   // * 额外参数
   get params(): any {
     return this.dateRange
       ? {
           beginTime: this.dateRange[0],
-          endTime: this.dateRange[1],
+          endTime: this.dateRange[1]
         }
-      : undefined
+      : undefined;
   }
 }
 
 export class FileUploadResult {
   // * URL地址
-  url?: string
+  url?: string;
 
   // * 文件路径 oss中的key
-  name?: string
+  name?: string;
 
   // * 原名
-  originalName?: string
+  originalName?: string;
 
   // * oss id
-  ossId?: string
+  ossId?: string;
 
   // * 文件大小
-  fileSize?: number
+  fileSize?: number;
 
   // * md5
-  md5?: string
+  md5?: string;
 }

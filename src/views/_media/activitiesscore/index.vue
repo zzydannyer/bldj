@@ -1,70 +1,45 @@
 <script setup lang="ts">
-  import { reactive, ref } from 'vue'
-  import { MediaMainQuery } from '@/types/_media'
-  import {
-    listMediaActivitiesScoreWithPending,
-    listMediaActivitiesScoreWithCompleted,
-  } from '@/api/media'
-  import { router } from '@/router'
-  import { useGlobal } from '@/utils'
-  import { emitter } from '@/plugins/mitt'
-  const queryParams = reactive<MediaMainQuery>(new MediaMainQuery())
+  import { reactive, ref } from 'vue';
+  import { MediaMainQuery } from '@/types/_media';
+  import { listMediaActivitiesScoreWithPending, listMediaActivitiesScoreWithCompleted } from '@/api/media';
+  import { router } from '@/router';
+  import { useGlobal } from '@/utils';
+  import { emitter } from '@/plugins/mitt';
+  const queryParams = reactive<MediaMainQuery>(new MediaMainQuery());
   const initQueryParams = () => ({
     activitiesName: '',
-    resourceName: '',
-  })
-  const { $parse } = useGlobal<GlobalPropertiesApi>()
-  const listRef = ref()
+    resourceName: ''
+  });
+  const { $parse } = useGlobal<GlobalPropertiesApi>();
+  const listRef = ref();
   const handleSearch = () => {
-    listRef.value.onRefresh()
-  }
+    listRef.value.onRefresh();
+  };
   // 重置
   const resetQuery = () => {
-    Object.assign(queryParams, initQueryParams())
-  }
-  const status = ref('pending')
-  const listFn = computed(() =>
-    status.value === 'pending'
-      ? listMediaActivitiesScoreWithPending
-      : listMediaActivitiesScoreWithCompleted
-  )
+    Object.assign(queryParams, initQueryParams());
+  };
+  const status = ref('pending');
+  const listFn = computed(() => (status.value === 'pending' ? listMediaActivitiesScoreWithPending : listMediaActivitiesScoreWithCompleted));
   // 查看详情页
   const handleDetail = (id: string, activitiesId: string) => {
-    router.push('/media/mediaActivitiesScore/detail/' + id + '/' + activitiesId)
-  }
+    router.push('/media/mediaActivitiesScore/detail/' + id + '/' + activitiesId);
+  };
   // 打分
   const handleGrade = (id: string, activitiesId: string) => {
-    router.push('/media/mediaActivitiesScore/update/' + id + '/' + activitiesId)
-  }
+    router.push('/media/mediaActivitiesScore/update/' + id + '/' + activitiesId);
+  };
   // 刷新数据
-  onMounted(() => emitter.on('refresh', handleSearch))
+  onMounted(() => emitter.on('refresh', handleSearch));
 
-  onBeforeUnmount(() => emitter.off('refresh'))
+  onBeforeUnmount(() => emitter.off('refresh'));
 </script>
 <template>
   <main class="list-container">
-    <v-search
-      showTabs
-      placeholder="请输入活动名称"
-      v-model:searchVal="queryParams.activitiesName"
-      @handle-search="handleSearch"
-    >
+    <v-search showTabs placeholder="请输入活动名称" v-model:searchVal="queryParams.activitiesName" @handle-search="handleSearch">
       <template #popMenu>
-        <van-field
-          v-model="queryParams.resourceName"
-          name="资源名称"
-          label="资源名称"
-          placeholder="请输入资源名称"
-        />
-        <van-button
-          block
-          plain
-          type="primary"
-          class="border-0"
-          @click="resetQuery"
-        >
-          重置
-        </van-button>
+        <van-field v-model="queryParams.resourceName" name="资源名称" label="资源名称" placeholder="请输入资源名称" />
+        <van-button block plain type="primary" class="border-0" @click="resetQuery"> 重置 </van-button>
       </template>
       <template #dropMenu>
         <van-tabs v-model:active="status" @change="handleSearch">
@@ -77,16 +52,8 @@
     <v-inset-list :list-fn="listFn" :query-params="queryParams" ref="listRef">
       <template #default="{ row }">
         <van-swipe-cell stop-propagation>
-          <section
-            class="v-list-item"
-            @click="handleDetail(row.id, row.activitiesId)"
-          >
-            <van-text-ellipsis
-              class="v-list-title"
-
-              :content="row.activitiesName"
-              rows="2"
-            />
+          <section class="v-list-item" @click="handleDetail(row.id, row.activitiesId)">
+            <van-text-ellipsis class="v-list-title" :content="row.activitiesName" rows="2" />
             <div class="between-end">
               <!-- 作者 -->
               <div class="v-company">

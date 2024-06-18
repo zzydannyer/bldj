@@ -1,24 +1,24 @@
 <script setup lang="ts">
-  import { getPublicResourceFile } from '@/api/media/publicResource'
-  import { PublicResourceFile } from '@/types/_media/publicResource'
-  import { closeToast, showImagePreview, showLoadingToast } from 'vant'
-  import { fileType } from '@/constants'
-  import Player from 'xgplayer'
-  import 'xgplayer/dist/index.min.css'
+  import { getPublicResourceFile } from '@/api/media/publicResource';
+  import { PublicResourceFile } from '@/types/_media/publicResource';
+  import { closeToast, showImagePreview, showLoadingToast } from 'vant';
+  import { fileType } from '@/constants';
+  import Player from 'xgplayer';
+  import 'xgplayer/dist/index.min.css';
 
-  const route = useRoute()
-  const { id } = route.params
-  const detail = ref<PublicResourceFile>(new PublicResourceFile())
+  const route = useRoute();
+  const { id } = route.params;
+  const detail = ref<PublicResourceFile>(new PublicResourceFile());
 
   // 首次加载数据
   const getDetail = async () => {
     try {
-      showLoadingToast({ message: '加载中...', forbidClick: true })
-      const { data } = await getPublicResourceFile(id as Numeric)
-      detail.value = data!
+      showLoadingToast({ message: '加载中...', forbidClick: true });
+      const { data } = await getPublicResourceFile(id as Numeric);
+      detail.value = data!;
 
       if (data?.fileType === '3') {
-        await nextTick()
+        await nextTick();
         new Player({
           id: 'video',
           url: data!.url,
@@ -29,29 +29,23 @@
           fluid: true,
           closeVideoClick: true,
           closeVideoTouch: true,
-          enableVideoDbltouch: true,
-        })
+          enableVideoDbltouch: true
+        });
       }
     } catch (err) {
-      console.error(err)
+      console.error(err);
     } finally {
-      closeToast()
+      closeToast();
     }
-  }
+  };
 
-  onBeforeMount(getDetail)
+  onBeforeMount(getDetail);
 </script>
 
 <template>
   <main class="detail-container">
     <section class="detail-img-container">
-      <van-image
-        v-if="detail.fileType === '2'"
-        class="w-full"
-        fit="cover"
-        :src="detail.url"
-        @click="showImagePreview([detail.url!])"
-      >
+      <van-image v-if="detail.fileType === '2'" class="w-full" fit="cover" :src="detail.url" @click="showImagePreview([detail.url!])">
         <template #loading>
           <van-loading type="spinner" size="20" />
         </template>

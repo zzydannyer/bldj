@@ -1,4 +1,3 @@
-
 export type PaginationProps = {
   /** 是否使用小型分页样式，默认值：`false` */
   small?: boolean;

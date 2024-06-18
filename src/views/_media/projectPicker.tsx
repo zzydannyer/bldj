@@ -1,80 +1,73 @@
-import { listProjectSelectOptions } from '@/api/media/project'
-import {
-  PickerOption,
-  Field,
-  Popup,
-  Picker,
-  Search,
-  type FieldRule,
-} from 'vant'
-import { debounce } from 'lodash'
-import { withModifiers } from 'vue'
+import { listProjectSelectOptions } from '@/api/media/project';
+import { PickerOption, Field, Popup, Picker, Search, type FieldRule } from 'vant';
+import { debounce } from 'lodash';
+import { withModifiers } from 'vue';
 
 export default defineComponent({
   name: 'ProjectPicker',
   props: {
     id: {
       type: String,
-      default: '',
+      default: ''
     },
     name: {
       type: String,
-      default: '',
+      default: ''
     },
     required: {
       type: Boolean,
-      default: true,
+      default: true
     },
     rules: {
       type: Array as PropType<FieldRule[]>,
-      default: () => [{ required: true, message: '请选择项目名称' }],
-    },
+      default: () => [{ required: true, message: '请选择项目名称' }]
+    }
   },
   setup(props, { emit }) {
     const projectId = computed({
       get: () => [props.id],
       set: (val) => {
-        emit('update:id', val)
-      },
-    })
+        emit('update:id', val);
+      }
+    });
 
     watch(
       () => props.id,
       (val) => {
-        picked.value = [val]
+        picked.value = [val];
       }
-    )
+    );
     const projectName = computed({
       get: () => props.name,
       set: (val) => {
-        emit('update:name', val)
-      },
-    })
+        emit('update:name', val);
+      }
+    });
 
-    const searchVal = ref<string>('')
-    const showProject = ref(false)
-    const picked = ref<string[]>([])
-    const projectList = ref<{ id: number; name: string }[]>([])
+    const searchVal = ref<string>('');
+    const showProject = ref(false);
+    const picked = ref<string[]>([]);
+    const projectList = ref<{ id: number; name: string }[]>([]);
     // 项目工程名称
     const columnsFieldNames = {
       text: 'name',
-      value: 'id',
-    }
+      value: 'id'
+    };
 
     // 确认项目
     const onProjectConfirm = ({ selectedOptions }: PickerOption) => {
-      projectId.value = selectedOptions[0].id
-      projectName.value = selectedOptions[0].name
-      showProject.value = false
-    }
+      projectId.value = selectedOptions[0].id;
+      projectName.value = selectedOptions[0].name;
+      showProject.value = false;
+    };
 
     // 菜单搜索框
     const onSearch = debounce(async () => {
-      const { data } = await listProjectSelectOptions(searchVal.value)
-      projectList.value = data!
-    }, 500)
+      const { data } = await listProjectSelectOptions(searchVal.value);
+      projectList.value = data!;
+    }, 500);
 
-    onBeforeMount(onSearch)
+    onBeforeMount(onSearch);
 
     return () => (
       <>
@@ -96,7 +89,7 @@ export default defineComponent({
             teleport="body"
             onConfirm={(e: PickerOption) => onProjectConfirm(e)}
             onCancel={() => {
-              showProject.value = false
+              showProject.value = false;
             }}
           >
             {{
@@ -109,11 +102,11 @@ export default defineComponent({
                   onClick={withModifiers(() => {}, ['stop'])}
                   onUpdate:modelValue={() => onSearch()}
                 />
-              ),
+              )
             }}
           </Picker>
         </Popup>
       </>
-    )
-  },
-})
+    );
+  }
+});

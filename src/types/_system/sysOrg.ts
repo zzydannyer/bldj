@@ -1,39 +1,39 @@
 export interface SysOrg {
   // * 主键
-  id?: string
+  id?: string;
 
   // * 组织名称
-  name?: string
+  name?: string;
 
   // * 编号
-  code?: string
+  code?: string;
 
   // * 祖先列表
-  ancestors?: string
+  ancestors?: string;
 
   // * 层级
-  level?: number
+  level?: number;
 
-  isActive?: string
+  isActive?: string;
 
   // * 优先级
-  orgSort?: number
+  orgSort?: number;
 
   // * 党组织地址
-  address?: string
+  address?: string;
 
   // * 党组织电话
-  tel?: string
+  tel?: string;
 
   // * 组织类型: 集团党委，基础党组织
-  orgType?: string
+  orgType?: string;
 
   // * 简称
-  abbreviation?: string
+  abbreviation?: string;
 
   // * 组织类型: 1、公司,2、XXX ,3、角色
-  type?: number
+  type?: number;
 
   // * 子节点
-  children?: SysOrg[]
+  children?: SysOrg[];
 }

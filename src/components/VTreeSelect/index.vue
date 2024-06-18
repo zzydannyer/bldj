@@ -1,30 +1,30 @@
 <script setup lang="ts" generic="T extends User | User[]">
-  import { TreeNode, User, IUser } from './type.d'
-  import { FieldRule, FieldProps, FieldTextAlign } from 'vant'
-  import { PropType } from 'vue'
-  import MyTreeSelect from './treeSelect.vue'
-  import { isObject } from 'lodash'
-  import {getUserInfo} from "@/api/system/org.ts";
+  import { TreeNode, User, IUser } from './type.d';
+  import { FieldRule, FieldProps, FieldTextAlign } from 'vant';
+  import { PropType } from 'vue';
+  import MyTreeSelect from './treeSelect.vue';
+  import { isObject } from 'lodash';
+  import { getUserInfo } from '@/api/system/org.ts';
 
   defineOptions({
     name: 'VTreeSelect'
-  })
+  });
 
-  const show = ref(false)
-  const modelValue = defineModel<T>()
-  const picked = ref<IUser | IUser[]>()
+  const show = ref(false);
+  const modelValue = defineModel<T>();
+  const picked = ref<IUser | IUser[]>();
 
   watch(
     () => modelValue.value,
     (val) => (picked.value = transformData(val, multiple, true))
-  )
+  );
 
-  const picked_text = ref('')
+  const picked_text = ref('');
   watchEffect(async () => {
     if (modelValue.value) {
-      const userIds = modelValue.value.map((item) => item.userId).join(',')
-      const data = await getUserInfoByIds(userIds)
-      picked_text.value = data.map((item) => item.userName).join(',')
+      const userIds = modelValue.value.map((item) => item.userId).join(',');
+      const data = await getUserInfoByIds(userIds);
+      picked_text.value = data.map((item) => item.userName).join(',');
     }
     // if (Array.isArray(modelValue.value)) {
     //   const userIds = modelValue.value.map((item) => item.userId).join(',')
@@ -33,7 +33,7 @@
     // } else {
     //   // 处理modelValue.value不是数组的情况
     // }
-  })
+  });
 
   // const picked_text = computed(async () => {
   //   if (Array.isArray(modelValue.value)) {
@@ -49,9 +49,9 @@
 
   function getUserInfoByIds(linkId: number[]) {
     // getUserInfo(linkId)
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (linkId) {
-        getUserInfo(linkId).then(resp => {
+        getUserInfo(linkId).then((resp) => {
           resolve(resp.data);
         });
       } else {
@@ -87,56 +87,46 @@
     visibleOptionNum: Number,
     columnsFieldNames: Object as PropType<{ text: string; value: string }>,
     multiple: Boolean
-  })
+  });
 
-  function transformData(
-    input: any,
-    multiple: boolean,
-    toPicked: boolean
-  ): any {
-    const val = input as any
+  function transformData(input: any, multiple: boolean, toPicked: boolean): any {
+    const val = input as any;
     if (input && isObject(input)) {
       if (multiple) {
-        return val.map((item: any) =>
-          toPicked
-            ? { id: item?.userId, label: item?.userName }
-            : { userId: item?.id, userName: item?.label }
-        )
+        return val.map((item: any) => (toPicked ? { id: item?.userId, label: item?.userName } : { userId: item?.id, userName: item?.label }));
       } else {
-        return toPicked
-          ? { id: val?.userId, label: val?.userName }
-          : { userId: val?.id, userName: val?.label }
+        return toPicked ? { id: val?.userId, label: val?.userName } : { userId: val?.id, userName: val?.label };
       }
     }
-    return input
+    return input;
   }
 
-  const emits = defineEmits(['confirm'])
+  const emits = defineEmits(['confirm']);
   const onConfirm = () => {
     // console.log(picked.value);
     // console.log(transformData(picked.value, true, false))
 
     // const [name] = transformData(picked.value, true, false).userName.split('-');
     // const newData = { userId: transformData(picked.value, multiple, false).userId, userName: name };
-    modelValue.value = transformData(picked.value, true, false)
+    modelValue.value = transformData(picked.value, true, false);
     // console.log(modelValue.value);
     //
-    emits('confirm')
-    show.value = false
-  }
+    emits('confirm');
+    show.value = false;
+  };
 
   const onCancel = () => {
-    show.value = false
-    picked.value = transformData(modelValue.value, true, true)
-  }
+    show.value = false;
+    picked.value = transformData(modelValue.value, true, true);
+  };
 
   const onClear = () => {
-    picked.value = undefined
-  }
+    picked.value = undefined;
+  };
 
   function handleOpen() {
-    if (disabled || readonly) return
-    show.value = true
+    if (disabled || readonly) return;
+    show.value = true;
   }
 </script>
 
@@ -158,41 +148,16 @@
   />
   <van-popup round v-model:show="show" position="bottom" teleport="body">
     <section class="van-picker__toolbar">
-      <button
-        type="button"
-        class="van-picker__cancel van-haptics-feedback"
-        @click="onCancel"
-      >
-        取消
-      </button>
+      <button type="button" class="van-picker__cancel van-haptics-feedback" @click="onCancel">取消</button>
       <div class="w-[240px] overflow-ellipsis overflow-hidden whitespace-nowrap">{{ picked?.label }}</div>
       <div>
-       
-        <button
-          type="button"
-          class="van-picker__confirm"
-          style="color: var(--van-red); padding-right: 0"
-          @click="onClear"
-        >
-          清空
-        </button>
-        <button
-          type="button"
-          class="van-picker__confirm van-haptics-feedback"
-          @click="onConfirm"
-        >
-          确认
-        </button>
+        <button type="button" class="van-picker__confirm" style="color: var(--van-red); padding-right: 0" @click="onClear">清空</button>
+        <button type="button" class="van-picker__confirm van-haptics-feedback" @click="onConfirm">确认</button>
       </div>
     </section>
-    
+
     <section class="p-[16PX] h-[400PX] overflow-auto">
-      <MyTreeSelect
-        v-model="picked"
-        v-bind="$attrs"
-        :multiple="multiple"
-        :placeholder="placeholder"
-      />
+      <MyTreeSelect v-model="picked" v-bind="$attrs" :multiple="multiple" :placeholder="placeholder" />
     </section>
   </van-popup>
 </template>

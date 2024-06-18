@@ -55,7 +55,7 @@
     </section>
     <!-- 底部导航 -->
     <section class="bottom-nav">
-      <van-grid clickable :column-num="2" :border="false">
+      <van-grid :border="false" clickable :column-num="2">
         <van-grid-item to="/home">
           <van-image class="w-[24PX]" :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')" />
           <span class="mt-1" :class="isHome ? 'text-[#e20949]' : 'text-[#a9867e]'">首页</span>
@@ -73,7 +73,7 @@
         visible: visible
       }"
     >
-      <span class="nav-text" v-for="(route, index) in moreList" :key="route.path" @click="changeRoute(route.path, index)">
+      <span v-for="(route, index) in moreList" :key="route.path" class="nav-text" @click="changeRoute(route.path, index)">
         {{ route.meta?.title }}
       </span>
       <div

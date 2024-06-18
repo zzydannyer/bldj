@@ -1,36 +1,36 @@
-import { BaseEntity } from '@/types'
+import { BaseEntity } from '@/types';
 
 export class PropagandaFile extends BaseEntity {
   // * 主键
-  id?: number
+  id?: number;
   // * 主表id
-  mainId?: number
+  mainId?: number;
   // * 文件名
-  fileName?: string
+  fileName?: string;
   // * 附件id
-  ossId?: string
+  ossId?: string;
   // 附件类型
-  fileType?: number
+  fileType?: number;
   // * 附件顺序
-  fileOrder?: number
+  fileOrder?: number;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   // 资源链接
-  url?: string
+  url?: string;
 
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
   }
 }
 
 export class PropagandaFileQuery {
   // * 主表id
-  mainId?: number
+  mainId?: number;
   // * 文件名
-  fileName?: string
+  fileName?: string;
   // * 附件id
-  ossId?: string
+  ossId?: string;
   // * 附件顺序
-  fileOrder?: number
+  fileOrder?: number;
 }

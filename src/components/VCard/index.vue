@@ -1,12 +1,12 @@
 <script setup lang="ts">
-  import { CSSProperties } from 'vue'
+  import { CSSProperties } from 'vue';
   defineOptions({
-    name: 'VCard',
-  })
+    name: 'VCard'
+  });
   const { bodyClass, bodyStyle } = defineProps({
     bodyClass: [String, Array] as PropType<string | string[]>,
-    bodyStyle: Object as PropType<CSSProperties>,
-  })
+    bodyStyle: Object as PropType<CSSProperties>
+  });
 </script>
 <template>
   <div class="v-card">

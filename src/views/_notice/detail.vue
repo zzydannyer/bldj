@@ -1,28 +1,28 @@
 <script lang="ts" setup>
-  import { getNotice } from '@/api/system/notice'
-  import { SysNotice } from '@/types/_system/sysNotice'
-  import { useGlobal } from '@/utils'
-  import { formatDate } from '@/utils/date'
-  import { showLoadingToast, closeToast } from 'vant/es'
+  import { getNotice } from '@/api/system/notice';
+  import { SysNotice } from '@/types/_system/sysNotice';
+  import { useGlobal } from '@/utils';
+  import { formatDate } from '@/utils/date';
+  import { showLoadingToast, closeToast } from 'vant/es';
 
-  const route = useRoute()
-  const noticeId = route.params.noticeId
-  const detail = ref<SysNotice>()
-  const { $value_to_label, $useDict } = useGlobal<GlobalPropertiesApi>()
-  const { sys_notice_type } = $useDict('sys_notice_type')
+  const route = useRoute();
+  const noticeId = route.params.noticeId;
+  const detail = ref<SysNotice>();
+  const { $value_to_label, $useDict } = useGlobal<GlobalPropertiesApi>();
+  const { sys_notice_type } = $useDict('sys_notice_type');
   const getDetail = async () => {
     try {
-      showLoadingToast({ message: '加载中' })
-      const { data } = await getNotice(noticeId as string)
-      detail.value = data
+      showLoadingToast({ message: '加载中' });
+      const { data } = await getNotice(noticeId as string);
+      detail.value = data;
     } catch (e) {
-      console.error(e)
+      console.error(e);
     } finally {
-      closeToast()
+      closeToast();
     }
-  }
+  };
 
-  onBeforeMount(getDetail)
+  onBeforeMount(getDetail);
 </script>
 
 <template>

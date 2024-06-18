@@ -1,325 +1,325 @@
-import { BaseEntity } from '@/types'
-import { Numeric } from 'vant/lib/utils'
+import { BaseEntity } from '@/types';
+import { Numeric } from 'vant/lib/utils';
 
 export class WorkFeedback extends BaseEntity {
   // * 主键
-  id?: any
+  id?: any;
   // * 任务id
-  workId?: Numeric
+  workId?: Numeric;
   // * 任务名称
-  workName?: string
+  workName?: string;
   // * 任务状态(0编辑  20下达 21反馈 22督查 23办结 -1撤回)
-  workStatus?: string
+  workStatus?: string;
   // * 类型( 字典表work_supervise_type);文件通知/一般工作/重点工作
-  typeCode?: string
+  typeCode?: string;
   // * 任务类型(1:一般任务、2:回填任务、3:重点)
-  workType?: string
+  workType?: string;
   // * 具体资源id;重点工作时关联上传资源id
-  mediaDetailId?: number
+  mediaDetailId?: number;
   // * 反馈内容
-  feedbackDesc?: string
+  feedbackDesc?: string;
   // 反馈组件
-  feedbackFile?: any
+  feedbackFile?: any;
   // * 任务回馈所属org_code
-  orgCode?: string
+  orgCode?: string;
   // * 回馈组织名
-  orgName?: string
+  orgName?: string;
   // * 0-（初始）未查看，1-查看未办 ，2-（保存）已办，3-（提交）已报，-1-退回待办
-  submitStatus?: string
+  submitStatus?: string;
   // * 是否完成 0：未完成 1：完成
-  isDone?: string
+  isDone?: string;
   // * 角色id
-  roleId?: number
+  roleId?: number;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   // * 附件
-  workFiles?: WorkFile[]
+  workFiles?: WorkFile[];
   // * 问题(只在任务类型为回填时有)
-  questions?: WorkMust[]
-  roleName?: string
-  belongToName?: string
+  questions?: WorkMust[];
+  roleName?: string;
+  belongToName?: string;
   // * 退回信息
-  workAuditDesc?: string
+  workAuditDesc?: string;
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
   }
 }
 export class Work extends BaseEntity {
   // * 主键
-  id?: Numeric
+  id?: Numeric;
   // * 任务名
-  workTitle?: string
+  workTitle?: string;
   // * 任务内容
-  workDesc?: string
+  workDesc?: string;
   // * 类型(字典表work_type_code);文件通知/一般工作/重点工作
-  typeCode?: string
+  typeCode?: string;
   // * 任务类型(1:通知、2:调查 、3:报送)
-  workType?: string
+  workType?: string;
   // * 文章所属org_code
-  orgCode?: string
+  orgCode?: string;
   // * 组织名称
-  orgName?: string
+  orgName?: string;
   /**
    * 接收单位类型( 1:全部;2：分组;3：指定用户)
    */
-  receiveType?: string
+  receiveType?: string;
   // * 分组id
-  recPackageId?: number
+  recPackageId?: number;
   // * 指定用户
-  recUserIds?: number[]
+  recUserIds?: number[];
   // * 指定用户名
-  recUserNames?: string[]
+  recUserNames?: string[];
   // * 任务状态(0编辑  20下达 21反馈 22督查 23办结 -1撤回)
-  status?: string
+  status?: string;
   // * 发布日期
-  publishDate?: string
+  publishDate?: string;
   // * 截止时间
-  deadline?: any
+  deadline?: any;
   // * 完成数量
-  finishNum?: number
+  finishNum?: number;
   // * 下达数量
-  publishNum?: number
+  publishNum?: number;
   // * 提交数量
-  submitNum?: number
+  submitNum?: number;
   // * 未完成数量
-  unfinishNum?: number
+  unfinishNum?: number;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   // * 附件
-  workFiles?: WorkFile[]
+  workFiles?: WorkFile[];
   // 日期
-  reportTime?: string
+  reportTime?: string;
   // * 问题(只在任务类型为回填时有)
-  questions?: WorkMust[]
+  questions?: WorkMust[];
   // 接收群组
-  receivePackage?: PackageMain
+  receivePackage?: PackageMain;
   constructor() {
-    super()
-    this.questions = []
+    super();
+    this.questions = [];
     //  * 根据自身业务需要的初始化值修改
   }
 }
 export class WorkFeedbackQuery {
   // * 类型( 字典表work_supervise_type);文件通知/一般工作/重点工作
-  typeCode?: string
+  typeCode?: string;
   // * 任务id
-  workId?: Numeric
+  workId?: Numeric;
   // * 任务类型(1:一般任务、2:回填任务、3:重点)
-  workType?: string
+  workType?: string;
   // * 具体资源id;重点工作时关联上传资源id
-  mediaDetailId?: number
+  mediaDetailId?: number;
   // * 反馈内容
-  feedbackDesc?: string
+  feedbackDesc?: string;
   // * 任务回馈所属org_code
-  orgCode?: string
+  orgCode?: string;
   // * 回馈组织名
-  orgName?: string
+  orgName?: string;
   // * 0-（初始）未查看，1-查看未办 ，2-（保存）已办，3-（提交）已报，-1-退回待办
-  submitStatus?: string
+  submitStatus?: string;
   // * 是否完成 0：未完成 1：完成
-  isDone?: string
+  isDone?: string;
 }
 
 export class WorkFeedbackAudit extends BaseEntity {
   // * 主键
-  id?: number
+  id?: number;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   // * 反馈id
-  feedbackId?: number
+  feedbackId?: number;
   // * 1:通过 2：退回
-  auditResult?: string
+  auditResult?: string;
   // * 审核意见
-  auditDesc?: string
+  auditDesc?: string;
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
   }
 }
 
 export class WorkFeedbackAuditQuery {
   // * 反馈id
-  feedbackId?: number
+  feedbackId?: number;
   // * 1:通过 2：退回
-  auditResult?: string
+  auditResult?: string;
   // * 审核意见
-  auditDesc?: string
+  auditDesc?: string;
 }
 
 export class WorkFile extends BaseEntity {
   // * 主键
-  id?: number
+  id?: number;
   // * 文件名称
-  name?: string
+  name?: string;
   // * 附件oss_id
-  ossId?: string
+  ossId?: string;
   // * 1: 任务附件 2：反馈任务附件
-  fileType?: string
+  fileType?: string;
   // * 关联id(任务id或回馈feedbackId)
-  linkId?: number
+  linkId?: number;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
   }
 }
 
 export class WorkFileQuery {
   // * 文件名称
-  name?: string
+  name?: string;
   // * 附件oss_id
-  ossId?: string
+  ossId?: string;
   // * 1: 任务附件 2：反馈任务附件
-  fileType?: number
+  fileType?: number;
   // * 关联id(任务id或回馈feedbackId)
-  linkId?: number
+  linkId?: number;
 }
 export class WorkFeedbackList {
   // 任务类型
-  workType?: string
+  workType?: string;
   // 任务问题
-  questions?: any
+  questions?: any;
   // 反馈内容
-  feedbackDesc?:string
+  feedbackDesc?: string;
 }
 export class PackageMain extends BaseEntity {
   // * 主键
-  id?: number
+  id?: number;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   // * 群组名称
-  packageName?: string
+  packageName?: string;
 
   // 机构名称
-  orgNames?: string[]
+  orgNames?: string[];
 
   // 角色名称
-  roleNames?: string[]
+  roleNames?: string[];
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
-    this.isActive = '1'
+    this.isActive = '1';
   }
 }
 
 export class PackageMainQuery {
   // * 群组名称
-  packageName?: string
+  packageName?: string;
 }
 
 export class WorkQuery {
   // * 任务名
-  workTitle = ''
+  workTitle = '';
   // * 类型(字典表work_type_code);文件通知/一般工作/重点工作
-  typeCode? = ''
+  typeCode? = '';
   // * 任务类型(1:一般任务、2:回填任务 、3:重点)
-  workType? = ''
+  workType? = '';
   // * 文章所属org_code
-  orgCode?: string
+  orgCode?: string;
   // * 任务状态(0编辑  20下达 21反馈 22督查 23办结 -1撤回)
-  status? = ''
+  status? = '';
   // * 发布日期
-  publishDate?: string
+  publishDate?: string;
   // * 截止时间
-  deadline?: string
+  deadline?: string;
 }
 
 export class WorkMust extends BaseEntity {
   // * 主键
-  id?: number
+  id?: number;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   // * 回填组织编号
-  orgCode?: string
+  orgCode?: string;
   // * 回填组织名称
-  orgName?: string
+  orgName?: string;
   // * 任务id
-  workId?: number
+  workId?: number;
   // * 1:集团发布 2：基层反馈
-  roleType?: string
+  roleType?: string;
   // * 集团发布问题；基层回答1对1
-  mustDesc?: string
+  mustDesc?: string;
   // * 问题内容(用于回答时展示)
-  question?: string
+  question?: string;
   // * 问题序号
-  sort?: number
+  sort?: number;
   // * 反馈id
-  feedbackId?: number
+  feedbackId?: number;
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
   }
 }
 
 export class WorkMustQuery {
   // * 回填组织编号
-  orgCode?: string
+  orgCode?: string;
   // * 回填组织名称
-  orgName?: string
+  orgName?: string;
   // * 任务id
-  workId?: number
+  workId?: number;
   // * 1:集团发布 2：基层反馈
-  roleType?: string
+  roleType?: string;
   // * 集团发布问题；基层回答1对1
-  mustDesc?: string
+  mustDesc?: string;
   // * 问题序号
-  sort?: number
+  sort?: number;
   // * 反馈id
-  feedbackId?: number
+  feedbackId?: number;
 }
 export class WorkOrg extends BaseEntity {
   // * 主键
-  id?: number
+  id?: number;
   // * 任务ID
-  workId?: number
+  workId?: number;
   // * 分组id
-  packageId?: number
+  packageId?: number;
   // *
-  orgCode?: string
+  orgCode?: string;
   // *
-  orgName?: string
+  orgName?: string;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
   }
 }
 
 export class WorkOrgQuery {
   // * 任务ID
-  workId?: number
+  workId?: number;
   // * 分组id
-  packageId?: number
+  packageId?: number;
   // *
-  orgCode?: string
+  orgCode?: string;
   // *
-  orgName?: string
+  orgName?: string;
 }
 export class WorkRole extends BaseEntity {
   // * 主键
-  id?: number
+  id?: number;
   // * 任务ID
-  workId?: number
+  workId?: number;
   // * 分组id
-  packageId?: number
+  packageId?: number;
   // * 角色编号
-  roleId?: number
+  roleId?: number;
   // * 1：有效 0：删除
-  isActive?: string
+  isActive?: string;
   constructor() {
-    super()
+    super();
     //  * 根据自身业务需要的初始化值修改
   }
 }
 
 export class WorkRoleQuery {
   // * 任务ID
-  workId?: number
+  workId?: number;
   // * 分组id
-  packageId?: number
+  packageId?: number;
   // * 角色编号
-  roleId?: number
+  roleId?: number;
 }

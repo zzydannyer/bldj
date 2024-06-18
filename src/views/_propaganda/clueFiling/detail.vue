@@ -1,31 +1,25 @@
 <script setup lang="ts">
-import { _5_years_ago, formatDate } from '@/utils/date'
-import {
-  closeToast,
-  showImagePreview,
-  showLoadingToast,
-  showToast,
-} from 'vant'
-import { getPropaganda, listAuditRecord } from '@/api/media/propaganda'
-import { PropagandaAuditBo, PropagandaAuditVo, PropagandaMain } from '@/types/_media/propaganda'
-import { useGlobal } from '@/utils'
-import {getPropagandaClue} from "@/api/media/propagandaClue.ts";
-import {PropagandaClue} from "@/types/_media/propagandaClue";
+  import { _5_years_ago, formatDate } from '@/utils/date';
+  import { closeToast, showImagePreview, showLoadingToast, showToast } from 'vant';
+  import { getPropaganda, listAuditRecord } from '@/api/media/propaganda';
+  import { PropagandaAuditBo, PropagandaAuditVo, PropagandaMain } from '@/types/_media/propaganda';
+  import { useGlobal } from '@/utils';
+  import { getPropagandaClue } from '@/api/media/propagandaClue.ts';
+  import { PropagandaClue } from '@/types/_media/propagandaClue';
 
-const route = useRoute()
-const detail = ref<PropagandaClue>(new PropagandaClue())
-const id = route.params.id as string
-const { $parse } = useGlobal<GlobalPropertiesApi>()
+  const route = useRoute();
+  const detail = ref<PropagandaClue>(new PropagandaClue());
+  const id = route.params.id as string;
+  const { $parse } = useGlobal<GlobalPropertiesApi>();
 
+  const getRecord = async () => {
+    const { data } = await getPropagandaClue(id);
+    detail.value = data!;
+  };
 
-const getRecord = async () => {
-  const { data } = await getPropagandaClue(id)
-  detail.value = data!
-}
-
-onMounted(() => {
-  getRecord()
-})
+  onMounted(() => {
+    getRecord();
+  });
 </script>
 <template>
   <main class="container">
@@ -55,17 +49,15 @@ onMounted(() => {
             <span class="van-cell van-field">联系人</span>
             <v-tree-select v-model="detail.linkUser" readonly name="linkUser" />
           </div>
-
         </van-form>
       </van-cell-group>
     </v-card>
-
   </main>
 </template>
 
 <style scoped>
-.van-cell {
-  padding-left: 0;
-  padding-right: 0;
-}
+  .van-cell {
+    padding-left: 0;
+    padding-right: 0;
+  }
 </style>

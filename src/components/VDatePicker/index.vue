@@ -24,25 +24,20 @@
 </template>
 
 <script setup lang="ts">
-  import { FieldRule, PickerOption } from 'vant'
-  import {
-    formatDate,
-    joinDate,
-    _5_years_ago,
-    _10_years_future,
-  } from '@/utils/date'
+  import { FieldRule, PickerOption } from 'vant';
+  import { formatDate, joinDate, _5_years_ago, _10_years_future } from '@/utils/date';
 
   defineOptions({
-    name: 'VDatePicker',
-  })
+    name: 'VDatePicker'
+  });
 
-  const show = ref(false)
-  const modelValue = defineModel<string>()
-  const picked = ref<string[]>([])
+  const show = ref(false);
+  const modelValue = defineModel<string>();
+  const picked = ref<string[]>([]);
   const picked_text = computed(() => {
-    if (!modelValue.value) return ''
-    return formatDate(modelValue.value)
-  })
+    if (!modelValue.value) return '';
+    return formatDate(modelValue.value);
+  });
 
   const {
     disabled = false,
@@ -52,7 +47,7 @@
     maxDate = _10_years_future,
     minDate = _5_years_ago,
 
-    placeholder,
+    placeholder
   } = defineProps({
     disabled: Boolean,
     rules: Array as PropType<FieldRule[]>,
@@ -60,26 +55,26 @@
     required: Boolean,
     minDate: Date,
     placeholder: String,
-    maxDate: Date,
-  })
+    maxDate: Date
+  });
   const onConfirm = () => {
-    modelValue.value = picked.value.join('-')
-    show.value = false
-  }
+    modelValue.value = picked.value.join('-');
+    show.value = false;
+  };
 
   const onCancel = () => {
-    show.value = false
-    if (!modelValue.value) return
-    picked.value = modelValue.value.split('-')
-  }
+    show.value = false;
+    if (!modelValue.value) return;
+    picked.value = modelValue.value.split('-');
+  };
 
   // 日期格式化
   const formatter = (type: string, option: PickerOption) => {
-    if (type === 'year') option.text += '年'
-    if (type === 'month') option.text += '月'
-    if (type === 'day') option.text += '日'
-    return option
-  }
+    if (type === 'year') option.text += '年';
+    if (type === 'month') option.text += '月';
+    if (type === 'day') option.text += '日';
+    return option;
+  };
 </script>
 
 <style scoped></style>

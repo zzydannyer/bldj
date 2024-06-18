@@ -1,42 +1,40 @@
-import useDictStore from '@/store/modules/dict'
-import { getDicts } from '@/api/dict'
+import useDictStore from '@/store/modules/dict';
+import { getDicts } from '@/api/dict';
 
 /**
  * 获取字典数据
  */
 export function useDict(...args: DictType[]): any {
-  const dictStore = useDictStore()
-  const dictMap = reactive<DictMapper>({})
+  const dictStore = useDictStore();
+  const dictMap = reactive<DictMapper>({});
 
   args.forEach(async (dictType: string) => {
-    dictMap[dictType] = []
-    const dicts = dictStore.get_dict(dictType)
+    dictMap[dictType] = [];
+    const dicts = dictStore.get_dict(dictType);
     if (dicts) {
-      dictMap[dictType] = dicts as DictData[]
+      dictMap[dictType] = dicts as DictData[];
     } else {
-      const { data } = await getDicts(dictType)
+      const { data } = await getDicts(dictType);
       dictMap[dictType] = data!.map((p) => ({
         label: p.dictLabel,
         value: p.dictValue,
         elTagType: p.listClass,
-        elTagClass: p.cssClass,
-      }))
-      dictStore.set_dict(dictType, dictMap[dictType])
+        elTagClass: p.cssClass
+      }));
+      dictStore.set_dict(dictType, dictMap[dictType]);
     }
-  })
-  return toRefs(dictMap)
+  });
+  return toRefs(dictMap);
 }
 
 export type DictData = {
-  label: string
-  value: string
-  elTagType: any
-  elTagClass: string
-}
+  label: string;
+  value: string;
+  elTagType: any;
+  elTagClass: string;
+};
 
-type DictMapper = DictType extends never
-  ? { [x: string]: DictData[] }
-  : { [key in DictType]: DictData[] }
+type DictMapper = DictType extends never ? { [x: string]: DictData[] } : { [key in DictType]: DictData[] };
 
 type DictType =
   | 'sys_user_sex'
@@ -52,4 +50,4 @@ type DictType =
   | 'work_release_type'
   | 'work_status'
   | 'feedback_status'
-  | string
+  | string;

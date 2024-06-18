@@ -1,6 +1,6 @@
-import { iconType } from './types'
-import { Component, defineComponent, h } from 'vue'
-import { IconFont, IconifyOnline, IconifyOffline } from './index'
+import { iconType } from './types';
+import { Component, defineComponent, h } from 'vue';
+import { IconFont, IconifyOnline, IconifyOffline } from './index';
 
 /**
  * 支持 `iconfont`、自定义 `svg` 以及 `iconify` 中所有的图标
@@ -11,51 +11,47 @@ import { IconFont, IconifyOnline, IconifyOffline } from './index'
  */
 export function useIcon(icon: any, attrs?: iconType): Component {
   // iconfont
-  const ifReg = /^IF-/
+  const ifReg = /^IF-/;
   // typeof icon === "function" 属于SVG
   if (ifReg.test(icon)) {
     // iconfont
-    const name = icon.split(ifReg)[1]
-    const iconName = name.slice(
-      0,
-      name.indexOf(' ') == -1 ? name.length : name.indexOf(' ')
-    )
-    const iconType = name.slice(name.indexOf(' ') + 1, name.length)
+    const name = icon.split(ifReg)[1];
+    const iconName = name.slice(0, name.indexOf(' ') == -1 ? name.length : name.indexOf(' '));
+    const iconType = name.slice(name.indexOf(' ') + 1, name.length);
     return defineComponent({
       name: 'FontIcon',
       render() {
         return h(IconFont, {
           icon: iconName,
           iconType,
-          ...attrs,
-        })
-      },
-    })
+          ...attrs
+        });
+      }
+    });
   } else if (typeof icon === 'function' || typeof icon?.render === 'function') {
     // svg
-    return icon
+    return icon;
   } else if (typeof icon === 'object') {
     return defineComponent({
       name: 'OfflineIcon',
       render() {
         return h(IconifyOffline, {
           icon: icon,
-          ...attrs,
-        })
-      },
-    })
+          ...attrs
+        });
+      }
+    });
   } else {
     // 通过是否存在 : 符号来判断是在线还是本地图标，存在即是在线图标，反之
     return defineComponent({
       name: 'Icon',
       render() {
-        const IconifyIcon =
-          icon && icon.includes(':') ? IconifyOnline : IconifyOffline
+        const IconifyIcon = icon && icon.includes(':') ? IconifyOnline : IconifyOffline;
         return h(IconifyIcon, {
           icon: icon,
-          ...attrs,
-        })
-      },
-    })
+          ...attrs
+        });
+      }
+    });
   }
 }

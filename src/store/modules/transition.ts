@@ -1,9 +1,9 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export default defineStore('transition', () => {
-  const transitionName = ref('right')
+  const transitionName = ref('right');
   const setTransitionName = (name: string) => {
-    transitionName.value = name
-  }
-  return { transitionName, setTransitionName }
-})
+    transitionName.value = name;
+  };
+  return { transitionName, setTransitionName };
+});

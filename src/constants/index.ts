@@ -56,4 +56,3 @@ export const ErrorCode: { [key: number]: string } = {
   [RespCode.BadGateway]: '系统未知错误，请反馈给管理员',
   [-1]: '系统未知错误，请反馈给管理员'
 };
-

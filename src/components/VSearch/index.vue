@@ -1,55 +1,51 @@
 <script setup lang="ts">
-  import useNavBarStore from '@/store/modules/navBar'
-  import { storeToRefs } from 'pinia'
+  import useNavBarStore from '@/store/modules/navBar';
+  import { storeToRefs } from 'pinia';
 
   defineOptions({
-    name: 'VSearch',
-  })
+    name: 'VSearch'
+  });
 
   const props = withDefaults(
     defineProps<{
-      showPopIcon?: boolean
-      placeholder: string
-      showSearch?: boolean
-      showTabs?: boolean
+      showPopIcon?: boolean;
+      placeholder: string;
+      showSearch?: boolean;
+      showTabs?: boolean;
     }>(),
     {
       placeholder: '请输入搜索关键词',
       showPopIcon: true,
       showSearch: true,
-      showTabs: false,
+      showTabs: false
     }
-  )
-  const emits = defineEmits(['handleSearch'])
+  );
+  const emits = defineEmits(['handleSearch']);
 
-  const showPopMenu = ref(false)
+  const showPopMenu = ref(false);
 
-  const searchVal = defineModel('searchVal', { default: '' })
-  const { visible } = storeToRefs(useNavBarStore())
+  const searchVal = defineModel('searchVal', { default: '' });
+  const { visible } = storeToRefs(useNavBarStore());
   const clear = () => {
-    searchVal.value = ''
-    emits('handleSearch')
-  }
+    searchVal.value = '';
+    emits('handleSearch');
+  };
   const popStyle = computed(() => {
-    const navBar = visible.value ? '+ var(--van-nav-bar-height)' : ''
-    const tabs = props.showTabs ? '+ var(--van-tabs-line-height)' : ''
+    const navBar = visible.value ? '+ var(--van-nav-bar-height)' : '';
+    const tabs = props.showTabs ? '+ var(--van-tabs-line-height)' : '';
     return {
-      top: `calc(20px + var(--van-search-input-height) ${navBar} ${tabs})`,
-    }
-  })
+      top: `calc(20px + var(--van-search-input-height) ${navBar} ${tabs})`
+    };
+  });
 
   defineSlots<{
-    dropMenu: () => any
-    popMenu: () => any
-  }>()
+    dropMenu: () => any;
+    popMenu: () => any;
+  }>();
 </script>
 
 <template>
-  <van-sticky
-    class="v-animation"
-    :offset-top="visible ? 46 : 0"
-    style="height: 54px"
-  >
+  <van-sticky class="v-animation" :offset-top="visible ? 46 : 0" style="height: 54px">
     <van-search
       v-model="searchVal"
       v-if="showSearch"
@@ -60,12 +56,7 @@
       @search="emits('handleSearch')"
     >
       <template #left>
-        <van-icon
-          v-if="showPopIcon"
-          class="pr-2"
-          name="filter-o"
-          @click="showPopMenu = !showPopMenu"
-        />
+        <van-icon v-if="showPopIcon" class="pr-2" name="filter-o" @click="showPopMenu = !showPopMenu" />
       </template>
       <template #right-icon>
         <van-icon v-show="searchVal" color="#ccc" name="clear" @click="clear" />
@@ -78,14 +69,7 @@
     <slot name="dropMenu" />
   </van-sticky>
 
-  <van-popup
-    v-model:show="showPopMenu"
-    teleport="body"
-    position="top"
-    round
-    :z-index="1"
-    :style="popStyle"
-  >
+  <van-popup v-model:show="showPopMenu" teleport="body" position="top" round :z-index="1" :style="popStyle">
     <slot name="popMenu" />
   </van-popup>
 </template>

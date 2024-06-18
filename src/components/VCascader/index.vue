@@ -1,50 +1,48 @@
 <script setup lang="ts" generic="T extends string | number">
-  import { FieldRule, PickerOption } from 'vant'
-  import { PropType } from 'vue'
+  import { FieldRule, PickerOption } from 'vant';
+  import { PropType } from 'vue';
 
   defineOptions({
-    name: 'VCascader',
-  })
+    name: 'VCascader'
+  });
 
-  const show = ref(false)
-  const modelValue = defineModel<T>()
-  const picked = ref<T>()
+  const show = ref(false);
+  const modelValue = defineModel<T>();
+  const picked = ref<T>();
 
   /**
    * @description 展平children数组
    * @param arr
    */
   const flatFn = (arr: any[]) => {
-    const result: any[] = []
+    const result: any[] = [];
 
     function flattenHelper(arr: any[]) {
       for (const item of arr) {
-        result.push(item)
+        result.push(item);
         if (item.children && item.children.length > 0) {
-          flattenHelper(item.children)
+          flattenHelper(item.children);
         }
       }
     }
 
-    flattenHelper(arr)
-    return result
-  }
+    flattenHelper(arr);
+    return result;
+  };
 
-  const flatOption = computed(() => flatFn(options))
+  const flatOption = computed(() => flatFn(options));
   const picked_text = computed(() => {
-    return flatOption.value.find((i) => i[value.value] === modelValue.value)?.[
-      text.value
-    ]
-  })
+    return flatOption.value.find((i) => i[value.value] === modelValue.value)?.[text.value];
+  });
 
   watch(
     () => modelValue.value,
     (val) => {
       if (val) {
-        picked.value = val
+        picked.value = val;
       }
     }
-  )
+  );
 
   const {
     options = [],
@@ -55,8 +53,8 @@
     placeholder,
     fieldNames = {
       text: 'text',
-      value: 'value',
-    },
+      value: 'value'
+    }
   } = defineProps({
     options: Array as PropType<any[]>,
     disabled: Boolean,
@@ -64,19 +62,19 @@
     label: String,
     required: Boolean,
     placeholder: String,
-    fieldNames: Object as PropType<{ text: string; value: string }>,
-  })
+    fieldNames: Object as PropType<{ text: string; value: string }>
+  });
 
-  const text = computed(() => fieldNames.text)
-  const value = computed(() => fieldNames.value)
+  const text = computed(() => fieldNames.text);
+  const value = computed(() => fieldNames.value);
 
   const onFinish = ({ selectedOptions }: PickerOption) => {
-    modelValue.value = picked.value
-    show.value = false
-    emits('finish', selectedOptions)
-  }
+    modelValue.value = picked.value;
+    show.value = false;
+    emits('finish', selectedOptions);
+  };
 
-  const emits = defineEmits(['update:modelValue', 'clear', 'finish'])
+  const emits = defineEmits(['update:modelValue', 'clear', 'finish']);
 </script>
 
 <template>
@@ -93,14 +91,7 @@
     @clear="emits('clear')"
   />
   <van-popup round v-model:show="show" position="bottom" teleport="body">
-    <van-cascader
-      v-model="picked"
-      :title="label"
-      :closeable="false"
-      :options="options"
-      :field-names="fieldNames"
-      @finish="onFinish"
-    />
+    <van-cascader v-model="picked" :title="label" :closeable="false" :options="options" :field-names="fieldNames" @finish="onFinish" />
   </van-popup>
 </template>
 

@@ -1,5 +1,5 @@
-import { BaseEntity } from "@/types";
-import dayjs from "dayjs";
+import { BaseEntity } from '@/types';
+import dayjs from 'dayjs';
 
 export class PropagandaClue extends BaseEntity {
   // * 主键
@@ -28,8 +28,8 @@ export class PropagandaClue extends BaseEntity {
   clueStatus: string;
   constructor() {
     super();
-    this.startTime = new Date().getTime()
-    this.endTime = new Date().getTime()
+    this.startTime = new Date().getTime();
+    this.endTime = new Date().getTime();
     //  * 根据自身业务需要的初始化值修改
   }
 }

@@ -15,22 +15,22 @@
 </template>
 
 <script setup lang="ts">
-  import { DictData } from '@/plugins/dict'
-  import type { TagSize, TagType, TagProps } from 'vant'
-  import { PropType } from 'vue'
-  import { useGlobal } from '@/utils'
-  import { border_color, bg_color, text_color } from '@/constants'
+  import { DictData } from '@/plugins/dict';
+  import type { TagSize, TagType, TagProps } from 'vant';
+  import { PropType } from 'vue';
+  import { useGlobal } from '@/utils';
+  import { border_color, bg_color, text_color } from '@/constants';
 
   defineOptions({
-    name: 'VTag',
-  })
-  const { $value_to_label, $value_to_dict } = useGlobal<GlobalPropertiesApi>()
+    name: 'VTag'
+  });
+  const { $value_to_label, $value_to_dict } = useGlobal<GlobalPropertiesApi>();
 
   const {
     dictData = [],
     value = '',
     border = true,
-    type,
+    type
   } = defineProps({
     // 数据
     dictData: Object as PropType<DictData[]>,
@@ -45,12 +45,12 @@
     color: String as PropType<TagProps['color']>,
     textColor: String as PropType<TagProps['textColor']>,
     closeable: Boolean as PropType<TagProps['closeable']>,
-    border: Boolean as PropType<boolean>,
-  })
+    border: Boolean as PropType<boolean>
+  });
 
-  const labelValue = computed(() => $value_to_dict(dictData, value))
-  const _type = computed(() => labelValue.value?.elTagType || type || 'primary')
-  const borderColor = computed(() => border_color[_type.value])
+  const labelValue = computed(() => $value_to_dict(dictData, value));
+  const _type = computed(() => labelValue.value?.elTagType || type || 'primary');
+  const borderColor = computed(() => border_color[_type.value]);
 </script>
 
 <style>
