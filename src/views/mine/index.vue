@@ -9,13 +9,13 @@
     <van-image round fit="cover" width="4rem" height="4rem" :src="useIcon('avatar')" />
     <div class="right-text">
       <div class="text-tit">这是一个昵称</div>
-      <div class="text-b">编辑资料</div>
+      <div class="text-b">编辑资料<Icon icon="octicon:chevron-right-24" /></div>
     </div>
   </div>
   <van-grid class="-mt-10 mx-[16PX] rounded overflow-hidden" :column-num="3" :border="false">
-    <van-grid-item :icon="useIcon('icon14-1')" text="我的活跃度" />
-    <van-grid-item :icon="useIcon('icon10')" text="我的素材" />
-    <van-grid-item :icon="useIcon('icon11')" text="工作提醒" />
+    <van-grid-item :icon="useIcon('icon14-1')" text="我的活跃度" url="active" />
+    <van-grid-item :icon="useIcon('icon10')" text="我的素材" url="materials" />
+    <van-grid-item :icon="useIcon('icon11')" text="工作提醒" to="reminder" />
   </van-grid>
   <van-cell-group class="mt-3 mx-[16PX] rounded overflow-hidden test">
     <van-cell title="我的组织" :icon="useIcon('icon12')" is-link url="organization" />

@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { debounce, pickBy, throttle } from 'lodash';
   import { isNotEmpty } from '@/utils';
-  import { useErrorHandler } from '@/utils';
   import { ComponentPublicInstance } from 'vue';
   import { emitter } from '@/plugins/mitt';
   import useScrollTopStore from '@/store/modules/scrollTop';
@@ -28,7 +27,6 @@
   const loading = ref(false);
   const finished = ref(false);
   const refreshing = ref(false);
-  const errorHandler = useErrorHandler()!;
   const scrollTopStore = useScrollTopStore();
   const proxy = getCurrentInstance()?.proxy as ComponentPublicInstance;
 
@@ -76,17 +74,16 @@
     try {
       const filteEmpty = pickBy(toRaw(queryParams), isNotEmpty);
       const params = Object.assign({}, query, filteEmpty);
-
-      const { data, total } = await listFn(params);
-
-      if (!data) throw new Error('请求失败');
+      const { rows, total } = await listFn(params);
+      console.log('rows', rows);
+      if (!rows) throw new Error('请求失败');
       // 刷新前列表清空
       if (refreshing.value) {
         list.value = [];
         refreshing.value = false;
       }
 
-      list.value = list.value.concat(data);
+      list.value = list.value.concat(rows);
       _total.value = total;
 
       if (list.value.length >= _total.value) {
@@ -96,7 +93,6 @@
       }
     } catch (e) {
       finished.value = true;
-      errorHandler(e, proxy, 'toast');
     } finally {
       loading.value = false;
     }

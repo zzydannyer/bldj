@@ -46,7 +46,7 @@ export default {
     },
     {
       path: '/organization',
-      name: 'organization',
+      name: 'Organization',
       component: () => import('@/views/mine/organization.vue'),
       meta: {
         title: '我的组织',
@@ -55,11 +55,41 @@ export default {
       }
     },
     {
+      path: '/active',
+      name: 'active',
+      component: () => import('@/views/mine/active.vue'),
+      meta: {
+        title: '我的活跃度',
+        keepAlive: true,
+        visible: false
+      }
+    },
+    {
       path: '/promise',
-      name: 'promise',
+      name: 'Promise',
       component: () => import('@/views/mine/promise.vue'),
       meta: {
         title: '我的承诺',
+        keepAlive: true,
+        visible: false
+      }
+    },
+    {
+      path: '/materials',
+      name: 'Materials',
+      component: () => import('@/views/mine/materials.vue'),
+      meta: {
+        title: '我的素材',
+        keepAlive: true,
+        visible: false
+      }
+    },
+    {
+      path: '/reminder',
+      name: 'Reminder',
+      component: () => import('@/views/mine/reminder.vue'),
+      meta: {
+        title: '我的素材',
         keepAlive: true,
         visible: false
       }
