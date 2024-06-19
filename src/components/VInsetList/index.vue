@@ -13,13 +13,15 @@
   const {
     listFn,
     queryParams,
-    shows = ['search', 'dropmenu'],
-    keyName = 'id'
+    shows = ['list'],
+    keyName = 'id',
+    rowsFilter
   } = defineProps({
     listFn: Function as PropType<any>,
     queryParams: Object as PropType<any>,
     shows: Array as PropType<any[]>,
-    keyName: String as PropType<string>
+    keyName: String as PropType<string>,
+    rowsFilter: Function as PropType<() => {}>
   });
   const route = useRoute();
   const list = ref([]);
@@ -83,7 +85,9 @@
         refreshing.value = false;
       }
 
-      list.value = list.value.concat(rows);
+      const _rows = rowsFilter(rows);
+
+      list.value = list.value.concat(_rows);
       _total.value = total;
 
       if (list.value.length >= _total.value) {
@@ -124,7 +128,7 @@
 </script>
 
 <template>
-  <van-pull-refresh ref="listRef" :class="listClass" v-model="refreshing" @refresh="onRefresh">
+  <van-pull-refresh ref="listRef" v-model="refreshing" :class="listClass" @refresh="onRefresh">
     <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" error-text="请求失败，请稍后重试" @load="onLoad">
       <slot name="list" :list="list">
         <van-cell-group :border="true" :inset="true" v-for="(row, index) in list" :key="row[keyName] ?? index">
@@ -139,8 +143,7 @@
 <style lang="scss" scoped>
   .van-pull-refresh {
     min-height: -webkit-fill-available;
-    min-height: stretch;
-
+    padding: $body-padding $body-padding 0;
     &.dropmenu-search {
       padding: calc($search-height + $dropmenu-height + $body-padding) $body-padding 0;
     }
