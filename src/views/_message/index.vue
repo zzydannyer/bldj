@@ -8,7 +8,11 @@
   import { getToken } from '@/utils/auth.ts';
   import useUserInfoStore from '@/store/modules/userInfo.ts';
   import { remove } from 'lodash';
-  import { getActionMap, getMessageVo, pullMessageList } from '@/api/media/message.ts';
+  import {
+    getActionMap,
+    getMessageVo,
+    pullMessageList
+  } from '@/api/_media/message';
   // const {$useDict} = useGlobal<GlobalPropertiesApi>();
   // const {MESSAGE_TYPE} = $useDict("MESSAGE_TYPE");
   // console.log("MESSAGE_TYPE", MESSAGE_TYPE.value)
@@ -193,7 +197,12 @@
     <template v-if="messageList.length > 0">
       <template v-for="message in messageList" :key="message.id">
         <v-card class="mb-2" @click="handleDetail(message)">
-          <van-text-ellipsis rows="2" :content="message.title" class="v-list-title" style="van-text-ellipsis-line-height: 1.4" />
+          <van-text-ellipsis
+            rows="2"
+            :content="message.title"
+            class="v-list-title"
+            style="van-text-ellipsis-line-height: 1.4"
+          />
 
           <div class="v-date justify-end">
             <van-icon name="clock-o" />
@@ -204,7 +213,11 @@
             <!--  {{ map[message.type] ?? message.type }}-->
             <!--</v-plain-tag>-->
             <v-tag plain :dictData="MESSAGE_TYPE" :value="message.type" />
-            <v-plain-tag v-if="actionMap[message.type]" size="mini" :type="message.completed ? 'success' : 'danger'">
+            <v-plain-tag
+              v-if="actionMap[message.type]"
+              size="mini"
+              :type="message.completed ? 'success' : 'danger'"
+            >
               {{ message.completed === true ? '已完成' : '未完成' }}
             </v-plain-tag>
           </div>

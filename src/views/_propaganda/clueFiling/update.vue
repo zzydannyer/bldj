@@ -1,11 +1,24 @@
 <script setup lang="ts">
   import { PropagandaMain } from '@/types/_media/propaganda';
-  import { checkScoreDetail, getDateRange, getNewMediaConfirm, listOption, listStandCascadeList } from '@/api/media/scoreStandard';
-  import { checkRole, getPropaganda } from '@/api/media/propaganda';
-  import { PickerOption, closeToast, showConfirmDialog, showLoadingToast, showSuccessToast, showToast } from 'vant';
+  import {
+    checkScoreDetail,
+    getDateRange,
+    getNewMediaConfirm,
+    listOption,
+    listStandCascadeList
+  } from '@/api/_media/scoreStandard';
+  import { checkRole, getPropaganda } from '@/api/_media/propaganda';
+  import {
+    PickerOption,
+    closeToast,
+    showConfirmDialog,
+    showLoadingToast,
+    showSuccessToast,
+    showToast
+  } from 'vant';
   import useUserInfoStore from '@/store/modules/userInfo';
   import { joinDate, _5_years_ago, dateFormatter } from '@/utils/date';
-  import { updatePropaganda } from '@/api/media/propaganda';
+  import { updatePropaganda } from '@/api/_media/propaganda';
   import { debounce, last } from 'lodash';
   import { emitter } from '@/plugins/mitt';
   import { RouteParams } from 'vue-router';
@@ -13,7 +26,10 @@
   import ProjectPicker from '@/views/media/projectPicker.tsx';
   import StandardPicker from '@/views/_propaganda/filing/standardPicker';
   import { PropagandaClue } from '@/types/_media/propagandaClue';
-  import { getPropagandaClue, updatePropagandaClue } from '@/api/media/propagandaClue.ts';
+  import {
+    getPropagandaClue,
+    updatePropagandaClue
+  } from '@/api/_media/propagandaClue';
 
   const form = ref<PropagandaClue>(new PropagandaClue());
   const route = useRoute();
@@ -49,7 +65,12 @@
     }
   };
   // 外部链接校验
-  const validator = (val: string) => (val ? /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(val) : true);
+  const validator = (val: string) =>
+    val
+      ? /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(
+          val
+        )
+      : true;
 
   const getRecord = async () => {
     const { data } = await getPropagandaClue(id);
@@ -65,7 +86,12 @@
     <van-form input-align="left" @submit="onSubmit">
       <van-cell-group inset>
         <!-- 项目工程名称 -->
-        <project-picker :rules="[{ required: true, message: '请选择项目' }]" required v-model:id="form.projectId" v-model:name="form.projectName" />
+        <project-picker
+          :rules="[{ required: true, message: '请选择项目' }]"
+          required
+          v-model:id="form.projectId"
+          v-model:name="form.projectName"
+        />
 
         <v-date-picker
           required
@@ -100,11 +126,18 @@
         />
 
         <van-cell-group inset class="mt-[16PX]">
-          <v-tree-select v-model="form.linkUser" placeholder="请选择联系人" label="联系人" name="linkUser" />
+          <v-tree-select
+            v-model="form.linkUser"
+            placeholder="请选择联系人"
+            label="联系人"
+            name="linkUser"
+          />
         </van-cell-group>
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit">
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

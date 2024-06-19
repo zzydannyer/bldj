@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { getPublicResourceFile } from '@/api/media/publicResource';
+  import { getPublicResourceFile } from '@/api/_media/publicResource';
   import { PublicResourceFile } from '@/types/_media/publicResource';
   import { closeToast, showImagePreview, showLoadingToast } from 'vant';
   import { fileType } from '@/constants';
@@ -45,7 +45,13 @@
 <template>
   <main class="detail-container">
     <section class="detail-img-container">
-      <van-image v-if="detail.fileType === '2'" class="w-full" fit="cover" :src="detail.url" @click="showImagePreview([detail.url!])">
+      <van-image
+        v-if="detail.fileType === '2'"
+        class="w-full"
+        fit="cover"
+        :src="detail.url"
+        @click="showImagePreview([detail.url!])"
+      >
         <template #loading>
           <van-loading type="spinner" size="20" />
         </template>

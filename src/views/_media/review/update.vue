@@ -1,8 +1,25 @@
 <script setup lang="ts">
-  import { getMedia, backAudit, passAudit, submitGroup, listActivitiesByMainId } from '@/api/media';
+  import {
+    getMedia,
+    backAudit,
+    passAudit,
+    submitGroup,
+    listActivitiesByMainId
+  } from '@/api/_media/index.ts';
   import { MediaMain } from '@/types/_media/index.ts';
-  import { PickerOption, closeToast, showConfirmDialog, showLoadingToast, showSuccessToast } from 'vant';
-  import { joinDate, _5_years_ago, formatDate, dateFormatter } from '@/utils/date';
+  import {
+    PickerOption,
+    closeToast,
+    showConfirmDialog,
+    showLoadingToast,
+    showSuccessToast
+  } from 'vant';
+  import {
+    joinDate,
+    _5_years_ago,
+    formatDate,
+    dateFormatter
+  } from '@/utils/date';
   import { showToast } from 'vant';
   import ProjectPicker from '@/views/media/projectPicker.tsx';
   import { useGlobal } from '@/utils';
@@ -185,15 +202,33 @@
           </template>
         </van-field>
         <!-- 作者 -->
-        <van-field required v-model="form.author" label="作者:" placeholder="请输入作者" :rules="[{ required: true, message: '作者不能为空' }]" />
+        <van-field
+          required
+          v-model="form.author"
+          label="作者:"
+          placeholder="请输入作者"
+          :rules="[{ required: true, message: '作者不能为空' }]"
+        />
         <!-- 公司 -->
-        <van-field readonly v-model="form.orgName" label="公司:" placeholder="请输入公司" />
+        <van-field
+          readonly
+          v-model="form.orgName"
+          label="公司:"
+          placeholder="请输入公司"
+        />
         <!-- 素材类别 -->
         <resource-type v-model="form.resourceType" />
         <!-- 项目工程名称 -->
-        <project-picker v-model:id="form.projectId" v-model:name="form.projectName" />
+        <project-picker
+          v-model:id="form.projectId"
+          v-model:name="form.projectName"
+        />
         <!-- 报道日期 -->
-        <v-date-picker v-model="form.shootingTime" label="拍摄时间:" placeholder="请选择拍摄时间" />
+        <v-date-picker
+          v-model="form.shootingTime"
+          label="拍摄时间:"
+          placeholder="请选择拍摄时间"
+        />
 
         <!-- 拍摄地点 -->
         <v-area-picker
@@ -211,7 +246,11 @@
         />
 
         <!-- 图片视频素材 -->
-        <van-field class="media-review" :label="form.mediaType === '1' ? '图片素材:' : '视频素材:'" label-align="top">
+        <van-field
+          class="media-review"
+          :label="form.mediaType === '1' ? '图片素材:' : '视频素材:'"
+          label-align="top"
+        >
           <template #input>
             <media-review
               :type="form.mediaType === '1' ? 'image' : 'video'"
@@ -240,13 +279,29 @@
         />
       </van-cell-group>
 
-      <van-button class="mt-2" block round type="danger" @click="NoAudit"> 退回 </van-button>
-      <van-button class="mt-2" block round type="primary" native-type="submit"> 通过审核 </van-button>
-      <van-button block round class="mt-2" type="success" @click="handlePassAndSubmitGroup" v-if="form.mediaStatus == '1'">
+      <van-button class="mt-2" block round type="danger" @click="NoAudit">
+        退回
+      </van-button>
+      <van-button class="mt-2" block round type="primary" native-type="submit">
+        通过审核
+      </van-button>
+      <van-button
+        block
+        round
+        class="mt-2"
+        type="success"
+        @click="handlePassAndSubmitGroup"
+        v-if="form.mediaStatus == '1'"
+      >
         通过并呈报集团
       </van-button>
     </van-form>
-    <van-dialog v-model:show="isShowNameDialog" title="请输入理由" show-cancel-button :before-close="onNameDialogBeforeClose">
+    <van-dialog
+      v-model:show="isShowNameDialog"
+      title="请输入理由"
+      show-cancel-button
+      :before-close="onNameDialogBeforeClose"
+    >
       <!-- 输入框 -->
       <van-field
         required

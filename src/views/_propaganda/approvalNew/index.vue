@@ -1,6 +1,6 @@
 <script setup lang="ts">
   // 审批
-  import { listAuditPropagandaMedia } from '@/api/media/propaganda';
+  import { listAuditPropagandaMedia } from '@/api/_media/propaganda';
   import { PropagandaMainQuery } from '@/types/_media/propaganda';
   import { useGlobal } from '@/utils';
   import useUserInfoStore from '@/store/modules/userInfo';
@@ -45,18 +45,35 @@
 </script>
 <template>
   <main class="list-container">
-    <v-search :show-pop-icon="false" placeholder="请输入报道标题" v-model:searchVal="queryParams.reportTitle" @handle-search="handleSearch">
+    <v-search
+      :show-pop-icon="false"
+      placeholder="请输入报道标题"
+      v-model:searchVal="queryParams.reportTitle"
+      @handle-search="handleSearch"
+    >
       <template #dropMenu>
-        <van-tabs v-model:active="queryParams.params.auditStatus" @change="handleSearch">
+        <van-tabs
+          v-model:active="queryParams.params.auditStatus"
+          @change="handleSearch"
+        >
           <van-tab title="待审核" name="auditing" />
           <van-tab title="已审核" name="audited" />
         </van-tabs>
       </template>
     </v-search>
-    <v-inset-list :shows="['search', 'tabs']" :list-fn="listAuditPropagandaMedia" :query-params="queryParams" ref="listRef">
+    <v-inset-list
+      :shows="['search', 'tabs']"
+      :list-fn="listAuditPropagandaMedia"
+      :query-params="queryParams"
+      ref="listRef"
+    >
       <template #default="{ row, index }">
         <v-card>
-          <van-text-ellipsis class="v-list-title" :content="row.reportTitle" rows="2" />
+          <van-text-ellipsis
+            class="v-list-title"
+            :content="row.reportTitle"
+            rows="2"
+          />
           <!-- 审核状态 -->
           <v-plain-tag class="mt-1" border type="primary">
             {{ statusMap[row.reportStatus] }}
@@ -72,7 +89,15 @@
           </div>
 
           <section class="absolute right-2 bottom-2">
-            <van-button class="px-4" round type="default" hairline size="mini" text="查 看" @click="handleDetail(row.id)" />
+            <van-button
+              class="px-4"
+              round
+              type="default"
+              hairline
+              size="mini"
+              text="查 看"
+              @click="handleDetail(row.id)"
+            />
             <van-button
               class="px-4"
               round
@@ -81,7 +106,9 @@
               v-auth="['multimedia:propaganda:audit']"
               v-if="queryParams.params.auditStatus == 'auditing' && !isAdmin"
               type="primary"
-              @click="router.push('/propaganda/approval/audit/' + row.id + '/' + 2)"
+              @click="
+                router.push('/propaganda/approval/audit/' + row.id + '/' + 2)
+              "
             />
             <van-button
               class="px-4"
@@ -89,7 +116,12 @@
               text="提交至集团审核"
               size="mini"
               v-auth="['multimedia:propaganda:auditToGroup']"
-              v-if="queryParams.params.auditStatus == 'audited' && row.reportStatus == '2' && row.lastAuditorId == userId && isCompany"
+              v-if="
+                queryParams.params.auditStatus == 'audited' &&
+                row.reportStatus == '2' &&
+                row.lastAuditorId == userId &&
+                isCompany
+              "
               type="success"
               @click="handleGroup(row.id)"
             />

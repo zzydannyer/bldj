@@ -1,5 +1,9 @@
 <script setup lang="ts">
-  import { listOrgChildren, listUserByPosition, searchUser } from '@/api/system/org.ts';
+  import {
+    listOrgChildren,
+    listUserByPosition,
+    searchUser
+  } from '@/api/_system/org';
   import { TreeNode, User, IUser, LoadOptions } from './type.d';
   import { debounce } from 'lodash';
   // @ts-ignore
@@ -43,7 +47,13 @@
     { leading: false, trailing: true }
   );
 
-  function loadOptions({ action, parentNode, callback, searchQuery, ...rest }: LoadOptions) {
+  function loadOptions({
+    action,
+    parentNode,
+    callback,
+    searchQuery,
+    ...rest
+  }: LoadOptions) {
     const errorHandler = (err: any) => {
       console.error(err);
       callback(new Error('加载失败'));
@@ -71,7 +81,8 @@
         listOrgChildren(parentNode.id)
           .then(({ data }) => {
             if (data && data.length) {
-              const result = importType == 'user' ? data : data.filter((i) => i.type !== 3);
+              const result =
+                importType == 'user' ? data : data.filter((i) => i.type !== 3);
               parentNode.children = result.map(
                 (item: SysOrg) =>
                   ({
@@ -121,18 +132,24 @@
   function onSearch() {
     searchable.value = true;
     nextTick(() => {
-      (document.querySelector('.vue3-treeselect__input') as HTMLInputElement)?.focus();
+      (
+        document.querySelector('.vue3-treeselect__input') as HTMLInputElement
+      )?.focus();
     });
   }
   function init() {
-    const input = document.querySelector('.vue3-treeselect__control') as HTMLInputElement;
+    const input = document.querySelector(
+      '.vue3-treeselect__control'
+    ) as HTMLInputElement;
     input.addEventListener('click', onSearch);
     onClickOutside(input, (event) => {
       searchable.value = false;
     });
   }
   function destroy() {
-    const input = document.querySelector('.vue3-treeselect__control') as HTMLInputElement;
+    const input = document.querySelector(
+      '.vue3-treeselect__control'
+    ) as HTMLInputElement;
     input.removeEventListener('click', onSearch);
   }
   onMounted(init);

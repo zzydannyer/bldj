@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { MediaMain } from '@/types/_media';
-  import { addMedia, directSubmitMedia } from '@/api/media/index';
+  import { addMedia, directSubmitMedia } from '@/api/_media/index';
   import { _5_years_ago } from '@/utils/date';
   import { showSuccessToast } from 'vant';
   import { emitter } from '@/plugins/mitt';
@@ -51,14 +51,29 @@
         <!-- 关联项目 -->
         <van-field label="是否关联项目">
           <template #input>
-            <van-switch size="16px" :active-value="true" :inactive-value="false" v-model="switchValue"></van-switch>
+            <van-switch
+              size="16px"
+              :active-value="true"
+              :inactive-value="false"
+              v-model="switchValue"
+            ></van-switch>
           </template>
         </van-field>
         <!-- 项目工程名称 -->
-        <project-picker v-if="switchValue" v-model:id="form.projectId" v-model:name="form.projectName" />
+        <project-picker
+          v-if="switchValue"
+          v-model:id="form.projectId"
+          v-model:name="form.projectName"
+        />
 
         <!-- 作者 -->
-        <van-field required v-model="form.author" label="作者" placeholder="请输入作者" :rules="[{ required: true, message: '作者不能为空' }]" />
+        <van-field
+          required
+          v-model="form.author"
+          label="作者"
+          placeholder="请输入作者"
+          :rules="[{ required: true, message: '作者不能为空' }]"
+        />
         <!-- 资源类别 -->
         <resource-type v-model="form.resourceType" />
 
@@ -86,16 +101,36 @@
           }"
         />
         <!-- 视频素材 -->
-        <van-field required :rules="[{ required: true, message: '请上传视频素材' }]" label="视频素材" v-if="status === '2'">
+        <van-field
+          required
+          :rules="[{ required: true, message: '请上传视频素材' }]"
+          label="视频素材"
+          v-if="status === '2'"
+        >
           <template #input>
-            <v-uploader :http-params="{ mainId: form.id }" url="media" v-model="form.mediaList" type="video" />
+            <v-uploader
+              :http-params="{ mainId: form.id }"
+              url="media"
+              v-model="form.mediaList"
+              type="video"
+            />
           </template>
         </van-field>
 
         <!-- 图片素材 -->
-        <van-field required :rules="[{ required: true, message: '请上传图片素材' }]" label="图片素材" v-else-if="status === '1'">
+        <van-field
+          required
+          :rules="[{ required: true, message: '请上传图片素材' }]"
+          label="图片素材"
+          v-else-if="status === '1'"
+        >
           <template #input>
-            <v-uploader :http-params="{ mainId: form.id }" url="media" v-model="form.mediaList" type="image" />
+            <v-uploader
+              :http-params="{ mainId: form.id }"
+              url="media"
+              v-model="form.mediaList"
+              type="image"
+            />
           </template>
         </van-field>
 
@@ -117,8 +152,24 @@
         />
       </van-cell-group>
       <div>
-        <van-button class="my-4" round block type="primary" native-type="submit"> 确定 </van-button>
-        <van-button class="my-4" round block type="success" @click="onSubmit(true)"> 提交 </van-button>
+        <van-button
+          class="my-4"
+          round
+          block
+          type="primary"
+          native-type="submit"
+        >
+          确定
+        </van-button>
+        <van-button
+          class="my-4"
+          round
+          block
+          type="success"
+          @click="onSubmit(true)"
+        >
+          提交
+        </van-button>
       </div>
     </van-form>
   </section>

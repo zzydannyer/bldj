@@ -1,10 +1,18 @@
 <script setup lang="ts">
   import { onBeforeMount } from 'vue';
   import { Activitiesscore, MediaActivitiesScore } from '@/types/_media';
-  import { closeToast, showImagePreview, showLoadingToast, showSuccessToast } from 'vant';
+  import {
+    closeToast,
+    showImagePreview,
+    showLoadingToast,
+    showSuccessToast
+  } from 'vant';
   import Player from 'xgplayer';
   import 'xgplayer/dist/index.min.css';
-  import { getMediaActivitiesScoreDetail, scoreMediaDetail } from '@/api/media';
+  import {
+    getMediaActivitiesScoreDetail,
+    scoreMediaDetail
+  } from '@/api/_media';
   import { emitter } from '@/plugins/mitt';
   import { useGlobal } from '@/utils';
 
@@ -18,7 +26,10 @@
   const getDetail = async () => {
     try {
       showLoadingToast({ message: '加载中...', forbidClick: true });
-      const { data } = await getMediaActivitiesScoreDetail(activitiesId as string, id as string);
+      const { data } = await getMediaActivitiesScoreDetail(
+        activitiesId as string,
+        id as string
+      );
 
       detail.value = data!;
 
@@ -62,7 +73,13 @@
 <template>
   <main class="detail-container">
     <section class="detail-img-container">
-      <van-image v-if="detail.mediaType === '1'" class="w-full" fit="cover" :src="detail.url" @click="showImagePreview([detail.url!])">
+      <van-image
+        v-if="detail.mediaType === '1'"
+        class="w-full"
+        fit="cover"
+        :src="detail.url"
+        @click="showImagePreview([detail.url!])"
+      >
         <template #loading>
           <van-loading type="spinner" size="20" />
         </template>
@@ -86,7 +103,9 @@
         <van-rate v-model="score" allow-half :count="10" />
         <span class="text-red-600 text-lg ml-4">{{ score }}分</span>
       </div>
-      <van-button @click="handleScore" class="mt-6" round type="primary" block> 打分 </van-button>
+      <van-button @click="handleScore" class="mt-6" round type="primary" block>
+        打分
+      </van-button>
     </section>
   </main>
 </template>

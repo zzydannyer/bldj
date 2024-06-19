@@ -1,7 +1,17 @@
 <script setup lang="ts">
-  import { listActivitiesByMainId, getMedia, updateMedia, listActiveMediaActivities } from '@/api/media';
+  import {
+    listActivitiesByMainId,
+    getMedia,
+    updateMedia,
+    listActiveMediaActivities
+  } from '@/api/_media';
   import { MediaMain } from '@/types/_media';
-  import { PickerOption, closeToast, showLoadingToast, showSuccessToast } from 'vant';
+  import {
+    PickerOption,
+    closeToast,
+    showLoadingToast,
+    showSuccessToast
+  } from 'vant';
   import { joinDate, _5_years_ago, formatDate } from '@/utils/date';
   import { last, debounce } from 'lodash';
   import { emitter } from '@/plugins/mitt';
@@ -73,7 +83,10 @@
     }
   };
   const onReportTimeConfirm = ({ selectedOptions }: PickerOption) => {
-    form.shootingTime = $parse(joinDate(selectedOptions, 'value', '-'), 'YYYY-MM-DD HH:mm:ss');
+    form.shootingTime = $parse(
+      joinDate(selectedOptions, 'value', '-'),
+      'YYYY-MM-DD HH:mm:ss'
+    );
     reportTimeText.value = joinDate(selectedOptions, 'text');
     showReportTime.value = false;
   };
@@ -86,7 +99,10 @@
       const submitForm = cloneDeep(form);
       submitForm.id = id as Numeric;
       submitForm.mediaType = form.mediaType;
-      submitForm.shootingTime = $parse(form.shootingTime, 'YYYY-MM-DD HH:mm:ss');
+      submitForm.shootingTime = $parse(
+        form.shootingTime,
+        'YYYY-MM-DD HH:mm:ss'
+      );
 
       showLoadingToast({ message: '提交中...' });
 
@@ -137,28 +153,64 @@
           :rules="[{ required: true, message: '媒体标题不能为空' }]"
         />
         <!-- 作者 -->
-        <van-field required v-model="form.author" label="作者" placeholder="请输入作者" :rules="[{ required: true, message: '作者不能为空' }]" />
+        <van-field
+          required
+          v-model="form.author"
+          label="作者"
+          placeholder="请输入作者"
+          :rules="[{ required: true, message: '作者不能为空' }]"
+        />
 
         <!-- 素材类别 -->
         <resource-type v-model="form.resourceType" />
         <!-- 关联项目 -->
         <van-field label="是否关联项目">
           <template #input>
-            <van-switch size="16px" :active-value="true" :inactive-value="false" v-model="form.project"></van-switch>
+            <van-switch
+              size="16px"
+              :active-value="true"
+              :inactive-value="false"
+              v-model="form.project"
+            ></van-switch>
           </template>
         </van-field>
         <!-- 项目工程名称 -->
-        <project-picker v-if="form.project" v-model:id="form.projectId" v-model:name="form.projectName" />
+        <project-picker
+          v-if="form.project"
+          v-model:id="form.projectId"
+          v-model:name="form.projectName"
+        />
         <!-- 视频素材 -->
-        <van-field label="视频素材" required :rules="[{ required: true, message: '请上传视频素材' }]" v-if="form.mediaType === '2'">
+        <van-field
+          label="视频素材"
+          required
+          :rules="[{ required: true, message: '请上传视频素材' }]"
+          v-if="form.mediaType === '2'"
+        >
           <template #input>
-            <v-uploader :projectname="form.mediaTitle" :max-size="5000 * 1024 * 1024" url="media" v-model="form.mediaList" type="video" />
+            <v-uploader
+              :projectname="form.mediaTitle"
+              :max-size="5000 * 1024 * 1024"
+              url="media"
+              v-model="form.mediaList"
+              type="video"
+            />
           </template>
         </van-field>
         <!-- 图片素材 -->
-        <van-field label="图片素材" required :rules="[{ required: true, message: '请上传图片素材' }]" v-else-if="form.mediaType === '1'">
+        <van-field
+          label="图片素材"
+          required
+          :rules="[{ required: true, message: '请上传图片素材' }]"
+          v-else-if="form.mediaType === '1'"
+        >
           <template #input>
-            <v-uploader url="media" :projectname="form.mediaTitle" v-model="form.mediaList" type="image" />
+            <v-uploader
+              url="media"
+              :projectname="form.mediaTitle"
+              v-model="form.mediaList"
+              type="image"
+            />
           </template>
         </van-field>
         <!-- 征集活动 -->
@@ -225,7 +277,9 @@
           ]"
         />
       </van-cell-group>
-      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit">
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

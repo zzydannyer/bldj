@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { PropagandaMain } from '@/types/_media/propaganda';
-  import { listOption, listStandCascadeList } from '@/api/media/scoreStandard';
+  import { listOption, listStandCascadeList } from '@/api/_media/scoreStandard';
   import { PickerOption, showSuccessToast } from 'vant';
   import { _5_years_ago } from '@/utils/date';
-  import { submitToGroupNew } from '@/api/media/propaganda';
+  import { submitToGroupNew } from '@/api/_media/propaganda';
   import { last } from 'lodash';
   import { router } from '@/router';
   import { emitter } from '@/plugins/mitt';
@@ -66,8 +66,12 @@
     resetExtra();
     const lastOne = last(selectedOptions) as any;
     form.optionMultiFlag = lastOne.optionMultiFlag;
-    form.groupScoreDetailId = selectedOptions.map((option: PickerOption) => option.id).join(',');
-    scoreDetailText.value = selectedOptions.map((option: PickerOption) => option.text).join('/');
+    form.groupScoreDetailId = selectedOptions
+      .map((option: PickerOption) => option.id)
+      .join(',');
+    scoreDetailText.value = selectedOptions
+      .map((option: PickerOption) => option.text)
+      .join('/');
 
     try {
       const { data } = await listOption({
@@ -176,7 +180,13 @@
           :rules="[{ required: true, message: '请选择赋分依据' }]"
         />
         <van-popup v-model:show="showScoreDetail" round position="bottom">
-          <van-cascader :closeable="false" title="赋分依据" :options="scoreOption" :field-names="fieldNames" @finish="onScoreDetailConfirm" />
+          <van-cascader
+            :closeable="false"
+            title="赋分依据"
+            :options="scoreOption"
+            :field-names="fieldNames"
+            @finish="onScoreDetailConfirm"
+          />
         </van-popup>
         <!-- 额外附加分 -->
         <van-cell clickable title="" @click="toggle" v-if="extra_1_field">
@@ -227,7 +237,9 @@
         </van-popup>
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit">
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

@@ -1,5 +1,12 @@
-import { listProjectSelectOptions } from '@/api/media/project';
-import { PickerOption, Field, Popup, Picker, Search, type FieldRule } from 'vant';
+import { listProjectSelectOptions } from '@/api/_media/project';
+import {
+  PickerOption,
+  Field,
+  Popup,
+  Picker,
+  Search,
+  type FieldRule
+} from 'vant';
 import { debounce } from 'lodash';
 import { withModifiers } from 'vue';
 

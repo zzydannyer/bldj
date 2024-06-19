@@ -1,10 +1,18 @@
 <script setup lang="ts">
-  import { getWorkFeedback, viewWorkFeedback } from '@/api/media/taskExecution';
+  import {
+    getWorkFeedback,
+    viewWorkFeedback
+  } from '@/api/_media/taskExecution';
   import { useGlobal } from '@/utils';
-  import { getWorkMain } from '@/api/media/taskRelease';
+  import { getWorkMain } from '@/api/_media/taskRelease';
 
-  const { $useDict, $parse, $value_to_label } = useGlobal<GlobalPropertiesApi>();
-  const { work_release_type, feedback_status, work_type_code } = $useDict('work_release_type', 'feedback_status', 'work_type_code');
+  const { $useDict, $parse, $value_to_label } =
+    useGlobal<GlobalPropertiesApi>();
+  const { work_release_type, feedback_status, work_type_code } = $useDict(
+    'work_release_type',
+    'feedback_status',
+    'work_type_code'
+  );
   const route = useRoute();
   const { id, workId }: any = route.params;
   const relaseList: any = ref([]);
@@ -52,7 +60,13 @@
       <van-field>
         <template #label>任务附件</template>
         <template #input>
-          <v-uploader disabled url="oss" v-if="detailList?.workFiles?.length > 0" v-model="detailList.workFiles" type="file" />
+          <v-uploader
+            disabled
+            url="oss"
+            v-if="detailList?.workFiles?.length > 0"
+            v-model="detailList.workFiles"
+            type="file"
+          />
           <van-tag v-else size="medium" type="primary">暂无附件</van-tag>
         </template>
       </van-field>
@@ -65,19 +79,31 @@
       <van-field v-if="relaseList.submitStatus === '3'">
         <template #label>反馈内容</template>
         <template #input>
-          {{ relaseList.feedbackDesc ? relaseList.feedbackDesc : '暂无反馈内容' }}
+          {{
+            relaseList.feedbackDesc ? relaseList.feedbackDesc : '暂无反馈内容'
+          }}
         </template>
       </van-field>
       <van-field v-if="relaseList.submitStatus === '3'">
         <template #label>反馈附件</template>
         <template #input>
-          <v-uploader :disabled="true" url="oss" v-if="relaseList?.workFiles?.length > 0" v-model="relaseList.workFiles" type="file" />
+          <v-uploader
+            :disabled="true"
+            url="oss"
+            v-if="relaseList?.workFiles?.length > 0"
+            v-model="relaseList.workFiles"
+            type="file"
+          />
           <van-tag v-else size="medium" type="primary">暂无附件</van-tag>
         </template>
       </van-field>
     </van-cell-group>
 
-    <van-cell-group inset style="margin-top: 20px" v-if="detailList.workType === '2'">
+    <van-cell-group
+      inset
+      style="margin-top: 20px"
+      v-if="detailList.workType === '2'"
+    >
       <van-collapse v-model="activeNames">
         <van-collapse-item title="任务回填" name="1">
           <div v-for="(item, index) in relaseList.questions" :key="index">

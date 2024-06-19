@@ -4,7 +4,7 @@
   import { PropType } from 'vue';
   import MyTreeSelect from './treeSelect.vue';
   import { isObject } from 'lodash';
-  import { getUserInfo } from '@/api/system/org.ts';
+  import { getUserInfo } from '@/api/_system/org';
 
   defineOptions({
     name: 'VTreeSelect'
@@ -89,13 +89,23 @@
     multiple: Boolean
   });
 
-  function transformData(input: any, multiple: boolean, toPicked: boolean): any {
+  function transformData(
+    input: any,
+    multiple: boolean,
+    toPicked: boolean
+  ): any {
     const val = input as any;
     if (input && isObject(input)) {
       if (multiple) {
-        return val.map((item: any) => (toPicked ? { id: item?.userId, label: item?.userName } : { userId: item?.id, userName: item?.label }));
+        return val.map((item: any) =>
+          toPicked
+            ? { id: item?.userId, label: item?.userName }
+            : { userId: item?.id, userName: item?.label }
+        );
       } else {
-        return toPicked ? { id: val?.userId, label: val?.userName } : { userId: val?.id, userName: val?.label };
+        return toPicked
+          ? { id: val?.userId, label: val?.userName }
+          : { userId: val?.id, userName: val?.label };
       }
     }
     return input;
@@ -148,16 +158,44 @@
   />
   <van-popup round v-model:show="show" position="bottom" teleport="body">
     <section class="van-picker__toolbar">
-      <button type="button" class="van-picker__cancel van-haptics-feedback" @click="onCancel">取消</button>
-      <div class="w-[240px] overflow-ellipsis overflow-hidden whitespace-nowrap">{{ picked?.label }}</div>
+      <button
+        type="button"
+        class="van-picker__cancel van-haptics-feedback"
+        @click="onCancel"
+      >
+        取消
+      </button>
+      <div
+        class="w-[240px] overflow-ellipsis overflow-hidden whitespace-nowrap"
+      >
+        {{ picked?.label }}
+      </div>
       <div>
-        <button type="button" class="van-picker__confirm" style="color: var(--van-red); padding-right: 0" @click="onClear">清空</button>
-        <button type="button" class="van-picker__confirm van-haptics-feedback" @click="onConfirm">确认</button>
+        <button
+          type="button"
+          class="van-picker__confirm"
+          style="color: var(--van-red); padding-right: 0"
+          @click="onClear"
+        >
+          清空
+        </button>
+        <button
+          type="button"
+          class="van-picker__confirm van-haptics-feedback"
+          @click="onConfirm"
+        >
+          确认
+        </button>
       </div>
     </section>
 
     <section class="p-[16PX] h-[400PX] overflow-auto">
-      <MyTreeSelect v-model="picked" v-bind="$attrs" :multiple="multiple" :placeholder="placeholder" />
+      <MyTreeSelect
+        v-model="picked"
+        v-bind="$attrs"
+        :multiple="multiple"
+        :placeholder="placeholder"
+      />
     </section>
   </van-popup>
 </template>

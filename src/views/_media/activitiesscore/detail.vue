@@ -5,7 +5,7 @@
   import Player from 'xgplayer';
   import { useGlobal } from '@/utils';
   import 'xgplayer/dist/index.min.css';
-  import { getMediaActivitiesScoreDetail } from '@/api/media';
+  import { getMediaActivitiesScoreDetail } from '@/api/_media';
   const route = useRoute();
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   const { id, activitiesId } = route.params;
@@ -15,7 +15,10 @@
   const getDetail = async () => {
     try {
       showLoadingToast({ message: '加载中...', forbidClick: true });
-      const { data } = await getMediaActivitiesScoreDetail(activitiesId as string, id as string);
+      const { data } = await getMediaActivitiesScoreDetail(
+        activitiesId as string,
+        id as string
+      );
       score.value = Number(data!.score);
       detail.value = data!;
       if (data?.mediaType === '2') {
@@ -44,7 +47,13 @@
 <template>
   <main class="detail-container">
     <section class="detail-img-container">
-      <van-image v-if="detail.mediaType === '1'" class="w-full" fit="cover" :src="detail.url" @click="showImagePreview([detail.url!])">
+      <van-image
+        v-if="detail.mediaType === '1'"
+        class="w-full"
+        fit="cover"
+        :src="detail.url"
+        @click="showImagePreview([detail.url!])"
+      >
         <template #loading>
           <van-loading type="spinner" size="20" />
         </template>

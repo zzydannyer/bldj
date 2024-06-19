@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { getNotice } from '@/api/system/notice';
+  import { getNotice } from '@/api/_system/notice';
   import { SysNotice } from '@/types/_system/sysNotice';
   import { useGlobal } from '@/utils';
   import { formatDate } from '@/utils/date';

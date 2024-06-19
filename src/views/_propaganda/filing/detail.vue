@@ -1,8 +1,17 @@
 <script setup lang="ts">
   import { _5_years_ago, formatDate } from '@/utils/date';
-  import { closeToast, showImagePreview, showLoadingToast, showToast } from 'vant';
-  import { getPropaganda, listAuditRecord } from '@/api/media/propaganda';
-  import { PropagandaAuditBo, PropagandaAuditVo, PropagandaMain } from '@/types/_media/propaganda';
+  import {
+    closeToast,
+    showImagePreview,
+    showLoadingToast,
+    showToast
+  } from 'vant';
+  import { getPropaganda, listAuditRecord } from '@/api/_media/propaganda';
+  import {
+    PropagandaAuditBo,
+    PropagandaAuditVo,
+    PropagandaMain
+  } from '@/types/_media/propaganda';
   import { useGlobal } from '@/utils';
 
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
@@ -21,10 +30,14 @@
       const { data } = await getPropaganda(id, 'view');
       detail.value = data!;
       if (detail.value.scoreDesc) {
-        scoreDesc.value = detail.value.scoreDesc.split('>').map((item: string) => item);
+        scoreDesc.value = detail.value.scoreDesc
+          .split('>')
+          .map((item: string) => item);
       }
       if (detail.value.groupScoreDesc) {
-        groupScoreDesc.value = detail.value.groupScoreDesc.split('>').map((item: string) => item);
+        groupScoreDesc.value = detail.value.groupScoreDesc
+          .split('>')
+          .map((item: string) => item);
       }
     } catch (e) {
       console.error(e);
@@ -86,7 +99,11 @@
           <van-field>
             <template #label>外部链接</template>
             <template #input>
-              <van-text-ellipsis :content="detail.outLink" expand-text="展开" collapse-text="收起" />
+              <van-text-ellipsis
+                :content="detail.outLink"
+                expand-text="展开"
+                collapse-text="收起"
+              />
             </template>
           </van-field>
 
@@ -94,7 +111,11 @@
             <template #label>赋分依据</template>
             <template #input>
               <div class="vant-steps--revert">
-                <van-steps direction="vertical" :active="scoreDesc.length" inactive-color="#07c160">
+                <van-steps
+                  direction="vertical"
+                  :active="scoreDesc.length"
+                  inactive-color="#07c160"
+                >
                   <van-step v-for="(item, index) in scoreDesc" :key="index">
                     {{ item }}
                   </van-step>
@@ -107,8 +128,15 @@
             <template #label>集团赋分依据</template>
             <template #input>
               <div class="vant-steps--revert">
-                <van-steps direction="vertical" :active="groupScoreDesc.length" inactive-color="#07c160">
-                  <van-step v-for="(item, index) in groupScoreDesc" :key="index">
+                <van-steps
+                  direction="vertical"
+                  :active="groupScoreDesc.length"
+                  inactive-color="#07c160"
+                >
+                  <van-step
+                    v-for="(item, index) in groupScoreDesc"
+                    :key="index"
+                  >
                     {{ item }}
                   </van-step>
                 </van-steps>
@@ -123,7 +151,11 @@
 
           <van-field v-show="detail.clueScore && Number(detail.clueScore) != 0">
             <template #label>新闻线索类型</template>
-            <template #input>{{ PRO_IMPORTANT_CLUE_STATUS.find((item) => item.value === detail.clueType)?.label }}</template>
+            <template #input>{{
+              PRO_IMPORTANT_CLUE_STATUS.find(
+                (item) => item.value === detail.clueType
+              )?.label
+            }}</template>
           </van-field>
           <van-field v-show="detail.clueScore && Number(detail.clueScore) != 0">
             <template #label>新闻线索分比例</template>
@@ -137,19 +169,39 @@
           <van-cell v-if="detail.imageList && detail.imageList.length > 0">
             <template #title>图片素材</template>
             <template #value>
-              <van-image @click="showImage(detail.imageList)" v-for="(item, index) in detail.imageList" :key="index" :src="item.url" />
+              <van-image
+                @click="showImage(detail.imageList)"
+                v-for="(item, index) in detail.imageList"
+                :key="index"
+                :src="item.url"
+              />
             </template>
           </van-cell>
-          <van-cell v-else-if="detail.videoList && detail.videoList?.length > 0">
+          <van-cell
+            v-else-if="detail.videoList && detail.videoList?.length > 0"
+          >
             <template #title>视频素材:</template>
             <template #value>
-              <v-uploader url="oss" :disabled="true" v-model="detail.videoList" type="video" />
+              <v-uploader
+                url="oss"
+                :disabled="true"
+                v-model="detail.videoList"
+                type="video"
+              />
             </template>
           </van-cell>
-          <van-cell v-else-if="detail.commonList && detail.commonList?.length > 0">
+          <van-cell
+            v-else-if="detail.commonList && detail.commonList?.length > 0"
+          >
             <template #title>普通附件</template>
             <template #value>
-              <v-uploader url="oss" :disabled="true" readonly v-model="detail.commonList" type="file" />
+              <v-uploader
+                url="oss"
+                :disabled="true"
+                readonly
+                v-model="detail.commonList"
+                type="file"
+              />
             </template>
           </van-cell>
         </van-form>
@@ -159,13 +211,23 @@
     <v-card style="margin-top: 20px">
       <section class="section-title">审核记录</section>
       <div v-if="auditList.length > 0">
-        <van-steps direction="vertical" finish-icon="checked" :active="auditList.length">
+        <van-steps
+          direction="vertical"
+          finish-icon="checked"
+          :active="auditList.length"
+        >
           <van-step v-for="(audit, index) in auditList" :key="index">
-            <div>状态:{{ audit.auditResult && matchText[audit.auditResult] }}</div>
+            <div>
+              状态:{{ audit.auditResult && matchText[audit.auditResult] }}
+            </div>
             <div>{{ audit.auditRoleName }}:{{ audit.auditName }}</div>
             <div>审核时间：{{ $parse(audit.createTime) }}</div>
             <div v-if="audit.auditResult !== '0'">
-              {{ audit.auditResult === '3' || audit.auditResult === '4' ? '申诉内容' : '审核意见' }}
+              {{
+                audit.auditResult === '3' || audit.auditResult === '4'
+                  ? '申诉内容'
+                  : '审核意见'
+              }}
               {{ audit.auditDesc }}
             </div>
           </van-step>

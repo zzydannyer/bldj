@@ -1,7 +1,11 @@
 <script setup lang="ts">
   import { PropagandaAuditBo, PropagandaMain } from '@/types/_media/propaganda';
-  import { addPropagandaAudit, checkRole, getPropaganda } from '@/api/media/propaganda';
-  import { listOption, listStandCascadeList } from '@/api/media/scoreStandard';
+  import {
+    addPropagandaAudit,
+    checkRole,
+    getPropaganda
+  } from '@/api/_media/propaganda';
+  import { listOption, listStandCascadeList } from '@/api/_media/scoreStandard';
   import { PickerOption, showSuccessToast, showFailToast } from 'vant';
   import { last } from 'lodash';
   import { toRaw } from 'vue';
@@ -9,9 +13,17 @@
   import useUserInfoStore from '@/store/modules/userInfo';
   import { emitter } from '@/plugins/mitt';
   import { storeToRefs } from 'pinia';
-  import { checkChooseDetail, validateImportantClue } from '@/api/media/propagandaClue.ts';
+  import {
+    checkChooseDetail,
+    validateImportantClue
+  } from '@/api/_media/propagandaClue';
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
-  const { group_propaganda_ratio, group_propaganda_type, PRO_IMPORTANT_CLUE_STATUS, propaganda_clue_ratio } = $useDict(
+  const {
+    group_propaganda_ratio,
+    group_propaganda_type,
+    PRO_IMPORTANT_CLUE_STATUS,
+    propaganda_clue_ratio
+  } = $useDict(
     'group_propaganda_ratio',
     'group_propaganda_type',
     'PRO_IMPORTANT_CLUE_STATUS',
@@ -53,9 +65,13 @@
   const group_propaganda = computed(() => {
     let res;
     if (type === '1') {
-      res = JSON.stringify(group_propaganda_type.value.filter((i: any) => i.value !== '4'));
+      res = JSON.stringify(
+        group_propaganda_type.value.filter((i: any) => i.value !== '4')
+      );
     } else if (type === '2') {
-      res = JSON.stringify(group_propaganda_type.value.filter((i: any) => i.value === '4'));
+      res = JSON.stringify(
+        group_propaganda_type.value.filter((i: any) => i.value === '4')
+      );
     }
     return JSON.parse(res as string);
   });
@@ -112,13 +128,21 @@
       if (isGroup.value) {
         scoreMainId.value = data?.groupScoreMainId;
         scoreDatailMainid.value = data?.groupScoreDetailId?.split(',')[4] ?? '';
-        scoreDetailText.value = data?.groupScoreDesc ? data?.groupScoreDesc : (data?.scoreDesc as string);
-        form.auditDetailId = data?.groupScoreDetailId?.split(',').slice(0, 5).join(',');
+        scoreDetailText.value = data?.groupScoreDesc
+          ? data?.groupScoreDesc
+          : (data?.scoreDesc as string);
+        form.auditDetailId = data?.groupScoreDetailId
+          ?.split(',')
+          .slice(0, 5)
+          .join(',');
       } else if (isCompany.value) {
         scoreMainId.value = data?.scoreMainId;
         scoreDatailMainid.value = data?.scoreDetailId?.split(',')[3] ?? '';
         scoreDetailText.value = data?.scoreDesc as string;
-        form.auditDetailId = data?.scoreDetailId?.split(',').slice(0, 4).join(',');
+        form.auditDetailId = data?.scoreDetailId
+          ?.split(',')
+          .slice(0, 4)
+          .join(',');
       }
       // 额外加分回显
       if (data?.otherScore1Id) {
@@ -151,8 +175,12 @@
 
         if (importantClue.value) {
           if (detailLevel.value !== '' || detailLevel.value !== undefined) {
-            clueLabel.value = PRO_IMPORTANT_CLUE_STATUS.value.find((item) => item.value === detailLevel.value)?.label;
-            form.clueRatio = propaganda_clue_ratio.value.find((item) => item.value === detailLevel.value)?.label;
+            clueLabel.value = PRO_IMPORTANT_CLUE_STATUS.value.find(
+              (item) => item.value === detailLevel.value
+            )?.label;
+            form.clueRatio = propaganda_clue_ratio.value.find(
+              (item) => item.value === detailLevel.value
+            )?.label;
             form.clueType = detailLevel.value;
           }
         }
@@ -168,11 +196,15 @@
   // 分数确认按钮
   const onScoreDetailConfirm = async ({ selectedOptions }: PickerOption) => {
     resetExtra();
-    form.auditDetailId = selectedOptions.map((option: PickerOption) => option.id).join(',');
+    form.auditDetailId = selectedOptions
+      .map((option: PickerOption) => option.id)
+      .join(',');
     const lastOne = last(selectedOptions) as any;
     form.scoreDetailId = lastOne.scoreDetailId;
     form.optionMultiFlag = lastOne.optionMultiFlag;
-    scoreDetailText.value = selectedOptions.map((option: PickerOption) => option.text).join('/');
+    scoreDetailText.value = selectedOptions
+      .map((option: PickerOption) => option.text)
+      .join('/');
 
     try {
       const { data } = await listOption({
@@ -223,8 +255,12 @@
 
           if (importantClue.value) {
             if (detailLevel.value !== '' || detailLevel.value !== undefined) {
-              clueLabel.value = PRO_IMPORTANT_CLUE_STATUS.value.find((item) => item.value === detailLevel.value)?.label;
-              form.clueRatio = propaganda_clue_ratio.value.find((item) => item.value === detailLevel.value)?.label;
+              clueLabel.value = PRO_IMPORTANT_CLUE_STATUS.value.find(
+                (item) => item.value === detailLevel.value
+              )?.label;
+              form.clueRatio = propaganda_clue_ratio.value.find(
+                (item) => item.value === detailLevel.value
+              )?.label;
               form.clueType = detailLevel.value;
             }
           }
@@ -279,7 +315,9 @@
   const getTreeOptions = async () => {
     try {
       // type类型  type为2的时候为新媒体
-      const isoperaType = userInfoStore?.roles?.includes('company-jbr') ? 'companyAudit' : ' ';
+      const isoperaType = userInfoStore?.roles?.includes('company-jbr')
+        ? 'companyAudit'
+        : ' ';
       let isType = (type as string) === '2' ? '1002' : '1003';
       // 获取赋分依据级联下拉框
       loading.value = true;
@@ -315,7 +353,10 @@
 
   // 退回
   const handleReturn = async (val: string) => {
-    let vaidate = await formref.value.resetValidation(['scoreDetailText', 'groupKind']);
+    let vaidate = await formref.value.resetValidation([
+      'scoreDetailText',
+      'groupKind'
+    ]);
     let res = await formref.value.validate(['auditDesc']);
     if (res === undefined) {
       const groupKind = form.groupKind;
@@ -395,7 +436,11 @@
           <template #value>
             <div class="flex gap-2 justify-end items-center">
               <span>额外加分项</span>
-              <van-checkbox v-model="extra_1_field" icon-size="16px" @click.stop />
+              <van-checkbox
+                v-model="extra_1_field"
+                icon-size="16px"
+                @click.stop
+              />
             </div>
           </template>
         </van-cell>
@@ -440,10 +485,20 @@
         />
 
         <!-- 新闻线索分类 -->
-        <van-cell clickable title="新闻线索类别" v-show="importantClue && detailLevel !== ''">
+        <van-cell
+          clickable
+          title="新闻线索类别"
+          v-show="importantClue && detailLevel !== ''"
+        >
           <template #value>
             <div class="gap-2 justify-end items-center">
-              <van-tag mark type="success" size="medium" style="text-align: center">{{ clueLabel }}</van-tag>
+              <van-tag
+                mark
+                type="success"
+                size="medium"
+                style="text-align: center"
+                >{{ clueLabel }}</van-tag
+              >
             </div>
             <div class="flex gap-2 justify-end items-center">
               <van-field
@@ -473,8 +528,12 @@
         />
       </van-cell-group>
       <div class="my-4 between-center gap-2">
-        <van-button round block type="primary" @click="handleSubmit('1')"> 通过 </van-button>
-        <van-button round block type="danger" @click="handleReturn('2')"> 退回 </van-button>
+        <van-button round block type="primary" @click="handleSubmit('1')">
+          通过
+        </van-button>
+        <van-button round block type="danger" @click="handleReturn('2')">
+          退回
+        </van-button>
       </div>
     </van-form>
   </section>

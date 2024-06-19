@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { MediaMain } from '@/types/_media';
   import { PickerOption, closeToast, showDialog, showLoadingToast } from 'vant';
-  import { addMedia, listActiveMediaActivities } from '@/api/media/index';
+  import { addMedia, listActiveMediaActivities } from '@/api/_media/index';
   import { _5_years_ago } from '@/utils/date';
   import { last, debounce, cloneDeep } from 'lodash';
   import { showSuccessToast } from 'vant';
@@ -37,7 +37,10 @@
       form.project = switchValue.value;
       const submitForm = cloneDeep(form);
       submitForm.mediaType = mediaType;
-      submitForm.shootingTime = $parse(form.shootingTime, 'YYYY-MM-DD HH:mm:ss');
+      submitForm.shootingTime = $parse(
+        form.shootingTime,
+        'YYYY-MM-DD HH:mm:ss'
+      );
 
       showLoadingToast({ message: '提交中...' });
 
@@ -103,19 +106,39 @@
           :rules="[{ required: true, message: '媒体标题不能为空' }]"
         />
         <!-- 作者 -->
-        <van-field required v-model="form.author" label="作者" placeholder="请输入作者" :rules="[{ required: true, message: '作者不能为空' }]" />
+        <van-field
+          required
+          v-model="form.author"
+          label="作者"
+          placeholder="请输入作者"
+          :rules="[{ required: true, message: '作者不能为空' }]"
+        />
         <!-- 素材类别 -->
         <resource-type v-model="form.resourceType" />
         <!-- 关联项目 -->
         <van-field label="是否关联项目">
           <template #input>
-            <van-switch size="16px" :active-value="true" :inactive-value="false" v-model="switchValue"></van-switch>
+            <van-switch
+              size="16px"
+              :active-value="true"
+              :inactive-value="false"
+              v-model="switchValue"
+            ></van-switch>
           </template>
         </van-field>
         <!-- 项目工程名称 -->
-        <project-picker v-if="switchValue" v-model:id="form.projectId" v-model:name="form.projectName" />
+        <project-picker
+          v-if="switchValue"
+          v-model:id="form.projectId"
+          v-model:name="form.projectName"
+        />
         <!-- 视频素材 -->
-        <van-field required :rules="[{ validator: mediaValidator, message: '请上传视频素材' }]" label="视频素材" v-if="mediaType === '2'">
+        <van-field
+          required
+          :rules="[{ validator: mediaValidator, message: '请上传视频素材' }]"
+          label="视频素材"
+          v-if="mediaType === '2'"
+        >
           <template #input>
             <v-uploader
               :projectname="form.mediaTitle"
@@ -128,9 +151,20 @@
           </template>
         </van-field>
         <!-- 图片素材 -->
-        <van-field required :rules="[{ validator: mediaValidator, message: '请上传图片素材' }]" label="图片素材" v-else-if="mediaType === '1'">
+        <van-field
+          required
+          :rules="[{ validator: mediaValidator, message: '请上传图片素材' }]"
+          label="图片素材"
+          v-else-if="mediaType === '1'"
+        >
           <template #input>
-            <v-uploader :http-params="{ mainId: form.id }" url="media" :projectname="form.mediaTitle" v-model="form.mediaList" type="image" />
+            <v-uploader
+              :http-params="{ mainId: form.id }"
+              url="media"
+              :projectname="form.mediaTitle"
+              v-model="form.mediaList"
+              type="image"
+            />
           </template>
         </van-field>
         <!-- 征集活动 -->
@@ -183,7 +217,9 @@
         />
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit">
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

@@ -1,4 +1,4 @@
-import { listStandCascadeList } from '@/api/media/scoreStandard';
+import { listStandCascadeList } from '@/api/_media/scoreStandard';
 import { join } from 'lodash';
 import { Field, Popup, Cascader, PickerOption } from 'vant';
 
@@ -48,7 +48,8 @@ export default defineComponent({
       if (!ids || !options.length) return '';
 
       const length = ids.split(',')?.length;
-      const idArr = length > 4 ? ids.split(',').slice(0, 5) : ids.split(',').slice(0, 4);
+      const idArr =
+        length > 4 ? ids.split(',').slice(0, 5) : ids.split(',').slice(0, 4);
 
       let children: OptionItem[] = [];
       return idArr.reduce((prev, cur, index) => {
@@ -108,7 +109,12 @@ export default defineComponent({
             show.value = true;
           }}
         />
-        <Popup round v-model:show={show.value} position="bottom" teleport="body">
+        <Popup
+          round
+          v-model:show={show.value}
+          position="bottom"
+          teleport="body"
+        >
           <Cascader
             v-model={picked.value}
             title="赋分依据"

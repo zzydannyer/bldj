@@ -1,6 +1,14 @@
 import { PublicResourceFile } from '@/types/_media/publicResource';
-import { addPublicResourceFile, getPublicResourceFile } from '@/api/media/publicResource';
-import { showSuccessToast, PickerOption, showLoadingToast, closeToast } from 'vant';
+import {
+  addPublicResourceFile,
+  getPublicResourceFile
+} from '@/api/_media/publicResource';
+import {
+  showSuccessToast,
+  PickerOption,
+  showLoadingToast,
+  closeToast
+} from 'vant';
 import { emitter } from '@/plugins/mitt';
 
 export default function useResource() {

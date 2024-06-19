@@ -9,10 +9,16 @@
   import { useGlobal } from '@/utils';
   import { router } from '@/router';
   import { closeToast, showDialog, showLoadingToast } from 'vant';
-  import { auditAlertNum, getMediaAuditSum, getNoticeSum, getWorkFeedbackDealtSum, listScoreSum } from '@/api';
-  import { listPublicResourceLatest } from '@/api/media/publicResource';
-  import { getNotice, listNotice } from '@/api/system/notice';
-  import { listMediaPublicLast, listMessageManage } from '@/api/media';
+  import {
+    auditAlertNum,
+    getMediaAuditSum,
+    getNoticeSum,
+    getWorkFeedbackDealtSum,
+    listScoreSum
+  } from '@/api';
+  import { listPublicResourceLatest } from '@/api/_media/publicResource';
+  import { getNotice, listNotice } from '@/api/_system/notice';
+  import { listMediaPublicLast, listMessageManage } from '@/api/_media';
   import { MediaPublic } from '@/types/_media';
   import { SysNotice } from '@/types/_system/sysNotice';
   import { PropagandaAuditAlertVo } from '@/types/_media/propaganda';
@@ -203,20 +209,30 @@
     }
   };
 
-  const rankList = ref<{ orgCode: string; orgName: string; fraction: number }[]>([]);
+  const rankList = ref<
+    { orgCode: string; orgName: string; fraction: number }[]
+  >([]);
   const rankTimeRange = ref('');
 
   const RankItems = () => {
     return rankList.value.map((row, index) => {
       return (
-        <div class={[index > 2 ? 'rank-out' : 'rank-in', 'rank-item']} key={row.orgCode}>
+        <div
+          class={[index > 2 ? 'rank-out' : 'rank-in', 'rank-item']}
+          key={row.orgCode}
+        >
           <div class="start-center gap-2">
             <span class="">
               {index > 2 ? (
                 <span>{index + 1}</span>
               ) : (
                 <Icon
-                  class={['text-2xl', index === 0 ? 'text-amber-400' : '', index === 1 ? 'text-gray-200' : '', index === 2 ? 'text-yellow-600' : '']}
+                  class={[
+                    'text-2xl',
+                    index === 0 ? 'text-amber-400' : '',
+                    index === 1 ? 'text-gray-200' : '',
+                    index === 2 ? 'text-yellow-600' : ''
+                  ]}
                   icon="material-symbols:star"
                 />
               )}
@@ -232,7 +248,12 @@
   onBeforeMount(async () => {
     try {
       loading.value = true;
-      await Promise.allSettled([getSum(), getMediaPublicLast(), getNoticeList(), getPublicResource()]);
+      await Promise.allSettled([
+        getSum(),
+        getMediaPublicLast(),
+        getNoticeList(),
+        getPublicResource()
+      ]);
     } catch (e) {
       console.error(e);
     } finally {
@@ -263,7 +284,14 @@
       </van-grid>
     </v-card>
     <!--宣传考核弹出层-->
-    <van-action-sheet v-model:show="showAction" :actions="actions" cancel-text="取消" description="宣传考核" close-on-click-action @select="onSelect">
+    <van-action-sheet
+      v-model:show="showAction"
+      :actions="actions"
+      cancel-text="取消"
+      description="宣传考核"
+      close-on-click-action
+      @select="onSelect"
+    >
       <template #action="{ action }">
         <div class="between-center">
           <span>{{ action.name }}</span>
@@ -278,9 +306,26 @@
       <template #template>
         <van-skeleton-title style="height: 40px" title-width="100%" />
       </template>
-      <van-notice-bar class="mt-4" left-icon="volume-o" :scrollable="false" color="#1989fa" background="#ecf9ff">
-        <van-swipe v-if="noticeList.length > 0" vertical class="notice-swipe" :autoplay="3000" :touchable="true" :show-indicators="false">
-          <van-swipe-item @click="showMsg(notice)" v-for="notice in noticeList" :key="notice.noticeId">
+      <van-notice-bar
+        class="mt-4"
+        left-icon="volume-o"
+        :scrollable="false"
+        color="#1989fa"
+        background="#ecf9ff"
+      >
+        <van-swipe
+          v-if="noticeList.length > 0"
+          vertical
+          class="notice-swipe"
+          :autoplay="3000"
+          :touchable="true"
+          :show-indicators="false"
+        >
+          <van-swipe-item
+            @click="showMsg(notice)"
+            v-for="notice in noticeList"
+            :key="notice.noticeId"
+          >
             {{ notice.noticeTitle }}
           </van-swipe-item>
         </van-swipe>
@@ -311,16 +356,28 @@
         :autoplay="{ disableOnInteraction: false, delay: 0 }"
         :freeMode="true"
         :speed="4000"
-        :injectStyles="['.swiper-wrapper{transition-timing-function: linear !important;}']"
+        :injectStyles="[
+          '.swiper-wrapper{transition-timing-function: linear !important;}'
+        ]"
       >
-        <swiper-slide v-for="{ url, resourceName, id } in bannerList" :key="id" @click="navigateTo('/media/list/detail', id!)">
-          <van-image class="w-full aspect-video overflow-hidden rounded" :src="url">
+        <swiper-slide
+          v-for="{ url, resourceName, id } in bannerList"
+          :key="id"
+          @click="navigateTo('/media/list/detail', id!)"
+        >
+          <van-image
+            class="w-full aspect-video overflow-hidden rounded"
+            :src="url"
+          >
             <template #loading>
               <van-loading type="spinner" size="20" />
             </template>
             <template #error>加载失败</template>
           </van-image>
-          <van-text-ellipsis class="text-center text-sm" :content="resourceName" />
+          <van-text-ellipsis
+            class="text-center text-sm"
+            :content="resourceName"
+          />
         </swiper-slide>
       </swiper-container>
 

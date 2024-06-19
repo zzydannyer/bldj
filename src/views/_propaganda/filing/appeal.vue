@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { appealPropaganda } from '@/api/media/propaganda';
+  import { appealPropaganda } from '@/api/_media/propaganda';
   import { showFailToast, showSuccessToast } from 'vant';
   import useUserInfoStore from '@/store/modules/userInfo';
   import { storeToRefs } from 'pinia';
@@ -61,7 +61,9 @@
         />
       </van-cell-group>
       <div style="margin: 16px">
-        <van-button round block type="primary" native-type="submit"> 提交申诉 </van-button>
+        <van-button round block type="primary" native-type="submit">
+          提交申诉
+        </van-button>
       </div>
     </van-form>
   </section>

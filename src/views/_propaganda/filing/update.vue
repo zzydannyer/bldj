@@ -1,11 +1,24 @@
 <script setup lang="ts">
   import { PropagandaMain } from '@/types/_media/propaganda';
-  import { checkScoreDetail, getDateRange, getNewMediaConfirm, listOption, listStandCascadeList } from '@/api/media/scoreStandard';
-  import { checkRole, getPropaganda } from '@/api/media/propaganda';
-  import { PickerOption, closeToast, showConfirmDialog, showLoadingToast, showSuccessToast, showToast } from 'vant';
+  import {
+    checkScoreDetail,
+    getDateRange,
+    getNewMediaConfirm,
+    listOption,
+    listStandCascadeList
+  } from '@/api/_media/scoreStandard';
+  import { checkRole, getPropaganda } from '@/api/_media/propaganda';
+  import {
+    PickerOption,
+    closeToast,
+    showConfirmDialog,
+    showLoadingToast,
+    showSuccessToast,
+    showToast
+  } from 'vant';
   import useUserInfoStore from '@/store/modules/userInfo';
   import { joinDate, _5_years_ago, dateFormatter } from '@/utils/date';
-  import { updatePropaganda } from '@/api/media/propaganda';
+  import { updatePropaganda } from '@/api/_media/propaganda';
   import { debounce, last } from 'lodash';
   import { emitter } from '@/plugins/mitt';
   import { RouteParams } from 'vue-router';
@@ -14,7 +27,10 @@
   import StandardPicker from '@/views/_propaganda/filing/standardPicker';
 
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
-  const { group_propaganda_ratio, group_propaganda_type } = $useDict('group_propaganda_ratio', 'group_propaganda_type');
+  const { group_propaganda_ratio, group_propaganda_type } = $useDict(
+    'group_propaganda_ratio',
+    'group_propaganda_type'
+  );
   // 开始时间和结束时间
   const startTime = ref<Date>();
   const endTime = ref<Date>();
@@ -76,7 +92,9 @@
       form.otherScore1Id = data.otherScore1Id;
       // 赋分主要详情id
 
-      let scoreDetail = (isDepartment.value ? data.scoreDetailId : data.groupScoreDetailId)?.split(',');
+      let scoreDetail = (
+        isDepartment.value ? data.scoreDetailId : data.groupScoreDetailId
+      )?.split(',');
       if (isDepartment.value) {
         form.scoreDetailId = scoreDetail?.slice(0, 4).join(',');
       } else {
@@ -104,7 +122,9 @@
         otherScore1Id.value = [data.otherScore1Id!];
         const { data: resData } = await listOption({
           mainId: scoreMainId.value,
-          parentId: isDepartment.value ? form.scoreDetailId?.split(',')[3] ?? '' : form.scoreDetailId?.split(',')[4] ?? ''
+          parentId: isDepartment.value
+            ? form.scoreDetailId?.split(',')[3] ?? ''
+            : form.scoreDetailId?.split(',')[4] ?? ''
         });
 
         extra_1_list.value = resData;
@@ -185,7 +205,9 @@
     resetExtra();
     const lastOne = last(selectedOptions) as any;
     form.optionMultiFlag = lastOne.optionMultiFlag;
-    form.scoreDetailId = selectedOptions.map((option: PickerOption) => option.id).join(',');
+    form.scoreDetailId = selectedOptions
+      .map((option: PickerOption) => option.id)
+      .join(',');
 
     if (isCulture.value) {
       const kind = await getNewMediaConfirm({ scoreId: form.scoreDetailId! });
@@ -219,10 +241,13 @@
     extra_1_pop.value = false;
   };
 
-  const isDepartment = computed(() => userInfoStore.roles?.includes('project-jbr'));
+  const isDepartment = computed(() =>
+    userInfoStore.roles?.includes('project-jbr')
+  );
 
   // 获取集团认定id
-  const getGroupRatio = (val: any) => group_propaganda_ratio.value.find((item: any) => item.value === val)?.label;
+  const getGroupRatio = (val: any) =>
+    group_propaganda_ratio.value.find((item: any) => item.value === val)?.label;
 
   // 获取scoreMainId
   const handleTreeOptionsLoad = (mainId: string) => {
@@ -258,7 +283,9 @@
       if (!data) {
         showConfirmDialog({
           title: '警告',
-          message: '赋分依据类型应与认定归类类型挂钩 \n' + '即非新媒体赋分不能选新媒体归类/新媒体赋分必须选择新媒体归类'
+          message:
+            '赋分依据类型应与认定归类类型挂钩 \n' +
+            '即非新媒体赋分不能选新媒体归类/新媒体赋分必须选择新媒体归类'
         })
           .then(isProject)
           .catch(() => {});
@@ -287,7 +314,12 @@
     }
   };
   // 外部链接校验
-  const validator = (val: string) => (val ? /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(val) : true);
+  const validator = (val: string) =>
+    val
+      ? /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(
+          val
+        )
+      : true;
   // 获取时间戳
   const getDateTime = async () => {
     const { data } = await getDateRange();
@@ -306,14 +338,22 @@
     <van-form input-align="left" @submit="onSubmit">
       <van-cell-group inset>
         <!-- 赋分依据 -->
-        <standard-picker v-model:scoreDetailId="form.scoreDetailId" @load="handleTreeOptionsLoad" @finish="onScoreDetailConfirm" />
+        <standard-picker
+          v-model:scoreDetailId="form.scoreDetailId"
+          @load="handleTreeOptionsLoad"
+          @finish="onScoreDetailConfirm"
+        />
 
         <!-- 额外附加分 -->
         <van-cell clickable title="" @click="toggle" v-if="extra_1_field">
           <template #value>
             <div class="flex gap-2 justify-end items-center">
               <span>额外加分项</span>
-              <van-checkbox v-model="extra_1_field" icon-size="16px" @click.stop />
+              <van-checkbox
+                v-model="extra_1_field"
+                icon-size="16px"
+                @click.stop
+              />
             </div>
           </template>
         </van-cell>
@@ -373,7 +413,12 @@
         />
 
         <!-- 项目工程名称 -->
-        <project-picker :rules="[]" :required="false" v-model:id="form.projectId" v-model:name="form.projectName" />
+        <project-picker
+          :rules="[]"
+          :required="false"
+          v-model:id="form.projectId"
+          v-model:name="form.projectName"
+        />
 
         <!-- 报道摘要 -->
         <van-field
@@ -399,7 +444,12 @@
         />
 
         <!-- 外部链接 -->
-        <van-field v-model="form.outLink" :rules="[{ validator, message: '请填写正确链接地址' }]" label="外部链接" placeholder="请输入外部链接" />
+        <van-field
+          v-model="form.outLink"
+          :rules="[{ validator, message: '请填写正确链接地址' }]"
+          label="外部链接"
+          placeholder="请输入外部链接"
+        />
         <van-field
           v-model="mediatype[form.fileType]"
           is-link
@@ -410,31 +460,54 @@
           @click="showPicker = true"
         />
         <van-popup v-model:show="showPicker" position="bottom">
-          <van-picker v-model="mediaList" :columns="columns" @confirm="onConfirm" @cancel="showPicker = false" />
+          <van-picker
+            v-model="mediaList"
+            :columns="columns"
+            @confirm="onConfirm"
+            @cancel="showPicker = false"
+          />
         </van-popup>
         <!-- <v-picker required :medialist="form.mediaList" v-model="form.fileType" :columns="columns" label="资源类型" placeholder="请选择类型"
                     :rules="[{ required: true, message: '' }]" /> -->
         <!-- 普通附件 -->
         <van-field label="普通附件" v-if="form.fileType == '3'">
           <template #input>
-            <v-uploader :max-count="5" :max-size="50 * 1024 * 1024" v-model="form.commonList" url="oss" type="file" />
+            <v-uploader
+              :max-count="5"
+              :max-size="50 * 1024 * 1024"
+              v-model="form.commonList"
+              url="oss"
+              type="file"
+            />
           </template>
         </van-field>
         <!-- 图片素材 -->
         <van-field label="图片素材" v-if="form.fileType == '1'">
           <template #input>
-            <v-uploader :max-count="5" url="oss" v-model="form.imageList" type="image" />
+            <v-uploader
+              :max-count="5"
+              url="oss"
+              v-model="form.imageList"
+              type="image"
+            />
           </template>
         </van-field>
         <!-- 视频素材 -->
         <van-field label="视频素材" v-if="form.fileType == '2'">
           <template #input>
-            <v-uploader :max-count="5" url="oss" v-model="form.videoList" type="video" />
+            <v-uploader
+              :max-count="5"
+              url="oss"
+              v-model="form.videoList"
+              type="video"
+            />
           </template>
         </van-field>
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit">
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

@@ -1,7 +1,11 @@
 <script setup lang="ts">
   import { PropagandaAuditBo, PropagandaMain } from '@/types/_media/propaganda';
-  import { addPropagandaAudit, checkRole, getPropaganda } from '@/api/media/propaganda';
-  import { listOption, listStandCascadeList } from '@/api/media/scoreStandard';
+  import {
+    addPropagandaAudit,
+    checkRole,
+    getPropaganda
+  } from '@/api/_media/propaganda';
+  import { listOption, listStandCascadeList } from '@/api/_media/scoreStandard';
   import { PickerOption, showSuccessToast, showFailToast } from 'vant';
   import { last } from 'lodash';
   import { toRaw } from 'vue';
@@ -9,7 +13,12 @@
   import useUserInfoStore from '@/store/modules/userInfo';
   import { emitter } from '@/plugins/mitt';
   import { storeToRefs } from 'pinia';
-  import { checkChooseDetail, getPropagandaClue, passPropagandaClue, validateImportantClue } from '@/api/media/propagandaClue.ts';
+  import {
+    checkChooseDetail,
+    getPropagandaClue,
+    passPropagandaClue,
+    validateImportantClue
+  } from '@/api/_media/propagandaClue';
   import { formatDate } from '@/utils/date.ts';
   import { PropagandaClue } from '@/types/_media/propagandaClue';
 
@@ -95,7 +104,9 @@
         </van-form>
       </van-cell-group>
       <div class="my-4 between-center gap-2">
-        <van-button round block type="primary" @click="handleSubmit"> 通过 </van-button>
+        <van-button round block type="primary" @click="handleSubmit">
+          通过
+        </van-button>
         <!--        <van-button round block type="danger" @click="handleReturn('2')">-->
         <!--          取消-->
         <!--        </van-button>-->

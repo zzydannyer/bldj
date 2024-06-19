@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { getUserCollect } from '@/api/media';
+  import { getUserCollect } from '@/api/_media';
   import { UserCollect } from '@/types/_media/collect';
   import { showImagePreview } from 'vant';
   const route = useRoute();
@@ -20,7 +20,12 @@
 <template>
   <section class="detail-container">
     <section class="detail-img-container">
-      <van-image class="w-full" fit="cover" :src="collectDetail.thumbUrl" @click="showImage(collectDetail.thumbUrl)">
+      <van-image
+        class="w-full"
+        fit="cover"
+        :src="collectDetail.thumbUrl"
+        @click="showImage(collectDetail.thumbUrl)"
+      >
         <template #loading>
           <van-loading type="spinner" size="20" />
         </template>

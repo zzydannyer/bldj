@@ -1,15 +1,31 @@
 <script setup lang="ts">
-  import { getWorkMain, urgingWork, recallWork, completionWork, supervisionWork } from '@/api/media/taskRelease';
+  import {
+    getWorkMain,
+    urgingWork,
+    recallWork,
+    completionWork,
+    supervisionWork
+  } from '@/api/_media/taskRelease';
   import { SysRole, DetailList } from '@/types/_media';
   import { useGlobal } from '@/utils';
-  import { showConfirmDialog, showSuccessToast, showFailToast, showLoadingToast, closeToast } from 'vant';
-  import { getWorkFeedback, listWorkFeedbackByWorkId } from '@/api/media/taskExecution';
+  import {
+    showConfirmDialog,
+    showSuccessToast,
+    showFailToast,
+    showLoadingToast,
+    closeToast
+  } from 'vant';
+  import {
+    getWorkFeedback,
+    listWorkFeedbackByWorkId
+  } from '@/api/_media/taskExecution';
   import { emitter } from '@/plugins/mitt';
   import { join } from 'lodash';
   import { Work, WorkFeedback } from '@/types/_media/task';
 
   const route = useRoute();
-  const { $useDict, $parse, $value_to_label } = useGlobal<GlobalPropertiesApi>();
+  const { $useDict, $parse, $value_to_label } =
+    useGlobal<GlobalPropertiesApi>();
   const { id } = route.params;
   const detail = ref<Work>({});
   const remark = ref('');
@@ -23,7 +39,11 @@
   const isShowNameDialog = ref(false);
   const router = useRouter();
   const query = ref<any>({});
-  const { work_release_type } = $useDict('work_release_type', 'feedback_status', 'work_type_code');
+  const { work_release_type } = $useDict(
+    'work_release_type',
+    'feedback_status',
+    'work_type_code'
+  );
 
   const getDetail = async () => {
     try {
@@ -178,7 +198,13 @@
         <van-field>
           <template #label>任务附件</template>
           <template #input>
-            <v-uploader disabled url="oss" v-if="detail.workFiles && detail.workFiles?.length > 0" v-model="detail.workFiles" type="file" />
+            <v-uploader
+              disabled
+              url="oss"
+              v-if="detail.workFiles && detail.workFiles?.length > 0"
+              v-model="detail.workFiles"
+              type="file"
+            />
             <span v-else>无</span>
           </template>
         </van-field>
@@ -187,7 +213,15 @@
           <template #label>接收类型</template>
           <template #input>
             <span>
-              {{ detail.receiveType === '1' ? '全部' : detail.receiveType === '2' ? '分组' : detail.receiveType === '3' ? '指定用户' : '' }}
+              {{
+                detail.receiveType === '1'
+                  ? '全部'
+                  : detail.receiveType === '2'
+                    ? '分组'
+                    : detail.receiveType === '3'
+                      ? '指定用户'
+                      : ''
+              }}
             </span>
           </template>
         </van-field>
@@ -214,7 +248,9 @@
           <van-field>
             <template #label>组织</template>
             <template #input>
-              <template v-for="(item, index) in detail?.receivePackage?.orgNames">
+              <template
+                v-for="(item, index) in detail?.receivePackage?.orgNames"
+              >
                 <v-plain-tag type="primary">
                   {{ item ?? '暂无组织' }}
                 </v-plain-tag>
@@ -225,7 +261,9 @@
           <van-field>
             <template #label>角色</template>
             <template #input>
-              <template v-for="(item, index) in detail?.receivePackage?.roleNames">
+              <template
+                v-for="(item, index) in detail?.receivePackage?.roleNames"
+              >
                 <v-plain-tag type="success">
                   {{ item ?? '暂无角色' }}
                 </v-plain-tag>
@@ -245,19 +283,30 @@
       </van-field>
       <van-form input-align="right">
         <van-collapse v-model="activeNames">
-          <van-collapse-item :name="index" v-for="(workdetail, index) in workList" :key="index">
+          <van-collapse-item
+            :name="index"
+            v-for="(workdetail, index) in workList"
+            :key="index"
+          >
             <template #title>
               <!-- 所属组织 -->
               <section class="between-center">
                 <span class="font-medium pr-2">
-                  {{ workdetail.roleName ? workdetail.orgName + ' - ' + workdetail.roleName : workdetail.orgName }}
+                  {{
+                    workdetail.roleName
+                      ? workdetail.orgName + ' - ' + workdetail.roleName
+                      : workdetail.orgName
+                  }}
                 </span>
 
                 <span class="whitespace-nowrap">
                   <van-icon
-                    :name="workdetail.submitStatus === '3' ? 'checked' : 'clear'"
+                    :name="
+                      workdetail.submitStatus === '3' ? 'checked' : 'clear'
+                    "
                     :style="{
-                      color: workdetail.submitStatus === '3' ? '#07c160' : '#ee0a24'
+                      color:
+                        workdetail.submitStatus === '3' ? '#07c160' : '#ee0a24'
                     }"
                   />
                   {{ workdetail.submitStatus === '3' ? '已提交' : '未提交' }}
@@ -294,8 +343,17 @@
             <!-- 反馈附件 -->
             <van-field v-if="workdetail.workFiles">
               <template #input>
-                <template v-if="workdetail.workFiles && workdetail.workFiles?.length > 0">
-                  <v-uploader disabled url="oss" v-model="workdetail.workFiles" type="file" />
+                <template
+                  v-if="
+                    workdetail.workFiles && workdetail.workFiles?.length > 0
+                  "
+                >
+                  <v-uploader
+                    disabled
+                    url="oss"
+                    v-model="workdetail.workFiles"
+                    type="file"
+                  />
                 </template>
                 <div v-else>暂无反馈附件</div>
               </template>
@@ -309,9 +367,22 @@
                     :style="{ color: workdetail.isDone === '1' ? '#07c160' : '#ee0a24' }" />
                   {{ workdetail.isDone === '1' ? '已完成' : '未完成' }}
                 </span> -->
-                <van-radio-group v-model="workdetail.isDone" direction="horizontal">
-                  <van-radio name="1" icon-size="18px" checked-color="#07c160"> 完成 </van-radio>
-                  <van-radio name="0" icon-size="18px" :icon="'clear'" checked-color="#ee0a24" style="margin-right: 0"> 未完成 </van-radio>
+                <van-radio-group
+                  v-model="workdetail.isDone"
+                  direction="horizontal"
+                >
+                  <van-radio name="1" icon-size="18px" checked-color="#07c160">
+                    完成
+                  </van-radio>
+                  <van-radio
+                    name="0"
+                    icon-size="18px"
+                    :icon="'clear'"
+                    checked-color="#ee0a24"
+                    style="margin-right: 0"
+                  >
+                    未完成
+                  </van-radio>
                 </van-radio-group>
               </template>
             </van-field>
@@ -323,7 +394,11 @@
               round
               type="danger"
               :icon="workdetail.submitStatus === '3' ? '' : 'bell'"
-              @click="workdetail.submitStatus === '3' ? goBack(workdetail) : urWork(workdetail)"
+              @click="
+                workdetail.submitStatus === '3'
+                  ? goBack(workdetail)
+                  : urWork(workdetail)
+              "
             >
               {{ workdetail.submitStatus === '3' ? '退回' : '催办' }}
             </van-button>
@@ -332,22 +407,55 @@
       </van-form>
     </van-cell-group>
 
-    <van-dialog v-model:show="isShowNameDialog" title="请输入退回理由" show-cancel-button :before-close="onNameDialogBeforeClose">
+    <van-dialog
+      v-model:show="isShowNameDialog"
+      title="请输入退回理由"
+      show-cancel-button
+      :before-close="onNameDialogBeforeClose"
+    >
       <!-- 输入框 -->
-      <van-field v-model="remark" input-align="center" placeholder="请输入退回理由" v-fofo />
+      <van-field
+        v-model="remark"
+        input-align="center"
+        placeholder="请输入退回理由"
+        v-fofo
+      />
     </van-dialog>
 
-    <van-dialog :showCancelButton="false" v-model:show="dialogShow" title="回填任务">
-      <van-cell-group inset style="margin-top: 20px" class="p-2" v-if="detail.workType === '2'">
+    <van-dialog
+      :showCancelButton="false"
+      v-model:show="dialogShow"
+      title="回填任务"
+    >
+      <van-cell-group
+        inset
+        style="margin-top: 20px"
+        class="p-2"
+        v-if="detail.workType === '2'"
+      >
         <div v-for="(item, index) in questionsList" :key="index">
-          <van-field left-icon="phone" disabled v-model="item.question" label="提问" />
-          <van-field left-icon="chat-o" disabled v-model="item.mustDesc" label="回答" />
+          <van-field
+            left-icon="phone"
+            disabled
+            v-model="item.question"
+            label="提问"
+          />
+          <van-field
+            left-icon="chat-o"
+            disabled
+            v-model="item.mustDesc"
+            label="回答"
+          />
         </div>
       </van-cell-group>
     </van-dialog>
 
-    <van-button class="my-2" block type="success" round @click="handleDone"> 办结 </van-button>
-    <van-button class="my-2" block type="primary" round @click="handleWork"> 确定 </van-button>
+    <van-button class="my-2" block type="success" round @click="handleDone">
+      办结
+    </van-button>
+    <van-button class="my-2" block type="primary" round @click="handleWork">
+      确定
+    </van-button>
   </div>
 </template>
 <style scoped>

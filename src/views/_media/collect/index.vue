@@ -1,7 +1,13 @@
 <script setup lang="ts">
-  import { userCollect } from '@/api/media';
-  import { showDialog, PickerOption, showConfirmDialog, showSuccessToast, showFailToast } from 'vant';
-  import { treeResourceCategory, delUserCollect } from '@/api/media';
+  import { userCollect } from '@/api/_media';
+  import {
+    showDialog,
+    PickerOption,
+    showConfirmDialog,
+    showSuccessToast,
+    showFailToast
+  } from 'vant';
+  import { treeResourceCategory, delUserCollect } from '@/api/_media';
   import { LazyImg, Waterfall } from 'vue-waterfall-plugin-next';
   import 'vue-waterfall-plugin-next/dist/style.css';
   import { _today, _5_years_ago, joinDate, dateFormatter } from '@/utils/date';
@@ -58,9 +64,15 @@
 
   //开始时间确认
   const confirmDatePicker = ({ selectedOptions }: PickerOption) => {
-    queryParams.collectTimeChoose[0] = $parse(joinDate(selectedOptions, 'value', '-'), 'YYYY-MM-DD HH:mm:ss');
+    queryParams.collectTimeChoose[0] = $parse(
+      joinDate(selectedOptions, 'value', '-'),
+      'YYYY-MM-DD HH:mm:ss'
+    );
     shootingTimeQueryText.value = joinDate(selectedOptions, 'text');
-    if (queryParams.collectTimeChoose[1] && queryParams.collectTimeChoose[0] > queryParams.collectTimeChoose[1]) {
+    if (
+      queryParams.collectTimeChoose[1] &&
+      queryParams.collectTimeChoose[0] > queryParams.collectTimeChoose[1]
+    ) {
       showDialog({
         message: '结束时间小于开始时间\n请重新选择'
       });
@@ -71,7 +83,10 @@
   };
   //结束时间确认
   const endconfirmDatePicker = ({ selectedOptions }: PickerOption) => {
-    queryParams.collectTimeChoose[1] = $parse(joinDate(selectedOptions, 'value', '-'), 'YYYY-MM-DD HH:mm:ss');
+    queryParams.collectTimeChoose[1] = $parse(
+      joinDate(selectedOptions, 'value', '-'),
+      'YYYY-MM-DD HH:mm:ss'
+    );
     endshootingTimeQueryText.value = joinDate(selectedOptions, 'text');
     if (queryParams.collectTimeChoose[0] > queryParams.collectTimeChoose[1]) {
       showDialog({
@@ -106,7 +121,8 @@
   // 重新请求
   const handleSearch = () => {
     if (shootingTimeQueryText.value) {
-      if (!endshootingTimeQueryText.value) return showFailToast('请填写结束时间');
+      if (!endshootingTimeQueryText.value)
+        return showFailToast('请填写结束时间');
     }
     if (endshootingTimeQueryText.value) {
       if (!shootingTimeQueryText.value) return showFailToast('请填写开始时间');
@@ -177,7 +193,11 @@
 
 <template>
   <main class="list-container">
-    <v-search placeholder="请输入项目名称" v-model:searchVal="queryParams.projectName" @handle-search="handleSearch">
+    <v-search
+      placeholder="请输入项目名称"
+      v-model:searchVal="queryParams.projectName"
+      @handle-search="handleSearch"
+    >
       <template #popMenu>
         <!-- 拍摄时间 -->
         <van-field
@@ -188,7 +208,13 @@
           :model-value="shootingTimeQueryText"
           @click="visibleShootingTimePopup = true"
         />
-        <van-popup v-model:show="visibleShootingTimePopup" :close-on-click-overlay="false" round teleport="body" position="bottom">
+        <van-popup
+          v-model:show="visibleShootingTimePopup"
+          :close-on-click-overlay="false"
+          round
+          teleport="body"
+          position="bottom"
+        >
           <van-date-picker
             title="拍摄时间"
             :min-date="_5_years_ago"
@@ -207,7 +233,13 @@
           :model-value="endshootingTimeQueryText"
           @click="endvisibleShootingTimePopup = true"
         />
-        <van-popup v-model:show="endvisibleShootingTimePopup" :close-on-click-overlay="false" round teleport="body" position="bottom">
+        <van-popup
+          v-model:show="endvisibleShootingTimePopup"
+          :close-on-click-overlay="false"
+          round
+          teleport="body"
+          position="bottom"
+        >
           <van-date-picker
             title="拍摄时间"
             :min-date="_5_years_ago"
@@ -218,11 +250,24 @@
           />
         </van-popup>
 
-        <van-button block plain type="primary" class="border-0" @click="resetQuery"> 重置 </van-button>
+        <van-button
+          block
+          plain
+          type="primary"
+          class="border-0"
+          @click="resetQuery"
+        >
+          重置
+        </van-button>
       </template>
     </v-search>
 
-    <v-inset-list :shows="['search']" :list-fn="userCollect" :query-params="queryParams" ref="listRef">
+    <v-inset-list
+      :shows="['search']"
+      :list-fn="userCollect"
+      :query-params="queryParams"
+      ref="listRef"
+    >
       <template #list="{ list }">
         <Waterfall class="bg-transparent" :list="list" v-bind="options">
           <template #item="{ item }">
@@ -235,8 +280,22 @@
               <span class="text-sm truncate text-gray-500">
                 {{ '收藏于 ' + $parse(item.collectTime) }}
               </span>
-              <v-plain-button class="px-4 self-end" round type="danger" size="mini" text="查 看" @click="handleView(item.id)" />
-              <v-plain-button class="px-4 self-end" round type="danger" size="mini" text="删 除" @click="handleDelete(item.id)" />
+              <v-plain-button
+                class="px-4 self-end"
+                round
+                type="danger"
+                size="mini"
+                text="查 看"
+                @click="handleView(item.id)"
+              />
+              <v-plain-button
+                class="px-4 self-end"
+                round
+                type="danger"
+                size="mini"
+                text="删 除"
+                @click="handleDelete(item.id)"
+              />
             </v-card>
           </template>
         </Waterfall>

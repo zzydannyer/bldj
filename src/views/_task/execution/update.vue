@@ -1,5 +1,10 @@
 <script setup lang="ts">
-  import { keepWorkFeedback, submitWorkFeedback, getWorkFeedback, viewWorkFeedback } from '@/api/media/taskExecution';
+  import {
+    keepWorkFeedback,
+    submitWorkFeedback,
+    getWorkFeedback,
+    viewWorkFeedback
+  } from '@/api/_media/taskExecution';
   import { emitter } from '@/plugins/mitt';
   import { WorkFeedback, WorkFeedbackList } from '@/types/_media/task';
   import { showSuccessToast, showFailToast, showToast } from 'vant';
@@ -22,7 +27,10 @@
 
   const onSubmit = async () => {
     if (feedbacklist.value.workType === '1') {
-      if ((!form.value.workFiles || form.value.workFiles.length === 0) && !form.value.feedbackDesc) {
+      if (
+        (!form.value.workFiles || form.value.workFiles.length === 0) &&
+        !form.value.feedbackDesc
+      ) {
         showToast('请上传文件附件或者填写任务反馈');
       } else {
         const submitValue = Object.assign(feedbacklist.value, form.value);
@@ -49,7 +57,10 @@
   // 保存
   const handleSubmit = async () => {
     if (feedbacklist.value.workType === '1') {
-      if ((!form.value.workFiles || form.value.workFiles.length === 0) && !form.value.feedbackDesc) {
+      if (
+        (!form.value.workFiles || form.value.workFiles.length === 0) &&
+        !form.value.feedbackDesc
+      ) {
         console.log('ssss');
 
         showToast('请上传文件附件或者填写任务反馈');
@@ -110,7 +121,11 @@
           </van-field>
         </div>
         <div v-else-if="feedbacklist.workType === '4'">
-          <van-field required :rules="[{ required: true, message: '请上传反馈附件' }]" label="反馈附件">
+          <van-field
+            required
+            :rules="[{ required: true, message: '请上传反馈附件' }]"
+            label="反馈附件"
+          >
             <template #input>
               <v-uploader url="oss" v-model="form.workFiles" type="file" />
             </template>
@@ -118,7 +133,14 @@
         </div>
         <template v-else-if="feedbacklist.workType === '2'">
           <div v-for="(item, index) in feedbacklist.questions" :key="index">
-            <van-field autosize show-word-limit v-model="item.question" name="问题" label="问题" disabled />
+            <van-field
+              autosize
+              show-word-limit
+              v-model="item.question"
+              name="问题"
+              label="问题"
+              disabled
+            />
             <van-field
               autosize
               show-word-limit
@@ -134,8 +156,24 @@
         </template>
       </van-cell-group>
       <div class="flex justify-between mt-2">
-        <van-button class="w-40" round block type="success" native-type="submit"> 提交 </van-button>
-        <van-button class="w-40" round block type="primary" @click="handleSubmit"> 保存 </van-button>
+        <van-button
+          class="w-40"
+          round
+          block
+          type="success"
+          native-type="submit"
+        >
+          提交
+        </van-button>
+        <van-button
+          class="w-40"
+          round
+          block
+          type="primary"
+          @click="handleSubmit"
+        >
+          保存
+        </van-button>
       </div>
     </van-form>
   </section>

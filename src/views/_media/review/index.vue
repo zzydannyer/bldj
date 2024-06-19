@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { backInBackAudit, submitGroup } from '@/api/media';
-  import { listAudited, listAuditing } from '@/api/media/index';
+  import { backInBackAudit, submitGroup } from '@/api/_media/index.ts';
+  import { listAudited, listAuditing } from '@/api/_media/index';
   import { useGlobal } from '@/utils';
   import { MediaMainQuery } from '@/types/_media/index.ts';
   import { FormInstance, showConfirmDialog, showSuccessToast } from 'vant';
@@ -20,7 +20,9 @@
   const queryParams = reactive<MediaMainQuery>(new MediaMainQuery());
   const listRef = ref();
   const handleSearch = () => {
-    queryParams.shootingTime = queryParams.shootingTime ? $parse(queryParams.shootingTime, 'YYYY-MM-DD HH:mm:ss') : '';
+    queryParams.shootingTime = queryParams.shootingTime
+      ? $parse(queryParams.shootingTime, 'YYYY-MM-DD HH:mm:ss')
+      : '';
     listRef.value.onRefresh();
   };
 
@@ -55,7 +57,11 @@
       backReason = _backReason;
     };
 
-    const element = h(BackDialog as any, { maxLength: 50, key: Math.random() }, defaultSlot as any);
+    const element = h(
+      BackDialog as any,
+      { maxLength: 50, key: Math.random() },
+      defaultSlot as any
+    );
     showConfirmDialog({
       title: '退回',
       message: () => element,
@@ -96,7 +102,9 @@
   };
 
   const status = ref('auditing');
-  const listFn = computed(() => (status.value === 'auditing' ? listAuditing : listAudited));
+  const listFn = computed(() =>
+    status.value === 'auditing' ? listAuditing : listAudited
+  );
   // 刷新数据
   onMounted(() => emitter.on('refresh', handleSearch));
 
@@ -104,13 +112,30 @@
 </script>
 <template>
   <main class="list-container">
-    <v-search showTabs placeholder="请输入项目名称" v-model:searchVal="queryParams.projectName" @handle-search="handleSearch">
+    <v-search
+      showTabs
+      placeholder="请输入项目名称"
+      v-model:searchVal="queryParams.projectName"
+      @handle-search="handleSearch"
+    >
       <template #popMenu>
         <!-- 资源类别 -->
         <resource-type :required="false" v-model="queryParams.resourceType" />
         <!-- 拍摄时间 -->
-        <v-date-picker v-model="queryParams.shootingTime" label="拍摄时间" placeholder="请选择拍摄时间" />
-        <van-button block plain type="primary" class="border-0" @click="resetQuery"> 重置 </van-button>
+        <v-date-picker
+          v-model="queryParams.shootingTime"
+          label="拍摄时间"
+          placeholder="请选择拍摄时间"
+        />
+        <van-button
+          block
+          plain
+          type="primary"
+          class="border-0"
+          @click="resetQuery"
+        >
+          重置
+        </van-button>
       </template>
       <template #dropMenu>
         <van-tabs v-model:active="status" @change="handleSearch">
@@ -120,11 +145,25 @@
       </template>
     </v-search>
 
-    <v-inset-list :show="['search', 'tabs']" :list-fn="listFn" :query-params="queryParams" ref="listRef">
+    <v-inset-list
+      :show="['search', 'tabs']"
+      :list-fn="listFn"
+      :query-params="queryParams"
+      ref="listRef"
+    >
       <template #default="{ row, index }">
         <v-card class="h-24">
-          <van-text-ellipsis class="v-list-title" :content="row.mediaTitle" rows="2" />
-          <v-tag class="mt-1" plain :dictData="MEDIA_STATUS" :value="row.mediaStatus" />
+          <van-text-ellipsis
+            class="v-list-title"
+            :content="row.mediaTitle"
+            rows="2"
+          />
+          <v-tag
+            class="mt-1"
+            plain
+            :dictData="MEDIA_STATUS"
+            :value="row.mediaStatus"
+          />
           <!-- 作者 -->
           <div class="v-author mt-1">
             <van-icon name="contact-o" />
@@ -136,7 +175,15 @@
             {{ $parse(row.shootingTime) }}
           </div>
           <section class="absolute right-2 bottom-2">
-            <van-button class="px-4" round type="default" hairline size="mini" text="查 看" @click="handleDetail(row.id)" />
+            <van-button
+              class="px-4"
+              round
+              type="default"
+              hairline
+              size="mini"
+              text="查 看"
+              @click="handleDetail(row.id)"
+            />
             <van-button
               class="px-4"
               text="审 核"
@@ -155,7 +202,10 @@
               size="mini"
               @click="handleSubmitGroup(row.id)"
               v-auth="['multimedia:media:audit']"
-              v-if="(status === 'audited' && row.additional) || (status === 'audited' && row.canSubmitGroup)"
+              v-if="
+                (status === 'audited' && row.additional) ||
+                (status === 'audited' && row.canSubmitGroup)
+              "
             />
             <van-button
               class="px-4"

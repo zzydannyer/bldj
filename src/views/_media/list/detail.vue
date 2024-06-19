@@ -1,7 +1,13 @@
 <script setup lang="ts">
-  import { showSuccessToast, showFailToast, showImagePreview, showLoadingToast, closeToast } from 'vant';
+  import {
+    showSuccessToast,
+    showFailToast,
+    showImagePreview,
+    showLoadingToast,
+    closeToast
+  } from 'vant';
   import Player from 'xgplayer';
-  import { getMediaPubilc, addUserCollect } from '@/api/media/index';
+  import { getMediaPubilc, addUserCollect } from '@/api/_media/index';
 
   import { formatDate } from '@/utils/date';
   import { MediaPublic } from '@/types/_media';
@@ -63,7 +69,12 @@
 <template>
   <main class="detail-container">
     <div class="detail-img-container">
-      <van-image v-if="detail.mediaType === '1'" width="100%" :src="detail.thumbnailUrl" @click="showImage(detail.thumbnailUrl!)">
+      <van-image
+        v-if="detail.mediaType === '1'"
+        width="100%"
+        :src="detail.thumbnailUrl"
+        @click="showImage(detail.thumbnailUrl!)"
+      >
         <template v-slot:loading>
           <van-loading type="spinner" size="20" />
         </template>
@@ -78,7 +89,12 @@
         <v-plain-tag type="primary">{{ detail.resourceTypeName }}</v-plain-tag>
 
         <div>
-          <van-icon class="align-text-bottom mr-1" size="20" color="gold" :name="detail.collect ? 'star' : 'star-o'" />
+          <van-icon
+            class="align-text-bottom mr-1"
+            size="20"
+            color="gold"
+            :name="detail.collect ? 'star' : 'star-o'"
+          />
           <span class="text-sm align-middle">
             {{ detail.collect ? '已收藏' : '收藏' }}
           </span>

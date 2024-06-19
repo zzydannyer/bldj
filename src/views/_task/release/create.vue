@@ -2,16 +2,19 @@
   import { Project } from '@/types/_media/project';
   import { showConfirmDialog, showSuccessToast, showToast } from 'vant';
   import { _5_years_ago, _10_years_future } from '@/utils/date';
-  import { addWorkMain } from '@/api/media/taskRelease';
+  import { addWorkMain } from '@/api/_media/taskRelease';
   import { useGlobal } from '@/utils';
   import { PackageMain, Work } from '@/types/_media/task';
-  import { listPackageMain } from '@/api/media/package';
-  import { selectUser } from '@/api/system/user';
+  import { listPackageMain } from '@/api/_media/package';
+  import { selectUser } from '@/api/_system/user';
   import { SysUser } from '@/types/_system/sysUser';
   import { emitter } from '@/plugins/mitt';
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
 
-  const { work_release_type, work_type_code } = $useDict('work_release_type', 'work_type_code');
+  const { work_release_type, work_type_code } = $useDict(
+    'work_release_type',
+    'work_type_code'
+  );
 
   const router = useRouter();
   const form = reactive(new Work());
@@ -103,7 +106,11 @@
   };
 
   onBeforeMount(() => {
-    Promise.allSettled([getworktype(), recieve_type_2_fn(), recieve_type_3_fn()]);
+    Promise.allSettled([
+      getworktype(),
+      recieve_type_2_fn(),
+      recieve_type_3_fn()
+    ]);
   });
 </script>
 
@@ -154,16 +161,31 @@
         <!-- 普通附件 -->
         <van-field label="普通附件">
           <template #input>
-            <v-uploader url="oss" :max-count="5" :max-size="50 * 1024 * 1024" v-model="form.workFiles" type="file" />
+            <v-uploader
+              url="oss"
+              :max-count="5"
+              :max-size="50 * 1024 * 1024"
+              v-model="form.workFiles"
+              type="file"
+            />
           </template>
         </van-field>
       </van-cell-group>
 
       <van-cell-group style="margin-top: 20px">
         <!-- 接收类型 -->
-        <van-field name="radio" label="接收类型" required :rules="[{ required: true, message: '请选择接收类型' }]">
+        <van-field
+          name="radio"
+          label="接收类型"
+          required
+          :rules="[{ required: true, message: '请选择接收类型' }]"
+        >
           <template #input>
-            <van-radio-group v-model="form.receiveType" direction="horizontal" @change="handleRadioChange">
+            <van-radio-group
+              v-model="form.receiveType"
+              direction="horizontal"
+              @change="handleRadioChange"
+            >
               <van-radio name="2" shape="dot">分组</van-radio>
               <van-radio name="3" shape="dot">指定用户</van-radio>
             </van-radio-group>
@@ -209,7 +231,9 @@
         />
         <!-- 调查添加 -->
         <div v-if="form.workType === '2'" class="m-4">
-          <van-button type="primary" size="mini" @click="handleNumber"> 添加问题 </van-button>
+          <van-button type="primary" size="mini" @click="handleNumber">
+            添加问题
+          </van-button>
 
           <van-cell-group inset>
             <van-cell class="p-0" v-for="(item, index) in addList">
@@ -225,14 +249,28 @@
                 />
               </template>
               <template #right-icon>
-                <span @click="handleDelete(index)" class="flex items-center text-red-500"> 删除 </span>
+                <span
+                  @click="handleDelete(index)"
+                  class="flex items-center text-red-500"
+                >
+                  删除
+                </span>
               </template>
             </van-cell>
           </van-cell-group>
         </div>
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit" :loading="loading"> 提交 </van-button>
+      <van-button
+        class="my-4"
+        round
+        block
+        type="success"
+        native-type="submit"
+        :loading="loading"
+      >
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

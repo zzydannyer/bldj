@@ -2,7 +2,7 @@
   import { PaginationProps } from '@/types/index';
   import { activitiesLists } from '@/types/_media';
   import { onBeforeMount, onMounted, reactive, ref } from 'vue';
-  import { listMediaActivitiesRanking } from '@/api/media';
+  import { listMediaActivitiesRanking } from '@/api/_media';
   const activitiesList = ref<any[]>([]);
   const pagination = reactive<PaginationProps>({
     total: 0,
@@ -45,7 +45,9 @@
           </div>
         </div>
         <div v-else-if="index + 1 === 3">
-          <div class="flex mt-3 justify-between font-bold text-base text-red-400">
+          <div
+            class="flex mt-3 justify-between font-bold text-base text-red-400"
+          >
             <div class="medal copper">
               {{ index + 1 }}
             </div>

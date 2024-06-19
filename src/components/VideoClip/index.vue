@@ -9,9 +9,15 @@
   import 'vue-slider-component/theme/default.css';
   import { setVideoImg } from '@/utils/video';
   import { formatTime } from '@/utils/date';
-  import { closeToast, showFailToast, showLoadingToast, showNotify, showToast } from 'vant';
+  import {
+    closeToast,
+    showFailToast,
+    showLoadingToast,
+    showNotify,
+    showToast
+  } from 'vant';
   import { debounce } from 'lodash';
-  import { cropVideo } from '@/api/media';
+  import { cropVideo } from '@/api/_media';
   import { DefaultSerializer } from 'v8';
 
   // 设置默认值,需要显式的开启,具体查看vue3文档
@@ -43,10 +49,20 @@
   };
 
   const setPrevewImg = debounce(async () => {
-    const _beginImgSrc = await setVideoImg(props.media.url, value.value[0], undefined, 'preview-img');
+    const _beginImgSrc = await setVideoImg(
+      props.media.url,
+      value.value[0],
+      undefined,
+      'preview-img'
+    );
     beginImgSrc.value = _beginImgSrc;
 
-    const _endImgSrc = await setVideoImg(props.media.url, value.value[1], undefined, 'preview-img');
+    const _endImgSrc = await setVideoImg(
+      props.media.url,
+      value.value[1],
+      undefined,
+      'preview-img'
+    );
     endImgSrc.value = _endImgSrc;
   }, 200);
 
@@ -94,10 +110,12 @@
         const cur = Math.ceil((max.value / 10) * i);
         // setVideoImg(props.url, cur, preview.value)
         promises.push(
-          setVideoImg(props.media.url, cur, preview.value, 'slider-item').then((res) => {
-            if (i === 0) beginImgSrc.value = res;
-            if (i === 9) endImgSrc.value = res;
-          })
+          setVideoImg(props.media.url, cur, preview.value, 'slider-item').then(
+            (res) => {
+              if (i === 0) beginImgSrc.value = res;
+              if (i === 9) endImgSrc.value = res;
+            }
+          )
         );
       }
 
@@ -130,7 +148,9 @@
       const startTime = formatTime(value.value[0]);
       const endTime = formatTime(value.value[1]);
       const duration = formatTime(value.value[1] - value.value[0]);
-      const { code, data } = await cropVideo(props.media.id as string, [{ startTime, endTime, duration }]);
+      const { code, data } = await cropVideo(props.media.id as string, [
+        { startTime, endTime, duration }
+      ]);
       console.log('🚀 ~ file: index.vue:124 ~ handleSubmit ~ data:', data);
       if (code === 200 && data && data.url) {
         emits('updateVideo', props.media.id, data);

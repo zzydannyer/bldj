@@ -1,5 +1,10 @@
 <script setup lang="ts">
-  import { delWorkMain, distributeWork, listWorkMain, withdrawWork } from '@/api/media/taskRelease';
+  import {
+    delWorkMain,
+    distributeWork,
+    listWorkMain,
+    withdrawWork
+  } from '@/api/_media/taskRelease';
   import { showConfirmDialog, showFailToast, showSuccessToast } from 'vant';
   import { useGlobal } from '@/utils';
   import { WorkQuery } from '@/types/_media/task';
@@ -14,7 +19,11 @@
   const router = useRouter();
   const listRef = ref();
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
-  const { work_status, work_release_type, work_type_code } = $useDict('work_status', 'work_release_type', 'work_type_code');
+  const { work_status, work_release_type, work_type_code } = $useDict(
+    'work_status',
+    'work_release_type',
+    'work_type_code'
+  );
 
   const queryParams = reactive<WorkQuery>(new WorkQuery());
   const offset: [Numeric, Numeric] = [0, 5];
@@ -124,19 +133,47 @@
 
 <template>
   <main class="list-container">
-    <v-search :show-pop-icon="false" placeholder="请输入任务名" v-model:searchVal="queryParams.workTitle" @handle-search="handleSearch">
+    <v-search
+      :show-pop-icon="false"
+      placeholder="请输入任务名"
+      v-model:searchVal="queryParams.workTitle"
+      @handle-search="handleSearch"
+    >
       <template #dropMenu>
         <van-dropdown-menu>
-          <van-dropdown-item @change="handleSearch" v-model="queryParams.typeCode" :options="typeCodeOption" />
-          <van-dropdown-item @change="handleSearch" v-model="queryParams.workType" :options="workTypeOption" />
-          <van-dropdown-item @change="handleSearch" v-model="queryParams.status" :options="workStatusOption" />
+          <van-dropdown-item
+            @change="handleSearch"
+            v-model="queryParams.typeCode"
+            :options="typeCodeOption"
+          />
+          <van-dropdown-item
+            @change="handleSearch"
+            v-model="queryParams.workType"
+            :options="workTypeOption"
+          />
+          <van-dropdown-item
+            @change="handleSearch"
+            v-model="queryParams.status"
+            :options="workStatusOption"
+          />
         </van-dropdown-menu>
       </template>
     </v-search>
 
-    <van-floating-bubble axis="xy" magnetic="x" v-if="hasAuth('work:workMain:add')">
+    <van-floating-bubble
+      axis="xy"
+      magnetic="x"
+      v-if="hasAuth('work:workMain:add')"
+    >
       <van-button type="primary" size="large" round to="/task/release/create">
-        <van-swipe vertical class="button-swipe" :autoplay="4000" :duration="600" :touchable="false" :show-indicators="false">
+        <van-swipe
+          vertical
+          class="button-swipe"
+          :autoplay="4000"
+          :duration="600"
+          :touchable="false"
+          :show-indicators="false"
+        >
           <van-swipe-item>
             <van-icon name="plus" />
           </van-swipe-item>
@@ -145,10 +182,18 @@
       </van-button>
     </van-floating-bubble>
 
-    <v-inset-list :list-fn="listWorkMain" :query-params="queryParams" ref="listRef">
+    <v-inset-list
+      :list-fn="listWorkMain"
+      :query-params="queryParams"
+      ref="listRef"
+    >
       <template #default="{ row, index }">
         <v-card class="v-list-item" @click="handleDetail(row.id)">
-          <van-text-ellipsis class="v-list-title" :content="row.workTitle" rows="2" />
+          <van-text-ellipsis
+            class="v-list-title"
+            :content="row.workTitle"
+            rows="2"
+          />
 
           <div class="mt-1">
             <v-tag plain :dictData="work_release_type" :value="row.workType" />
@@ -161,8 +206,17 @@
             {{ row.orgName }}
           </div>
 
-          <van-notice-bar class="mt-1" background="transparent" :scrollable="false">
-            <van-swipe vertical :autoplay="3000" :touchable="false" :show-indicators="false">
+          <van-notice-bar
+            class="mt-1"
+            background="transparent"
+            :scrollable="false"
+          >
+            <van-swipe
+              vertical
+              :autoplay="3000"
+              :touchable="false"
+              :show-indicators="false"
+            >
               <van-swipe-item class="v-date">
                 <van-icon name="clock-o" />
                 {{ $parse(row.publishDate) }}
@@ -175,7 +229,15 @@
           </van-notice-bar>
 
           <section class="absolute right-2 bottom-2">
-            <van-button class="px-4" round type="default" hairline size="mini" text="查 看" @click="handleDetail(row.id)" />
+            <van-button
+              class="px-4"
+              round
+              type="default"
+              hairline
+              size="mini"
+              text="查 看"
+              @click="handleDetail(row.id)"
+            />
             <van-button
               class="px-4"
               text="督 查"

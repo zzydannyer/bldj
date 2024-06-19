@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import { checkRole } from '@/api/media/propaganda';
+  import { checkRole } from '@/api/_media/propaganda';
   import { PropagandaMainQuery } from '@/types/_media/propaganda';
   import { useGlobal } from '@/utils';
   import useUserInfoStore from '@/store/modules/userInfo';
   import { emitter } from '@/plugins/mitt';
   import { storeToRefs } from 'pinia';
-  import { listAuditPropagandaClue } from '@/api/media/propagandaClue.ts';
+  import { listAuditPropagandaClue } from '@/api/_media/propagandaClue';
 
   defineOptions({
     name: 'PropagandaClueApproval'
@@ -39,14 +39,32 @@
 </script>
 <template>
   <main class="list-container">
-    <v-search placeholder="请输入项目名称" v-model:searchVal="queryParams.projectName" @handle-search="handleSearch" />
+    <v-search
+      placeholder="请输入项目名称"
+      v-model:searchVal="queryParams.projectName"
+      @handle-search="handleSearch"
+    />
 
-    <v-inset-list :shows="['search']" :list-fn="listAuditPropagandaClue" :query-params="queryParams" ref="listRef">
+    <v-inset-list
+      :shows="['search']"
+      :list-fn="listAuditPropagandaClue"
+      :query-params="queryParams"
+      ref="listRef"
+    >
       <template #default="{ row, index }">
         <v-card>
-          <van-text-ellipsis class="v-list-title" :content="row.projectName" rows="2" />
+          <van-text-ellipsis
+            class="v-list-title"
+            :content="row.projectName"
+            rows="2"
+          />
           <div class="between-end">
-            <v-tag class="mt-2" plain :dictData="PRO_CLUE_STATUS" :value="row.clueStatus" />
+            <v-tag
+              class="mt-2"
+              plain
+              :dictData="PRO_CLUE_STATUS"
+              :value="row.clueStatus"
+            />
             <van-tag plain type="primary" class="mt-2">
               {{ row.orgName }}
             </van-tag>
@@ -59,7 +77,15 @@
           <br />
           <br />
           <section class="absolute right-2 bottom-2">
-            <van-button class="px-4" round type="default" hairline size="mini" text="查 看" @click="handleDetail(row.id)" />
+            <van-button
+              class="px-4"
+              round
+              type="default"
+              hairline
+              size="mini"
+              text="查 看"
+              @click="handleDetail(row.id)"
+            />
 
             <van-button
               class="px-4"

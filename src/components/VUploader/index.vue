@@ -1,7 +1,14 @@
 <script setup lang="ts">
-  import { UploaderProps, UploaderFileListItem, showToast, showFailToast, showConfirmDialog, showSuccessToast } from 'vant';
+  import {
+    UploaderProps,
+    UploaderFileListItem,
+    showToast,
+    showFailToast,
+    showConfirmDialog,
+    showSuccessToast
+  } from 'vant';
   import axios, { CustomParamsSerializer } from 'axios';
-  import { Resp } from '@/utils/http/types.d';
+
   import { fileTypes, acceptTypes } from './config';
   import { Icon } from '@iconify/vue';
   import { useGlobal } from '@/utils';
@@ -9,7 +16,7 @@
   import { formatToken, getToken } from '@/utils/auth';
   import { find, isEmpty, isUndefined } from 'lodash';
   import { fileMd5 } from '@/plugins/md5';
-  import { fileCheck } from '@/api/media';
+  import { fileCheck } from '@/api/_media';
 
   defineOptions({
     name: 'VUploader'
@@ -115,7 +122,10 @@
   });
 
   // emits
-  type parameters = [fileList: UploaderFileListItem | UploaderFileListItem[], detail: { name: number | string; index: number }];
+  type parameters = [
+    fileList: UploaderFileListItem | UploaderFileListItem[],
+    detail: { name: number | string; index: number }
+  ];
   const emit = defineEmits<{
     oversize: parameters;
     clickUpload: [event: MouseEvent];
@@ -208,7 +218,11 @@
       };
       errIndex.value = detail.index;
 
-      const { code, data: resData, msg } = (await instance.post(uploadUrl.value, params, config)) as Resp<any>;
+      const {
+        code,
+        data: resData,
+        msg
+      } = (await instance.post(uploadUrl.value, params, config)) as Resp<any>;
 
       if (code !== 200) {
         fileList.value.splice(detail.index, 1);
@@ -220,13 +234,22 @@
 
       resData.md5 = file.md5;
       fileList.value![detail.index] = resData;
-      fileList.value![detail.index].resourceName = projectname ? projectname + '(' + `${subscript.value}` + ')' : resData.originalName;
-      if (fileList.value![detail.index - 1]?.resourceName == projectname + `(${subscript.value})`) {
+      fileList.value![detail.index].resourceName = projectname
+        ? projectname + '(' + `${subscript.value}` + ')'
+        : resData.originalName;
+      if (
+        fileList.value![detail.index - 1]?.resourceName ==
+        projectname + `(${subscript.value})`
+      ) {
         subscript.value = subscript.value + 1;
-        fileList.value![detail.index].resourceName = projectname ? projectname + '(' + `${subscript.value}` + ')' : resData.originalName;
+        fileList.value![detail.index].resourceName = projectname
+          ? projectname + '(' + `${subscript.value}` + ')'
+          : resData.originalName;
       } else {
         subscript.value = 1;
-        fileList.value![detail.index].resourceName = projectname ? projectname + '(' + `${subscript.value}` + ')' : resData.originalName;
+        fileList.value![detail.index].resourceName = projectname
+          ? projectname + '(' + `${subscript.value}` + ')'
+          : resData.originalName;
       }
       // 文件重复上传下标自动加1
       // let newTitle=''
@@ -375,7 +398,11 @@
     </template> -->
 
     <template #preview-cover="{ index }">
-      <van-image v-if="type === 'video'" class="w-full h-full" :src="fileList[index].thumbnailUrl">
+      <van-image
+        v-if="type === 'video'"
+        class="w-full h-full"
+        :src="fileList[index].thumbnailUrl"
+      >
         <template #loading>
           <van-loading type="spinner" size="20" />
         </template>
@@ -398,23 +425,46 @@
           alignItems: 'center'
         }"
       >
-        <van-field v-model="originalName" label="文件名" placeholder="请输入文件名" />
+        <van-field
+          v-model="originalName"
+          label="文件名"
+          placeholder="请输入文件名"
+        />
       </van-popup>
     </template>
 
     <template #default>
       <div class="van-uploader__wrapper">
         <div class="van-uploader__preview">
-          <div v-if="!disabled" class="van-uploader__file" style="width: 6rem; height: 6rem">
-            <van-icon name="video" :size="iconSize" :color="iconcolor" v-if="type === 'video'" />
-            <van-icon name="photo" :size="iconSize" :color="iconcolor" v-else-if="type === 'image'" />
+          <div
+            v-if="!disabled"
+            class="van-uploader__file"
+            style="width: 6rem; height: 6rem"
+          >
+            <van-icon
+              name="video"
+              :size="iconSize"
+              :color="iconcolor"
+              v-if="type === 'video'"
+            />
+            <van-icon
+              name="photo"
+              :size="iconSize"
+              :color="iconcolor"
+              v-else-if="type === 'image'"
+            />
             <Icon icon="bxs:file" :width="iconSize" :color="iconcolor" v-else />
           </div>
         </div>
       </div>
     </template>
   </van-uploader>
-  <v-preview v-model="show" :type="type" :list="previewList" :listIndex="listIndex" />
+  <v-preview
+    v-model="show"
+    :type="type"
+    :list="previewList"
+    :listIndex="listIndex"
+  />
   <van-number-keyboard safe-area-inset-bottom />
 </template>
 

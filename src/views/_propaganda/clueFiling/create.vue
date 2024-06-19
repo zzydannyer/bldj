@@ -1,5 +1,11 @@
 <script setup lang="ts">
-  import { PickerOption, showConfirmDialog, showSuccessToast, showToast, Toast } from 'vant';
+  import {
+    PickerOption,
+    showConfirmDialog,
+    showSuccessToast,
+    showToast,
+    Toast
+  } from 'vant';
   import { joinDate, _5_years_ago } from '@/utils/date';
   import { router } from '@/router';
   import { useGlobal } from '@/utils';
@@ -9,10 +15,13 @@
   import { storeToRefs } from 'pinia';
   import useUserInfoStore from '@/store/modules/userInfo';
   import { PropagandaClue } from '@/types/_media/propagandaClue';
-  import { addPropagandaClue } from '@/api/media/propagandaClue.ts';
+  import { addPropagandaClue } from '@/api/_media/propagandaClue';
   import dayjs from 'dayjs';
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
-  const { group_propaganda_ratio, group_propaganda_type } = $useDict('group_propaganda_ratio', 'group_propaganda_type');
+  const { group_propaganda_ratio, group_propaganda_type } = $useDict(
+    'group_propaganda_ratio',
+    'group_propaganda_type'
+  );
   const userInfoStore = useUserInfoStore();
   const { roles, userId, orgCode } = storeToRefs(userInfoStore);
   const form = reactive<PropagandaClue>(new PropagandaClue());
@@ -53,7 +62,10 @@
   const startTimeText = ref('');
 
   const onStartTimeConfirm = ({ selectedOptions }: PickerOption) => {
-    form.startTime = $parse(joinDate(selectedOptions, 'value', '-'), 'YYYY-MM-DD HH:mm:ss');
+    form.startTime = $parse(
+      joinDate(selectedOptions, 'value', '-'),
+      'YYYY-MM-DD HH:mm:ss'
+    );
     startTimeText.value = joinDate(selectedOptions, 'text');
     showStartTime.value = false;
   };
@@ -63,7 +75,10 @@
   const endTimeText = ref('');
 
   const onEndTimeConfirm = ({ selectedOptions }: PickerOption) => {
-    form.endTime = $parse(joinDate(selectedOptions, 'value', '-'), 'YYYY-MM-DD HH:mm:ss');
+    form.endTime = $parse(
+      joinDate(selectedOptions, 'value', '-'),
+      'YYYY-MM-DD HH:mm:ss'
+    );
     if (new Date(form.endTime) < new Date(form.startTime)) {
       showToast('结束时间不能小于开始时间');
     }
@@ -94,7 +109,12 @@
     <van-form input-align="left" @submit="onSubmit">
       <van-cell-group inset>
         <!-- 项目工程名称 -->
-        <project-picker :rules="[]" :required="false" v-model:id="form.projectId" v-model:name="form.projectName" />
+        <project-picker
+          :rules="[]"
+          :required="false"
+          v-model:id="form.projectId"
+          v-model:name="form.projectName"
+        />
 
         <!-- 开始时间 -->
         <van-field
@@ -155,11 +175,18 @@
         />
 
         <van-cell-group inset class="mt-[16PX]">
-          <v-tree-select v-model="form.linkUser" placeholder="请选择联系人" label="联系人" name="linkUser" />
+          <v-tree-select
+            v-model="form.linkUser"
+            placeholder="请选择联系人"
+            label="联系人"
+            name="linkUser"
+          />
         </van-cell-group>
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit">
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

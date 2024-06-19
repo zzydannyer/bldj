@@ -1,12 +1,25 @@
 <script setup lang="ts">
   import { getWorkFeedbackDealtSum } from '@/api';
-  import { listWorkFeedbackByWorkId, getWorkFeedback } from '@/api/media/taskExecution';
-  import { getWorkMain } from '@/api/media/taskRelease';
-  import { Work, WorkFeedback, WorkFeedbackQuery, WorkMust } from '@/types/_media/task';
+  import {
+    listWorkFeedbackByWorkId,
+    getWorkFeedback
+  } from '@/api/_media/taskExecution';
+  import { getWorkMain } from '@/api/_media/taskRelease';
+  import {
+    Work,
+    WorkFeedback,
+    WorkFeedbackQuery,
+    WorkMust
+  } from '@/types/_media/task';
   import { useGlobal } from '@/utils';
   import { join } from 'lodash';
-  const { $useDict, $parse, $value_to_label } = useGlobal<GlobalPropertiesApi>();
-  const { work_release_type } = $useDict('work_release_type', 'feedback_status', 'work_type_code');
+  const { $useDict, $parse, $value_to_label } =
+    useGlobal<GlobalPropertiesApi>();
+  const { work_release_type } = $useDict(
+    'work_release_type',
+    'feedback_status',
+    'work_type_code'
+  );
 
   const route = useRoute();
   const { id } = route.params;
@@ -23,7 +36,9 @@
     work.value = _work!;
 
     query.value.workId = id as string;
-    const { data: _workFeedbackList } = await listWorkFeedbackByWorkId(query.value);
+    const { data: _workFeedbackList } = await listWorkFeedbackByWorkId(
+      query.value
+    );
     workFeedbackList.value = _workFeedbackList!;
 
     for (const index in workFeedbackList.value) {
@@ -65,7 +80,13 @@
           <template #label>接收类型</template>
           <!-- 接收单位类型( 1:全部;2：分组;3：指定用户) -->
           <template #input>
-            {{ work.receiveType == '2' ? '分组' : work.receiveType == '3' ? '指定用户' : '' }}
+            {{
+              work.receiveType == '2'
+                ? '分组'
+                : work.receiveType == '3'
+                  ? '指定用户'
+                  : ''
+            }}
           </template>
         </van-field>
         <van-field v-if="work.receiveType === '2'">
@@ -95,8 +116,16 @@
         <van-field>
           <template #label>任务附件</template>
           <template #input>
-            <v-uploader url="oss" :disabled="true" v-if="work.workFiles && work.workFiles.length > 0" v-model="work.workFiles" type="file" />
-            <van-tag v-else plain size="medium" type="primary"> 暂无附件 </van-tag>
+            <v-uploader
+              url="oss"
+              :disabled="true"
+              v-if="work.workFiles && work.workFiles.length > 0"
+              v-model="work.workFiles"
+              type="file"
+            />
+            <van-tag v-else plain size="medium" type="primary">
+              暂无附件
+            </van-tag>
           </template>
         </van-field>
       </van-form>
@@ -111,12 +140,20 @@
           </template>
         </van-field>
         <van-collapse v-model="activeNames">
-          <van-collapse-item :name="index" v-for="(workFeedback, index) in workFeedbackList" :key="index">
+          <van-collapse-item
+            :name="index"
+            v-for="(workFeedback, index) in workFeedbackList"
+            :key="index"
+          >
             <template #title>
               <!-- 所属组织 -->
               <section class="between-center">
                 <span class="font-medium">
-                  {{ workFeedback.roleName ? workFeedback.orgName + ' - ' + workFeedback.roleName : workFeedback.orgName }}
+                  {{
+                    workFeedback.roleName
+                      ? workFeedback.orgName + ' - ' + workFeedback.roleName
+                      : workFeedback.orgName
+                  }}
                 </span>
                 <div class="whitespace-nowrap">
                   <van-icon
@@ -156,19 +193,48 @@
             <!-- 反馈附件 -->
             <section class="text-sm py-1">
               反馈附件：
-              <template v-if="workFeedback.workFiles && workFeedback.workFiles?.length > 0">
-                <v-uploader url="oss" :disabled="true" v-model="workFeedback.workFiles" type="file" />
+              <template
+                v-if="
+                  workFeedback.workFiles && workFeedback.workFiles?.length > 0
+                "
+              >
+                <v-uploader
+                  url="oss"
+                  :disabled="true"
+                  v-model="workFeedback.workFiles"
+                  type="file"
+                />
               </template>
               <div v-else>暂无反馈附件</div>
             </section>
             <van-collapse
               v-model="activeNames"
-              v-if="workFeedback.submitStatus === '3' && work.workType === '2' && workFeedback.questions && workFeedback.questions.length > 0"
+              v-if="
+                workFeedback.submitStatus === '3' &&
+                work.workType === '2' &&
+                workFeedback.questions &&
+                workFeedback.questions.length > 0
+              "
             >
               <van-collapse-item title="回填信息" :name="workFeedback.id">
-                <div v-for="(item, index) in workFeedback.questions" :key="index">
-                  <van-field label-width="40" readonly v-model="item.question" label="提问" label-class="text-gray-400" />
-                  <van-field label-width="40" readonly v-model="item.mustDesc" label="回答" label-class="text-gray-400" />
+                <div
+                  v-for="(item, index) in workFeedback.questions"
+                  :key="index"
+                >
+                  <van-field
+                    label-width="40"
+                    readonly
+                    v-model="item.question"
+                    label="提问"
+                    label-class="text-gray-400"
+                  />
+                  <van-field
+                    label-width="40"
+                    readonly
+                    v-model="item.mustDesc"
+                    label="回答"
+                    label-class="text-gray-400"
+                  />
                 </div>
               </van-collapse-item>
             </van-collapse>

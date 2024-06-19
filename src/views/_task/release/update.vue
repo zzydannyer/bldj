@@ -1,17 +1,25 @@
 <script setup lang="ts">
   import { Project } from '@/types/_media/project';
-  import { PickerOption, showConfirmDialog, showSuccessToast, showToast } from 'vant';
+  import {
+    PickerOption,
+    showConfirmDialog,
+    showSuccessToast,
+    showToast
+  } from 'vant';
   import { _10_years_future, _5_years_ago } from '@/utils/date';
-  import { updateWorkMain, getWorkMain } from '@/api/media/taskRelease';
+  import { updateWorkMain, getWorkMain } from '@/api/_media/taskRelease';
   import { useGlobal } from '@/utils';
   import { PackageMain, Work } from '@/types/_media/task';
-  import { listPackageMain } from '@/api/media/package';
-  import { selectUser } from '@/api/system/user';
+  import { listPackageMain } from '@/api/_media/package';
+  import { selectUser } from '@/api/_system/user';
   import { SysUser } from '@/types/_system/sysUser';
   import { emitter } from '@/plugins/mitt';
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
   // import VueOfficePdf from '@vue-office/pdf'
-  const { work_release_type, work_type_code } = $useDict('work_release_type', 'work_type_code');
+  const { work_release_type, work_type_code } = $useDict(
+    'work_release_type',
+    'work_type_code'
+  );
   const route = useRoute();
   const router = useRouter();
   const form = reactive(new Work());
@@ -136,7 +144,11 @@
   };
   onBeforeMount(() => {
     getWorkMainLsit();
-    Promise.allSettled([getworktype(), recieve_type_2_fn(), recieve_type_3_fn()]);
+    Promise.allSettled([
+      getworktype(),
+      recieve_type_2_fn(),
+      recieve_type_3_fn()
+    ]);
   });
 </script>
 <template>
@@ -164,7 +176,12 @@
           :columns-field-names="columnsFieldNames"
         />
         <!-- 任务名 -->
-        <van-field v-model="form.workTitle" required label="任务名" placeholder="请输入任务名" />
+        <van-field
+          v-model="form.workTitle"
+          required
+          label="任务名"
+          placeholder="请输入任务名"
+        />
         <!-- 截止时间 -->
         <v-date-picker
           :minDate="new Date()"
@@ -189,10 +206,21 @@
         <!-- 普通附件 -->
         <van-field label="普通附件">
           <template #input>
-            <v-uploader url="oss" :max-count="5" :max-size="50 * 1024 * 1024" v-model="form.workFiles" type="file" />
+            <v-uploader
+              url="oss"
+              :max-count="5"
+              :max-size="50 * 1024 * 1024"
+              v-model="form.workFiles"
+              type="file"
+            />
           </template>
         </van-field>
-        <van-field name="radio" label="接收类型" required :rules="[{ required: true, message: '请选择接收类型' }]">
+        <van-field
+          name="radio"
+          label="接收类型"
+          required
+          :rules="[{ required: true, message: '请选择接收类型' }]"
+        >
           <template #input>
             <van-radio-group v-model="form.receiveType" direction="horizontal">
               <van-radio name="2" shape="dot">分组</van-radio>
@@ -227,7 +255,9 @@
         />
         <!-- 调查添加 -->
         <div v-if="form.workType === '2'" class="m-4">
-          <van-button type="primary" size="mini" @click="handleNuber"> 添加问题 </van-button>
+          <van-button type="primary" size="mini" @click="handleNuber">
+            添加问题
+          </van-button>
 
           <van-cell-group inset>
             <van-cell class="p-0" v-for="(item, index) in addList">
@@ -242,14 +272,21 @@
                 />
               </template>
               <template #right-icon>
-                <span @click="handleDelete(index)" class="flex items-center text-red-500"> 删除 </span>
+                <span
+                  @click="handleDelete(index)"
+                  class="flex items-center text-red-500"
+                >
+                  删除
+                </span>
               </template>
             </van-cell>
           </van-cell-group>
         </div>
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit">
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

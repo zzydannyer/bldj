@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { homeContentList } from '@/api';
   import { useImage, useIcon } from '@/utils/assets';
   import { register } from 'swiper/element/bundle';
 
@@ -47,9 +48,40 @@
       path: '/culture'
     }
   ];
+
+  const noticeData = ref();
+  const noticeCards = computed(() => {
+    return [
+      {
+        title: '通知公告',
+        value: '全部',
+        valueColor: '#e20a0a'
+      },
+      {
+        title: '党建动态',
+        value: '全部',
+        valueColor: '#e20a0a'
+      },
+      {
+        title: '党员风采',
+        value: '全部',
+        valueColor: '#e20a0a'
+      },
+      {
+        title: '党建活动',
+        value: '全部',
+        valueColor: '#e20a0a'
+      }
+    ];
+  });
+  async function getData() {
+    await homeContentList();
+  }
+
+  onBeforeMount(getData);
 </script>
 <template>
-  <section class="bg-white">
+  <main class="pb-[140PX] bg-white">
     <swiper-container
       :breakpoints="{
         768: {
@@ -100,9 +132,9 @@
         value="全部"
         value-class="text-[#e20a0a]"
       />
-      <van-cell label="描述信息" title="单元格" value="内容" />
+      <div>6666666666666666666666666</div>
     </van-cell-group>
-  </section>
+  </main>
 </template>
 <style lang="scss" scoped>
   .swiper-slide {

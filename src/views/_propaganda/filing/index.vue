@@ -1,11 +1,15 @@
 <script setup lang="ts">
-  import { delPropaganda, listPropaganda, submitPropaganda } from '@/api/media/propaganda';
+  import {
+    delPropaganda,
+    listPropaganda,
+    submitPropaganda
+  } from '@/api/_media/propaganda';
   import { PropagandaMainQuery } from '@/types/_media/propaganda';
   import { useGlobal } from '@/utils';
   import { showConfirmDialog, showSuccessToast, FormInstance } from 'vant';
-  import { appealPropaganda } from '@/api/media/propaganda';
+  import { appealPropaganda } from '@/api/_media/propaganda';
   import appealDialog from './appealDialog';
-  import { checkRole } from '@/api/media/propaganda';
+  import { checkRole } from '@/api/_media/propaganda';
   import useUserInfoStore from '@/store/modules/userInfo';
   import { emitter } from '@/plugins/mitt';
   import { hasAuth } from '@/utils/auth';
@@ -15,7 +19,8 @@
     name: 'PropagandaFiling'
   });
   const userInfoStore = useUserInfoStore();
-  const { isGroup, userId, isDepartment, isCompany } = storeToRefs(userInfoStore);
+  const { isGroup, userId, isDepartment, isCompany } =
+    storeToRefs(userInfoStore);
 
   // 是否为集团文化部
   const isCulture = ref(false);
@@ -106,7 +111,11 @@
       formRef = _formRef;
       appealBrief = _appealBrief;
     };
-    const element = h(appealDialog as any, { maxLength: 30, key: Math.random() }, defaultSlot as any);
+    const element = h(
+      appealDialog as any,
+      { maxLength: 30, key: Math.random() },
+      defaultSlot as any
+    );
     const result = level.value === '3' ? '3' : '4';
     showConfirmDialog({
       title: '申诉理由',
@@ -152,11 +161,32 @@
 </script>
 <template>
   <main class="list-container">
-    <v-search :show-pop-icon="false" placeholder="请输入报道标题" v-model:searchVal="queryParams.reportTitle" @handle-search="handleSearch" />
+    <v-search
+      :show-pop-icon="false"
+      placeholder="请输入报道标题"
+      v-model:searchVal="queryParams.reportTitle"
+      @handle-search="handleSearch"
+    />
 
-    <van-floating-bubble axis="xy" magnetic="x" v-if="hasAuth('multimedia:propaganda:add')">
-      <van-button type="primary" size="large" round to="/propaganda/filing/create">
-        <van-swipe vertical class="button-swipe" :autoplay="4000" :duration="600" :touchable="false" :show-indicators="false">
+    <van-floating-bubble
+      axis="xy"
+      magnetic="x"
+      v-if="hasAuth('multimedia:propaganda:add')"
+    >
+      <van-button
+        type="primary"
+        size="large"
+        round
+        to="/propaganda/filing/create"
+      >
+        <van-swipe
+          vertical
+          class="button-swipe"
+          :autoplay="4000"
+          :duration="600"
+          :touchable="false"
+          :show-indicators="false"
+        >
           <van-swipe-item>
             <van-icon name="plus" />
           </van-swipe-item>
@@ -165,10 +195,19 @@
       </van-button>
     </van-floating-bubble>
 
-    <v-inset-list :shows="['search']" :list-fn="listPropaganda" :query-params="queryParams" ref="listRef">
+    <v-inset-list
+      :shows="['search']"
+      :list-fn="listPropaganda"
+      :query-params="queryParams"
+      ref="listRef"
+    >
       <template #default="{ row, index }">
         <v-card>
-          <van-text-ellipsis class="v-list-title" :content="row.reportTitle" rows="2" />
+          <van-text-ellipsis
+            class="v-list-title"
+            :content="row.reportTitle"
+            rows="2"
+          />
           <van-tag plain type="primary" class="mt-2">
             {{ statusMap[row.reportStatus] }}
           </van-tag>
@@ -178,7 +217,15 @@
           </span>
 
           <section class="absolute right-2 bottom-2">
-            <van-button class="px-4" round type="default" hairline size="mini" text="查 看" @click="handleDetail(row.id)" />
+            <van-button
+              class="px-4"
+              round
+              type="default"
+              hairline
+              size="mini"
+              text="查 看"
+              @click="handleDetail(row.id)"
+            />
             <van-button
               class="px-4"
               text="提 交"
@@ -187,7 +234,9 @@
               size="mini"
               @click="handleSubmit(row.id)"
               v-show="
-                (row.self && isDepartment && ['0', '3'].includes(row.reportStatus)) ||
+                (row.self &&
+                  isDepartment &&
+                  ['0', '3'].includes(row.reportStatus)) ||
                 (isCompany && ['0', '7'].includes(row.reportStatus)) ||
                 (isGroup && ['0', '7'].includes(row.reportStatus))
               "
@@ -203,8 +252,12 @@
               size="mini"
               @click="handleAppeal(row.id, row.orgCode, row.reportTitle)"
               v-show="
-                (isDepartment && ['2'].includes(row.reportStatus) && row.self) ||
-                (!isDepartment && ['6'].includes(row.reportStatus) && (row.companyAuditSelf || row.self))
+                (isDepartment &&
+                  ['2'].includes(row.reportStatus) &&
+                  row.self) ||
+                (!isDepartment &&
+                  ['6'].includes(row.reportStatus) &&
+                  (row.companyAuditSelf || row.self))
               "
               v-auth="['multimedia:propaganda:edit']"
             />
@@ -217,8 +270,12 @@
               size="mini"
               @click="handleReUpdate(row.id)"
               v-show="
-                (row.self && isDepartment && ['0', '3'].includes(row.reportStatus)) ||
-                (isCompany && ['7'].includes(row.reportStatus) && row.companyAuditSelf) ||
+                (row.self &&
+                  isDepartment &&
+                  ['0', '3'].includes(row.reportStatus)) ||
+                (isCompany &&
+                  ['7'].includes(row.reportStatus) &&
+                  row.companyAuditSelf) ||
                 (isGroup && ['0', '7'].includes(row.reportStatus))
               "
               v-auth="['multimedia:propaganda:edit']"
@@ -233,8 +290,12 @@
               size="mini"
               @click="handleUpdate(row.id)"
               v-show="
-                (row.self && isDepartment && ['0', '3'].includes(row.reportStatus)) ||
-                (isCompany && ['0', '7'].includes(row.reportStatus) && row.self) ||
+                (row.self &&
+                  isDepartment &&
+                  ['0', '3'].includes(row.reportStatus)) ||
+                (isCompany &&
+                  ['0', '7'].includes(row.reportStatus) &&
+                  row.self) ||
                 (isGroup && ['0', '7'].includes(row.reportStatus))
               "
               v-auth="['multimedia:propaganda:edit']"

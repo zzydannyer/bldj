@@ -11,7 +11,8 @@ export function homeContentList() {
 export function getContentViewApi(uid: number, type = 'view') {
   //（checkView审核查阅-无需判断权限）
   return request({
-    url: type === 'checkView' ? '/mobile/viewDetailCheck' : '/mobile/viewDetail',
+    url:
+      type === 'checkView' ? '/mobile/viewDetailCheck' : '/mobile/viewDetail',
     method: 'get',
     params: {
       uid,

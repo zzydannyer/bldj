@@ -1,10 +1,19 @@
 <script setup lang="ts">
   import { _5_years_ago, formatDate } from '@/utils/date';
-  import { closeToast, showImagePreview, showLoadingToast, showToast } from 'vant';
-  import { getPropaganda, listAuditRecord } from '@/api/media/propaganda';
-  import { PropagandaAuditBo, PropagandaAuditVo, PropagandaMain } from '@/types/_media/propaganda';
+  import {
+    closeToast,
+    showImagePreview,
+    showLoadingToast,
+    showToast
+  } from 'vant';
+  import { getPropaganda, listAuditRecord } from '@/api/_media/propaganda';
+  import {
+    PropagandaAuditBo,
+    PropagandaAuditVo,
+    PropagandaMain
+  } from '@/types/_media/propaganda';
   import { useGlobal } from '@/utils';
-  import { getPropagandaClue } from '@/api/media/propagandaClue.ts';
+  import { getPropagandaClue } from '@/api/_media/propagandaClue';
   import { PropagandaClue } from '@/types/_media/propagandaClue';
 
   const route = useRoute();

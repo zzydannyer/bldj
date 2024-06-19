@@ -7,10 +7,15 @@
     listOption,
     listStandCascadeList,
     validatorAchieveScoreEnough
-  } from '@/api/media/scoreStandard';
-  import { PickerOption, showConfirmDialog, showSuccessToast, showToast } from 'vant';
+  } from '@/api/_media/scoreStandard';
+  import {
+    PickerOption,
+    showConfirmDialog,
+    showSuccessToast,
+    showToast
+  } from 'vant';
   import { joinDate, _5_years_ago } from '@/utils/date';
-  import { addPropaganda, checkRole } from '@/api/media/propaganda';
+  import { addPropaganda, checkRole } from '@/api/_media/propaganda';
   import { debounce, last } from 'lodash';
   import { router } from '@/router';
   import { useGlobal } from '@/utils';
@@ -20,7 +25,10 @@
   import { storeToRefs } from 'pinia';
   import useUserInfoStore from '@/store/modules/userInfo';
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
-  const { group_propaganda_ratio, group_propaganda_type } = $useDict('group_propaganda_ratio', 'group_propaganda_type');
+  const { group_propaganda_ratio, group_propaganda_type } = $useDict(
+    'group_propaganda_ratio',
+    'group_propaganda_type'
+  );
   const userInfoStore = useUserInfoStore();
   const { roles, userId, orgCode } = storeToRefs(userInfoStore);
   // 开始时间和结束时间
@@ -93,8 +101,12 @@
     resetExtra();
     const lastOne = last(selectedOptions) as any;
     form.optionMultiFlag = lastOne.optionMultiFlag;
-    form.scoreDetailId = selectedOptions.map((option: PickerOption) => option.id).join(',');
-    scoreDetailText.value = selectedOptions.map((option: PickerOption) => option.text).join('/');
+    form.scoreDetailId = selectedOptions
+      .map((option: PickerOption) => option.id)
+      .join(',');
+    scoreDetailText.value = selectedOptions
+      .map((option: PickerOption) => option.text)
+      .join('/');
     if (isCulture.value) {
       const kind = await getNewMediaConfirm({ scoreId: form.scoreDetailId! });
       if (kind.data && !form.groupConfirmKind) {
@@ -140,7 +152,13 @@
     const requireUpper = data.requireUpper;
 
     if (requireUpper && enough) {
-      alert('本公司本年度当前赋分依据已通过分数为 ' + achieveScore + ' 分，已达到集团设定上限 ' + limitScore + ' 分。继续申报年度将不再累计分数。');
+      alert(
+        '本公司本年度当前赋分依据已通过分数为 ' +
+          achieveScore +
+          ' 分，已达到集团设定上限 ' +
+          limitScore +
+          ' 分。继续申报年度将不再累计分数。'
+      );
     }
   }
   //  是否有集团文化部角色
@@ -231,7 +249,10 @@
   const reportTimeText = ref('');
 
   const onReportTimeConfirm = ({ selectedOptions }: PickerOption) => {
-    form.reportTime = $parse(joinDate(selectedOptions, 'value', '-'), 'YYYY-MM-DD HH:mm:ss');
+    form.reportTime = $parse(
+      joinDate(selectedOptions, 'value', '-'),
+      'YYYY-MM-DD HH:mm:ss'
+    );
     reportTimeText.value = joinDate(selectedOptions, 'text');
     showReportTime.value = false;
   };
@@ -249,7 +270,9 @@
       if (!data) {
         showConfirmDialog({
           title: '警告',
-          message: '赋分依据类型应与认定归类类型挂钩 \n' + '即非新媒体赋分不能选新媒体归类/新媒体赋分必须选择新媒体归类'
+          message:
+            '赋分依据类型应与认定归类类型挂钩 \n' +
+            '即非新媒体赋分不能选新媒体归类/新媒体赋分必须选择新媒体归类'
         })
           .then(isProject)
           .catch(() => {});
@@ -300,7 +323,12 @@
     showToast('文件大小超过50mb，请重新上传');
   };
   // 外部链接校验
-  const validator = (val: string) => (val ? /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(val) : true);
+  const validator = (val: string) =>
+    val
+      ? /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/.test(
+          val
+        )
+      : true;
 
   onBeforeMount(async () => {
     await getTreeOptions();
@@ -326,7 +354,13 @@
           :rules="[{ required: true, message: '请选择赋分依据' }]"
         />
         <van-popup v-model:show="showScoreDetail" round position="bottom">
-          <van-cascader :closeable="false" title="赋分依据" :options="scoreOption" :field-names="fieldNames" @finish="onScoreDetailConfirm" />
+          <van-cascader
+            :closeable="false"
+            title="赋分依据"
+            :options="scoreOption"
+            :field-names="fieldNames"
+            @finish="onScoreDetailConfirm"
+          />
         </van-popup>
         <!-- 额外附加分 -->
         <van-cell clickable title="" @click="toggle" v-if="extra_1_field">
@@ -400,7 +434,12 @@
           :rules="[{ required: true, message: '请输入报道标题' }]"
         />
         <!-- 项目工程名称 -->
-        <project-picker :rules="[]" :required="false" v-model:id="form.projectId" v-model:name="form.projectName" />
+        <project-picker
+          :rules="[]"
+          :required="false"
+          v-model:id="form.projectId"
+          v-model:name="form.projectName"
+        />
 
         <!-- 报道摘要 -->
         <van-field
@@ -439,7 +478,12 @@
           />
         </van-popup>
         <!-- 外部链接 -->
-        <van-field v-model="form.outLink" :rules="[{ validator, message: '请填写正确链接地址' }]" label="外部链接" placeholder="请输入外部链接" />
+        <van-field
+          v-model="form.outLink"
+          :rules="[{ validator, message: '请填写正确链接地址' }]"
+          label="外部链接"
+          placeholder="请输入外部链接"
+        />
         <!-- 资源类型 -->
         <van-field
           v-model="form.fileTypename"
@@ -451,29 +495,52 @@
           @click="showPicker = true"
         />
         <van-popup v-model:show="showPicker" position="bottom">
-          <van-picker :columns="columns" @confirm="onConfirm" @cancel="showPicker = false" />
+          <van-picker
+            :columns="columns"
+            @confirm="onConfirm"
+            @cancel="showPicker = false"
+          />
         </van-popup>
         <!-- 普通附件 -->
         <van-field label="普通附件" v-if="form.fileType == '3'">
           <template #input>
-            <v-uploader url="oss" :max-count="5" :max-size="50 * 1024 * 1024" @oversize="onOversize" v-model="form.commonList" type="file" />
+            <v-uploader
+              url="oss"
+              :max-count="5"
+              :max-size="50 * 1024 * 1024"
+              @oversize="onOversize"
+              v-model="form.commonList"
+              type="file"
+            />
           </template>
         </van-field>
         <!-- 图片素材 -->
         <van-field label="图片素材" v-if="form.fileType == '1'">
           <template #input>
-            <v-uploader url="oss" :max-count="5" v-model="form.imageList" type="image" />
+            <v-uploader
+              url="oss"
+              :max-count="5"
+              v-model="form.imageList"
+              type="image"
+            />
           </template>
         </van-field>
         <!-- 视频素材 -->
         <van-field label="视频素材" v-if="form.fileType == '2'">
           <template #input>
-            <v-uploader url="oss" :max-count="5" v-model="form.videoList" type="video" />
+            <v-uploader
+              url="oss"
+              :max-count="5"
+              v-model="form.videoList"
+              type="video"
+            />
           </template>
         </van-field>
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit"> 提交 </van-button>
+      <van-button class="my-4" round block type="success" native-type="submit">
+        提交
+      </van-button>
     </van-form>
   </section>
 </template>

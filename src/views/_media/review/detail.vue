@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { getMedia, listAudit, listActivitiesByMainId } from '@/api/media';
+  import { getMedia, listAudit, listActivitiesByMainId } from '@/api/_media';
   import { _5_years_ago, formatDate } from '@/utils/date';
   import { closeToast, showImagePreview, showLoadingToast } from 'vant';
   import ReviewTimeline from '@/views/media/reviewTimeline';
@@ -15,7 +15,11 @@
   // **************************************************************************************
   const getMediaList = async () => {
     try {
-      showLoadingToast({ message: '加载中...', forbidClick: true, duration: 0 });
+      showLoadingToast({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+      });
       // 媒体列表数据
       const { data: _detail } = await getMedia(id);
       let res = await listActivitiesByMainId(id);
@@ -33,7 +37,9 @@
   };
   // 放大预览图片
   const showImage = () => {
-    const urls = detail.value.mediaList && detail.value.mediaList.map((item) => item.thumbnailUrl);
+    const urls =
+      detail.value.mediaList &&
+      detail.value.mediaList.map((item) => item.thumbnailUrl);
     if (!urls) return;
     showImagePreview(urls);
   };
@@ -43,9 +49,24 @@
   <main class="container">
     <v-card>
       <template v-if="detail.mediaList && detail.mediaList.length > 0">
-        <van-swipe class="my-swipe" :autoplay="5000" indicator-color="white" v-if="detail.mediaType === '1'" @click="showImage">
-          <van-swipe-item class="center-center" v-for="(item, index) in detail.mediaList" :key="index">
-            <van-image fit="cover" class="aspect-video" :src="item.thumbnailUrl" alt="" />
+        <van-swipe
+          class="my-swipe"
+          :autoplay="5000"
+          indicator-color="white"
+          v-if="detail.mediaType === '1'"
+          @click="showImage"
+        >
+          <van-swipe-item
+            class="center-center"
+            v-for="(item, index) in detail.mediaList"
+            :key="index"
+          >
+            <van-image
+              fit="cover"
+              class="aspect-video"
+              :src="item.thumbnailUrl"
+              alt=""
+            />
           </van-swipe-item>
         </van-swipe>
       </template>
@@ -60,7 +81,9 @@
             <span>征集活动</span>
           </template>
           <template #input>
-            <van-tag plain v-for="item in activitiesName" type="primary">{{ item.activitiesName }}</van-tag>
+            <van-tag plain v-for="item in activitiesName" type="primary">{{
+              item.activitiesName
+            }}</van-tag>
           </template>
         </van-field>
 
@@ -107,7 +130,13 @@
             <span>素材介绍</span>
           </template>
           <template #input>
-            <van-text-ellipsis class="text-left" rows="2" :content="detail.materialBrief" expand-text="展开" collapse-text="收起" />
+            <van-text-ellipsis
+              class="text-left"
+              rows="2"
+              :content="detail.materialBrief"
+              expand-text="展开"
+              collapse-text="收起"
+            />
           </template>
         </van-field>
         <!-- 素材 -->

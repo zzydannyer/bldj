@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { getMedia, listAudit, listActivitiesByMainId } from '@/api/media';
+  import { getMedia, listAudit, listActivitiesByMainId } from '@/api/_media';
   import { closeToast, showImagePreview, showLoadingToast } from 'vant';
   import { _5_years_ago, formatDate } from '@/utils/date';
 
@@ -51,7 +51,11 @@
       <div v-if="detail.mediaType === '1'">
         <template v-if="detail.mediaList && detail.mediaList.length > 0">
           <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-            <div v-for="item in detail.mediaList" class="w-full h-80" @click="showImage(item.thumbnailUrl)">
+            <div
+              v-for="item in detail.mediaList"
+              class="w-full h-80"
+              @click="showImage(item.thumbnailUrl)"
+            >
               <van-swipe-item>
                 <img class="w-full h-full" :src="item.thumbnailUrl" alt="" />
               </van-swipe-item>
@@ -70,7 +74,9 @@
             <span>征集活动</span>
           </template>
           <template #input>
-            <van-tag plain v-for="item in activitiesName" type="primary">{{ item.activitiesName }}</van-tag>
+            <van-tag plain v-for="item in activitiesName" type="primary">{{
+              item.activitiesName
+            }}</van-tag>
           </template>
         </van-field>
         <!-- 作者 -->
@@ -115,7 +121,13 @@
             <span>素材介绍</span>
           </template>
           <template #input>
-            <van-text-ellipsis class="text-left" rows="2" :content="detail.materialBrief" expand-text="展开" collapse-text="收起" />
+            <van-text-ellipsis
+              class="text-left"
+              rows="2"
+              :content="detail.materialBrief"
+              expand-text="展开"
+              collapse-text="收起"
+            />
           </template>
         </van-field>
         <!-- 素材 -->

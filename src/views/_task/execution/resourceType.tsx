@@ -1,5 +1,5 @@
 import VCascader from '@/components/VCascader/index.vue';
-import { treeResourceCategory } from '@/api/media';
+import { treeResourceCategory } from '@/api/_media';
 
 export default defineComponent({
   props: {
@@ -41,7 +41,11 @@ export default defineComponent({
     return () => (
       <VCascader
         required={props.required}
-        rules={props.required ? [{ required: true, message: '资源类别不能为空' }] : undefined}
+        rules={
+          props.required
+            ? [{ required: true, message: '资源类别不能为空' }]
+            : undefined
+        }
         v-model={resourceType.value}
         options={categoryOptions.value}
         field-names={fieldNames}
