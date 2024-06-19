@@ -47,9 +47,11 @@ const useUserInfoStore = defineStore('user-info', {
     },
     async login(data: LoginReq): Promise<void> {
       try {
-        const { token } = await AuthServer.USER_LOGIN(data);
+        const {
+          data: { token }
+        } = await AuthServer.USER_LOGIN(data);
         setToken(token);
-        const userInfo = await AuthServer.GET_USER_INFO();
+        const { data: userInfo } = await AuthServer.GET_USER_INFO();
         this.set_user_info(userInfo);
         Promise.resolve();
       } catch (error: unknown) {

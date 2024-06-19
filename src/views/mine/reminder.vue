@@ -19,14 +19,23 @@
   }
 </script>
 <template>
-  <div class="bg-white pt-3 h-dvh">
+  <div class="pt-3 pb-[200PX]">
     <van-search v-model="value" show-action label="素材" placeholder="请输入搜索关键词" @search="onSearch">
       <template #action>
         <div @click="onClickButton">搜索</div>
       </template>
     </van-search>
 
-    <v-inset-list :list-fn="getData" :query-params="{}" ref="listRef">
+    <v-inset-list
+      :list-fn="getData"
+      :query-params="{}"
+      ref="listRef"
+      :rowsFilter="
+        (rows) => {
+          return rows.filter((row) => row.status === '22' && row.feedbackStatus === 'notDo');
+        }
+      "
+    >
       <template #default="{ row, index }">
         <v-card class="v-list-item">
           <van-text-ellipsis class="v-list-title" :content="row.workTitle" rows="2" />
