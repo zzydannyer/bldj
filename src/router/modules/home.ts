@@ -89,7 +89,7 @@ export default {
       name: 'Reminder',
       component: () => import('@/views/mine/reminder.vue'),
       meta: {
-        title: '我的素材',
+        title: '工作提醒',
         keepAlive: true,
         visible: false
       }
