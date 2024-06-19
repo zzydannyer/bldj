@@ -70,14 +70,36 @@
       </swiper-slide>
     </swiper-container>
 
-    <van-grid class="grid-container" :column-num="3" direction="horizontal" :gutter="8">
-      <van-grid-item v-for="(item, index) in gridItems" :key="index" :icon="useIcon(item.icon)" :text="item.text" :to="item.path" />
+    <van-grid
+      class="grid-container"
+      :column-num="3"
+      direction="horizontal"
+      :gutter="8"
+    >
+      <van-grid-item
+        v-for="(item, index) in gridItems"
+        :key="index"
+        :icon="useIcon(item.icon)"
+        :text="item.text"
+        :to="item.path"
+      />
     </van-grid>
 
-    <van-image class="m-[16PX]" fit="cover" :src="useImage('index-bg-yyk')" @click="router.push('/')" />
+    <van-image
+      class="m-[16PX]"
+      fit="cover"
+      :src="useImage('index-bg-yyk')"
+      @click="router.push('/')"
+    />
 
     <van-cell-group class="home-cell-group">
-      <van-cell is-link title="通知公告" title-class="home-cell-title" value="全部" value-class="text-[#e20a0a]" />
+      <van-cell
+        is-link
+        title="通知公告"
+        title-class="home-cell-title"
+        value="全部"
+        value-class="text-[#e20a0a]"
+      />
       <van-cell label="描述信息" title="单元格" value="内容" />
     </van-cell-group>
   </section>
@@ -89,7 +111,8 @@
 
   .grid-container {
     @apply mt-4 mx-[8PX];
-    --van-grid-item-content-background: url('@/assets/images/index-grid-bg.png') no-repeat right bottom / 70% 40%,
+    --van-grid-item-content-background: url('@/assets/images/index-grid-bg.png')
+        no-repeat right bottom / 70% 40%,
       linear-gradient(to bottom, #fffbfa, #fffaf9);
 
     :deep(.van-grid-item__content) {
@@ -101,7 +124,8 @@
 
   .home-cell-group {
     --van-cell-background: transparent;
-    --van-cell-group-background: url('@/assets/images/home-title-bg.png') no-repeat left top / cover;
+    --van-cell-group-background: url('@/assets/images/home-title-bg.png')
+      no-repeat left top / cover;
     :deep(.van-icon-arrow.van-cell__right-icon) {
       color: #e20a0a;
     }

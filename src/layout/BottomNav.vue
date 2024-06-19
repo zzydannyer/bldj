@@ -50,19 +50,36 @@
     <!-- 中间更多菜单按钮 -->
     <section class="nav-trigger" @click="visible = !visible">
       <div :class="[isOther ? 'more-bg' : 'more-border', 'nav-more']">
-        <img class="nav-icon-more" :src="isOther ? useIcon('nav-more-active') : useIcon('nav-more')" />
+        <img
+          class="nav-icon-more"
+          :src="isOther ? useIcon('nav-more-active') : useIcon('nav-more')"
+        />
       </div>
     </section>
     <!-- 底部导航 -->
     <section class="bottom-nav">
       <van-grid :border="false" clickable :column-num="2">
         <van-grid-item to="/home">
-          <van-image class="w-[24PX]" :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')" />
-          <span class="mt-1" :class="isHome ? 'text-[#e20949]' : 'text-[#a9867e]'">首页</span>
+          <van-image
+            class="w-[24PX]"
+            :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')"
+          />
+          <span
+            class="mt-1"
+            :class="isHome ? 'text-[#e20949]' : 'text-[#a9867e]'"
+            >首页</span
+          >
         </van-grid-item>
         <van-grid-item to="/mine">
-          <van-image class="w-[24PX]" :src="isMine ? useIcon('icon-mine-active') : useIcon('icon-mine')" />
-          <span class="mt-1" :class="isMine ? 'text-[#e20949]' : 'text-[#a9867e]'">我的</span>
+          <van-image
+            class="w-[24PX]"
+            :src="isMine ? useIcon('icon-mine-active') : useIcon('icon-mine')"
+          />
+          <span
+            class="mt-1"
+            :class="isMine ? 'text-[#e20949]' : 'text-[#a9867e]'"
+            >我的</span
+          >
         </van-grid-item>
       </van-grid>
     </section>
@@ -73,7 +90,12 @@
         visible: visible
       }"
     >
-      <span v-for="(route, index) in moreList" :key="route.path" class="nav-text" @click="changeRoute(route.path, index)">
+      <span
+        v-for="(route, index) in moreList"
+        :key="route.path"
+        class="nav-text"
+        @click="changeRoute(route.path, index)"
+      >
         {{ route.meta?.title }}
       </span>
       <div
