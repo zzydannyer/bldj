@@ -3,7 +3,7 @@ import { LoginReq, LoginRes, UserInfo } from '@/types/user';
 
 // 登录
 export function USER_LOGIN(data?: LoginReq) {
-  return request<LoginReq, LoginRes>({
+  return request<LoginReq, ResData<LoginRes>>({
     url: '/login',
     method: 'post',
     data
@@ -12,7 +12,7 @@ export function USER_LOGIN(data?: LoginReq) {
 
 // 获取用户信息
 export function GET_USER_INFO() {
-  return request<null, UserInfo>({
+  return request<ResData<UserInfo>>({
     url: '/getInfo',
     method: 'get'
   });

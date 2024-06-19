@@ -21,14 +21,14 @@ import { Message, MessageQuery } from '@/types/_message';
 export function listMedia(
   query: MediaMainQuery,
   page: PaginationProps
-): Promise<Resp<MediaMain[]>> {
+): Promise<Res<MediaMain[]>> {
   return request('get', '/multimedia/media/list', {
     params: { ...page, ...query }
   });
 }
 
 // 查询媒体信息详细
-export function getMedia(id: Numeric): Promise<Resp<MediaMain>> {
+export function getMedia(id: Numeric): Promise<Res<MediaMain>> {
   return request('get', '/multimedia/media/' + id);
 }
 
@@ -37,29 +37,29 @@ export function getMedia(id: Numeric): Promise<Resp<MediaMain>> {
  * @param data
  * @returns
  */
-export function addMedia(data: MediaMain): Promise<Resp<void>> {
+export function addMedia(data: MediaMain): Promise<Res<void>> {
   return request('post', '/multimedia/media', { data: data });
 }
 
 // * 修改媒体信息
-export function updateMedia(data: MediaMain): Promise<Resp<void>> {
+export function updateMedia(data: MediaMain): Promise<Res<void>> {
   return request('put', '/multimedia/media', { data: data });
 }
 
 // * 删除媒体信息
-export function delMedia(id: number | number[]): Promise<Resp<void>> {
+export function delMedia(id: number | number[]): Promise<Res<void>> {
   return request('delete', '/multimedia/media/' + id);
 }
 // * 提交媒体信息
-export function submitMedia(id: number): Promise<Resp<void>> {
+export function submitMedia(id: number): Promise<Res<void>> {
   return request('put', '/multimedia/media/submit/' + id);
 }
 
-export function directSubmitMedia(media: MediaMain): Promise<Resp<void>> {
+export function directSubmitMedia(media: MediaMain): Promise<Res<void>> {
   return request('put', '/multimedia/media/directSubmit', { data: media });
 }
 // * 获取资源类型
-export function treeResourceCategory(): Promise<Resp<any[]>> {
+export function treeResourceCategory(): Promise<Res<any[]>> {
   return request('get', '/multimedia/media/category/tree');
 }
 
@@ -67,7 +67,7 @@ export function treeResourceCategory(): Promise<Resp<any[]>> {
 export function listAuditing(
   query: MediaMainQuery,
   page: PaginationProps
-): Promise<Resp<any[]>> {
+): Promise<Res<any[]>> {
   return request('get', '/multimedia/media/auditing/list', {
     params: { ...page, ...query }
   });
@@ -77,7 +77,7 @@ export function listAuditing(
 export function listAudited(
   query: MediaMainQuery,
   page: PaginationProps
-): Promise<Resp<any[]>> {
+): Promise<Res<any[]>> {
   return request('get', '/multimedia/media/audited/list', {
     params: { ...page, ...query }
   });
@@ -87,7 +87,7 @@ export function listAudited(
 export function passAudit(
   main: MediaMain,
   checkedIds: string
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   return request('put', '/multimedia/media/audit/pass', {
     params: {
       checkedIds: checkedIds
@@ -97,7 +97,7 @@ export function passAudit(
 }
 
 // * 拒绝审核
-export function backAudit(mainId: number, remark: string): Promise<Resp<void>> {
+export function backAudit(mainId: number, remark: string): Promise<Res<void>> {
   return request('put', '/multimedia/media/audit/back/' + mainId, {
     params: {
       remark: remark
@@ -105,11 +105,11 @@ export function backAudit(mainId: number, remark: string): Promise<Resp<void>> {
   });
 }
 // 点击已读
-export function readOne(id: number): Promise<Resp<void>> {
+export function readOne(id: number): Promise<Res<void>> {
   return request('put', `/message/readOne/` + id);
 }
 // * 视频裁剪
-/* export function cropVideo(detailId: number, list: any): Promise<Resp<void>> {
+/* export function cropVideo(detailId: number, list: any): Promise<Res<void>> {
   return request('put', '/multimedia/media/audit/video/crop/' + detailId, {
     data: list,
     timeout: 1000 * 60 * 1000,
@@ -120,7 +120,7 @@ export function readOne(id: number): Promise<Resp<void>> {
 export function cropVideo(
   detailId: Numeric,
   list: CropVideoParams[]
-): Promise<Resp<{ url: string; ossId: number }>> {
+): Promise<Res<{ url: string; ossId: number }>> {
   return request('put', '/multimedia/media/audit/video/crop/' + detailId, {
     data: list,
     timeout: 1000 * 60 * 1000
@@ -130,29 +130,29 @@ export function cropVideo(
 export function listMediaPublic(
   query: MediaMainQuery,
   page: PaginationProps
-): Promise<Resp<MediaPublic[]>> {
+): Promise<Res<MediaPublic[]>> {
   return request('get', '/multimedia/media/public/list', {
     params: { ...page, ...query }
   });
 }
 
 // * 获取最新的公开媒体列表 - 集团审核通过
-export function listMediaPublicLast(): Promise<Resp<MediaPublic[]>> {
+export function listMediaPublicLast(): Promise<Res<MediaPublic[]>> {
   return request('get', '/multimedia/media/public/last');
 }
 // * 获取媒体信息 - 集团审核通过
-export function getMediaPubilc(detailId: string): Promise<Resp<MediaPublic>> {
+export function getMediaPubilc(detailId: string): Promise<Res<MediaPublic>> {
   return request('get', '/multimedia/media/public/' + detailId);
 }
 // * 获取审核列表
-export function listAudit(mainId: Numeric): Promise<Resp<MediaAudit[]>> {
+export function listAudit(mainId: Numeric): Promise<Res<MediaAudit[]>> {
   return request('get', `/multimedia/media/audit/${mainId}/list `);
 }
 //媒体资料审核列表
 export function AudiTing(
   query: MediaMainQuery,
   page: PaginationProps
-): Promise<Resp<MediaPublic[]>> {
+): Promise<Res<MediaPublic[]>> {
   return request('get', '/multimedia/media/auditing/list', {
     params: { ...page, ...query }
   });
@@ -161,35 +161,35 @@ export function AudiTing(
 export function userCollect(
   query: MediaMainQuery,
   page: PaginationProps
-): Promise<Resp<MediaPublic[]>> {
+): Promise<Res<MediaPublic[]>> {
   return request('get', '/usercollect/list', {
     params: { ...page, ...query }
   });
 }
 // 新增【个人】个人收藏
-export function addUserCollect(data: string): Promise<Resp<void>> {
+export function addUserCollect(data: string): Promise<Res<void>> {
   return request('post', `/usercollect/${data}`);
 }
 // 删除【个人】个人收藏
-export function delUserCollect(id: number | number[]): Promise<Resp<void>> {
+export function delUserCollect(id: number | number[]): Promise<Res<void>> {
   return request('delete', `/usercollect/` + id);
 }
 // 查询【个人】个人收藏详细
-export function getUserCollect(id: string): Promise<Resp<UserCollect>> {
+export function getUserCollect(id: string): Promise<Res<UserCollect>> {
   return request('get', `/usercollect/` + id);
 }
 // 查询消息推送主体列表
 export function listMessageManage(
   query: MessageQuery,
   page?: PaginationProps
-): Promise<Resp<Message[]>> {
+): Promise<Res<Message[]>> {
   return request('get', `/message/list`, {
     params: { ...page, ...query }
   });
 }
 
 // * 呈报到集团
-export function submitGroup(mainId: any): Promise<Resp<void>> {
+export function submitGroup(mainId: any): Promise<Res<void>> {
   return request('post', `/multimedia/media/audit/submitGroup/${mainId}`);
 }
 
@@ -197,7 +197,7 @@ export function submitGroup(mainId: any): Promise<Resp<void>> {
 export function backInBackAudit(
   mainId: string,
   backReason: string
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   return request('post', `/multimedia/media/audit/backInBack/${mainId}`, {
     params: {
       backReason: backReason
@@ -209,7 +209,7 @@ export function backInBackAudit(
 export function fileCheck(
   md5: string,
   fileSize: string | number
-): Promise<Resp<any>> {
+): Promise<Res<any>> {
   return request('post', `/multimedia/media/upload/check`, {
     data: {
       md5: md5,
@@ -219,13 +219,13 @@ export function fileCheck(
 }
 
 // 征集活动
-export function listActivitiesByMainId(id: string): Promise<Resp<any[]>> {
+export function listActivitiesByMainId(id: string): Promise<Res<any[]>> {
   return request('get', `/multimedia/media/${id}/activities`);
 }
 // 查询媒体征集活动列表
 export function listActiveMediaActivities(
   query?: MediaActivitiesQuery
-): Promise<Resp<MediaActivities[]>> {
+): Promise<Res<MediaActivities[]>> {
   return request('get', `/multimedia/mediaActivities/list/active`, {
     params: query
   });
@@ -234,7 +234,7 @@ export function listActiveMediaActivities(
 export function listMediaActivitiesScoreWithPending(
   query: MediaActivitiesScoreQuery,
   page?: PaginationProps
-): Promise<Resp<MediaActivitiesScore[]>> {
+): Promise<Res<MediaActivitiesScore[]>> {
   return request('get', `/multimedia/mediaActivitiesScore/pending`, {
     params: { ...page, ...query }
   });
@@ -244,7 +244,7 @@ export function listMediaActivitiesScoreWithPending(
 export function listMediaActivitiesScoreWithCompleted(
   query: MediaActivitiesScoreQuery,
   page?: PaginationProps
-): Promise<Resp<MediaActivitiesScore[]>> {
+): Promise<Res<MediaActivitiesScore[]>> {
   return request('get', `/multimedia/mediaActivitiesScore/completed`, {
     params: { ...page, ...query }
   });
@@ -253,7 +253,7 @@ export function listMediaActivitiesScoreWithCompleted(
 export function getMediaActivitiesScoreDetail(
   activitiesId: string,
   detailId: string
-): Promise<Resp<MediaActivitiesScoreDetail>> {
+): Promise<Res<MediaActivitiesScoreDetail>> {
   return request(
     'get',
     `/multimedia/mediaActivitiesScore/activities/${activitiesId}/detail/${detailId}`
@@ -262,7 +262,7 @@ export function getMediaActivitiesScoreDetail(
 // 新增媒体征集分数
 export function scoreMediaDetail(
   data: MediaActivitiesScore[]
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   return request('post', `/multimedia/mediaActivitiesScore/score`, {
     data: data
   });
@@ -270,7 +270,7 @@ export function scoreMediaDetail(
 export function listPublicMediaActivitiesScore(
   query: MediaActivitiesScoreQuery,
   page?: PaginationProps
-): Promise<Resp<MediaActivitiesScore[]>> {
+): Promise<Res<MediaActivitiesScore[]>> {
   return request('get', `/multimedia/mediaActivitiesScore/public`, {
     params: { ...page, ...query }
   });
@@ -279,7 +279,7 @@ export function listPublicMediaActivitiesScore(
 export function getPublicMediaActivitiesScoreDetail(
   activitiesId: string,
   detailId: string
-): Promise<Resp<MediaActivitiesScoreDetail>> {
+): Promise<Res<MediaActivitiesScoreDetail>> {
   return request(
     'get',
     `/multimedia/mediaActivitiesScore/activities/public/${activitiesId}/detail/${detailId}`
@@ -289,7 +289,7 @@ export function getPublicMediaActivitiesScoreDetail(
 export function listMediaActivitiesRanking(
   query: MediaActivitiesQuery,
   page?: PaginationProps
-): Promise<Resp<MediaActivitiesRankings[]>> {
+): Promise<Res<MediaActivitiesRankings[]>> {
   return request('get', `/multimedia/mediaActivitiesScore/ranking/list`, {
     params: { ...page, ...query }
   });

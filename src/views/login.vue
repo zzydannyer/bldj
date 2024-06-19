@@ -60,7 +60,13 @@
     </van-row>
 
     <van-cell-group>
-      <van-field v-model="form.username" name="用户名" label="用户名" placeholder="用户名" :rules="[{ required: true, message: '请填写用户名' }]" />
+      <van-field
+        v-model="form.username"
+        name="用户名"
+        label="用户名"
+        placeholder="用户名"
+        :rules="[{ required: true, message: '请填写用户名' }]"
+      />
       <van-field
         v-model="form.password"
         type="password"

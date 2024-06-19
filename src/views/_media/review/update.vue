@@ -19,7 +19,7 @@
     _5_years_ago,
     formatDate,
     dateFormatter
-  } from '@/utils/date';
+  } from '@/utils/date/index.ts';
   import { showToast } from 'vant';
   import ProjectPicker from '@/views/media/projectPicker.tsx';
   import { useGlobal } from '@/utils';

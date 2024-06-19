@@ -13,7 +13,7 @@ import {
 export function listPropaganda(
   query: PropagandaMainQuery,
   page?: PaginationProps
-): Promise<Resp<PropagandaMain[]>> {
+): Promise<Res<PropagandaMain[]>> {
   return request('get', `/multimedia/propaganda/list`, {
     params: { ...page, ...query }
   });
@@ -21,7 +21,7 @@ export function listPropaganda(
 // 公司提交【宣传考核】主至集团待审
 export function submitToGroupNew(
   data: PropagandaSubmitToGroupVo
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   return request('post', `/multimedia/propaganda/submitToGroup`, {
     data: data
   });
@@ -30,7 +30,7 @@ export function submitToGroupNew(
 export function listAuditPropaganda(
   query: PropagandaMainQuery,
   page?: PaginationProps
-): Promise<Resp<PropagandaMain[]>> {
+): Promise<Res<PropagandaMain[]>> {
   return request('get', `/multimedia/propaganda/auditList`, {
     params: { ...page, ...query }
   });
@@ -39,7 +39,7 @@ export function listAuditPropaganda(
 // 新增宣传考核审核
 export function addPropagandaAudit(
   data: PropagandaAuditBo
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   return request('post', `/multimedia/propagandaAudit/saveAudit`, {
     data: data
   });
@@ -48,14 +48,14 @@ export function addPropagandaAudit(
 // 获取审核记录
 export function listAuditRecord(params: {
   mainId: string;
-}): Promise<Resp<PropagandaAuditVo[]>> {
+}): Promise<Res<PropagandaAuditVo[]>> {
   return request('get', `/multimedia/propagandaAudit/listAuditRecord`, {
     params
   });
 }
 
 // 媒体报送申诉
-export function appealPropaganda(data: any): Promise<Resp<boolean>> {
+export function appealPropaganda(data: any): Promise<Res<boolean>> {
   return request('post', `/multimedia/propaganda/appealPropaganda`, {
     data: data
   });
@@ -64,7 +64,7 @@ export function appealPropaganda(data: any): Promise<Resp<boolean>> {
 export function submitPropaganda(
   id: number,
   roleType: string
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   return request('put', `/multimedia/propaganda/submit/` + id + `/` + roleType);
 }
 // 查询【宣传考核】主详细
@@ -72,48 +72,48 @@ export function submitPropaganda(
 export function getPropaganda(
   id: string,
   type: string
-): Promise<Resp<PropagandaMain>> {
+): Promise<Res<PropagandaMain>> {
   return request('get', `/multimedia/propaganda/` + id + `/` + type);
 }
 // 新增【宣传考核】主
-export function addPropaganda(data: PropagandaMain): Promise<Resp<void>> {
+export function addPropaganda(data: PropagandaMain): Promise<Res<void>> {
   return request('post', `/multimedia/propaganda`, { data: data });
 }
 
 // 修改【宣传考核】主
-export function updatePropaganda(data: PropagandaMain): Promise<Resp<void>> {
+export function updatePropaganda(data: PropagandaMain): Promise<Res<void>> {
   return request('put', `/multimedia/propaganda`, { data: data });
 }
 
 // 删除【宣传考核】主
-export function delPropaganda(id: number | number[]): Promise<Resp<void>> {
+export function delPropaganda(id: number | number[]): Promise<Res<void>> {
   return request('delete', `/multimedia/propaganda/` + id);
 }
 
 // 判断当前人员是否有集团文化部角色
-export function checkRole(): Promise<Resp<boolean>> {
+export function checkRole(): Promise<Res<boolean>> {
   return request('get', `/multimedia/propaganda/checkRole`);
 }
 
 // 公司提交【宣传考核】主至集团待审
-export function submitToGroup(id: number | number[]): Promise<Resp<void>> {
+export function submitToGroup(id: number | number[]): Promise<Res<void>> {
   return request('put', `/multimedia/propaganda/submitToGroup/` + id);
 }
 
 // 首页分数统计
-export function listScoreSum(): Promise<Resp<void>> {
+export function listScoreSum(): Promise<Res<void>> {
   return request('get', `/multimedia/propaganda/listScoreSum`);
 }
 
 // 首页优秀报道
-export function listExcellentSum(): Promise<Resp<void>> {
+export function listExcellentSum(): Promise<Res<void>> {
   return request('get', `/multimedia/propaganda/listTableSum`);
 }
 // 查询【宣传考核】主列表 子分公司/总部总部审核页面
 export function listAuditPropagandaMedia(
   query: PropagandaMainQuery,
   page?: PaginationProps
-): Promise<Resp<PropagandaMain[]>> {
+): Promise<Res<PropagandaMain[]>> {
   return request('get', `/multimedia/propaganda/mediaAuditList`, {
     params: { ...page, ...query }
   });

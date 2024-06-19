@@ -11,37 +11,37 @@ import {
 export function listworkFeedback(
   query: WorkQuery,
   page?: PaginationProps
-): Promise<Resp<Work[]>> {
+): Promise<Res<Work[]>> {
   return request('get', `/work/workFeedback/list`, {
     params: { ...page, ...query }
   });
 }
 // 查询工作督办基层反馈详细
-export function getWorkFeedback(id: string): Promise<Resp<WorkFeedback>> {
+export function getWorkFeedback(id: string): Promise<Res<WorkFeedback>> {
   return request('get', `/work/workFeedback/` + id);
 }
 // 查询工作督办基层反馈(督查页内嵌列表)
 export function listWorkFeedbackByWorkId(
   query: WorkFeedbackQuery,
   page?: PaginationProps
-): Promise<Resp<WorkFeedback[]>> {
+): Promise<Res<WorkFeedback[]>> {
   return request('get', `/work/workFeedback/listByWork`, {
     params: { ...page, ...query }
   });
 }
 // 保存工作督办
-export function keepWorkFeedback(data: WorkFeedback): Promise<Resp<void>> {
+export function keepWorkFeedback(data: WorkFeedback): Promise<Res<void>> {
   return request('put', `/work/workFeedback/keep`, { data: data });
 }
 // 提交(上报)工作督办
-export function submitWorkFeedback(data: WorkFeedback): Promise<Resp<void>> {
+export function submitWorkFeedback(data: WorkFeedback): Promise<Res<void>> {
   return request('put', `/work/workFeedback/submit`, { data: data });
 }
 // 撤回工作督办基层反馈
-export function recallWorkFeedback(id: number): Promise<Resp<WorkFeedback>> {
+export function recallWorkFeedback(id: number): Promise<Res<WorkFeedback>> {
   return request('post', `/work/workFeedback/recall/` + id);
 }
 // 查看工作督办
-export function viewWorkFeedback(id: string): Promise<Resp<void>> {
+export function viewWorkFeedback(id: string): Promise<Res<void>> {
   return request('put', `/work/workFeedback/view/${id}`);
 }

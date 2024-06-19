@@ -19,7 +19,7 @@
     passPropagandaClue,
     validateImportantClue
   } from '@/api/_media/propagandaClue';
-  import { formatDate } from '@/utils/date.ts';
+  import { formatDate } from '@/utils/date';
   import { PropagandaClue } from '@/types/_media/propagandaClue';
 
   const userInfoStore = useUserInfoStore();

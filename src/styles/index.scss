@@ -12,14 +12,17 @@ html,body{
 }
 
 body {
-  background-color: red;
+  background-color: #e10101;
 }
 
 #app{
+  // IOS禁止回弹
+  overscroll-behavior: none;
   overflow-y: auto;
   width: 100%;
   height: 100%;
   background-color: $body-bg;
+
   // box-sizing: border-box;
   // IOS禁止回弹
   // overscroll-behavior: none;

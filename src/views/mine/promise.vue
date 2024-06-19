@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-  import { useIcon } from '@/utils/assets.ts';
+  import { useIcon } from '@/utils/assets';
 
   const router = useRouter();
   const form = ref({ code: '' });

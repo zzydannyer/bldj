@@ -222,7 +222,7 @@
         code,
         data: resData,
         msg
-      } = (await instance.post(uploadUrl.value, params, config)) as Resp<any>;
+      } = (await instance.post(uploadUrl.value, params, config)) as Res<any>;
 
       if (code !== 200) {
         fileList.value.splice(detail.index, 1);

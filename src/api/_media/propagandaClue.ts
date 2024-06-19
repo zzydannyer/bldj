@@ -13,7 +13,7 @@ import { PaginationProps } from '@/types/list';
 export function listPropagandaClue(
   query: PropagandaClueQuery,
   page?: PaginationProps
-): Promise<Resp<PropagandaClue[]>> {
+): Promise<Res<PropagandaClue[]>> {
   return request('get', `/multimedia/propagandaClue/list`, {
     params: { ...page, ...query }
   });
@@ -23,48 +23,46 @@ export function listPropagandaClue(
 export function listAuditPropagandaClue(
   query: PropagandaClueQuery,
   page?: PaginationProps
-): Promise<Resp<PropagandaClue[]>> {
+): Promise<Res<PropagandaClue[]>> {
   return request('get', `/multimedia/propagandaClue/listAudit`, {
     params: { ...page, ...query }
   });
 }
 
 // 查询宣传考核-新闻线索详细
-export function getPropagandaClue(id: string): Promise<Resp<PropagandaClue>> {
+export function getPropagandaClue(id: string): Promise<Res<PropagandaClue>> {
   return request('get', `/multimedia/propagandaClue/` + id);
 }
 
 // 新增宣传考核-新闻线索
-export function addPropagandaClue(data: PropagandaClue): Promise<Resp<void>> {
+export function addPropagandaClue(data: PropagandaClue): Promise<Res<void>> {
   return request('post', `/multimedia/propagandaClue`, { data: data });
 }
 
 // 修改宣传考核-新闻线索
-export function updatePropagandaClue(
-  data: PropagandaClue
-): Promise<Resp<void>> {
+export function updatePropagandaClue(data: PropagandaClue): Promise<Res<void>> {
   return request('put', `/multimedia/propagandaClue`, { data: data });
 }
 
 // 提交宣传考核-新闻线索
-export function submitPropagandaClue(id: number): Promise<Resp<boolean>> {
+export function submitPropagandaClue(id: number): Promise<Res<boolean>> {
   return request('put', `/multimedia/propagandaClue/submit/` + id);
 }
 
 // 通过宣传考核-新闻线索
-export function passPropagandaClue(id: number): Promise<Resp<boolean>> {
+export function passPropagandaClue(id: number): Promise<Res<boolean>> {
   return request('put', `/multimedia/propagandaClue/pass/` + id);
 }
 
 // 删除宣传考核-新闻线索
-export function delPropagandaClue(id: number | number[]): Promise<Resp<void>> {
+export function delPropagandaClue(id: number | number[]): Promise<Res<void>> {
   return request('delete', `/multimedia/propagandaClue/` + id);
 }
 
 // 判断当前用户所选项目是否为重要新闻线索 需要额外加上时间范围判断
 export function validateImportantClue(
   data: PropagandaMainAndClueBo
-): Promise<Resp<PropagandaMainAndClueVo>> {
+): Promise<Res<PropagandaMainAndClueVo>> {
   return request('post', `/multimedia/propagandaClue/validateImportantClue`, {
     data: data
   });
@@ -73,7 +71,7 @@ export function validateImportantClue(
 // 查询宣传考核-新闻线索详细
 export function checkChooseDetail(
   data: PropagandaMainAndClueBo
-): Promise<Resp<String>> {
+): Promise<Res<String>> {
   return request('post', `/multimedia/propagandaClue/checkChooseDetail`, {
     data: data
   });

@@ -9,27 +9,27 @@ export type UserDetailed = {
   roleIds: number[];
 };
 // 查询用户列表
-export function listUser(params: any): Promise<Resp<SysUser[]>> {
+export function listUser(params: any): Promise<Res<SysUser[]>> {
   return request('get', '/system/user/list', { params });
 }
 
 //用户下拉选择
-export function selectUser(params?: SysUserQuery): Promise<Resp<SysUser[]>> {
+export function selectUser(params?: SysUserQuery): Promise<Res<SysUser[]>> {
   return request('get', '/system/user/selectList', { params });
 }
 
 // 新增用户
-export function addUser(data: SysUser): Promise<Resp<void>> {
+export function addUser(data: SysUser): Promise<Res<void>> {
   return request('post', '/system/user', { data });
 }
 
 // 修改用户
-export function updateUser(data: SysUser): Promise<Resp<void>> {
+export function updateUser(data: SysUser): Promise<Res<void>> {
   return request('put', '/system/user', { data });
 }
 
 // 删除用户
-export function delUser(userId: number | number[]): Promise<Resp<void>> {
+export function delUser(userId: number | number[]): Promise<Res<void>> {
   return request('delete', `/system/user/${userId}`);
 }
 
@@ -37,7 +37,7 @@ export function delUser(userId: number | number[]): Promise<Resp<void>> {
 export function resetUserPwd(
   userId: number,
   password: string
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   const data = {
     userId,
     password
@@ -49,7 +49,7 @@ export function resetUserPwd(
 export function changeUserStatus(
   userId: string,
   status: string
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   const data = {
     userId,
     status
@@ -58,12 +58,12 @@ export function changeUserStatus(
 }
 
 // 查询用户个人信息
-export function getUserProfile(): Promise<Resp<SysUser>> {
+export function getUserProfile(): Promise<Res<SysUser>> {
   return request('get', '/system/user/profile');
 }
 
 // 修改用户个人信息
-export function updateUserProfile(data: SysUser): Promise<Resp<void>> {
+export function updateUserProfile(data: SysUser): Promise<Res<void>> {
   return request('put', '/system/user/profile', { data });
 }
 
@@ -71,7 +71,7 @@ export function updateUserProfile(data: SysUser): Promise<Resp<void>> {
 export function updateUserPwd(
   oldPassword: string,
   newPassword: string
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   const params = {
     oldPassword,
     newPassword
@@ -80,7 +80,7 @@ export function updateUserPwd(
 }
 
 // 查询授权角色
-export function getAuthRole(userId: string): Promise<Resp<UserDetailed>> {
+export function getAuthRole(userId: string): Promise<Res<UserDetailed>> {
   return request('get', `/system/user/authRole/${userId}`);
 }
 
@@ -88,18 +88,16 @@ export function getAuthRole(userId: string): Promise<Resp<UserDetailed>> {
 export function updateAuthRole(params: {
   userId: string;
   roleIds: number[];
-}): Promise<Resp<void>> {
+}): Promise<Res<void>> {
   return request('put', '/system/user/authRole', { params });
 }
 
 // 查询机构下拉树结构
-export function orgTreeSelect(): Promise<
-  Resp<{ id: number; label: string }[]>
-> {
+export function orgTreeSelect(): Promise<Res<{ id: number; label: string }[]>> {
   return request('get', '/system/user/orgTree');
 }
 
-export function importCrccUser(data: CrccUserImport): Promise<Resp<void>> {
+export function importCrccUser(data: CrccUserImport): Promise<Res<void>> {
   return request('post', '/system/user/importCrccUser', {
     data: data
   });

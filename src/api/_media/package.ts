@@ -7,7 +7,7 @@ import { PackageMainQuery, PackageMain } from '@/types/_media/task';
 export function listPackageMain(
   query: PackageMainQuery,
   page?: PaginationProps
-): Promise<Resp<PackageMain[]>> {
+): Promise<Res<PackageMain[]>> {
   return request('get', `/packageGroup/packageMain/list`, {
     params: { ...page, ...query }
   });

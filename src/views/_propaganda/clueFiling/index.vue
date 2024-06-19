@@ -9,7 +9,7 @@
     listPropagandaClue,
     submitPropagandaClue
   } from '@/api/_media/propagandaClue';
-  import { hasAuth } from '@/utils/auth.ts';
+  import { hasAuth } from '@/utils/auth';
   import { PropagandaClueQuery } from '@/types/_media/propagandaClue';
   import { emitter } from '@/plugins/mitt';
 

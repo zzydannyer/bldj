@@ -16,16 +16,14 @@ declare global {
     tt: any;
   }
 
-  type Resp<T> = RespWithData<T> | RespWithRows<T>;
-
-  interface RespWithData<T> {
-    code: RespCode;
+  interface ResData<T> {
+    code: ResCode;
     data: T;
     msg: string;
   }
 
-  interface RespWithRows<T> {
-    code: RespCode;
+  interface ResRows<T> {
+    code: ResCode;
     rows: T[];
     msg: string;
     total: number;

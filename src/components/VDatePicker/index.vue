@@ -25,7 +25,12 @@
 
 <script setup lang="ts">
   import { FieldRule, PickerOption } from 'vant';
-  import { formatDate, joinDate, _5_years_ago, _10_years_future } from '@/utils/date';
+  import {
+    formatDate,
+    joinDate,
+    _5_years_ago,
+    _10_years_future
+  } from '@/utils/date';
 
   defineOptions({
     name: 'VDatePicker'

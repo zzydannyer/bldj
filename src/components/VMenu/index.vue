@@ -41,7 +41,8 @@
       })
       .map((route) => {
         const newRoute = cloneDeep(route);
-        if (newRoute.children) newRoute.children = filteRoutes(newRoute.children);
+        if (newRoute.children)
+          newRoute.children = filteRoutes(newRoute.children);
         return newRoute;
       });
   };
@@ -60,7 +61,13 @@
 </script>
 
 <template>
-  <van-popup ref="container" v-model:show="show" position="right" teleport="body" :style="{ width: '60%', height: '100%' }">
+  <van-popup
+    ref="container"
+    v-model:show="show"
+    position="right"
+    teleport="body"
+    :style="{ width: '60%', height: '100%' }"
+  >
     <van-sticky class="my-2 px-4" :container="container">
       <van-row justify="center" align="center">
         <van-image width="20" height="20" :src="useImage('logo')" />
@@ -79,7 +86,12 @@
       <van-collapse-item
         v-for="menuItem in menu"
         class="menu-item"
-        :class="curRoute === menuItem.redirect && (!menuItem.children || menuItem.children.length === 0) ? 'active-menu' : ''"
+        :class="
+          curRoute === menuItem.redirect &&
+          (!menuItem.children || menuItem.children.length === 0)
+            ? 'active-menu'
+            : ''
+        "
         :border="false"
         :key="menuItem.path"
         :name="menuItem.path"
@@ -114,7 +126,9 @@
             :border="false"
             :key="childMenuItem.path"
             :name="childMenuItem.path"
-            :readonly="!childMenuItem.children || childMenuItem.children.length === 0"
+            :readonly="
+              !childMenuItem.children || childMenuItem.children.length === 0
+            "
             @click.prevent="navigateTo(childMenuItem)"
           >
             <template #title>
@@ -125,7 +139,11 @@
       </van-collapse-item>
     </van-collapse>
 
-    <van-cell class="fixed left-0 bottom-0 items-center gap-1" clickable @click="logOut">
+    <van-cell
+      class="fixed left-0 bottom-0 items-center gap-1"
+      clickable
+      @click="logOut"
+    >
       <template #icon>
         <Icon class="align-middle" icon="basil:logout-solid" :rotate="2" />
       </template>

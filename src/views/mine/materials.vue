@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-  import { useIcon } from '@/utils/assets.ts';
+  import { useIcon } from '@/utils/assets';
   import ResourceType from '@/views/_task/execution/resourceType.tsx';
   import { listMediaPublic } from '@/api/media';
 
@@ -12,7 +12,13 @@
 </script>
 <template>
   <div class="bg-white pt-3 h-dvh">
-    <van-search v-model="value" show-action label="素材" placeholder="请输入搜索关键词" @search="onSearch">
+    <van-search
+      v-model="value"
+      show-action
+      label="素材"
+      placeholder="请输入搜索关键词"
+      @search="onSearch"
+    >
       <template #action>
         <div @click="onClickButton">搜索</div>
       </template>
@@ -35,7 +41,15 @@
       </section>
 
       <section class="absolute right-2 bottom-2">
-        <van-button class="px-4" round type="default" hairline size="mini" text="查 看" @click="handleDetail(row.id)" />
+        <van-button
+          class="px-4"
+          round
+          type="default"
+          hairline
+          size="mini"
+          text="查 看"
+          @click="handleDetail(row.id)"
+        />
       </section>
     </v-card>
     <!--    <v-inset-list ref="listRef">-->

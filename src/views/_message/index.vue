@@ -5,7 +5,7 @@
   import { showDialog, showConfirmDialog } from 'vant';
   import { useGlobal } from '@/utils';
   import { fetchEventSource } from '@microsoft/fetch-event-source';
-  import { getToken } from '@/utils/auth.ts';
+  import { getToken } from '@/utils/auth';
   import useUserInfoStore from '@/store/modules/userInfo.ts';
   import { remove } from 'lodash';
   import {

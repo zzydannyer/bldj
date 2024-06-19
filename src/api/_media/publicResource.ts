@@ -10,7 +10,7 @@ import {
 export function listPublicResourceFile(
   query: PublicResourceFileQuery,
   page?: PaginationProps
-): Promise<Resp<PublicResourceFile[]>> {
+): Promise<Res<PublicResourceFile[]>> {
   return request('get', `/publicresource/publicResourceFile/list`, {
     params: { ...page, ...query }
   });
@@ -19,14 +19,14 @@ export function listPublicResourceFile(
 // 查询【公共】公共资源附件详细
 export function getPublicResourceFile(
   id: Numeric
-): Promise<Resp<PublicResourceFile>> {
+): Promise<Res<PublicResourceFile>> {
   return request('get', `/publicresource/publicResourceFile/` + id);
 }
 
 // 新增【公共】公共资源附件
 export function addPublicResourceFile(
   data: PublicResourceFile
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   return request('post', `/publicresource/publicResourceFile`, {
     data: data
   });
@@ -35,20 +35,18 @@ export function addPublicResourceFile(
 // 删除【公共】公共资源附件
 export function delPublicResourceFile(
   id: number | number[]
-): Promise<Resp<void>> {
+): Promise<Res<void>> {
   return request('delete', `/publicresource/publicResourceFile/` + id);
 }
 
 // 删除【公共】公共资源附件
-export function listPublicResourceLatest(): Promise<
-  Resp<PublicResourceFile[]>
-> {
+export function listPublicResourceLatest(): Promise<Res<PublicResourceFile[]>> {
   return request('get', `/publicresource/publicResourceFile/latest`);
 }
 // 切换是否在主页显示开关
 export function updataIsHomeShow(
   query: PublicResourceFileQuery
-): Promise<Resp<PublicResourceFile[]>> {
+): Promise<Res<PublicResourceFile[]>> {
   return request('post', `/publicresource/publicResourceFile/isHomeShow`, {
     data: query
   });

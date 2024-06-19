@@ -1,8 +1,15 @@
-import axios, { AxiosError, AxiosResponse, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, CustomParamsSerializer } from 'axios';
+import axios, {
+  AxiosError,
+  AxiosResponse,
+  AxiosRequestConfig,
+  InternalAxiosRequestConfig,
+  AxiosInstance,
+  CustomParamsSerializer
+} from 'axios';
 import { stringify } from 'qs';
 import useUserInfoStore from '@/store/modules/userInfo';
 import { getToken, formatToken } from '@/utils/auth';
-import { RespCode, ErrorCode } from '@/constants';
+import { ResCode, ErrorCode } from '@/constants';
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 // 数组格式参数序列化（https://github.com/axios/axios/issues/5142）
 const defaultConfig: AxiosRequestConfig = {
@@ -57,8 +64,8 @@ instance.interceptors.response.use(
   (response: AxiosResponse) => {
     const code = response.data.code;
     const msg: string = response.data.msg || getErrorMessage(code);
-    if (code in RespCode && code !== RespCode.Ok) {
-      code === RespCode.Unauthorized && useUserInfoStore().logout();
+    if (code in ResCode && code !== ResCode.Ok) {
+      code === ResCode.Unauthorized && useUserInfoStore().logout();
       return Promise.reject(msg);
     } else {
       return Promise.resolve(response.data);
@@ -70,13 +77,10 @@ instance.interceptors.response.use(
   }
 );
 
-export default function request<T, D>(config: AxiosRequestConfig<T>): Promise<Resp<D>> {
-  return new Promise((resolve, reject) => {
-    instance
-      .request(config)
-      .then((res: Resp<D>) => {
-        resolve(res);
-      })
-      .catch(reject);
-  });
+function request<T, D>(config: AxiosRequestConfig<T>): Promise<D>;
+function request<D>(config: AxiosRequestConfig): Promise<D>;
+function request<T = any, D = any>(config: AxiosRequestConfig<T>): Promise<D> {
+  return instance.request(config);
 }
+
+export default request;

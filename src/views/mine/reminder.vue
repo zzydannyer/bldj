@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-  import { useIcon } from '@/utils/assets.ts';
+  import { useIcon } from '@/utils/assets';
   import ResourceType from '@/views/_task/execution/resourceType.tsx';
   import { listMediaPublic } from '@/api/media';
   import { jcListWorkSupervise } from '@/api';
@@ -20,7 +20,13 @@
 </script>
 <template>
   <div class="pt-3 pb-[200PX]">
-    <van-search v-model="value" show-action label="素材" placeholder="请输入搜索关键词" @search="onSearch">
+    <van-search
+      v-model="value"
+      show-action
+      label="素材"
+      placeholder="请输入搜索关键词"
+      @search="onSearch"
+    >
       <template #action>
         <div @click="onClickButton">搜索</div>
       </template>
@@ -32,13 +38,19 @@
       ref="listRef"
       :rowsFilter="
         (rows) => {
-          return rows.filter((row) => row.status === '22' && row.feedbackStatus === 'notDo');
+          return rows.filter(
+            (row) => row.status === '22' && row.feedbackStatus === 'notDo'
+          );
         }
       "
     >
       <template #default="{ row, index }">
         <v-card class="v-list-item">
-          <van-text-ellipsis class="v-list-title" :content="row.workTitle" rows="2" />
+          <van-text-ellipsis
+            class="v-list-title"
+            :content="row.workTitle"
+            rows="2"
+          />
 
           <div class="between-center">
             <div class="v-company mt-1">

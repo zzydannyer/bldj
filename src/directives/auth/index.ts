@@ -12,11 +12,15 @@ export function hasRole(value: string | Array<string>): boolean {
   }
 
   if (roleFlag && roleFlag instanceof Array && roleFlag.length > 0) {
-    const hasRole = roles!.some((role) => super_admin === role || roleFlag.includes(role));
+    const hasRole = roles!.some(
+      (role) => super_admin === role || roleFlag.includes(role)
+    );
 
     return hasRole;
   } else {
-    throw new Error('need role! Like v-role="[\'admin\',\'common\']" or v-role="admin"');
+    throw new Error(
+      'need role! Like v-role="[\'admin\',\'common\']" or v-role="admin"'
+    );
   }
 }
 

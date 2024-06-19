@@ -1,20 +1,24 @@
 <template>
-  <!--  {{ route.path }}-->
-  <RouterView />
+  <main class="pt-[60PX] pb-[200PX]">
+    <TopNav />
+    <!--  {{ route.path }}-->
+    <RouterView />
 
-  <section
-    class="mask-layer"
-    :style="{
-      opacity: visible ? 1 : 0,
-      pointerEvents: visible ? 'auto' : 'none'
-    }"
-    @click.self="visible = false"
-  />
-  <BottomNav v-model:visible="visible" />
+    <section
+      class="mask-layer"
+      :style="{
+        opacity: visible ? 1 : 0,
+        pointerEvents: visible ? 'auto' : 'none'
+      }"
+      @click.self="visible = false"
+    />
+    <BottomNav v-model:visible="visible" />
+  </main>
 </template>
 
 <script setup lang="ts">
-  import BottomNav from './BottomNav.vue';
+  import TopNav from './components/TopNav.vue';
+  import BottomNav from './components/BottomNav.vue';
   const visible = ref(false);
   const route = useRoute();
 </script>

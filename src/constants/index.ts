@@ -29,7 +29,10 @@ export const border_color: Record<string, string> = {
   default: '#dcdfe6'
 };
 
-export const fileType: Record<string, { type: 'file' | 'image' | 'video'; name: string }> = {
+export const fileType: Record<
+  string,
+  { type: 'file' | 'image' | 'video'; name: string }
+> = {
   1: { type: 'file', name: '文件' },
   2: { type: 'image', name: '图片' },
   3: { type: 'video', name: '视频' }
@@ -39,7 +42,7 @@ export enum RouteLinks {
   Politics = '政治建设'
 }
 
-export enum RespCode {
+export enum ResCode {
   Ok = 200,
   Unauthorized = 401,
   Forbidden = 403,
@@ -49,10 +52,10 @@ export enum RespCode {
 }
 
 export const ErrorCode: { [key: number]: string } = {
-  [RespCode.Unauthorized]: '认证失败，无法访问系统资源',
-  [RespCode.Forbidden]: '当前操作没有权限',
-  [RespCode.NotFound]: '访问资源不存在',
-  [RespCode.InternalServerError]: '系统未知错误，请反馈给管理员',
-  [RespCode.BadGateway]: '系统未知错误，请反馈给管理员',
+  [ResCode.Unauthorized]: '认证失败，无法访问系统资源',
+  [ResCode.Forbidden]: '当前操作没有权限',
+  [ResCode.NotFound]: '访问资源不存在',
+  [ResCode.InternalServerError]: '系统未知错误，请反馈给管理员',
+  [ResCode.BadGateway]: '系统未知错误，请反馈给管理员',
   [-1]: '系统未知错误，请反馈给管理员'
 };

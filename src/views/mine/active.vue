@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-  import { useIcon } from '@/utils/assets.ts';
+  import { useIcon } from '@/utils/assets';
   import ResourceType from '@/views/_task/execution/resourceType.tsx';
 
   const router = useRouter();
@@ -11,10 +11,16 @@
 </script>
 <template>
   <div class="bg-white pt-3 h-dvh">
-    <v-date-picker v-model="time" label="选择日期" placeholder="请选择选择日期" />
+    <v-date-picker
+      v-model="time"
+      label="选择日期"
+      placeholder="请选择选择日期"
+    />
 
     <div class="flex justify-center bt pt-6 mt-6">
-      <table class="border-collapse border-gray-400 w-[90%] text-center text-xs">
+      <table
+        class="border-collapse border-gray-400 w-[90%] text-center text-xs"
+      >
         <thead>
           <tr>
             <th>姓名</th>

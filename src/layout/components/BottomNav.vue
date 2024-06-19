@@ -6,7 +6,7 @@
   const route = useRoute();
   const router = useRouter();
 
-  const rotates = ['-75', '-45', '-15', '15', '45', '75'];
+  const rotates = ['-180', '-75', '-45', '-15', '15', '45', '75'];
   const curItem = ref('');
   const curIndex = ref(0);
 
@@ -16,7 +16,10 @@
 
   const isHome = computed(() => route.path === '/home');
   const isMine = computed(() => route.path === '/mine');
-  const isOther = computed(() => !isHome.value && !isMine.value);
+  const isMore = computed(() => route.meta?.more);
+  const isOther = computed(
+    () => !isHome.value && !isMine.value && !isMore.value
+  );
   const moreList = computed(() =>
     router.options.routes
       .filter((route: RouteRecordRaw) => {
@@ -31,12 +34,24 @@
       })
   );
 
+  watchEffect(() => {
+    if (isMore.value) {
+      moreList.value.forEach((item, index) => {
+        if (route.path.includes(item.path)) {
+          curIndex.value = index + 1;
+        }
+      });
+    } else {
+      curIndex.value = 0;
+    }
+  });
+
   const loading = ref(false);
   function changeRoute(item: string, index: number) {
     if (loading.value) return;
     loading.value = true;
     curItem.value = item;
-    curIndex.value = index;
+    curIndex.value = index + 1;
     router.push(item);
     setTimeout(() => {
       visible.value = false;
@@ -49,17 +64,17 @@
   <main class="bottom-nav-container">
     <!-- 中间更多菜单按钮 -->
     <section class="nav-trigger" @click="visible = !visible">
-      <div :class="[isOther ? 'more-bg' : 'more-border', 'nav-more']">
+      <div :class="[isMore ? 'more-bg' : 'more-border', 'nav-more']">
         <img
           class="nav-icon-more"
-          :src="isOther ? useIcon('nav-more-active') : useIcon('nav-more')"
+          :src="isMore ? useIcon('nav-more-active') : useIcon('nav-more')"
         />
       </div>
     </section>
     <!-- 底部导航 -->
     <section class="bottom-nav">
       <van-grid :border="false" clickable :column-num="2">
-        <van-grid-item to="/home">
+        <van-grid-item to="/home" @click="visible = false">
           <van-image
             class="w-[24PX]"
             :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')"
@@ -70,7 +85,7 @@
             >首页</span
           >
         </van-grid-item>
-        <van-grid-item to="/mine">
+        <van-grid-item to="/mine" @click="visible = false">
           <van-image
             class="w-[24PX]"
             :src="isMine ? useIcon('icon-mine-active') : useIcon('icon-mine')"
@@ -110,17 +125,14 @@
 
 <style lang="scss" scoped>
   .bottom-nav-container {
-    @apply fixed bottom-0 left-0 w-full;
-    z-index: 10;
+    @apply fixed bottom-0 left-0 w-full z-10;
     .bottom-nav {
-      @apply h-[90PX];
-      z-index: 0;
+      @apply h-[90PX] z-0;
       box-shadow: #fff0 0px 0px 1px;
       background-image: linear-gradient(to bottom, #fce8e6, #fff);
     }
     .nav-trigger {
-      @apply w-[70PX] h-[70PX] bg-white rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-      z-index: 1;
+      @apply z-1 w-[70PX] h-[70PX] bg-white rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2;
       .nav-more {
         @apply absolute-center w-[90%] h-[90%] rounded-full;
         .nav-icon-more {

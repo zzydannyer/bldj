@@ -1523,7 +1523,8 @@ export default [
               {
                 name: 'Material-declaration',
                 path: 'material-declaration',
-                component: 'workGroup/meritContest/innovation/materialDeclaration',
+                component:
+                  'workGroup/meritContest/innovation/materialDeclaration',
                 meta: {
                   title: '评审材料申报',
                   icon: '#'
@@ -1581,7 +1582,8 @@ export default [
           {
             name: 'ModelStudioCard',
             path: 'modelStudioCard',
-            component: 'workGroup/modelWorker/styleDisplay/ModelStudioCard/index',
+            component:
+              'workGroup/modelWorker/styleDisplay/ModelStudioCard/index',
             meta: {
               title: '劳模创新工作室',
               icon: '#'
@@ -1775,7 +1777,8 @@ export default [
               {
                 name: 'AssistApply',
                 path: 'assistApply',
-                component: 'workGroup/memberCare/transformation/assistApply/index',
+                component:
+                  'workGroup/memberCare/transformation/assistApply/index',
                 meta: {
                   title: '扶助申请',
                   icon: '#'
@@ -1784,7 +1787,8 @@ export default [
               {
                 name: 'AssistCheck',
                 path: 'assistCheck',
-                component: 'workGroup/memberCare/transformation/assistCheck/index',
+                component:
+                  'workGroup/memberCare/transformation/assistCheck/index',
                 meta: {
                   title: '扶助审核',
                   icon: '#'
@@ -1793,7 +1797,8 @@ export default [
               {
                 name: 'AssistSum',
                 path: 'assistSum',
-                component: 'workGroup/memberCare/transformation/assistSum/index',
+                component:
+                  'workGroup/memberCare/transformation/assistSum/index',
                 meta: {
                   title: '扶助统计',
                   icon: '#'
@@ -1824,7 +1829,8 @@ export default [
                 name: 'HelpApply',
                 path: 'helpApply',
 
-                component: 'workGroup/memberCare/difficultyHelp/helpApply/index',
+                component:
+                  'workGroup/memberCare/difficultyHelp/helpApply/index',
                 meta: {
                   title: '困难帮扶申请',
                   icon: '#'
@@ -1834,7 +1840,8 @@ export default [
                 name: 'HelpCheck',
                 path: 'helpCheck',
 
-                component: 'workGroup/memberCare/difficultyHelp/helpCheck/index',
+                component:
+                  'workGroup/memberCare/difficultyHelp/helpCheck/index',
                 meta: {
                   title: '困难帮扶审核',
                   icon: '#'
@@ -1844,7 +1851,8 @@ export default [
                 name: 'ArchivesChange',
                 path: 'archivesChange',
 
-                component: 'workGroup/memberCare/difficultyHelp/archivesChange/index',
+                component:
+                  'workGroup/memberCare/difficultyHelp/archivesChange/index',
                 meta: {
                   title: '帮扶档案变更',
                   icon: '#'
@@ -1854,7 +1862,8 @@ export default [
                 name: 'ArchivesCheck',
                 path: 'archivesCheck',
 
-                component: 'workGroup/memberCare/difficultyHelp/archivesCheck/index',
+                component:
+                  'workGroup/memberCare/difficultyHelp/archivesCheck/index',
                 meta: {
                   title: '档案变更审核',
                   icon: '#'
@@ -1934,7 +1943,8 @@ export default [
               {
                 name: 'FinaPatrolMainGroup',
                 path: 'finaPatrolMainGroup',
-                component: 'workGroup/memberCare/finaPatrol/finaPatrolMain/indexGroup',
+                component:
+                  'workGroup/memberCare/finaPatrol/finaPatrolMain/indexGroup',
                 meta: {
                   title: '经审反馈意见（集团）',
                   icon: '#'
@@ -1943,7 +1953,8 @@ export default [
               {
                 name: 'FinaPatrolMain',
                 path: 'finaPatrolMain',
-                component: 'workGroup/memberCare/finaPatrol/finaPatrolMain/index',
+                component:
+                  'workGroup/memberCare/finaPatrol/finaPatrolMain/index',
                 meta: {
                   title: '报送整改报告（基层）',
                   icon: '#'
@@ -1952,7 +1963,8 @@ export default [
               {
                 name: 'FinaPatrolAudit',
                 path: 'finaPatrolAudit',
-                component: 'workGroup/memberCare/finaPatrol/finaPatrolAudit/index',
+                component:
+                  'workGroup/memberCare/finaPatrol/finaPatrolAudit/index',
                 meta: {
                   title: '整改报告审核',
                   icon: '#'
@@ -1961,7 +1973,8 @@ export default [
               {
                 name: 'FinaPatrolView',
                 path: 'finaPatrolView',
-                component: 'workGroup/memberCare/finaPatrol/finaPatrolView/index',
+                component:
+                  'workGroup/memberCare/finaPatrol/finaPatrolView/index',
                 meta: {
                   title: '查看整改报告（基层）',
                   icon: '#'
@@ -1981,7 +1994,8 @@ export default [
               {
                 name: 'CareHeartDemand',
                 path: 'CareHeartDemand',
-                component: 'workGroup/memberCare/careHeart/careHeartDemand/index',
+                component:
+                  'workGroup/memberCare/careHeart/careHeartDemand/index',
                 meta: {
                   title: '职工需求与意愿',
                   icon: '#'
@@ -1990,7 +2004,8 @@ export default [
               {
                 name: 'CareHeartDemandGroup',
                 path: 'CareHeartDemandGroup',
-                component: 'workGroup/memberCare/careHeart/careHeartDemand/indexGroup',
+                component:
+                  'workGroup/memberCare/careHeart/careHeartDemand/indexGroup',
                 meta: {
                   title: '职工需求与意愿（集团）',
                   icon: '#'
@@ -1999,7 +2014,8 @@ export default [
               {
                 name: 'CareHeartProject',
                 path: 'careHeartProject',
-                component: 'workGroup/memberCare/careHeart/careHeartProject/index',
+                component:
+                  'workGroup/memberCare/careHeart/careHeartProject/index',
                 meta: {
                   title: '优秀实事项目',
                   icon: '#'
@@ -2008,7 +2024,8 @@ export default [
               {
                 name: 'CareHeartProjectGroup',
                 path: 'careHeartProjectGroup',
-                component: 'workGroup/memberCare/careHeart/careHeartProject/indexGroup',
+                component:
+                  'workGroup/memberCare/careHeart/careHeartProject/indexGroup',
                 meta: {
                   title: '优秀实事项目（集团）',
                   icon: '#'
