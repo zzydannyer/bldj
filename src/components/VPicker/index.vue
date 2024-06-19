@@ -95,6 +95,7 @@
     :disaled="disabled"
     :required="required"
     :rules="rules"
+    input-align="right"
     @click="show = true"
   />
   <van-popup round v-model:show="show" position="bottom" teleport="body">

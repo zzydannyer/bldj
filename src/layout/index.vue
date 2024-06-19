@@ -1,5 +1,7 @@
 <template>
+  <!--  {{ route.path }}-->
   <RouterView />
+
   <section
     class="mask-layer"
     :style="{
@@ -14,6 +16,7 @@
 <script setup lang="ts">
   import BottomNav from './BottomNav.vue';
   const visible = ref(false);
+  const route = useRoute();
 </script>
 
 <style lang="scss" scoped>
