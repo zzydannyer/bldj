@@ -52,7 +52,7 @@
     }
   }
   .my-bg {
-    @apply w-full h-[150PX] bg-no-repeat flex pt-12 pl-7;
+    @apply h-[150PX] bg-no-repeat flex pt-12 pl-7;
     background-image: url('@/assets/images/bg.png');
     background-size: 100% 100%;
     .avatar-bg {
