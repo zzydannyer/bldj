@@ -65,7 +65,7 @@ instance.interceptors.response.use(
     const code = response.data.code;
     const msg: string = response.data.msg || getErrorMessage(code);
     if (code in ResCode && code !== ResCode.Ok) {
-      code === ResCode.Unauthorized && useUserInfoStore().logout();
+      code === ResCode.Unauthorized && useUserInfoStore().LOGOUT();
       return Promise.reject(msg);
     } else {
       return Promise.resolve(response.data);
@@ -77,9 +77,8 @@ instance.interceptors.response.use(
   }
 );
 
-function request<T, D>(config: AxiosRequestConfig<T>): Promise<D>;
 function request<D>(config: AxiosRequestConfig): Promise<D>;
-function request<T = any, D = any>(config: AxiosRequestConfig<T>): Promise<D> {
+function request<D = any>(config: AxiosRequestConfig): Promise<D> {
   return instance.request(config);
 }
 

@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import { stringify, parse } from 'qs';
-import AuthServer from '@/api/login';
-import { rmToken, setToken, getToken } from '@/utils/auth';
-import type { UserInfo, LoginRes, LoginReq } from '@/types/user';
+import { rmToken } from '@/utils/auth';
+import type { UserInfo } from '@/types/user';
 import { sessionKey } from '@/constants';
 import { showSuccessToast } from 'vant';
 
@@ -35,31 +34,17 @@ const useUserInfoStore = defineStore('user-info', {
     }
   },
   actions: {
-    set_user_info({ permissions, roles, user, party }: UserInfo) {
+    SET_USERINFO({ permissions, roles, user, party }: UserInfo) {
       this.permissions = permissions;
       this.roles = roles;
       this.user = user;
       this.party = party;
     },
-    clear_user_info() {
+    CLEAR_USERINFO() {
       this.$reset();
       sessionStorage.clear();
     },
-    async login(data: LoginReq): Promise<void> {
-      try {
-        const {
-          data: { token }
-        } = await AuthServer.USER_LOGIN(data);
-        setToken(token);
-        const { data: userInfo } = await AuthServer.GET_USER_INFO();
-        this.set_user_info(userInfo);
-        Promise.resolve();
-      } catch (error: unknown) {
-        Promise.reject(error);
-      }
-    },
-
-    logout() {
+    LOGOUT() {
       this.$reset();
       rmToken();
       showSuccessToast('退出成功');

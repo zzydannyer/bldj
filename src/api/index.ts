@@ -3,7 +3,7 @@ import request from '@/utils/request';
 export function homeContentList() {
   return request({
     url: '/mobile/homeContent',
-    method: 'get'
+    method: 'GET'
   });
 }
 
@@ -13,7 +13,7 @@ export function getContentViewApi(uid: number, type = 'view') {
   return request({
     url:
       type === 'checkView' ? '/mobile/viewDetailCheck' : '/mobile/viewDetail',
-    method: 'get',
+    method: 'GET',
     params: {
       uid,
       type
@@ -25,14 +25,14 @@ export function getContentViewApi(uid: number, type = 'view') {
 export function getSummaryByMonth(year: string, month: string) {
   return request({
     url: `/mobile/topicSystem/summary/${year}/${month ?? new Date().getMonth() + 1}`,
-    method: 'get'
+    method: 'GET'
   });
 }
 //第一议题制度列表
 export function listSummary(params: any) {
   return request({
     url: '/mobile/topicSystem/list',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -40,7 +40,7 @@ export function listSummary(params: any) {
 export function getTopicSystem(uid: Numeric) {
   return request({
     url: '/mobile/topicSystem/' + uid,
-    method: 'get'
+    method: 'GET'
   });
 }
 
@@ -48,7 +48,7 @@ export function getTopicSystem(uid: Numeric) {
 export function getOrganisationInfo(params: any) {
   return request({
     url: '/mobile/dmInformation/orgList',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -57,7 +57,7 @@ export function getOrganisationInfo(params: any) {
 export function getMeetTopicInfo(params: any) {
   return request({
     url: '/mobile/dmInformation/meetTopicList',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -66,7 +66,7 @@ export function getMeetTopicInfo(params: any) {
 export function getInstitutionInfo(params: any) {
   return request({
     url: '/mobile/dmInformation/insList',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -74,7 +74,7 @@ export function getInstitutionInfo(params: any) {
 export function listDmInstitutionByPartyOrgId(params: any) {
   return request({
     url: '/mobile/dmInstitution/list',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -82,14 +82,14 @@ export function listDmInstitutionByPartyOrgId(params: any) {
 export function getDmInstitution(uid: Numeric) {
   return request({
     url: '/mobile/dmInstitution/' + uid,
-    method: 'get'
+    method: 'GET'
   });
 }
 //党组织
 export function getOrgDetail() {
   return request({
     url: `/mobile/getOrgDetail`,
-    method: 'get'
+    method: 'GET'
   });
 }
 
@@ -97,35 +97,35 @@ export function getOrgDetail() {
 export function getDjrz() {
   return request({
     url: `/mobile/getDjrz`,
-    method: 'get'
+    method: 'GET'
   });
 }
 //换届选举
 export function getHjxj() {
   return request({
     url: `/mobile/getHjxj`,
-    method: 'get'
+    method: 'GET'
   });
 }
 //劳模
 export function getLm() {
   return request({
     url: `/mobile/getLm`,
-    method: 'get'
+    method: 'GET'
   });
 }
 //员工关爱
 export function getYgga() {
   return request({
     url: `/mobile/getYgga`,
-    method: 'get'
+    method: 'GET'
   });
 }
 //重点工作督办集团列表
 export function listWorkSupervise(type: string, params: any) {
   return request({
     url: '/mobile/workSupervise/list/' + type,
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -133,7 +133,7 @@ export function listWorkSupervise(type: string, params: any) {
 export function jcListWorkSupervise(type: string, params: any) {
   return request({
     url: '/mobile/workSupervise/jc/list/' + type,
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -141,7 +141,7 @@ export function jcListWorkSupervise(type: string, params: any) {
 export function getWorkSupervise(workSupId: Numeric) {
   return request({
     url: '/mobile/workSupervise/detail',
-    method: 'get',
+    method: 'GET',
     params: {
       workSupId
     }
@@ -151,7 +151,7 @@ export function getWorkSupervise(workSupId: Numeric) {
 export function getWorkSuperviseJc(workSupId: Numeric) {
   return request({
     url: '/mobile/workSupervise/jc/detail',
-    method: 'get',
+    method: 'GET',
     params: {
       workSupId
     }
@@ -161,7 +161,7 @@ export function getWorkSuperviseJc(workSupId: Numeric) {
 export function studyrecordList(params: any) {
   return request({
     url: '/mobile/studyrecord/list',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -169,7 +169,7 @@ export function studyrecordList(params: any) {
 export function studyrecordGet(uid: Numeric) {
   return request({
     url: '/mobile/studyrecord/get/' + uid,
-    method: 'get'
+    method: 'GET'
   });
 }
 
@@ -178,14 +178,14 @@ export function studyrecordGet(uid: Numeric) {
 export function dynamicCentralTree(type: string) {
   return request({
     url: `mobile/dynamicCentral/${type}`,
-    method: 'get'
+    method: 'GET'
   });
 }
 //学习记录统计
 export function studyrecordListCounts(params: any) {
   return request({
     url: '/mobile/studyrecord/listCounts',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -206,7 +206,7 @@ export function studyrecordListCounts(params: any) {
 export function listByChannelId(id: Numeric, params: any) {
   return request({
     url: `/mobile/content/channel/${id}/list`,
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -214,7 +214,7 @@ export function listByChannelId(id: Numeric, params: any) {
 export function meetingrecordList(params: any) {
   return request({
     url: '/mobile/meetingrecord/list',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -222,7 +222,7 @@ export function meetingrecordList(params: any) {
 export function meetingrecordSave(params: any) {
   return request({
     url: '/mobile/meetingrecord/save',
-    method: 'post',
+    method: 'POST',
     data: params
   });
 }
@@ -230,14 +230,14 @@ export function meetingrecordSave(params: any) {
 export function meetingrecordGet(uid: Numeric) {
   return request({
     url: '/mobile/meetingrecord/get/' + uid,
-    method: 'get'
+    method: 'GET'
   });
 }
 //党建帮扶
 export function getSocietyDjHelpList(dateArray: any[]) {
   return request({
     url: '/mobile/societyDjHelp/getSummaryList',
-    method: 'get',
+    method: 'GET',
     params: {
       dateArray
     }
@@ -247,7 +247,7 @@ export function getSocietyDjHelpList(dateArray: any[]) {
 export function getSocietyConsumeHelpList(dateArray: any[]) {
   return request({
     url: '/mobile/societyConsumeHelp/getSummaryList',
-    method: 'get',
+    method: 'GET',
     params: {
       dateArray: dateArray
     }
@@ -257,21 +257,21 @@ export function getSocietyConsumeHelpList(dateArray: any[]) {
 export function getSocietyConsumeHelp(uid: Numeric) {
   return request({
     url: '/mobile/societyConsumeHelp/' + uid,
-    method: 'get'
+    method: 'GET'
   });
 }
 // 查询【社会责任】党建帮扶详细
 export function getSocietyDjHelp(uid: Numeric) {
   return request({
     url: '/culture/societyDjHelp/' + uid,
-    method: 'get'
+    method: 'GET'
   });
 }
 // 查询【媒体资料库】主列表
 export function listMediaMain(params: any) {
   return request({
     url: '/media/mediaMain/list',
-    method: 'get',
+    method: 'GET',
     params
   });
 }
@@ -280,13 +280,13 @@ export function listMediaMain(params: any) {
 export function getMediaMain(uid: Numeric) {
   return request({
     url: '/media/mediaMain/' + uid,
-    method: 'get'
+    method: 'GET'
   });
 }
 // 获取用户详细信息
 export function getInfo() {
   return request({
     url: '/getInfo',
-    method: 'get'
+    method: 'GET'
   });
 }

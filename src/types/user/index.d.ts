@@ -56,3 +56,10 @@ export interface LoginReq {
 export interface LoginRes {
   token: string;
 }
+
+// 飞书登录
+export interface FeishuLoginReq {
+  socialCode: string;
+  socialState: string;
+  source: string;
+}
