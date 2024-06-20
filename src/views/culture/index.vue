@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import type { TabProps, TabsType, TabsProps, TabsInstance } from 'vant';
   import VideoCrates from '@/views/culture/components/videoCrates.vue';
+  import ResponCrates from '@/views/culture/components/responsiBility.vue';
   const active = ref('video');
   function handleClick({ name }: TabsProps) {
     active.value = name;
@@ -10,11 +11,12 @@
   <van-sticky :offset-top="0">
     <van-tabs v-model:active="active" class="menu" @click-tab="handleClick">
       <van-tab name="video" title="影音库"></van-tab>
-      <van-tab name="social" title="社会责任">内容 2</van-tab>
+      <van-tab name="social" title="社会责任"></van-tab>
     </van-tabs>
   </van-sticky>
 
   <VideoCrates v-if="active === 'video'" />
+  <ResponCrates v-if="active === 'social'" />
 </template>
 <style lang="scss" scoped>
   .menu {
