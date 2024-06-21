@@ -2161,8 +2161,7 @@ export default [
       {
         name: 'UploadMaterials',
         path: 'uploadMaterials',
-        component: () =>
-          import('@/views/culture/components/uploadMaterials.vue'),
+        component: () => import('@/views/culture/pages/video/index.vue'),
         meta: {
           title: '上传素材',
           icon: '#'
@@ -2172,9 +2171,19 @@ export default [
         name: 'ResponsiBility',
         path: 'responsiBility',
         component: () =>
-          import('@/views/culture/components/responsiBility.vue'),
+          import('@/views/culture/pages/responsibility/index.vue'),
         meta: {
           title: '社会责任',
+          icon: '#'
+        }
+      },
+      {
+        name: 'Detail',
+        path: 'detail',
+        component: () =>
+          import('@/views/culture/pages/responsibility/detail.vue'),
+        meta: {
+          title: '详情',
           icon: '#'
         }
       }

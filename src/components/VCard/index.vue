@@ -27,8 +27,13 @@
   background-clip: padding-box;
   box-shadow: 0 4px 6px -1px #e0f2fe;
 } */
+  .v-card-title {
+    @apply text-sm font-bold pb-2 pt-1;
+    border-bottom: 1px solid #eee;
+    color: rgb(51, 51, 51);
+  }
   .v-card {
-    @apply relative p-2 bg-white shadow-md shadow-sky-100 overflow-hidden rounded-md;
+    @apply relative p-2 px-3 bg-white border overflow-hidden rounded-md;
   }
 </style>
 <style></style>

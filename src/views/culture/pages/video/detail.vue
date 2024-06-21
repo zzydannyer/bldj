@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-  import AdvancedCrates from '@/views/culture/components/advancedSearch.vue';
+  import AdvancedCrates from '@/views/culture/components/video/advancedSearch.vue';
   const list = [];
   const text = '沙家邦红色党建活动';
   import { ref } from 'vue';
