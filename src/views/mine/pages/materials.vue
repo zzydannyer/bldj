@@ -14,9 +14,9 @@
   <div class="bg-white pt-3 h-dvh">
     <van-search
       v-model="value"
-      show-action
       label="素材"
       placeholder="请输入搜索关键词"
+      show-action
       @search="onSearch"
     >
       <template #action>
@@ -27,7 +27,7 @@
     <v-card body-class="flex flex-between gap-2">
       <section class="flex-1">
         <van-text-ellipsis class="v-list-title" content="333333333" rows="2" />
-        <v-plain-tag type="primary" size="mini"> 45fefvgr </v-plain-tag>
+        <v-plain-tag size="mini" type="primary"> 45fefvgr </v-plain-tag>
         <div class="start-center gap-1 mt-1">
           <span class="v-author">
             <van-icon name="contact-o" />
@@ -43,11 +43,11 @@
       <section class="absolute right-2 bottom-2">
         <van-button
           class="px-4"
-          round
-          type="default"
           hairline
+          round
           size="mini"
           text="查 看"
+          type="default"
           @click="handleDetail(row.id)"
         />
       </section>

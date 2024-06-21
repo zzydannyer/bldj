@@ -1,4 +1,4 @@
-import type { App } from 'vue';
+import type { App, Component } from 'vue';
 import VCard from '@/components/VCard/index.vue';
 import VInsetList from '@/components/VInsetList/index.vue';
 import VSearch from '@/components/VSearch/index.vue';
@@ -13,7 +13,7 @@ import VMultiPicker from '@/components/VMultiPicker/index.vue';
 import VDatePicker from '@/components/VDatePicker/index.vue';
 import VAreaPicker from '@/components/VAreaPicker/index.vue';
 
-const components = [
+const components: Component[] = [
   VCard,
   VInsetList,
   VSearch,
@@ -26,7 +26,7 @@ const components = [
   VCascader,
   VMultiPicker,
   VDatePicker,
-  VAreaPicker
+  VAreaPicker,
 ];
 
 /**
@@ -34,7 +34,7 @@ const components = [
  * @param app
  */
 const install = (app: App) => {
-  components.forEach((component) => app.component(component.name, component));
+  components.forEach((component) => app.component(component.name!, component));
 };
 
 export default function setupComponents(app: App) {

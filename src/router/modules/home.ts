@@ -38,57 +38,62 @@ export default {
     {
       path: '/setting',
       name: 'Setting',
-      component: () => import('@/views/mine/setting.vue'),
+      component: () => import('@/views/mine/pages/setting.vue'),
       meta: {
         title: '设置',
         keepAlive: true,
+        showLeftArrow: true,
         visible: false
       }
     },
     {
       path: '/organization',
       name: 'Organization',
-      component: () => import('@/views/mine/organization.vue'),
+      component: () => import('@/views/mine/pages/organization.vue'),
       meta: {
         title: '我的组织',
         keepAlive: true,
+        showLeftArrow: true,
         visible: false
       }
     },
     {
       path: '/active',
       name: 'active',
-      component: () => import('@/views/mine/active.vue'),
+      component: () => import('@/views/mine/pages/active.vue'),
       meta: {
         title: '我的活跃度',
         keepAlive: true,
+        showLeftArrow: true,
         visible: false
       }
     },
     {
       path: '/promise',
       name: 'Promise',
-      component: () => import('@/views/mine/promise.vue'),
+      component: () => import('@/views/mine/pages/promise.vue'),
       meta: {
         title: '我的承诺',
         keepAlive: true,
+        showLeftArrow: true,
         visible: false
       }
     },
     {
       path: '/materials',
       name: 'Materials',
-      component: () => import('@/views/mine/materials.vue'),
+      component: () => import('@/views/mine/pages/materials.vue'),
       meta: {
         title: '我的素材',
         keepAlive: true,
+        showLeftArrow: true,
         visible: false
       }
     },
     {
       path: '/reminder',
       name: 'Reminder',
-      component: () => import('@/views/mine/reminder.vue'),
+      component: () => import('@/views/mine/pages/reminder.vue'),
       meta: {
         title: '工作提醒',
         keepAlive: true,

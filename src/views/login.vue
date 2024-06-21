@@ -26,11 +26,11 @@
     source: 'feishu'
   });
 
-  if (code) {
-    login();
-  } else {
-    apiAuth();
-  }
+  // if (code) {
+  //   login();
+  // } else {
+  //   apiAuth();
+  // }
 
   async function login(isFeishu: boolean = true) {
     try {
@@ -86,7 +86,6 @@
   }
 
   function apiAuth() {
-    return;
     if (!window.h5sdk) {
       console.log('invalid h5sdk');
       alert('please open in feishu');

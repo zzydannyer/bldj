@@ -5,38 +5,63 @@
   const router = useRouter();
 </script>
 <template>
-  <div class="my-bg">
-    <van-image
-      round
-      fit="cover"
-      width="4rem"
-      height="4rem"
-      :src="useIcon('avatar')"
-    />
-    <div class="right-text">
-      <div class="text-tit">这是一个昵称</div>
-      <div class="text-b">编辑资料<Icon icon="octicon:chevron-right-24" /></div>
+  <main class="px-[16PX]">
+    <div class="my-bg">
+      <van-space>
+        <van-image
+          class="avatar"
+          fit="cover"
+          height="4rem"
+          round
+          :src="useIcon('avatar')"
+          width="4rem"
+        />
+        <div class="right-text">
+          <div class="text-tit">这是一个昵称</div>
+          <van-space align="center" class="text-b" size="0">
+            <span>编辑资料</span><Icon icon="octicon:chevron-right-24" />
+          </van-space>
+        </div>
+      </van-space>
     </div>
-  </div>
-  <van-grid
-    class="-mt-10 mx-[16PX] rounded overflow-hidden"
-    :column-num="3"
-    :border="false"
-  >
-    <van-grid-item :icon="useIcon('icon14-1')" text="我的活跃度" url="active" />
-    <van-grid-item :icon="useIcon('icon10')" text="我的素材" url="materials" />
-    <van-grid-item :icon="useIcon('icon11')" text="工作提醒" to="reminder" />
-  </van-grid>
-  <van-cell-group class="mt-3 mx-[16PX] rounded overflow-hidden test">
-    <van-cell
-      title="我的组织"
-      :icon="useIcon('icon12')"
-      is-link
-      url="organization"
-    />
-    <van-cell title="我的承诺" :icon="useIcon('icon13')" is-link to="promise" />
-    <van-cell title="个人设置" :icon="useIcon('icon14')" is-link to="setting" />
-  </van-cell-group>
+    <van-grid
+      :border="false"
+      class="-mt-10 rounded overflow-hidden"
+      :column-num="3"
+    >
+      <van-grid-item
+        :icon="useIcon('icon14-1')"
+        text="我的活跃度"
+        url="active"
+      />
+      <van-grid-item
+        :icon="useIcon('icon10')"
+        text="我的素材"
+        url="materials"
+      />
+      <van-grid-item :icon="useIcon('icon11')" text="工作提醒" to="reminder" />
+    </van-grid>
+    <van-cell-group class="mt-3 rounded overflow-hidden test">
+      <van-cell
+        :icon="useIcon('icon12')"
+        is-link
+        title="我的组织"
+        url="organization"
+      />
+      <van-cell
+        :icon="useIcon('icon13')"
+        is-link
+        title="我的承诺"
+        to="promise"
+      />
+      <van-cell
+        :icon="useIcon('icon14')"
+        is-link
+        title="个人设置"
+        to="setting"
+      />
+    </van-cell-group>
+  </main>
 </template>
 <style lang="scss" scoped>
   .test {
@@ -52,17 +77,19 @@
     }
   }
   .my-bg {
-    @apply h-[150PX] bg-no-repeat flex pt-12 pl-7;
+    @apply bg-no-repeat flex -mx-[16PX] px-[16PX] py-[20PX] items-center;
+    // padding-top: env(safe-area-inset-top);
+    // prettier-ignore
+    height: calc(150PX + env(safe-area-inset-top));
     background-image: url('@/assets/images/bg.png');
     background-size: 100% 100%;
-    .avatar-bg {
-      @apply w-[55PX] h-[55PX] bg-white;
-      .avatar {
-        @apply w-[27PX] h-[27PX] text-red-600;
-      }
+
+    .avatar {
+      @apply ml-auto;
     }
+
     .right-text {
-      @apply h-[40PX] mt-2 ml-2;
+      @apply h-[40PX] mt-2 mr-auto;
     }
     .text-tit {
       @apply text-base text-white font-medium;

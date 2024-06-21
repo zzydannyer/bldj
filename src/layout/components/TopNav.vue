@@ -1,5 +1,9 @@
 <script setup lang="ts">
+  defineOptions({
+    name: 'VNavBar'
+  });
   const route = useRoute();
+  const router = useRouter();
   const title = computed<string>(() => {
     if (route.query?.title) {
       return route.query.title as string;
@@ -9,11 +13,20 @@
       return '';
     }
   });
+  const back = computed<string>(() => {
+    return history?.state?.back ?? '';
+  });
 
+  const showLeftArrow = computed<boolean>(() => {
+    return route.meta?.showLeftArrow as boolean;
+  });
   const hideTopNav = computed<boolean>(() => {
     return route.meta?.hideTopNav as boolean;
   });
-  function onClickLeft() {}
+  function onClickLeft() {
+    history.back();
+  }
+  function onClickRight() {}
 </script>
 <template>
   <van-nav-bar
@@ -21,12 +34,13 @@
     :border="false"
     class="top-nav"
     fixed
-    left-arrow
+    :left-arrow="showLeftArrow"
     placeholder
     safe-area-inset-top
     :title="title"
-    z-index="9"
+    z-index="3"
     @click-left="onClickLeft"
+    @click-right="onClickRight"
   />
 </template>
 
@@ -42,6 +56,6 @@
         center bottom / 100% auto,
       #e10101;
     // top: constant(safe-area-inset-top);
-    margin-top: env(safe-area-inset-top);
+    // margin-top: env(safe-area-inset-top);
   }
 </style>

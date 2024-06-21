@@ -9,11 +9,11 @@
   const spaceBetween = 10;
   const onProgress = (e: any) => {
     const [swiper, progress] = e.detail;
-    console.log(progress);
+    // console.log(progress);
   };
 
   const onSlideChange = (e: any) => {
-    console.log('slide changed');
+    // console.log('slide changed');
   };
 
   const gridItems = [
@@ -81,7 +81,7 @@
   onBeforeMount(getData);
 </script>
 <template>
-  <main class="pb-[140PX] bg-white">
+  <main class="pb-[440PX] bg-white">
     <swiper-container
       :breakpoints="{
         768: {

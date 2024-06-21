@@ -78,7 +78,8 @@ export default ({ command, mode }: ConfigEnv) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: "@use './src/styles/global.scss' as *;@import './src/styles/mixins.scss';"
+          additionalData:
+            "@use './src/styles/global.scss' as *;@import './src/styles/mixins.scss';"
         }
       }
     },

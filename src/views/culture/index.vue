@@ -2,21 +2,30 @@
   import type { TabProps, TabsType, TabsProps, TabsInstance } from 'vant';
   import VideoCrates from '@/views/culture/components/videoCrates.vue';
   import ResponCrates from '@/views/culture/components/responsiBility.vue';
-  const active = ref('video');
-  function handleClick({ name }: TabsProps) {
+
+  const active = ref<TabProps['name']>('video');
+  const ac = ref(0);
+  function handleClick({ name }: TabProps) {
     active.value = name;
   }
 </script>
 <template>
-  <van-sticky :offset-top="0">
-    <van-tabs v-model:active="active" class="menu" @click-tab="handleClick">
-      <van-tab name="video" title="影音库"></van-tab>
-      <van-tab name="social" title="社会责任"></van-tab>
-    </van-tabs>
-  </van-sticky>
+  <!-- <div id="view-container"> -->
+
+  <van-tabs
+    v-model:active="active"
+    class="menu z-[3]"
+    :offset-top="200"
+    sticky
+    @click-tab="handleClick"
+  >
+    <van-tab name="video" title="影音库"></van-tab>
+    <van-tab name="social" title="社会责任"></van-tab>
+  </van-tabs>
 
   <VideoCrates v-if="active === 'video'" />
   <ResponCrates v-if="active === 'social'" />
+  <!-- </div> -->
 </template>
 <style lang="scss" scoped>
   .menu {

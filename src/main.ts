@@ -8,6 +8,7 @@ import 'vant/es/toast/style';
 import 'vant/es/dialog/style';
 import 'vant/es/notify/style';
 import '@/styles/index.scss';
+
 // 桌面端适配
 import '@vant/touch-emulator';
 

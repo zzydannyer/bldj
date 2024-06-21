@@ -10,10 +10,7 @@
   const curItem = ref('');
   const curIndex = ref(0);
 
-  const visible = defineModel('visible', {
-    default: false
-  });
-
+  const visible = ref(false);
   const isHome = computed(() => route.path === '/home');
   const isMine = computed(() => route.path === '/mine');
   const isMore = computed(() => route.meta?.more);
@@ -61,7 +58,15 @@
 </script>
 
 <template>
-  <main class="bottom-nav-container">
+  <section
+    class="mask-layer"
+    :style="{
+      opacity: visible ? 1 : 0,
+      pointerEvents: visible ? 'auto' : 'none'
+    }"
+    @click.self="visible = false"
+  />
+  <van-sticky class="relative" position="bottom" z-index="5">
     <!-- 中间更多菜单按钮 -->
     <section class="nav-trigger" @click="visible = !visible">
       <div :class="[isMore ? 'more-bg' : 'more-border', 'nav-more']">
@@ -73,10 +78,15 @@
     </section>
     <!-- 底部导航 -->
     <section class="bottom-nav">
-      <van-grid :border="false" clickable :column-num="2">
+      <van-grid
+        :border="false"
+        clickable
+        :column-num="2"
+        :safe-area-inset-bottom="true"
+      >
         <van-grid-item to="/home" @click="visible = false">
           <van-image
-            class="w-[24PX]"
+            class="w-[20PX]"
             :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')"
           />
           <span
@@ -87,7 +97,7 @@
         </van-grid-item>
         <van-grid-item to="/mine" @click="visible = false">
           <van-image
-            class="w-[24PX]"
+            class="w-[20PX]"
             :src="isMine ? useIcon('icon-mine-active') : useIcon('icon-mine')"
           />
           <span
@@ -120,75 +130,84 @@
         }"
       />
     </section>
-  </main>
+  </van-sticky>
 </template>
 
 <style lang="scss" scoped>
-  .bottom-nav-container {
-    @apply fixed bottom-0 left-0 w-full z-10;
-    .bottom-nav {
-      @apply h-[90PX] z-0;
-      box-shadow: #fff0 0px 0px 1px;
-      background-image: linear-gradient(to bottom, #fce8e6, #fff);
-    }
-    .nav-trigger {
-      @apply z-1 w-[70PX] h-[70PX] bg-white rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-      .nav-more {
-        @apply absolute-center w-[90%] h-[90%] rounded-full;
-        .nav-icon-more {
-          @apply absolute-center w-[50%] h-[50%];
-        }
-      }
-      .more-border {
-        border: 1px solid #ebdfdd;
-        background-image: linear-gradient(to bottom, #fff, #fef0ee);
-      }
-      .more-bg {
-        background-image: linear-gradient(#f84200 0%, #e10101 100%);
+  .bottom-nav {
+    @apply z-0;
+    padding-bottom: var(--safe-area-inset-bottom);
+    --van-grid-item-content-background: linear-gradient(
+      to bottom,
+      #fce8e6,
+      #fff
+    );
+    box-shadow: #fff0 0px 0px 1px;
+  }
+  .nav-trigger {
+    @apply z-1 w-[70PX] h-[70PX] bg-white rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+    .nav-more {
+      @apply absolute-center w-[90%] h-[90%] rounded-full;
+      .nav-icon-more {
+        @apply absolute-center w-[50%] h-[50%];
       }
     }
-    .nav-panel {
-      @apply w-0 h-0 rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 transition-all duration-300 ease-in-out overflow-hidden;
-      z-index: -1;
-      background-image: radial-gradient(circle, #ff4f22, #e10101);
+    .more-border {
+      border: 1px solid #ebdfdd;
+      background-image: linear-gradient(to bottom, #fff, #fef0ee);
     }
-    .nav-panel.visible {
-      @apply w-[240PX] h-[240PX];
+    .more-bg {
+      background-image: linear-gradient(#f84200 0%, #e10101 100%);
     }
-    .nav-panel-active {
-      @apply absolute w-[27%] h-1/2 top-0 left-1/2 transition-all duration-300 ease-in-out;
-      z-index: 0;
-      transform-origin: bottom center;
-      background: url('@/assets/images/nav-panel-active.png') no-repeat;
-      background-size: 100% 100%;
+  }
+  .nav-panel {
+    @apply z-[-1] w-0 h-0 rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 transition-all duration-300 ease-in-out overflow-hidden;
+    background-image: radial-gradient(circle, #ff4f22, #e10101);
+  }
+  .nav-panel.visible {
+    @apply w-[240PX] h-[240PX];
+  }
+  .nav-panel-active {
+    @apply z-0 absolute w-[27%] h-1/2 top-0 left-1/2 transition-all duration-300 ease-in-out;
+    transform-origin: bottom center;
+    background: url('@/assets/images/nav-panel-active.png') no-repeat;
+    background-size: 100% 100%;
+  }
+  .nav-text {
+    @apply absolute text-white z-1;
+    &:nth-child(1) {
+      top: 36%;
+      left: 6%;
     }
-    .nav-text {
-      @apply absolute text-white;
-      z-index: 1;
-      &:nth-child(1) {
-        top: 36%;
-        left: 6%;
-      }
-      &:nth-child(2) {
-        top: 18%;
-        left: 16%;
-      }
-      &:nth-child(3) {
-        top: 6%;
-        left: 33%;
-      }
-      &:nth-child(4) {
-        top: 6%;
-        right: 33%;
-      }
-      &:nth-child(5) {
-        top: 18%;
-        right: 16%;
-      }
-      &:nth-child(6) {
-        top: 36%;
-        right: 6%;
-      }
+    &:nth-child(2) {
+      top: 18%;
+      left: 16%;
     }
+    &:nth-child(3) {
+      top: 6%;
+      left: 33%;
+    }
+    &:nth-child(4) {
+      top: 6%;
+      right: 33%;
+    }
+    &:nth-child(5) {
+      top: 18%;
+      right: 16%;
+    }
+    &:nth-child(6) {
+      top: 36%;
+      right: 6%;
+    }
+  }
+  .mask-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 4;
+    transition: all 0.3s;
   }
 </style>

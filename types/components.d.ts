@@ -35,6 +35,7 @@ declare module 'vue' {
     VanPullRefresh: typeof import('vant/es')['PullRefresh']
     VanRow: typeof import('vant/es')['Row']
     VanSearch: typeof import('vant/es')['Search']
+    VanSpace: typeof import('vant/es')['Space']
     VanSticky: typeof import('vant/es')['Sticky']
     VanTab: typeof import('vant/es')['Tab']
     VanTabs: typeof import('vant/es')['Tabs']
