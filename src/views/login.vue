@@ -83,6 +83,7 @@
   }
 
   function apiAuth() {
+    return;
     if (!window.h5sdk) {
       console.log('invalid h5sdk');
       alert('please open in feishu');
@@ -114,7 +115,7 @@
 </script>
 
 <template>
-  <van-form class="login-container" @submit="login">
+  <van-form class="login-container" @submit="login(false)">
     <van-row align="center" justify="center">
       <van-image height="30" :src="useIcon('logo')" width="30" />
       <span class="title">百联党建</span>
