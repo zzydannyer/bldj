@@ -28,7 +28,8 @@ export default {
       meta: {
         title: '我的',
         keepAlive: true,
-        visible: false
+        visible: false,
+        hideTopNav: true
       }
       // children: [
 

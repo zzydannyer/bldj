@@ -11,7 +11,7 @@ export function USER_LOGIN(data?: LoginReq) {
 }
 
 export function FEISHU_LOGIN(data: FeishuLoginReq) {
-  return request({
+  return request<ResData<LoginRes>>({
     url: '/social-login',
     method: 'POST',
     data
@@ -19,7 +19,7 @@ export function FEISHU_LOGIN(data: FeishuLoginReq) {
 }
 
 export function CALLBACK_LOGIN(data: FeishuLoginReq) {
-  return request({
+  return request<ResData<any>>({
     url: '/auth/social/callback',
     method: 'POST',
     data

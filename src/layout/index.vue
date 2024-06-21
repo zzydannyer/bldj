@@ -1,19 +1,17 @@
 <template>
-  <main class="pt-[60PX] pb-[200PX]">
-    <TopNav />
-    <!--  {{ route.path }}-->
-    <RouterView />
+  <TopNav />
+  <!--  {{ route.path }}-->
+  <RouterView />
+  <section
+    class="mask-layer"
+    :style="{
+      opacity: visible ? 1 : 0,
+      pointerEvents: visible ? 'auto' : 'none'
+    }"
+    @click.self="visible = false"
+  />
 
-    <section
-      class="mask-layer"
-      :style="{
-        opacity: visible ? 1 : 0,
-        pointerEvents: visible ? 'auto' : 'none'
-      }"
-      @click.self="visible = false"
-    />
-    <BottomNav v-model:visible="visible" />
-  </main>
+  <BottomNav v-model:visible="visible" />
 </template>
 
 <script setup lang="ts">
