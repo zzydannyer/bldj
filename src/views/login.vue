@@ -86,6 +86,7 @@
   }
 
   function apiAuth() {
+    return;
     if (!window.h5sdk) {
       console.log('invalid h5sdk');
       alert('please open in feishu');
