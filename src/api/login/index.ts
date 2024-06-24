@@ -10,6 +10,16 @@ export function USER_LOGIN(data?: LoginReq) {
   });
 }
 
+// 检查是否已经绑定飞书账号
+export function AUTH_BINDING(params: FeishuLoginReq) {
+  return request<ResData<boolean>>({
+    url: '/auth/social/isBinding',
+    method: 'GET',
+    params
+  });
+}
+
+//登录飞书账号
 export function FEISHU_LOGIN(data: FeishuLoginReq) {
   return request<ResData<LoginRes>>({
     url: '/social-login',
@@ -18,14 +28,16 @@ export function FEISHU_LOGIN(data: FeishuLoginReq) {
   });
 }
 
+// 绑定飞书账号
 export function FEISHU_REGISTER(data: FeishuLoginReq & LoginReq) {
   return request<ResData<LoginRes>>({
     url: '/auth/social/login',
-    method: 'post',
+    method: 'POST',
     data
   });
 }
 
+// 暂时没用
 export function CALLBACK_LOGIN(data: FeishuLoginReq) {
   return request<ResData<unknown>>({
     url: '/auth/social/callback',
@@ -45,12 +57,13 @@ export function GET_USER_INFO() {
 export const LOGOUT = () => {
   return request({
     url: '/logout',
-    method: 'post'
+    method: 'POST'
   });
 };
 
 export default {
   USER_LOGIN,
+  AUTH_BINDING,
   FEISHU_LOGIN,
   FEISHU_REGISTER,
   CALLBACK_LOGIN,

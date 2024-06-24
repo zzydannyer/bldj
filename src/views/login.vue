@@ -25,7 +25,7 @@
     source: 'feishu'
   });
 
-  apiAuth();
+  beforeLogin();
 
   async function login(isFeishu: boolean = true) {
     try {
@@ -35,7 +35,7 @@
       });
       let res;
       if (isFeishu) {
-        if (getToken()) {
+        if (isBinding.value === true) {
           res = await AuthServer.FEISHU_REGISTER({ ...form });
         } else {
           res = await AuthServer.FEISHU_LOGIN({
@@ -44,12 +44,14 @@
             source: form.source
           });
         }
-      } else {
+      } else if (isBinding.value === false) {
         res = await AuthServer.USER_LOGIN({
           password: encrypt(form.password),
           username: encrypt(form.username),
           captcha: form.captcha
         });
+      } else {
+        throw new Error('登录失败');
       }
       let token = res.data?.token;
       token && setToken(token);
@@ -68,7 +70,17 @@
     }
   }
 
-  function apiAuth() {
+  const isBinding = ref(true);
+  async function authBinding() {
+    const { data } = await AuthServer.AUTH_BINDING({
+      socialCode: form.socialCode,
+      socialState: form.socialState,
+      source: form.source
+    });
+    isBinding.value = data;
+  }
+
+  function beforeLogin() {
     if (!window.h5sdk) {
       console.log('invalid h5sdk');
       alert('please open in feishu');
@@ -78,6 +90,7 @@
     window.h5sdk.error((err: any) => {
       console.error('h5sdk error:', JSON.stringify(err));
     });
+
     // 通过ready接口确认环境准备就绪后才能调用API
     window.h5sdk.ready(() => {
       // 调用JSAPI tt.requestAccess 获取 authorization code
@@ -88,7 +101,8 @@
         success(res: any) {
           form.socialCode = res.code;
           form.socialState = res.state;
-          login();
+          authBinding();
+          // login();
         },
         // 获取失败后的回调
         fail(err: any) {
@@ -100,30 +114,35 @@
 </script>
 
 <template>
-  <van-form class="login-container" @submit="login(false)">
+  <van-form class="login-container" @submit="login(true)">
     <van-row align="center" justify="center">
       <van-image height="30" :src="useIcon('logo')" width="30" />
       <span class="title">百联党建</span>
     </van-row>
 
-    <van-cell-group>
-      <van-field
-        v-model="form.username"
-        label="用户名"
-        name="用户名"
-        placeholder="用户名"
-        :rules="[{ required: true, message: '请填写用户名' }]"
-      />
-      <van-field
-        v-model="form.password"
-        label="密码"
-        name="密码"
-        placeholder="密码"
-        :rules="[{ required: true, message: '请填写密码' }]"
-        type="password"
-      />
-    </van-cell-group>
-    <van-button block native-type="submit" type="primary">登录</van-button>
+    <section v-if="!isBinding">
+      <van-cell-group>
+        <van-field
+          v-model="form.username"
+          label="用户名"
+          name="用户名"
+          placeholder="用户名"
+          :rules="[{ required: true, message: '请填写用户名' }]"
+        />
+        <van-field
+          v-model="form.password"
+          label="密码"
+          name="密码"
+          placeholder="密码"
+          :rules="[{ required: true, message: '请填写密码' }]"
+          type="password"
+        />
+      </van-cell-group>
+      <van-button block native-type="submit" type="primary">
+        绑定百联账号
+      </van-button>
+      <!-- <van-button block native-type="submit" type="primary">登录</van-button> -->
+    </section>
   </van-form>
 </template>
 
