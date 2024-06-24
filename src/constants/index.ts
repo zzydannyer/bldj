@@ -1,6 +1,6 @@
 export const sessionKey = 'user-info';
 export const TokenKey = 'Admin-Token';
-export const whiteList = ['/refreshToken', '/login', '/captchaImage'];
+export const whiteList = ['/refreshToken', '/login'];
 
 export const text_color: Record<string, string> = {
   success: '#67c23a',

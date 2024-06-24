@@ -49,7 +49,6 @@ export interface UserInfo {
 export interface LoginReq {
   username: string;
   password: string;
-  captcha: string;
 }
 
 // 登录返回信息
