@@ -85,8 +85,6 @@
         refreshing.value = false;
       }
 
-      const _rows = rowsFilter(rows);
-
       list.value = list.value.concat(_rows);
       _total.value = total;
 
@@ -128,10 +126,26 @@
 </script>
 
 <template>
-  <van-pull-refresh ref="listRef" v-model="refreshing" :class="listClass" @refresh="onRefresh">
-    <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" error-text="请求失败，请稍后重试" @load="onLoad">
+  <van-pull-refresh
+    ref="listRef"
+    v-model="refreshing"
+    :class="listClass"
+    @refresh="onRefresh"
+  >
+    <van-list
+      v-model:loading="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      error-text="请求失败，请稍后重试"
+      @load="onLoad"
+    >
       <slot name="list" :list="list">
-        <van-cell-group :border="true" :inset="true" v-for="(row, index) in list" :key="row[keyName] ?? index">
+        <van-cell-group
+          :border="true"
+          :inset="true"
+          v-for="(row, index) in list"
+          :key="row[keyName] ?? index"
+        >
           <slot :row="row" :index="index" />
         </van-cell-group>
       </slot>
@@ -145,11 +159,13 @@
     min-height: -webkit-fill-available;
     padding: $body-padding $body-padding 0;
     &.dropmenu-search {
-      padding: calc($search-height + $dropmenu-height + $body-padding) $body-padding 0;
+      padding: calc($search-height + $dropmenu-height + $body-padding)
+        $body-padding 0;
     }
 
     &.search-tabs {
-      padding: calc($search-height + $tabs-height + $body-padding) $body-padding 0;
+      padding: calc($search-height + $tabs-height + $body-padding) $body-padding
+        0;
     }
 
     &.search {

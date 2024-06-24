@@ -17,10 +17,7 @@
   <Search />
   <v-card v-for="i in 10" :key="i" class="mt-3 mx-4">
     <template #title>
-      <van-text-ellipsis
-        :content="text"
-        @click="router.push('/culture/detail')"
-      />
+      <van-text-ellipsis :content="text" @click="router.push('/detail')" />
     </template>
     <ResponsContent :count="i" :name="'name' + i" />
   </v-card>

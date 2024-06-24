@@ -151,7 +151,7 @@
       const { code, data } = await cropVideo(props.media.id as string, [
         { startTime, endTime, duration }
       ]);
-      console.log('🚀 ~ file: index.vue:124 ~ handleSubmit ~ data:', data);
+      console.log('🚀 ~ file: upload.vue:124 ~ handleSubmit ~ data:', data);
       if (code === 200 && data && data.url) {
         emits('updateVideo', props.media.id, data);
       }

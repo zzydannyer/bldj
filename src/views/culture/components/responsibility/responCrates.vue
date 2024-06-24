@@ -22,10 +22,10 @@
 </template>
 
 <style lang="scss" scoped>
+  //党建帮扶、消费扶贫、社会公益页面一样
   $baseColor: rgb(225, 1, 1);
   $borderColor: #e2e2e2;
   $textColor: #777;
-
   :deep(.van-tabs__wrap) {
     margin-top: 30px;
     border-radius: 10px;

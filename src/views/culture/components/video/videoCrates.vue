@@ -35,7 +35,12 @@
   </div>
   <van-pull-refresh>
     <div class="grid grid-2 gap-2 grid-cols-2 px-4 pb-64">
-      <div v-for="i in 10" :key="i" class="sub-content">
+      <div
+        v-for="i in 10"
+        :key="i"
+        class="sub-content"
+        @click="router.push('/culture/videodetail')"
+      >
         <van-image
           fit="cover"
           src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
@@ -53,7 +58,6 @@
   const list = [];
   const text = '沙家邦红色党建活动';
   import { ref } from 'vue';
-
   const show = ref(false);
   const showPopup = () => {
     show.value = true;
