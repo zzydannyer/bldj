@@ -14,23 +14,18 @@
 
   const route = useRoute();
   const router = useRouter();
-  const { code, state } = route.query;
   const { SET_USERINFO } = useUserInfoStore();
 
   const form = reactive({
     username: '',
     password: '',
     captcha: 'mobile',
-    socialCode: (code as string) ?? '',
-    socialState: (state as string) ?? '',
+    socialCode: '',
+    socialState: '',
     source: 'feishu'
   });
 
-  // if (code) {
-  //   login();
-  // } else {
-  //   apiAuth();
-  // }
+  apiAuth();
 
   async function login(isFeishu: boolean = true) {
     try {
@@ -38,40 +33,28 @@
         message: '登录中...',
         forbidClick: true
       });
+      let res;
       if (isFeishu) {
         if (getToken()) {
-          const {
-            data: { token }
-          } = await AuthServer.CALLBACK_LOGIN({
-            socialCode: form.socialCode,
-            socialState: form.socialState,
-            source: form.source
-          });
+          res = await AuthServer.FEISHU_REGISTER({ ...form });
         } else {
-          const {
-            data: { token }
-          } = await AuthServer.FEISHU_LOGIN({
+          res = await AuthServer.FEISHU_LOGIN({
             socialCode: form.socialCode,
             socialState: form.socialState,
             source: form.source
           });
-          setToken(token);
-          const { data: userInfo } = await AuthServer.GET_USER_INFO();
-          SET_USERINFO(userInfo);
         }
       } else {
-        const {
-          data: { token }
-        } = await AuthServer.USER_LOGIN({
+        res = await AuthServer.USER_LOGIN({
           password: encrypt(form.password),
           username: encrypt(form.username),
           captcha: form.captcha
         });
-        setToken(token);
-        const { data: userInfo } = await AuthServer.GET_USER_INFO();
-        SET_USERINFO(userInfo);
       }
-
+      let token = res.data?.token;
+      token && setToken(token);
+      const { data: userInfo } = await AuthServer.GET_USER_INFO();
+      SET_USERINFO(userInfo);
       showSuccessToast('登录成功');
       setTimeout(() => {
         router.push('/home');

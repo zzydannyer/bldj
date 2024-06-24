@@ -66,7 +66,7 @@
     }"
     @click.self="visible = false"
   />
-  <van-sticky class="relative" position="bottom" z-index="5">
+  <van-sticky :offset-bottom="0" position="bottom" z-index="5">
     <!-- 中间更多菜单按钮 -->
     <section class="nav-trigger" @click="visible = !visible">
       <div :class="[isMore ? 'more-bg' : 'more-border', 'nav-more']">

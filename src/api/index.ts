@@ -1,11 +1,4 @@
 import request from '@/utils/request';
-//首页
-export function homeContentList() {
-  return request({
-    url: '/mobile/homeContent',
-    method: 'GET'
-  });
-}
 
 //消息通知详情
 export function getContentViewApi(uid: number, type = 'view') {

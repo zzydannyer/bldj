@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import { homeContentList } from '@/api';
+  import { homeContentList } from '@/api/home';
+  import type { HomeNotice } from '@/types/home';
   import { useImage, useIcon } from '@/utils/assets';
   import { register } from 'swiper/element/bundle';
 
@@ -49,33 +50,33 @@
     }
   ];
 
-  const noticeData = ref();
-  const noticeCards = computed(() => {
-    return [
-      {
-        title: '通知公告',
-        value: '全部',
-        valueColor: '#e20a0a'
-      },
-      {
-        title: '党建动态',
-        value: '全部',
-        valueColor: '#e20a0a'
-      },
-      {
-        title: '党员风采',
-        value: '全部',
-        valueColor: '#e20a0a'
-      },
-      {
-        title: '党建活动',
-        value: '全部',
-        valueColor: '#e20a0a'
-      }
-    ];
-  });
+  const homeNotice = ref<HomeNotice[]>([]);
+  const noticeCards = ref([
+    {
+      color: '#e10101',
+      bgColor: '#fffcfc,#fff6f6',
+      bg: useImage('home-card1')
+    },
+    {
+      color: '#fbb700',
+      bgColor: '#fffdf6,#fcf9eb',
+      bg: useImage('home-card2')
+    },
+    {
+      color: '#1bbaff',
+      bgColor: '#f5fcfe,#e7f4fb',
+      bg: useImage('home-card3')
+    }
+  ]);
   async function getData() {
-    await homeContentList();
+    try {
+      const {
+        data: { home_notice }
+      } = await homeContentList();
+      homeNotice.value = home_notice.slice(0, 3);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   onBeforeMount(getData);
@@ -132,7 +133,48 @@
         value="全部"
         value-class="text-[#e20a0a]"
       />
-      <div>6666666666666666666666666</div>
+      <section class="mt-2 pl-[16PX] whitespace-nowrap overflow-x-auto">
+        <div
+          v-for="(notice, index) in homeNotice"
+          :key="notice.uid"
+          class="notice-card"
+          :style="{
+            background: `linear-gradient(to bottom, ${noticeCards[index].bgColor})`
+          }"
+        >
+          <van-text-ellipsis :content="notice.title" rows="2" />
+          <span class="v-date">
+            <van-icon name="clock-o" />
+            {{ notice.releaseDate }}
+          </span>
+          <van-image
+            class="w-[80PX] absolute right-1 bottom-1"
+            fit="cover"
+            :src="noticeCards[index].bg"
+          />
+          <van-button
+            class="mt-auto w-[80PX] rounded-md"
+            :color="noticeCards[index].color"
+            size="small"
+            text="查看详情"
+            type="primary"
+          />
+        </div>
+      </section>
+    </van-cell-group>
+
+    <van-cell-group class="home-cell-group">
+      <van-cell
+        is-link
+        title="最新新闻"
+        title-class="home-cell-title"
+        value="全部"
+        value-class="text-[#e20a0a]"
+      />
+      <!-- <VCard
+      v-for=""
+        class=""
+      ></VCard> -->
     </van-cell-group>
   </main>
 </template>
@@ -157,10 +199,17 @@
   .home-cell-group {
     --van-cell-background: transparent;
     --van-cell-group-background: url('@/assets/images/home-title-bg.png')
-      no-repeat left top / cover;
+      no-repeat left top / contain;
     :deep(.van-icon-arrow.van-cell__right-icon) {
       color: #e20a0a;
     }
+  }
+  .notice-card {
+    @apply inline-flex p-4 w-[250PX] h-[120PX] align-top relative flex-col;
+    border-radius: 10px;
+    // prettier-ignore
+    margin-right: 16PX;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   }
   :deep(.home-cell-title) {
     @apply font-semibold;

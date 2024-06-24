@@ -18,8 +18,16 @@ export function FEISHU_LOGIN(data: FeishuLoginReq) {
   });
 }
 
+export function FEISHU_REGISTER(data: FeishuLoginReq & LoginReq) {
+  return request<ResData<LoginRes>>({
+    url: '/auth/social/login',
+    method: 'post',
+    data
+  });
+}
+
 export function CALLBACK_LOGIN(data: FeishuLoginReq) {
-  return request<ResData<any>>({
+  return request<ResData<unknown>>({
     url: '/auth/social/callback',
     method: 'POST',
     data
@@ -44,6 +52,7 @@ export const LOGOUT = () => {
 export default {
   USER_LOGIN,
   FEISHU_LOGIN,
+  FEISHU_REGISTER,
   CALLBACK_LOGIN,
   GET_USER_INFO,
   LOGOUT
