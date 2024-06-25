@@ -48,12 +48,13 @@
         }
       }
       // 用户名密码登录
-      // else {
-      //   res = await AuthServer.USER_LOGIN({
-      //     password: encrypt(form.password),
-      //     username: encrypt(form.username)
-      //   });
-      // }
+      else {
+        res = await AuthServer.USER_LOGIN({
+          password: encrypt(form.password),
+          username: encrypt(form.username),
+          captcha: 'mobile'
+        });
+      }
       let token = res.data?.token;
       token && setToken(token);
       const { data: userInfo } = await AuthServer.GET_USER_INFO();
@@ -71,7 +72,7 @@
     }
   }
 
-  const isBinding = ref(true);
+  const isBinding = ref(false);
   async function authBinding() {
     const { data } = await AuthServer.AUTH_BINDING({
       socialCode: form.socialCode,
@@ -124,11 +125,11 @@
       await authBinding();
     });
   }
-  onBeforeMount(beforeLogin);
+  // onBeforeMount(beforeLogin);
 </script>
 
 <template>
-  <van-form class="login-container" @submit="login(true)">
+  <van-form class="login-container" @submit="login(false)">
     <van-row align="center" justify="center">
       <van-image class="-ml-6" height="30" :src="useIcon('logo')" width="30" />
       <span class="title">百联党建</span>
@@ -152,10 +153,10 @@
             type="password"
           />
         </van-cell-group>
-        <van-button block class="mt-2" native-type="submit" type="primary">
-          绑定百联账号
-        </van-button>
-        <!-- <van-button block native-type="submit" type="primary">登录</van-button> -->
+        <!--        <van-button block class="mt-2" native-type="submit" type="primary">-->
+        <!--          绑定百联账号-->
+        <!--        </van-button>-->
+        <van-button block native-type="submit" type="primary">登录</van-button>
       </section>
     </transition>
   </van-form>

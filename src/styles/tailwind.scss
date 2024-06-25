@@ -26,10 +26,6 @@
     }
   }
 
-  .v-detail-content {
-    @apply;
-  }
-
   // 滑块右下角的提示图标
   .v-swipe-cell-tips {
     @apply absolute right-0 bottom-0 p-4 text-gray-400 flex gap-1;
