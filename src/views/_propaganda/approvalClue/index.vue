@@ -69,7 +69,7 @@
               {{ row.orgName }}
             </van-tag>
           </div>
-          <span class="v-date mt-2">
+          <span class="v-icon-text mt-2">
             <van-icon name="clock-o" />
             {{ $parse(row.startTime) }}-{{ $parse(row.endTime) }}
           </span>

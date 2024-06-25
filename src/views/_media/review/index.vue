@@ -122,7 +122,7 @@
         <!-- 资源类别 -->
         <resource-type :required="false" v-model="queryParams.resourceType" />
         <!-- 拍摄时间 -->
-        <v-date-picker
+        <v-icon-text-picker
           v-model="queryParams.shootingTime"
           label="拍摄时间"
           placeholder="请选择拍摄时间"
@@ -165,12 +165,12 @@
             :value="row.mediaStatus"
           />
           <!-- 作者 -->
-          <div class="v-author mt-1">
+          <div class="v-icon-text mt-1">
             <van-icon name="contact-o" />
             {{ row.author }}
           </div>
           <!-- 拍摄时间 -->
-          <div class="v-date mt-1">
+          <div class="v-icon-text mt-1">
             <van-icon name="clock-o" />
             {{ $parse(row.shootingTime) }}
           </div>

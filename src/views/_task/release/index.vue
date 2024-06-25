@@ -201,7 +201,7 @@
             <v-tag plain :dictData="work_status" :value="row.status" />
           </div>
 
-          <div class="v-company mt-1">
+          <div class="v-icon-text mt-1">
             <Icon icon="ph:buildings" v-if="row.orgName" />
             {{ row.orgName }}
           </div>
@@ -217,11 +217,11 @@
               :touchable="false"
               :show-indicators="false"
             >
-              <van-swipe-item class="v-date">
+              <van-swipe-item class="v-icon-text">
                 <van-icon name="clock-o" />
                 {{ $parse(row.publishDate) }}
               </van-swipe-item>
-              <van-swipe-item class="v-date v-danger">
+              <van-swipe-item class="v-icon-text v-danger">
                 <Icon icon="ri:hourglass-fill" />
                 {{ $parse(row.deadline) }}
               </van-swipe-item>

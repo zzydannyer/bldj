@@ -1,23 +1,23 @@
 <template>
   <van-tag
+    :class="border ? 'v-plain-tag' : ''"
+    :closeable="closeable"
+    :color="bg_color[_type]"
     :mark="mark"
-    :size="size"
     :plain="plain"
     :round="round"
-    :color="bg_color[_type]"
-    :closeable="closeable"
+    :size="size"
     :text-color="textColor ?? text_color[_type]"
     :type="_type"
-    :class="border ? 'v-plain-tag' : ''"
   >
     {{ labelValue?.label }}
   </van-tag>
 </template>
 
 <script setup lang="ts">
-  import { DictData } from '@/plugins/dict';
+  import type { DictData } from '@/plugins/dict';
   import type { TagSize, TagType, TagProps } from 'vant';
-  import { PropType } from 'vue';
+  import type { PropType } from 'vue';
   import { useGlobal } from '@/utils';
   import { border_color, bg_color, text_color } from '@/constants';
 
@@ -49,7 +49,9 @@
   });
 
   const labelValue = computed(() => $value_to_dict(dictData, value));
-  const _type = computed(() => labelValue.value?.elTagType || type || 'primary');
+  const _type = computed(
+    () => labelValue.value?.elTagType || type || 'primary'
+  );
   const borderColor = computed(() => border_color[_type.value]);
 </script>
 

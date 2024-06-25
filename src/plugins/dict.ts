@@ -15,7 +15,7 @@ export function useDict(...args: DictType[]): any {
       dictMap[dictType] = dicts as DictData[];
     } else {
       const { data } = await getDicts(dictType);
-      dictMap[dictType] = data!.map((p) => ({
+      dictMap[dictType] = data!.map((p: any) => ({
         label: p.dictLabel,
         value: p.dictValue,
         elTagType: p.listClass,
@@ -30,11 +30,13 @@ export function useDict(...args: DictType[]): any {
 export type DictData = {
   label: string;
   value: string;
-  elTagType: any;
-  elTagClass: string;
+  elTagType?: any;
+  elTagClass?: string;
 };
 
-type DictMapper = DictType extends never ? { [x: string]: DictData[] } : { [key in DictType]: DictData[] };
+type DictMapper = DictType extends never
+  ? { [x: string]: DictData[] }
+  : { [key in DictType]: DictData[] };
 
 type DictType =
   | 'sys_user_sex'

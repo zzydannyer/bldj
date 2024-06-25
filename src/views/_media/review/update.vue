@@ -224,7 +224,7 @@
           v-model:name="form.projectName"
         />
         <!-- 报道日期 -->
-        <v-date-picker
+        <v-icon-text-picker
           v-model="form.shootingTime"
           label="拍摄时间:"
           placeholder="请选择拍摄时间"

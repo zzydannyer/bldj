@@ -11,7 +11,7 @@
 </script>
 <template>
   <div class="bg-white pt-3 h-dvh">
-    <v-date-picker
+    <v-icon-text-picker
       v-model="time"
       label="选择日期"
       placeholder="请选择选择日期"

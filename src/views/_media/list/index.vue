@@ -56,7 +56,7 @@
         <resource-type :required="false" v-model="queryParams.resourceType" />
 
         <!-- 拍摄时间 -->
-        <v-date-picker
+        <v-icon-text-picker
           v-model="queryParams.shootingTime"
           label="拍摄时间"
           placeholder="请选择拍摄时间"
@@ -98,11 +98,11 @@
               {{ row.resourceTypeName }}
             </v-plain-tag>
             <div class="start-center gap-1 mt-1">
-              <span class="v-author">
+              <span class="v-icon-text">
                 <van-icon name="contact-o" />
                 {{ row.author }}
               </span>
-              <span class="v-date">
+              <span class="v-icon-text">
                 <van-icon name="clock-o" />
                 {{ $parse(row.shootingTime) }}
               </span>

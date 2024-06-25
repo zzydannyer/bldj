@@ -29,3 +29,10 @@ $dropmenu-height: var(--van-dropdown-menu-height) !default;
 $dropmenu-height: 48PX;
 $tabs-height: var(--van-tabs-line-height);
 $notice-height: calc(var(--van-notice-bar-height) / 2);
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

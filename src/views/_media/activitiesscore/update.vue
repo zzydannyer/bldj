@@ -94,7 +94,7 @@
       <div class="my-2 text-gray-500">
         <span>{{ detail?.projectName }}</span>
       </div>
-      <div class="v-date flex mt-2 justify-between">
+      <div class="v-icon-text flex mt-2 justify-between">
         <span>{{ detail.resourceTypeName }}</span>
         <span>{{ $parse(detail.shootingTime) }}</span>
       </div>

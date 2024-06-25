@@ -22,6 +22,16 @@ export default {
       }
     },
     {
+      path: '/newsDetail/:id',
+      name: 'NewsDetail',
+      component: () => import('@/views/details/common.vue'),
+      meta: {
+        title: '新闻详情',
+        keepAlive: false,
+        visible: false
+      }
+    },
+    {
       path: '/mine',
       name: 'Mine',
       component: () => import('@/views/mine/index.vue'),

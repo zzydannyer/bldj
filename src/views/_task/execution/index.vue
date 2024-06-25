@@ -131,7 +131,7 @@
                 :value="row.submitStatus"
               />
             </div>
-            <div class="v-company">
+            <div class="v-icon-text">
               <!-- <Icon width="20" height="20" icon="ph:buildings" v-if="row.orgName" /> -->
               {{ row.orgName }}
             </div>
@@ -144,11 +144,11 @@
                   :touchable="false"
                   :show-indicators="false"
                 >
-                  <van-swipe-item class="v-date">
+                  <van-swipe-item class="v-icon-text">
                     <van-icon name="clock-o" />
                     {{ $parse(row.deadline) }}
                   </van-swipe-item>
-                  <van-swipe-item class="v-date v-danger">
+                  <van-swipe-item class="v-icon-text v-danger">
                     <Icon icon="ri:hourglass-fill" />
                     {{ $parse(row.deadline) }}
                   </van-swipe-item>

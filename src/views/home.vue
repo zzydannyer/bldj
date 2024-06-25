@@ -6,6 +6,8 @@
   import { useStore } from '@/store';
   import { storeToRefs } from 'pinia';
   import { UserType } from '@/constants';
+  import dayjs from 'dayjs';
+  import { DictData } from '@/plugins/dict';
   // Swiper
   register();
   const router = useRouter();
@@ -78,7 +80,17 @@
   ]);
 
   //最新新闻
-  const homeNews = ref<HomeNews[]>([]);
+  function sortNews(a: HomeNews, b: HomeNews) {
+    return (
+      new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+    );
+  }
+  type News = HomeNews & { type: '1' | '2' };
+  const dictData: DictData[] = [
+    { label: '集团要闻', value: '1' },
+    { label: '基层动态', value: '2' }
+  ];
+  const homeNews = ref<News[]>([]);
   async function getData() {
     try {
       const {
@@ -89,16 +101,16 @@
       // 通知公告
       homeNotice.value = home_notice.slice(0, 3);
       // 最新新闻
-      switch (userType.value) {
-        case UserType.Group:
-          homeNews.value = home_jt_news.slice(0, 8);
-          break;
-        case UserType.Grassroots:
-          homeNews.value = home_jc_news.slice(0, 8);
-          break;
-        default:
-          break;
-      }
+
+      const jt_news: News[] = home_jt_news.map((item) => ({
+        ...item,
+        type: '1'
+      }));
+      const jc_news: News[] = home_jc_news.map((item) => ({
+        ...item,
+        type: '2'
+      }));
+      homeNews.value = jt_news.concat(jc_news).sort(sortNews);
     } catch (e) {
       console.error(e);
     }
@@ -107,7 +119,7 @@
   onBeforeMount(getData);
 </script>
 <template>
-  <main class="pb-[440PX] bg-white">
+  <main class="pb-[200PX] bg-white">
     <swiper-container
       :breakpoints="{
         768: {
@@ -128,7 +140,10 @@
         :key="pic.uid"
         class="swiper-slide"
       >
-        <van-image v-src="pic.picUrl" class="w-full h-full" fit="cover" />
+        <img
+          v-src="pic.picUrl"
+          class="w-full h-full object-cover object-center"
+        />
       </swiper-slide>
     </swiper-container>
 
@@ -141,6 +156,7 @@
       <van-grid-item
         v-for="(item, index) in gridItems"
         :key="index"
+        class="van-haptics-feedback"
         :icon="useIcon(item.icon)"
         :text="item.text"
         :to="item.path"
@@ -172,7 +188,7 @@
           }"
         >
           <van-text-ellipsis :content="notice.title" rows="2" />
-          <span class="v-date">
+          <span class="v-icon-text">
             <van-icon name="clock-o" />
             {{ notice.releaseDate }}
           </span>
@@ -200,7 +216,26 @@
         value="全部"
         value-class="text-[#e20a0a]"
       />
-      <VCard v-for="news in homeNews" :key="news.uid" class=""> 66 </VCard>
+      <VCard
+        v-for="news in homeNews"
+        :key="news.uid"
+        body-class="h-[80PX] flex flex-col"
+        class="van-hairline--bottom van-haptics-feedback"
+        @click="router.push('/newsDetail/' + news.uid)"
+      >
+        <van-text-ellipsis
+          class="text-justify"
+          :content="news.title"
+          rows="2"
+        />
+        <div class="between-end mt-auto">
+          <v-tag :dictData="dictData" plain :value="news.type" />
+          <span class="v-icon-text">
+            <van-icon name="clock-o" />
+            {{ dayjs(news.releaseDate).format('YY-MM-DD') }}
+          </span>
+        </div>
+      </VCard>
     </van-cell-group>
   </main>
 </template>

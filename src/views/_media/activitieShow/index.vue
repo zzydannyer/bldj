@@ -95,12 +95,12 @@
             <v-plain-tag type="success">
               {{ row.resourceName }}
             </v-plain-tag>
-            <div class="text-sm v-date">
+            <div class="text-sm v-icon-text">
               {{ row.projectName }}
             </div>
 
             <div class="w-full between-center">
-              <span class="v-date self-end">
+              <span class="v-icon-text self-end">
                 {{ $parse(row.shootingTime) }}
               </span>
             </div>

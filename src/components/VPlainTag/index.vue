@@ -11,7 +11,9 @@
     border = false,
     size = 'mini'
   } = defineProps({
-    type: String as PropType<'success' | 'info' | 'danger' | 'warning' | 'primary' | 'default'>,
+    type: String as PropType<
+      'success' | 'info' | 'danger' | 'warning' | 'primary' | 'default'
+    >,
     border: Boolean as PropType<boolean>,
     size: String as PropType<TagSize>
     // mark: boolean;
@@ -25,7 +27,12 @@
 </script>
 
 <template>
-  <van-tag :class="border ? 'v-plain-tag' : ''" :text-color="text_color[type]" :color="bg_color[type]" :size="size">
+  <van-tag
+    :class="border ? 'v-plain-tag' : ''"
+    :color="bg_color[type]"
+    :size="size"
+    :text-color="text_color[type]"
+  >
     <slot />
   </van-tag>
 </template>

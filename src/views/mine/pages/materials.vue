@@ -29,11 +29,11 @@
         <van-text-ellipsis class="v-list-title" content="333333333" rows="2" />
         <v-plain-tag size="mini" type="primary"> 45fefvgr </v-plain-tag>
         <div class="start-center gap-1 mt-1">
-          <span class="v-author">
+          <span class="v-icon-text">
             <van-icon name="contact-o" />
             45fefvgr
           </span>
-          <span class="v-date">
+          <span class="v-icon-text">
             <van-icon name="clock-o" />
             45fefvgr
           </span>

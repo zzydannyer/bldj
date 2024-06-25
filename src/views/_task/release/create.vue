@@ -138,7 +138,7 @@
           placeholder="请输入任务名"
         />
         <!-- 截止时间 -->
-        <v-date-picker
+        <v-icon-text-picker
           :minDate="new Date()"
           :maxDate="_10_years_future"
           v-model="form.deadline"

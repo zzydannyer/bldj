@@ -92,21 +92,21 @@
             />
             <div class="between-end">
               <!-- 作者 -->
-              <div class="v-company">
+              <div class="v-icon-text">
                 {{ row.targetUserName }}
               </div>
 
-              <div class="v-company">
+              <div class="v-icon-text">
                 {{ row.mediaType === '2' ? '视频' : '图片' }}
               </div>
             </div>
             <div class="between-end">
               <!-- 资源标题 -->
-              <div class="v-company">
+              <div class="v-icon-text">
                 {{ row.resourceName }}
               </div>
               <!-- 时间 -->
-              <div class="v-company">
+              <div class="v-icon-text">
                 {{ $parse(row.shootingTime) }}
               </div>
             </div>

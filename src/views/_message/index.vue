@@ -182,7 +182,7 @@
               style="&#45;&#45;van-text-ellipsis-line-height: 1.4"
             />
   
-            <div class="v-date text-sm between-center mt-2">
+            <div class="v-icon-text text-sm between-center mt-2">
               <van-icon v-if="row.isRead === '1'" size="20" name="envelop-o" />
               <van-badge v-else dot>
                 <van-icon size="20" color="#f56c6c" name="envelop-o" />
@@ -204,7 +204,7 @@
             style="van-text-ellipsis-line-height: 1.4"
           />
 
-          <div class="v-date justify-end">
+          <div class="v-icon-text justify-end">
             <van-icon name="clock-o" />
             {{ $parse(message.datetime) }}
           </div>

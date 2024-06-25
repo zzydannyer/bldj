@@ -66,7 +66,7 @@
     }"
     @click.self="visible = false"
   />
-  <van-sticky :offset-bottom="0" position="bottom" z-index="5">
+  <section class="w-full z-[5] fixed left-0 bottom-0">
     <!-- 中间更多菜单按钮 -->
     <section class="nav-trigger" @click="visible = !visible">
       <div :class="[isMore ? 'more-bg' : 'more-border', 'nav-more']">
@@ -130,7 +130,7 @@
         }"
       />
     </section>
-  </van-sticky>
+  </section>
 </template>
 
 <style lang="scss" scoped>

@@ -66,7 +66,7 @@
       <div class="my-2 text-gray-500">
         <span>{{ detail?.mediaList[0].name }}</span>
       </div>
-      <div class="v-date">{{ detail.createTime }}</div>
+      <div class="v-icon-text">{{ detail.createTime }}</div>
     </section>
   </main>
 </template>

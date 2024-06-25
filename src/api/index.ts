@@ -1,16 +1,23 @@
 import request from '@/utils/request';
 
-//消息通知详情
-export function getContentViewApi(uid: number, type = 'view') {
-  //（checkView审核查阅-无需判断权限）
+//todo 0081 文章通用
+//党建事务 id=25d22599ea7d489fa2b63520e71b239f
+//通知公告 id=eb17fd4dab2045db992b3beb369fc9a5
+//党纪宣贯 id=8f42ecf773714fa09348d2c2361aff26
+//监督检查 id=6994f47316514ab499ed6051d716fb24
+//八项 id=f718872f70714afdb760c6b8c6905db2
+//深化 id=421b87801b284a17a8d60d77d1a5ae9a
+//廉政 id=4a676556ab504f7c9eb104b4a988a075
+//青年思想引领 id=6dd396b2e4f24b51a0cb80e9c8211e14
+//全面从严治团 af05402ba8c44f5cb46290a4a7747958
+//青年岗位建功 febb6ed9a5c24c6986b9db4bf5cc93cf
+//服务青年成才 26648d4b4f6c4ca7a48a4f60db8b97c9
+//社会责任工作动态 fa64c453a9914f76bf6c5974000df495
+export function listByChannelId(id: Numeric, params: any) {
   return request({
-    url:
-      type === 'checkView' ? '/mobile/viewDetailCheck' : '/mobile/viewDetail',
+    url: `/mobile/content/channel/${id}/list`,
     method: 'GET',
-    params: {
-      uid,
-      type
-    }
+    params
   });
 }
 
@@ -183,26 +190,6 @@ export function studyrecordListCounts(params: any) {
   });
 }
 
-//todo 0081 文章通用
-//党建事务 id=25d22599ea7d489fa2b63520e71b239f
-//通知公告 id=eb17fd4dab2045db992b3beb369fc9a5
-//党纪宣贯 id=8f42ecf773714fa09348d2c2361aff26
-//监督检查 id=6994f47316514ab499ed6051d716fb24
-//八项 id=f718872f70714afdb760c6b8c6905db2
-//深化 id=421b87801b284a17a8d60d77d1a5ae9a
-//廉政 id=4a676556ab504f7c9eb104b4a988a075
-//青年思想引领 id=6dd396b2e4f24b51a0cb80e9c8211e14
-//全面从严治团 af05402ba8c44f5cb46290a4a7747958
-//青年岗位建功 febb6ed9a5c24c6986b9db4bf5cc93cf
-//服务青年成才 26648d4b4f6c4ca7a48a4f60db8b97c9
-//社会责任工作动态 fa64c453a9914f76bf6c5974000df495
-export function listByChannelId(id: Numeric, params: any) {
-  return request({
-    url: `/mobile/content/channel/${id}/list`,
-    method: 'GET',
-    params
-  });
-}
 //三会一课列表
 export function meetingrecordList(params: any) {
   return request({

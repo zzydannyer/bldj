@@ -71,7 +71,7 @@
         refreshing.value = false;
       }
 
-      list.value = list.value.concat(_rows);
+      list.value = list.value.concat(rows);
       _total.value = total;
 
       if (list.value.length >= _total.value) {
@@ -120,19 +120,19 @@
   >
     <van-list
       v-model:loading="loading"
+      error-text="请求失败，请稍后重试"
       :finished="finished"
       finished-text="没有更多了"
-      error-text="请求失败，请稍后重试"
       @load="onLoad"
     >
-      <slot name="list" :list="list">
+      <slot :list="list" name="list">
         <van-cell-group
-          :border="true"
-          :inset="true"
           v-for="(row, index) in list"
           :key="row[keyName] ?? index"
+          :border="true"
+          :inset="true"
         >
-          <slot :row="row" :index="index" />
+          <slot :index="index" :row="row" />
         </van-cell-group>
       </slot>
     </van-list>

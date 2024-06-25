@@ -177,7 +177,7 @@
           :columns-field-names="{ value: 'id', text: 'activitiesName' }"
         />
         <!-- 报道日期 -->
-        <v-date-picker
+        <v-icon-text-picker
           required
           :rules="[{ required: true, message: '请上传拍摄时间' }]"
           v-model="form.shootingTime"

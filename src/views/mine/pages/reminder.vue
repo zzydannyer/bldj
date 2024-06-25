@@ -53,12 +53,12 @@
           />
 
           <div class="between-center">
-            <div class="v-company mt-1">
+            <div class="v-icon-text mt-1">
               <Icon icon="ph:buildings" v-if="row.orgName" />
               {{ row.orgName }}
             </div>
 
-            <div class="v-date mt-1">
+            <div class="v-icon-text mt-1">
               <van-icon name="clock-o" />
               {{ $parse(row.publishDate) }}
             </div>

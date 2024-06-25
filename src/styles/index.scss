@@ -1,7 +1,5 @@
 @import 'tailwind.scss';
 @import 'global.scss';
-@import 'mixins.scss';
-@import 'theme.scss';
 
 html{
   // IOS禁止回弹
@@ -19,10 +17,6 @@ html{
 textarea {
   text-align: justify !important;
 }
-
-//.border {
-//  border: 1PX solid #f56c6c;
-//}
 
 // 基础背景容器
 .container {
@@ -48,14 +42,9 @@ textarea {
 // ****************************************************************************************************
 // 详情页
 .detail-container {
-  padding: calc($navbar-height) 0 0;
-  min-height: 100%;
-  height: -webkit-fill-available;
+  min-height: 90vh;
   background-color: #fff;
-
-  &.padding {
-    padding: calc($navbar-height + $body-padding) $body-padding;
-  }
+  padding: 16PX 16PX 160PX;
 }
 
 // 详情页-图片查看

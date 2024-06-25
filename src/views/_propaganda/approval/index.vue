@@ -81,11 +81,11 @@
           <v-plain-tag class="mt-1" border type="primary">
             {{ statusMap[row.reportStatus] }}
           </v-plain-tag>
-          <div class="v-author mt-1">
+          <div class="v-icon-text mt-1">
             <van-icon name="contact-o" />
             {{ row.mediaName }}
           </div>
-          <div class="v-date mt-1">
+          <div class="v-icon-text mt-1">
             <van-icon name="clock-o" />
             {{ $parse(row.createTime) }}
           </div>

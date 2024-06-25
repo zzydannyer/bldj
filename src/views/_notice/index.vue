@@ -49,7 +49,7 @@
           />
           <div class="between-center">
             <v-tag :dictData="sys_notice_type" :value="row.noticeType" />
-            <span class="v-date">
+            <span class="v-icon-text">
               <van-icon name="clock-o" />
               {{ formatDate(row.createTime) }}
             </span>

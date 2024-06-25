@@ -37,7 +37,7 @@
       >
         <van-image class="w-[90PX]" fit="cover" :src="useImage('pic')" />
         <van-text-ellipsis :content="'陶依嘉'" rows="1" />
-        <span class="v-date">
+        <span class="v-icon-text">
           <div class="text2">上海市劳模规范</div>
         </span>
       </div>

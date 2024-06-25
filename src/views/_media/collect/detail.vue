@@ -41,7 +41,7 @@
       <div class="my-2 text-gray-500">
         <span>{{ collectDetail.author }}</span>
       </div>
-      <div class="v-date">收藏于:{{ collectDetail.collectTime }}</div>
+      <div class="v-icon-text">收藏于:{{ collectDetail.collectTime }}</div>
     </section>
   </section>
 </template>

@@ -93,7 +93,7 @@
           v-model:name="form.projectName"
         />
 
-        <v-date-picker
+        <v-icon-text-picker
           required
           v-model="form.startTime"
           :min-date="_5_years_ago"
@@ -101,7 +101,7 @@
           :rules="[{ required: true, message: '请选择开始时间' }]"
           placeholder="请选择开始时间"
         />
-        <v-date-picker
+        <v-icon-text-picker
           required
           v-model="form.endTime"
           :min-date="_5_years_ago"

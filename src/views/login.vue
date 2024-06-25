@@ -96,7 +96,7 @@
         success(res: any) {
           console.log('🚀 ~ success ~ res:', res);
           form.socialCode = res.code;
-          form.socialState = res.state;
+          form.socialState = res.state ?? '';
           resolve();
         },
         // 获取失败后的回调

@@ -433,7 +433,7 @@
           placeholder="请输入报道摘要"
           :rules="[{ required: true, message: '请输入报道摘要' }]"
         />
-        <v-date-picker
+        <v-icon-text-picker
           required
           v-model="form.reportTime"
           :min-date="new Date(startTime)"
