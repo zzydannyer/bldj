@@ -1454,6 +1454,24 @@ export default [
         }
       },
       {
+        name: 'ModelDetail',
+        path: 'modelDetail',
+        component: () => import('@/views/workGroup/pages/modelDetail.vue'),
+        meta: {
+          title: '劳模先进详情',
+          icon: ''
+        }
+      },
+      {
+        name: 'WorkDetail',
+        path: 'workDetail',
+        component: () => import('@/views/workGroup/pages/workDetail.vue'),
+        meta: {
+          title: '工作室详情',
+          icon: ''
+        }
+      },
+      {
         name: 'Index',
         path: 'index',
 

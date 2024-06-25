@@ -28,14 +28,18 @@
 <template>
   <section class="bg">
     <div class="tit">劳模风采<span class="line"></span></div>
-    <section class="mt-2 pl-[16PX] whitespace-nowrap overflow-x-auto">
+    <section class="mt-2 pl-[16PX] whitespace-nowrap overflow-x-auto pt-2">
       <div
         v-for="(notice, index) in 10"
         :key="index"
         class="advance-card"
-        @click="router.push('/detail')"
+        @click="router.push('/workGroup/modelDetail')"
       >
-        <van-image class="w-[90PX]" fit="cover" :src="useImage('pic')" />
+        <van-image
+          class="w-[90PX] rounded overflow-hidden"
+          fit="cover"
+          :src="useImage('pic')"
+        />
         <van-text-ellipsis :content="'陶依嘉'" rows="1" />
         <span class="v-date">
           <div class="text2">上海市劳模规范</div>
@@ -47,15 +51,15 @@
   <section class="bg">
     <div class="tit">创新工作室<span class="line"></span></div>
   </section>
-
+  <!--      @click="handleDetail(row.id, row.activitiesId)"-->
   <section class="pb-10 bg-white">
     <div
       v-for="(row, index) in cxgzsl"
       :key="index"
-      class="flex flex-between gap-2 bg-white px-4 pt-2"
-      @click="handleDetail(row.id, row.activitiesId)"
+      class="flex flex-between gap-2 bg-white px-4 pt-5"
+      @click="router.push('/workGroup/workDetail')"
     >
-      <img width="100" height="100" v-src="row.imgUrl" />
+      <img width="100" height="85" v-src="row.imgUrl" class="rounded" />
       <section class="flex-1 text-sm flex-col gap-2">
         <div class="w-full">
           <van-text-ellipsis :content="row.name" rows="1" />
@@ -88,7 +92,7 @@
       @apply m-1 w-8 h-0.5 absolute rounded-sm;
       background-color: #ff2600;
       left: -4px;
-      bottom: -5px;
+      bottom: -12px;
     }
   }
   .detail {
