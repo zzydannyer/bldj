@@ -71,8 +71,6 @@
         refreshing.value = false;
       }
 
-      const _rows = rowsFilter(rows);
-
       list.value = list.value.concat(_rows);
       _total.value = total;
 
@@ -122,19 +120,19 @@
   >
     <van-list
       v-model:loading="loading"
-      error-text="请求失败，请稍后重试"
       :finished="finished"
       finished-text="没有更多了"
+      error-text="请求失败，请稍后重试"
       @load="onLoad"
     >
-      <slot :list="list" name="list">
+      <slot name="list" :list="list">
         <van-cell-group
-          v-for="(row, index) in list"
-          :key="row[keyName] ?? index"
           :border="true"
           :inset="true"
+          v-for="(row, index) in list"
+          :key="row[keyName] ?? index"
         >
-          <slot :index="index" :row="row" />
+          <slot :row="row" :index="index" />
         </van-cell-group>
       </slot>
     </van-list>

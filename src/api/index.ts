@@ -102,7 +102,7 @@ export function getHjxj() {
 }
 //劳模
 export function getLm() {
-  return request({
+  return request<ResData<any>>({
     url: `/mobile/getLm`,
     method: 'GET'
   });

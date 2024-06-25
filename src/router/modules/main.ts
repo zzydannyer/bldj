@@ -999,7 +999,7 @@ export default [
           {
             name: 'TDjDeliberation',
             path: 'TDjDeliberation',
-            component: 'org/deliberationPartyMember/index.vue',
+            component: 'org/deliberationPartyMember/upload.vue',
             meta: {
               title: '民主评议党员',
               icon: '#'
@@ -2161,27 +2161,38 @@ export default [
       {
         name: 'UploadMaterials',
         path: 'uploadMaterials',
-        component: () => import('@/views/culture/pages/video/index.vue'),
+        component: () => import('@/views/culture/pages/video/upload.vue'),
         meta: {
           title: '上传素材',
           icon: '#'
         }
       },
       {
-        name: 'ResponsiBility',
-        path: 'responsiBility',
+        name: 'Responsibility',
+        path: 'responsibility',
         component: () =>
-          import('@/views/culture/pages/responsibility/index.vue'),
+          import('@/views/culture/components/responsibility/responCrates.vue'),
         meta: {
           title: '社会责任',
           icon: '#'
-        }
+        },
+        children: [
+          {
+            name: 'ResponsibilityDetail',
+            path: '/detail',
+            component: () =>
+              import('@/views/culture/pages/responsibility/detail.vue'),
+            meta: {
+              title: '详情',
+              icon: '#'
+            }
+          }
+        ]
       },
       {
-        name: 'Detail',
-        path: 'detail',
-        component: () =>
-          import('@/views/culture/pages/responsibility/detail.vue'),
+        name: 'VideoDetail',
+        path: 'videoDetail',
+        component: () => import('@/views/culture/pages/video/detail.vue'),
         meta: {
           title: '详情',
           icon: '#'
@@ -2203,7 +2214,7 @@ export default [
   //     {
   //       path: '/media/list',
   //       name: 'MediaList',
-  //       component: () => import('@/views/media/list/index.vue'),
+  //       component: () => import('@/views/media/list/upload.vue'),
   //       meta: {
   //         auth: 'multimedia:media:public',
   //         title: '素材列表',
@@ -2224,7 +2235,7 @@ export default [
   //     {
   //       path: '/media/upload',
   //       name: 'MediaUpload',
-  //       component: () => import('@/views/media/upload/index.vue'),
+  //       component: () => import('@/views/media/upload/upload.vue'),
   //       meta: {
   //         auth: 'multimedia:media:list',
   //         title: '素材上传',
@@ -2265,7 +2276,7 @@ export default [
   //     {
   //       path: '/media/review',
   //       name: 'MediaReview',
-  //       component: () => import('@/views/media/review/index.vue'),
+  //       component: () => import('@/views/media/review/upload.vue'),
   //       meta: {
   //         auth: 'multimedia:media:audit',
   //         title: '素材审核',
@@ -2305,7 +2316,7 @@ export default [
   //     {
   //       path: '/media/collect',
   //       name: 'MediaCollect',
-  //       component: () => import('@/views/media/collect/index.vue'),
+  //       component: () => import('@/views/media/collect/upload.vue'),
   //       meta: {
   //         title: '个人收藏',
   //         keepAlive: true,
@@ -2325,7 +2336,7 @@ export default [
   //     {
   //       path: '/media/mediaActivitiesScore',
   //       name: 'MediaActivitiesScore',
-  //       component: () => import('@/views/media/activitiesscore/index.vue'),
+  //       component: () => import('@/views/media/activitiesscore/upload.vue'),
   //       meta: {
   //         title: '活动评分',
   //         keepAlive: true,
@@ -2355,7 +2366,7 @@ export default [
   //     {
   //       path: '/media/mediaActivities',
   //       name: 'mediaActivities',
-  //       component: () => import('@/views/media/activitieShow/index.vue'),
+  //       component: () => import('@/views/media/activitieShow/upload.vue'),
   //       meta: {
   //         title: '活动展示',
   //         keepAlive: true,
@@ -2375,7 +2386,7 @@ export default [
   //     {
   //       path: '/media/mediaEventsShowcase',
   //       name: 'mediaEventsShowcase',
-  //       component: () => import('@/views/media/activitiespublic/index.vue'),
+  //       component: () => import('@/views/media/activitiespublic/upload.vue'),
   //       meta: {
   //         title: '活动排名',
   //         keepAlive: true,
@@ -2398,7 +2409,7 @@ export default [
   //     {
   //       path: '/propaganda/clue-filing',
   //       name: 'PropagandaClueFiling',
-  //       component: () => import('@/views/propaganda/clueFiling/index.vue'),
+  //       component: () => import('@/views/propaganda/clueFiling/upload.vue'),
   //       meta: {
   //         auth: 'multimedia:propagandaClue:query',
   //         title: '新闻线索申报',
@@ -2409,7 +2420,7 @@ export default [
   //     {
   //       path: '/propaganda/approval-clue',
   //       name: 'PropagandaClueApproval',
-  //       component: () => import('@/views/propaganda/approvalClue/index.vue'),
+  //       component: () => import('@/views/propaganda/approvalClue/upload.vue'),
   //       meta: {
   //         auth: 'multimedia:propagandaClue:audit',
   //         title: '新闻线索审核',
@@ -2460,7 +2471,7 @@ export default [
   //     {
   //       path: '/propaganda/filing',
   //       name: 'PropagandaFilling',
-  //       component: () => import('@/views/propaganda/filing/index.vue'),
+  //       component: () => import('@/views/propaganda/filing/upload.vue'),
   //       meta: {
   //         auth: 'multimedia:propaganda:list',
   //         title: '媒体报送',
@@ -2501,7 +2512,7 @@ export default [
   //     {
   //       path: '/propaganda/approval',
   //       name: 'PropagandaApproval',
-  //       component: () => import('@/views/propaganda/approval/index.vue'),
+  //       component: () => import('@/views/propaganda/approval/upload.vue'),
   //       meta: {
   //         auth: 'multimedia:propagandaAudit:list',
   //         title: '媒体审核',
@@ -2532,7 +2543,7 @@ export default [
   //     {
   //       path: '/propaganda/approval-new',
   //       name: 'PropagandaApprovalNew',
-  //       component: () => import('@/views/propaganda/approvalNew/index.vue'),
+  //       component: () => import('@/views/propaganda/approvalNew/upload.vue'),
   //       meta: {
   //         auth: 'multimedia:propagandaAuditNew:list',
   //         title: '新媒体审核',
@@ -2566,7 +2577,7 @@ export default [
   //     {
   //       path: '/task/release',
   //       name: 'TaskRelease',
-  //       component: () => import('@/views/task/release/index.vue'),
+  //       component: () => import('@/views/task/release/upload.vue'),
   //       meta: {
   //         auth: 'work:workMain:list',
   //         title: '日程任务发布',
@@ -2617,7 +2628,7 @@ export default [
   //     {
   //       path: '/task/execution',
   //       name: 'TaskExecution',
-  //       component: () => import('@/views/task/execution/index.vue'),
+  //       component: () => import('@/views/task/execution/upload.vue'),
   //       meta: {
   //         auth: 'work:workFeedback:list',
   //         title: '日程任务执行',
@@ -2671,7 +2682,7 @@ export default [
   //     {
   //       path: '/public/resource',
   //       name: 'PublicResource',
-  //       component: () => import('@/views/resource/index.vue'),
+  //       component: () => import('@/views/resource/upload.vue'),
   //       meta: {
   //         auth: 'publicresource:publicResourceFile:list',
   //         title: '公共资源',
@@ -2724,7 +2735,7 @@ export default [
   //     {
   //       path: '/msg/message',
   //       name: 'Message',
-  //       component: () => import('@/views/message/index.vue'),
+  //       component: () => import('@/views/message/upload.vue'),
   //       meta: {
   //         title: '消息待办',
   //         keepAlive: true,
@@ -2747,7 +2758,7 @@ export default [
   //     {
   //       path: '/notice/announcement',
   //       name: 'Notice',
-  //       component: () => import('@/views/notice/index.vue'),
+  //       component: () => import('@/views/notice/upload.vue'),
   //       meta: {
   //         auth: 'system:notice:list',
   //         title: '公告通知',

@@ -16,7 +16,7 @@
 
   const { logout } = userInfoStore;
   const { auths } = storeToRefs(userInfoStore);
-  console.log('🚀 ~ file: index.vue:19 ~ auths:', auths);
+  console.log('🚀 ~ file: upload.vue:19 ~ auths:', auths);
   const container = ref<HTMLElement>();
 
   const show = ref(false);
