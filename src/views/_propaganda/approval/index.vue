@@ -3,7 +3,7 @@
   import { listAuditPropaganda } from '@/api/_media/propaganda';
   import { PropagandaMainQuery } from '@/types/_media/propaganda';
   import { useGlobal } from '@/utils';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { storeToRefs } from 'pinia';
   import { Icon } from '@iconify/vue';
 

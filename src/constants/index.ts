@@ -59,3 +59,9 @@ export const ErrorCode: { [key: number]: string } = {
   [ResCode.BadGateway]: '系统未知错误，请反馈给管理员',
   [-1]: '系统未知错误，请反馈给管理员'
 };
+
+export enum UserType {
+  Group = '集团',
+  Grassroots = '基层',
+  Unknown = '未知'
+}

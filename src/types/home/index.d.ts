@@ -1,8 +1,8 @@
 export interface HomeResData {
   topic_pic: TopicPic[];
-  home_jc_news: HomeJcNews[];
+  home_jc_news: HomeNews[];
   home_topic: HomeTopic[];
-  home_jt_news: HomeJtNews[];
+  home_jt_news: HomeNews[];
   home_system: HomeSystem[];
   home_head_news: HomeHeadNews[];
   home_notice: HomeNotice[];
@@ -21,11 +21,10 @@ interface TopicPic extends Basic {
   topicName: string;
 }
 
-interface HomeJcNews extends Basic {}
+interface HomeNews extends Basic {}
 interface HomeTopic extends Basic {
   picUrl: string;
 }
-interface HomeJtNews extends Basic {}
 interface HomeSystem extends Basic {}
 
 interface HomeHeadNews extends Basic {

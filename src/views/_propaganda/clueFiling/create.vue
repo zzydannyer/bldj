@@ -7,13 +7,13 @@
     Toast
   } from 'vant';
   import { joinDate, _5_years_ago } from '@/utils/date';
-  import { router } from '@/router';
+
   import { useGlobal } from '@/utils';
   import { emitter } from '@/plugins/mitt';
   import { dateFormatter } from '@/utils/date';
   import ProjectPicker from '@/views/media/projectPicker.tsx';
   import { storeToRefs } from 'pinia';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { PropagandaClue } from '@/types/_media/propagandaClue';
   import { addPropagandaClue } from '@/api/_media/propagandaClue';
   import dayjs from 'dayjs';

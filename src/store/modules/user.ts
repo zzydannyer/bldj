@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 import { stringify, parse } from 'qs';
 import { rmToken } from '@/utils/auth';
-import type { UserInfo } from '@/types/user';
 import { sessionKey } from '@/constants';
 import { showSuccessToast } from 'vant';
+import { UserType } from '@/constants';
+import type { UserInfo } from '@/types/user';
 
-const useUserInfoStore = defineStore('user-info', {
+export default defineStore('user', {
   persist: {
     key: sessionKey,
     storage: sessionStorage,
@@ -31,6 +32,12 @@ const useUserInfoStore = defineStore('user-info', {
         list.push({ value: partyScopeId, label: partyScopeName });
       }
       return list;
+    },
+    userType(state): UserType {
+      const orgId = state.user.orgId;
+      if (!orgId) return UserType.Unknown;
+      if (orgId.startsWith('0001') || orgId === '-1') return UserType.Group;
+      else return UserType.Grassroots;
     }
   },
   actions: {
@@ -51,5 +58,3 @@ const useUserInfoStore = defineStore('user-info', {
     }
   }
 });
-
-export default useUserInfoStore;

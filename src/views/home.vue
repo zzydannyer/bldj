@@ -1,12 +1,18 @@
 <script setup lang="ts">
   import { homeContentList } from '@/api/home';
-  import type { HomeNotice } from '@/types/home';
+  import type { HomeHeadNews, HomeNews, HomeNotice } from '@/types/home';
   import { useImage, useIcon } from '@/utils/assets';
   import { register } from 'swiper/element/bundle';
-
+  import { useStore } from '@/store';
+  import { storeToRefs } from 'pinia';
+  import { UserType } from '@/constants';
+  // Swiper
   register();
   const router = useRouter();
+  const { userInfo } = useStore();
+  const { userType } = storeToRefs(userInfo);
 
+  // 轮播
   const spaceBetween = 10;
   const onProgress = (e: any) => {
     const [swiper, progress] = e.detail;
@@ -16,7 +22,8 @@
   const onSlideChange = (e: any) => {
     // console.log('slide changed');
   };
-
+  const swiperList = ref<HomeHeadNews[]>([]);
+  // 导航
   const gridItems = [
     {
       icon: 'index-icon-politics',
@@ -50,6 +57,7 @@
     }
   ];
 
+  //通知公告
   const homeNotice = ref<HomeNotice[]>([]);
   const noticeCards = ref([
     {
@@ -68,12 +76,29 @@
       bg: useImage('home-card3')
     }
   ]);
+
+  //最新新闻
+  const homeNews = ref<HomeNews[]>([]);
   async function getData() {
     try {
       const {
-        data: { home_notice }
+        data: { home_head_news, home_notice, home_jt_news, home_jc_news }
       } = await homeContentList();
+      // 轮播数据
+      swiperList.value = home_head_news;
+      // 通知公告
       homeNotice.value = home_notice.slice(0, 3);
+      // 最新新闻
+      switch (userType.value) {
+        case UserType.Group:
+          homeNews.value = home_jt_news.slice(0, 8);
+          break;
+        case UserType.Grassroots:
+          homeNews.value = home_jc_news.slice(0, 8);
+          break;
+        default:
+          break;
+      }
     } catch (e) {
       console.error(e);
     }
@@ -98,8 +123,12 @@
       @swiperprogress="onProgress"
       @swiperslidechange="onSlideChange"
     >
-      <swiper-slide v-for="i in 10" :key="i" class="swiper-slide">
-        <van-image class="w-full h-full" fit="cover" :src="useImage('test')" />
+      <swiper-slide
+        v-for="pic in swiperList"
+        :key="pic.uid"
+        class="swiper-slide"
+      >
+        <van-image v-src="pic.picUrl" class="w-full h-full" fit="cover" />
       </swiper-slide>
     </swiper-container>
 
@@ -163,7 +192,7 @@
       </section>
     </van-cell-group>
 
-    <van-cell-group class="home-cell-group">
+    <van-cell-group class="home-cell-group mt-4">
       <van-cell
         is-link
         title="最新新闻"
@@ -171,10 +200,7 @@
         value="全部"
         value-class="text-[#e20a0a]"
       />
-      <!-- <VCard
-      v-for=""
-        class=""
-      ></VCard> -->
+      <VCard v-for="news in homeNews" :key="news.uid" class=""> 66 </VCard>
     </van-cell-group>
   </main>
 </template>

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { DictData } from '@/plugins/dict';
 
-const useDictStore = defineStore({
+export default defineStore({
   id: 'dict',
   state: () => ({
     dict: [] as any
@@ -40,5 +40,3 @@ const useDictStore = defineStore({
     }
   }
 });
-
-export default useDictStore;

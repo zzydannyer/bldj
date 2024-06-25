@@ -5,7 +5,7 @@
     listMediaActivitiesScoreWithPending,
     listMediaActivitiesScoreWithCompleted
   } from '@/api/_media';
-  import { router } from '@/router';
+
   import { useGlobal } from '@/utils';
   import { emitter } from '@/plugins/mitt';
   const queryParams = reactive<MediaMainQuery>(new MediaMainQuery());

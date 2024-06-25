@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import useUserInfoStore from '@/store/modules/userInfo';
+import useUserInfoStore from '@/store/modules/user';
 import { parse } from 'qs';
 import { sessionKey, TokenKey } from '@/constants';
 import { isString, includes } from 'lodash';
@@ -36,6 +36,8 @@ export function hasAuth(value: string | Array<string>): boolean {
 
   if (includes(permissions, '*:*:*')) return true;
 
-  const isAuths = isString(value) ? includes(permissions, value) : isIncludeAllChildren(value, permissions);
+  const isAuths = isString(value)
+    ? includes(permissions, value)
+    : isIncludeAllChildren(value, permissions);
   return isAuths ? true : false;
 }

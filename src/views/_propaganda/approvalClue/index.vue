@@ -2,7 +2,7 @@
   import { checkRole } from '@/api/_media/propaganda';
   import { PropagandaMainQuery } from '@/types/_media/propaganda';
   import { useGlobal } from '@/utils';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { emitter } from '@/plugins/mitt';
   import { storeToRefs } from 'pinia';
   import { listAuditPropagandaClue } from '@/api/_media/propagandaClue';

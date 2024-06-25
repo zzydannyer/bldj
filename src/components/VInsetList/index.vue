@@ -3,8 +3,6 @@
   import { isNotEmpty } from '@/utils';
   import { ComponentPublicInstance } from 'vue';
   import { emitter } from '@/plugins/mitt';
-  import useScrollTopStore from '@/store/modules/scrollTop';
-  import useNavBarStore from '@/store/modules/navBar';
 
   defineOptions({
     name: 'VInsetList'
@@ -29,29 +27,17 @@
   const loading = ref(false);
   const finished = ref(false);
   const refreshing = ref(false);
-  const scrollTopStore = useScrollTopStore();
   const proxy = getCurrentInstance()?.proxy as ComponentPublicInstance;
 
   // 记录滚动条位置
   const app = document.querySelector('#app')!;
-  const navBarStore = useNavBarStore();
-  const fn = throttle(navBarStore.watchScrollTop, 0, {
-    leading: true,
-    trailing: false
-  });
 
-  onBeforeRouteLeave(() => {
-    scrollTopStore.setScrollTop(route.name!, app.scrollTop);
-  });
+  onBeforeRouteLeave(() => {});
 
   // 滚动隐藏头部
-  onActivated(() => {
-    app.addEventListener('scroll', fn);
-  });
+  onActivated(() => {});
 
-  onDeactivated(() => {
-    app.removeEventListener('scroll', fn);
-  });
+  onDeactivated(() => {});
 
   onMounted(() => emitter.on('refresh', onRefresh));
 
@@ -128,11 +114,27 @@
 </script>
 
 <template>
-  <van-pull-refresh ref="listRef" v-model="refreshing" :class="listClass" @refresh="onRefresh">
-    <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" error-text="请求失败，请稍后重试" @load="onLoad">
-      <slot name="list" :list="list">
-        <van-cell-group :border="true" :inset="true" v-for="(row, index) in list" :key="row[keyName] ?? index">
-          <slot :row="row" :index="index" />
+  <van-pull-refresh
+    ref="listRef"
+    v-model="refreshing"
+    :class="listClass"
+    @refresh="onRefresh"
+  >
+    <van-list
+      v-model:loading="loading"
+      error-text="请求失败，请稍后重试"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+      <slot :list="list" name="list">
+        <van-cell-group
+          v-for="(row, index) in list"
+          :key="row[keyName] ?? index"
+          :border="true"
+          :inset="true"
+        >
+          <slot :index="index" :row="row" />
         </van-cell-group>
       </slot>
     </van-list>
@@ -145,11 +147,13 @@
     min-height: -webkit-fill-available;
     padding: $body-padding $body-padding 0;
     &.dropmenu-search {
-      padding: calc($search-height + $dropmenu-height + $body-padding) $body-padding 0;
+      padding: calc($search-height + $dropmenu-height + $body-padding)
+        $body-padding 0;
     }
 
     &.search-tabs {
-      padding: calc($search-height + $tabs-height + $body-padding) $body-padding 0;
+      padding: calc($search-height + $tabs-height + $body-padding) $body-padding
+        0;
     }
 
     &.search {

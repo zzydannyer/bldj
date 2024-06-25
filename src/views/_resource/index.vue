@@ -7,7 +7,7 @@
     updataIsHomeShow
   } from '@/api/_media/publicResource';
   import { download } from '@/plugins/download';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { hasAuth } from '@/utils/auth';
   import { Icon } from '@iconify/vue';
   import { emitter } from '@/plugins/mitt';

@@ -7,7 +7,7 @@ import axios, {
   CustomParamsSerializer
 } from 'axios';
 import { stringify } from 'qs';
-import useUserInfoStore from '@/store/modules/userInfo';
+import useUserInfoStore from '@/store/modules/user';
 import { getToken, formatToken } from '@/utils/auth';
 import { ResCode, ErrorCode } from '@/constants';
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1

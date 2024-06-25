@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import useNavBarStore from '@/store/modules/navBar';
   import { storeToRefs } from 'pinia';
 
   defineOptions({
@@ -25,18 +24,10 @@
   const showPopMenu = ref(false);
 
   const searchVal = defineModel('searchVal', { default: '' });
-  const { visible } = storeToRefs(useNavBarStore());
   const clear = () => {
     searchVal.value = '';
     emits('handleSearch');
   };
-  const popStyle = computed(() => {
-    const navBar = visible.value ? '+ var(--van-nav-bar-height)' : '';
-    const tabs = props.showTabs ? '+ var(--van-tabs-line-height)' : '';
-    return {
-      top: `calc(20px + var(--van-search-input-height) ${navBar} ${tabs})`
-    };
-  });
 
   defineSlots<{
     dropMenu: () => any;
@@ -45,18 +36,23 @@
 </script>
 
 <template>
-  <van-sticky class="v-animation" :offset-top="visible ? 46 : 0" style="height: 54px">
+  <van-sticky class="v-animation" style="height: 54px">
     <van-search
-      v-model="searchVal"
       v-if="showSearch"
-      show-action
-      shape="round"
+      v-model="searchVal"
       :clearable="false"
       :placeholder="props.placeholder"
+      shape="round"
+      show-action
       @search="emits('handleSearch')"
     >
       <template #left>
-        <van-icon v-if="showPopIcon" class="pr-2" name="filter-o" @click="showPopMenu = !showPopMenu" />
+        <van-icon
+          v-if="showPopIcon"
+          class="pr-2"
+          name="filter-o"
+          @click="showPopMenu = !showPopMenu"
+        />
       </template>
       <template #right-icon>
         <van-icon v-show="searchVal" color="#ccc" name="clear" @click="clear" />
@@ -69,7 +65,13 @@
     <slot name="dropMenu" />
   </van-sticky>
 
-  <van-popup v-model:show="showPopMenu" teleport="body" position="top" round :z-index="1" :style="popStyle">
+  <van-popup
+    v-model:show="showPopMenu"
+    position="top"
+    round
+    teleport="body"
+    :z-index="1"
+  >
     <slot name="popMenu" />
   </van-popup>
 </template>

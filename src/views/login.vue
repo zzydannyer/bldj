@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import {
     closeToast,
     showFailToast,

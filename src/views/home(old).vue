@@ -7,7 +7,7 @@
   import { delay, throttle } from 'lodash';
   import { emitter } from '@/plugins/mitt';
   import { useGlobal } from '@/utils';
-  import { router } from '@/router';
+
   import { closeToast, showDialog, showLoadingToast } from 'vant';
   import {
     auditAlertNum,
@@ -266,20 +266,20 @@
 <template>
   <main class="home-container">
     <v-card class="home-nav">
-      <van-grid clickable :column-num="5" :border="false" icon-size="48px">
+      <van-grid :border="false" clickable :column-num="5" icon-size="48px">
         <van-grid-item
           v-for="({ icon, name, sum, path }, index) in iconList"
-          :icon="useIcon(icon)"
-          :text="name"
           :key="index"
           :badge="sum"
-          :to="path"
-          @click="handleGridItemClick(name)"
           :badge-props="{
             max: 9,
             showZero: false,
             offset: [-10, 5]
           }"
+          :icon="useIcon(icon)"
+          :text="name"
+          :to="path"
+          @click="handleGridItemClick(name)"
         />
       </van-grid>
     </v-card>
@@ -288,8 +288,8 @@
       v-model:show="showAction"
       :actions="actions"
       cancel-text="取消"
-      description="宣传考核"
       close-on-click-action
+      description="宣传考核"
       @select="onSelect"
     >
       <template #action="{ action }">
@@ -307,24 +307,24 @@
         <van-skeleton-title style="height: 40px" title-width="100%" />
       </template>
       <van-notice-bar
+        background="#ecf9ff"
         class="mt-4"
+        color="#1989fa"
         left-icon="volume-o"
         :scrollable="false"
-        color="#1989fa"
-        background="#ecf9ff"
       >
         <van-swipe
           v-if="noticeList.length > 0"
-          vertical
-          class="notice-swipe"
           :autoplay="3000"
-          :touchable="true"
+          class="notice-swipe"
           :show-indicators="false"
+          :touchable="true"
+          vertical
         >
           <van-swipe-item
-            @click="showMsg(notice)"
             v-for="notice in noticeList"
             :key="notice.noticeId"
+            @click="showMsg(notice)"
           >
             {{ notice.noticeTitle }}
           </van-swipe-item>
@@ -339,7 +339,7 @@
     <van-skeleton :loading="loading">
       <template #template>
         <div class="w-full flex gap-2">
-          <div v-for="_ in 3" class="w-full flex flex-col gap-1" :key="_">
+          <div v-for="_ in 3" :key="_" class="w-full flex flex-col gap-1">
             <van-skeleton-image image-shape="square" image-size="100%" />
             <van-skeleton-title title-width="100%" />
           </div>
@@ -348,17 +348,17 @@
 
       <swiper-container
         v-if="bannerList.length"
-        :loop="true"
-        :slides-per-view="3"
-        :space-between="10"
-        :centered-slides="false"
-        :breakpoints="breakpoints"
         :autoplay="{ disableOnInteraction: false, delay: 0 }"
+        :breakpoints="breakpoints"
+        :centered-slides="false"
         :freeMode="true"
-        :speed="4000"
         :injectStyles="[
           '.swiper-wrapper{transition-timing-function: linear !important;}'
         ]"
+        :loop="true"
+        :slides-per-view="3"
+        :space-between="10"
+        :speed="4000"
       >
         <swiper-slide
           v-for="{ url, resourceName, id } in bannerList"
@@ -370,7 +370,7 @@
             :src="url"
           >
             <template #loading>
-              <van-loading type="spinner" size="20" />
+              <van-loading size="20" type="spinner" />
             </template>
             <template #error>加载失败</template>
           </van-image>
@@ -381,7 +381,7 @@
         </swiper-slide>
       </swiper-container>
 
-      <van-empty v-else image-size="30vw" description="暂无推荐素材" />
+      <van-empty v-else description="暂无推荐素材" image-size="30vw" />
     </van-skeleton>
     <!-- 宣传分数排名 -->
     <section class="main-title mt-4">
@@ -393,7 +393,7 @@
       <template #template>
         <div class="w-full flex flex-col gap-2 mt-2">
           <div v-for="_ in 5" :key="_">
-            <van-skeleton-paragraph style="height: 60px" row-width="100%" />
+            <van-skeleton-paragraph row-width="100%" style="height: 60px" />
           </div>
         </div>
       </template>
@@ -408,30 +408,30 @@
     <van-skeleton :loading="loading">
       <template #template>
         <div class="w-full flex flex-col gap-2">
-          <div v-for="_ in 5" class="between-center gap-2" :key="_">
+          <div v-for="_ in 5" :key="_" class="between-center gap-2">
             <van-skeleton-paragraph row-width="70%" />
             <van-skeleton-title title-width="30%" />
           </div>
         </div>
       </template>
 
-      <div class="resources" v-if="resourceList.length">
+      <div v-if="resourceList.length" class="resources">
         <van-cell
-          clickable
-          class="resources-item"
           v-for="{ id, resTitle, createTime } in resourceList"
           :key="id"
+          class="resources-item"
+          clickable
           @click="navigateTo('/public/resource/detail', id)"
         >
           <template #title>
-            <van-text-ellipsis :content="resTitle" class="resources-text" />
+            <van-text-ellipsis class="resources-text" :content="resTitle" />
           </template>
           <template #value>
             <span class="resources-time">{{ createTime }}</span>
           </template>
         </van-cell>
       </div>
-      <van-empty v-else image-size="30vw" description="暂无公共资源" />
+      <van-empty v-else description="暂无公共资源" image-size="30vw" />
     </van-skeleton>
 
     <!-- <van-tabbar v-model="active">

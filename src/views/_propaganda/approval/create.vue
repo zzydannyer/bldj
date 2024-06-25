@@ -5,7 +5,7 @@
   import { _5_years_ago } from '@/utils/date';
   import { submitToGroupNew } from '@/api/_media/propaganda';
   import { last } from 'lodash';
-  import { router } from '@/router';
+
   import { emitter } from '@/plugins/mitt';
 
   // import VueOfficePdf from '@vue-office/pdf'
@@ -168,28 +168,28 @@
       <van-cell-group inset>
         <!-- 赋分依据 -->
         <van-field
-          required
           v-model="scoreDetailText"
-          is-link
+          autocomplete="off"
           clearble
+          is-link
           label="赋分依据"
           placeholder="请选择赋分依据"
-          autocomplete="off"
+          required
+          :rules="[{ required: true, message: '请选择赋分依据' }]"
           @clear="clearScoreStandard"
           @click="showScoreDetail = true"
-          :rules="[{ required: true, message: '请选择赋分依据' }]"
         />
-        <van-popup v-model:show="showScoreDetail" round position="bottom">
+        <van-popup v-model:show="showScoreDetail" position="bottom" round>
           <van-cascader
             :closeable="false"
-            title="赋分依据"
-            :options="scoreOption"
             :field-names="fieldNames"
+            :options="scoreOption"
+            title="赋分依据"
             @finish="onScoreDetailConfirm"
           />
         </van-popup>
         <!-- 额外附加分 -->
-        <van-cell clickable title="" @click="toggle" v-if="extra_1_field">
+        <van-cell v-if="extra_1_field" clickable title="" @click="toggle">
           <template #value>
             <div class="flex gap-2 justify-end items-center">
               <span>额外加分项</span>
@@ -202,18 +202,18 @@
           v-if="extra_1_field && showExtra"
           v-model="extra_1_text"
           is-link
-          readonly
           label="额外加分项1"
           placeholder="请选择额外加分项1"
+          readonly
           @click="extra_1_pop = true"
         />
-        <van-popup v-model:show="extra_1_pop" round position="bottom">
+        <van-popup v-model:show="extra_1_pop" position="bottom" round>
           <van-picker
             :columns="extra_1_list"
             :columns-field-names="{ text: 'text', value: 'id' }"
             teleport="body"
-            @confirm="extra_1_confirm"
             @cancel="extra_1_pop = false"
+            @confirm="extra_1_confirm"
           />
         </van-popup>
         <!-- 额外加分项2 -->
@@ -221,23 +221,23 @@
           v-if="extra_2_field && showExtra"
           v-model="extra_2_text"
           is-link
-          readonly
           label="额外加分项2"
           placeholder="请选择额外加分项2"
+          readonly
           @click="extra_2_pop = true"
         />
-        <van-popup v-model:show="extra_2_pop" round position="bottom">
+        <van-popup v-model:show="extra_2_pop" position="bottom" round>
           <van-picker
             :columns="extra_2_list"
             :columns-field-names="{ text: 'text', value: 'id' }"
             teleport="body"
-            @confirm="extra_2_confirm"
             @cancel="extra_2_pop = false"
+            @confirm="extra_2_confirm"
           />
         </van-popup>
       </van-cell-group>
 
-      <van-button class="my-4" round block type="success" native-type="submit">
+      <van-button block class="my-4" native-type="submit" round type="success">
         提交
       </van-button>
     </van-form>

@@ -16,7 +16,7 @@
     showSuccessToast,
     showToast
   } from 'vant';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { joinDate, _5_years_ago, dateFormatter } from '@/utils/date';
   import { updatePropaganda } from '@/api/_media/propaganda';
   import { debounce, last } from 'lodash';

@@ -10,7 +10,7 @@
   import { appealPropaganda } from '@/api/_media/propaganda';
   import appealDialog from './appealDialog';
   import { checkRole } from '@/api/_media/propaganda';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { emitter } from '@/plugins/mitt';
   import { hasAuth } from '@/utils/auth';
   import { storeToRefs } from 'pinia';

@@ -3,7 +3,7 @@
   import { useImage } from '@/utils/assets';
   import { Icon } from '@iconify/vue';
   import { storeToRefs } from 'pinia';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import allRoutes from '@/router/routes';
   import { hasAuth } from '@/utils/auth';
   import { cloneDeep } from 'lodash';

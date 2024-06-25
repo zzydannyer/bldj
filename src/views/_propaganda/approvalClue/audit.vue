@@ -10,7 +10,7 @@
   import { last } from 'lodash';
   import { toRaw } from 'vue';
   import { useGlobal } from '@/utils';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { emitter } from '@/plugins/mitt';
   import { storeToRefs } from 'pinia';
   import {

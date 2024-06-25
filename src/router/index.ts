@@ -2,7 +2,6 @@ import type { App } from 'vue';
 import { createRouter, createWebHistory, Router } from 'vue-router';
 import routes from './routes';
 import { getToken } from '@/utils/auth';
-import useTransitionStore from '@/store/modules/transition';
 
 const router: Router = createRouter({
   history: createWebHistory(), // history 模式则使用 createWebHistory()
@@ -25,17 +24,9 @@ router.beforeEach(async (to, from, next) => {
 });
 
 router.afterEach((to, from) => {
-  const store = useTransitionStore();
-  if (to.path.split('/').length > from.path.split('/').length) {
-    store.setTransitionName('right');
-  } else {
-    store.setTransitionName('left');
-  }
   // NProgress.done();
 });
 
 export default function setupRouter(app: App) {
   app.use(router);
 }
-
-export { router };

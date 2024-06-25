@@ -1,7 +1,7 @@
 <script setup lang="ts">
   // 审批
   import { useGlobal } from '@/utils';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { storeToRefs } from 'pinia';
   import { showConfirmDialog, showSuccessToast } from 'vant';
   import {

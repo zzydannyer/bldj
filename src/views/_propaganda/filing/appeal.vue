@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { appealPropaganda } from '@/api/_media/propaganda';
   import { showFailToast, showSuccessToast } from 'vant';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   import { storeToRefs } from 'pinia';
   const route = useRoute();
   const router = useRouter();

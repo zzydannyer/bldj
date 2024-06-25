@@ -17,13 +17,13 @@
   import { joinDate, _5_years_ago } from '@/utils/date';
   import { addPropaganda, checkRole } from '@/api/_media/propaganda';
   import { debounce, last } from 'lodash';
-  import { router } from '@/router';
+
   import { useGlobal } from '@/utils';
   import { emitter } from '@/plugins/mitt';
   import { dateFormatter } from '@/utils/date';
   import ProjectPicker from '@/views/media/projectPicker.tsx';
   import { storeToRefs } from 'pinia';
-  import useUserInfoStore from '@/store/modules/userInfo';
+  import useUserInfoStore from '@/store/modules/user';
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
   const { group_propaganda_ratio, group_propaganda_type } = $useDict(
     'group_propaganda_ratio',

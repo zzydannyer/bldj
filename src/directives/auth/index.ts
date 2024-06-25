@@ -1,5 +1,5 @@
 import type { App, Directive, DirectiveBinding } from 'vue';
-import useUserInfoStore from '@/store/modules/userInfo';
+import useUserInfoStore from '@/store/modules/user';
 import { isString, includes } from 'lodash';
 import { hasAuth } from '@/utils/auth';
 
