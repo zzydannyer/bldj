@@ -9,7 +9,7 @@
   import { useIcon } from '@/utils/assets';
   import { encrypt } from '@/plugins/encrypt';
   import { setToken, getToken } from '@/utils/auth';
-  import { FeishuLoginReq } from '@/types/user';
+  import { LoginRes } from '@/types/user';
   import AuthServer from '@/api/login';
 
   const route = useRoute();
@@ -30,7 +30,7 @@
         message: '登录中...',
         forbidClick: true
       });
-      let res;
+      let res = {} as ResData<LoginRes>;
       if (isFeishu) {
         await getSocialCode();
         if (!isBinding.value) {
@@ -46,12 +46,14 @@
             source: form.source
           });
         }
-      } else {
-        res = await AuthServer.USER_LOGIN({
-          password: encrypt(form.password),
-          username: encrypt(form.username)
-        });
       }
+      // 用户名密码登录
+      // else {
+      //   res = await AuthServer.USER_LOGIN({
+      //     password: encrypt(form.password),
+      //     username: encrypt(form.username)
+      //   });
+      // }
       let token = res.data?.token;
       token && setToken(token);
       const { data: userInfo } = await AuthServer.GET_USER_INFO();
@@ -77,6 +79,7 @@
       source: form.source
     });
     isBinding.value = data;
+
     if (data) {
       login(true);
     } else {
