@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Search from '@/views/culture/components/responsibility/search.vue';
-  import ResponsContent from '@/views/culture/components/responsibility/ResponsContent.vue';
+  import Search from '@/views/culture/social/search.vue';
+  import SocialContent from '@/views/culture/social/content.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   const text = '沙家邦红色党建活动';
   defineOptions({
@@ -19,6 +19,6 @@
     <template #title>
       <van-text-ellipsis :content="text" @click="router.push('/detail')" />
     </template>
-    <ResponsContent :count="i" :name="'name' + i" />
+    <SocialContent :count="i" :name="'name' + i" />
   </v-card>
 </template>

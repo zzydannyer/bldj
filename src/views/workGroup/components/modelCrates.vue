@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Help from '@/views/culture/responsibility/helping.vue';
+  import Help from '@/views/culture/social/helping.vue';
   import { getLm } from '@/api';
   import { useImage } from '@/utils/assets';
   import { listPublicMediaActivitiesScore } from '@/api/_media';
@@ -59,7 +59,7 @@
       class="flex flex-between gap-2 bg-white px-4 pt-5"
       @click="router.push('/workGroup/workDetail')"
     >
-      <img width="100" height="85" v-src="row.imgUrl" class="rounded" />
+      <img v-src="row.imgUrl" class="rounded" height="85" width="100" />
       <section class="flex-1 text-sm flex-col gap-2">
         <div class="w-full">
           <van-text-ellipsis :content="row.name" rows="1" />

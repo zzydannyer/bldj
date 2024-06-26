@@ -2185,27 +2185,15 @@ export default [
           icon: '#'
         }
       },
+
       {
-        name: 'Responsibility',
-        path: 'responsibility',
-        component: () =>
-          import('@/views/culture/responsibility/responCrates.vue'),
+        name: 'SocialDetail',
+        path: '/social/detail',
+        component: () => import('@/views/culture/social/detail.vue'),
         meta: {
-          title: '社会责任',
+          title: '社会责任详情',
           icon: '#'
-        },
-        children: [
-          {
-            name: 'ResponsibilityDetail',
-            path: '/detail',
-            component: () =>
-              import('@/views/culture/responsibility/detail.vue'),
-            meta: {
-              title: '详情',
-              icon: '#'
-            }
-          }
-        ]
+        }
       },
       {
         name: 'VideoDetail',
