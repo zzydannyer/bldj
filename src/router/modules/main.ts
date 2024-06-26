@@ -2179,7 +2179,7 @@ export default [
       {
         name: 'UploadMaterials',
         path: 'uploadMaterials',
-        component: () => import('@/views/culture/pages/video/upload.vue'),
+        component: () => import('@/views/culture/video/upload.vue'),
         meta: {
           title: '上传素材',
           icon: '#'
@@ -2189,7 +2189,7 @@ export default [
         name: 'Responsibility',
         path: 'responsibility',
         component: () =>
-          import('@/views/culture/components/responsibility/responCrates.vue'),
+          import('@/views/culture/responsibility/responCrates.vue'),
         meta: {
           title: '社会责任',
           icon: '#'
@@ -2199,7 +2199,7 @@ export default [
             name: 'ResponsibilityDetail',
             path: '/detail',
             component: () =>
-              import('@/views/culture/pages/responsibility/detail.vue'),
+              import('@/views/culture/responsibility/detail.vue'),
             meta: {
               title: '详情',
               icon: '#'
@@ -2210,7 +2210,7 @@ export default [
       {
         name: 'VideoDetail',
         path: 'videoDetail',
-        component: () => import('@/views/culture/pages/video/detail.vue'),
+        component: () => import('@/views/culture/video/detail.vue'),
         meta: {
           title: '详情',
           icon: '#'

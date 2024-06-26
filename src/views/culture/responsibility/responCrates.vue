@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Help from '@/views/culture/components/responsibility/helping.vue';
+  import Help from '@/views/culture/responsibility/helping.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   defineOptions({
     name: 'MediaList'

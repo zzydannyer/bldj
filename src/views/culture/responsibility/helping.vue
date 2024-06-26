@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Search from '@/views/culture/components/responsibility/search.vue';
-  import ResponsContent from '@/views/culture/components/responsibility/ResponsContent.vue';
+  import Search from '@/views/culture/responsibility/search.vue';
+  import ResponsContent from '@/views/culture/responsibility/ResponsContent.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   const text = '沙家邦红色党建活动';
   defineOptions({
