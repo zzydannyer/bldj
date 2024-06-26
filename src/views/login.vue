@@ -125,7 +125,7 @@
       await authBinding();
     });
   }
-  // onBeforeMount(beforeLogin);
+  onBeforeMount(beforeLogin);
 </script>
 
 <template>
