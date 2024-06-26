@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import ModelCrates from '@/views/workGroup/components/modelCrates.vue';
   import CareCrates from '@/views/workGroup/components/careCrates.vue';
+  import YouthCrates from '@/views/workGroup/components/youthCrates.vue';
   const active = ref('model');
 </script>
 <template>
@@ -17,6 +18,7 @@
   </van-tabs>
   <ModelCrates v-if="active === 'model'" />
   <CareCrates v-if="active === 'care'" />
+  <YouthCrates v-if="active === 'youth'" />
 </template>
 <style lang="scss" scoped>
   .menu {
