@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Search from '@/views/culture/components/responsibility/search.vue';
-  import ResponsContent from '@/views/culture/components/responsibility/ResponsContent.vue';
+  import Search from '@/views/discipline/components/integrity/search.vue';
+  import List from '@/views/discipline/components/integrity/list.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   const text = '沙家邦红色党建活动';
   defineOptions({
@@ -17,11 +17,8 @@
   <Search />
   <v-card v-for="i in 10" :key="i" class="mt-3 mx-4">
     <template #title>
-      <van-text-ellipsis
-        :content="text"
-        @click="router.push('/culture/detail')"
-      />
+      <van-text-ellipsis :content="text" @click="router.push('/detail')" />
     </template>
-    <ResponsContent :count="i" :name="'name' + i" />
+    <List :count="i" :name="'name' + i" />
   </v-card>
 </template>

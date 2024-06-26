@@ -10,7 +10,7 @@
 </script>
 <template>
   <div class="v-card">
-    <div v-if="$slots.name" class="v-card-title">
+    <div class="v-card-title">
       <slot name="title"></slot>
     </div>
 
