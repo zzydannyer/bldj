@@ -8,6 +8,7 @@
 
   const route = useRoute();
   const noticeId = route.params.noticeId;
+  z;
   const detail = ref<SysNotice>();
   const { $value_to_label, $useDict } = useGlobal<GlobalPropertiesApi>();
   const { sys_notice_type } = $useDict('sys_notice_type');
@@ -37,15 +38,15 @@
     <div class="describe">
       <div class="flex flex-nowrap">
         <div class="text-xs">
-          <Icon icon="solar:user-linear" class="color" />蔡文明
+          <Icon class="color" icon="solar:user-linear" />蔡文明
         </div>
         <div class="text-xs ml-3">
-          <Icon icon="ion:time-outline" class="color1" />2021-15-20 15:23
+          <Icon class="color1" icon="ion:time-outline" />2021-15-20 15:23
         </div>
       </div>
 
       <div class="text-xs ml-3">
-        <Icon icon="tabler:eye-discount" class="color2" />浏览 <span>8</span>
+        <Icon class="color2" icon="tabler:eye-discount" />浏览 <span>8</span>
       </div>
     </div>
     <div class="detail">

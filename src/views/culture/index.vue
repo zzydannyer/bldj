@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type { TabProps, TabsType, TabsProps, TabsInstance } from 'vant';
-  import VideoCrates from '@/views/culture/components/video/videoCrates.vue';
-  import ResponCrates from '@/views/culture/components/responsibility/responCrates.vue';
+  import TabVideo from '@/views/culture/components/video/tabVideo.vue';
+  import TabSocial from '@/views/culture/components/responsibility/tabSocial.vue';
 
   const active = ref<TabProps['name']>('video');
   const ac = ref(0);
@@ -18,12 +18,12 @@
     sticky
     @click-tab="handleClick"
   >
-    <van-tab name="video" title="影音库"></van-tab>
-    <van-tab name="social" title="社会责任"></van-tab>
+    <van-tab name="video" title="影音库" />
+    <van-tab name="social" title="社会责任" />
   </van-tabs>
 
-  <VideoCrates v-if="active === 'video'" />
-  <ResponCrates v-if="active === 'social'" />
+  <TabVideo v-if="active === 'video'" />
+  <TabSocial v-else-if="active === 'social'" />
   <!-- </div> -->
 </template>
 <style lang="scss" scoped>

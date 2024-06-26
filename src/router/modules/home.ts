@@ -14,7 +14,7 @@ export default {
     {
       path: '/home',
       name: 'Home',
-      component: () => import('@/views/home.vue'),
+      component: () => import('@/views/home/index.vue'),
       meta: {
         title: '首页',
         keepAlive: true,
@@ -22,11 +22,28 @@ export default {
       }
     },
     {
-      path: '/newsDetail/:id',
-      name: 'NewsDetail',
-      component: () => import('@/views/details/common.vue'),
+      path: '/notice/list',
+      name: 'NoticeList',
+      component: () => import('@/views/home/noticeList.vue'),
       meta: {
-        title: '新闻详情',
+        keepAlive: false,
+        visible: false
+      }
+    },
+    {
+      path: '/news/list',
+      name: 'NewsList',
+      component: () => import('@/views/home/newsList.vue'),
+      meta: {
+        keepAlive: false,
+        visible: false
+      }
+    },
+    {
+      path: '/detail/:section/:detailId',
+      name: 'Detail',
+      component: () => import('@/views/details/index.vue'),
+      meta: {
         keepAlive: false,
         visible: false
       }

@@ -44,33 +44,13 @@ async function getImage(el: HTMLElement, binding: DirectiveBinding) {
   if (!imgUrl || !isLink(imgUrl)) return;
 
   try {
-    const res = await isExist(imgUrl);
-
-    if (res) {
-      setUrl(el, imgUrl);
-    } else {
-      const { data: privateUrl } = await UrlServer.GET_URL(imgUrl, isMini);
-      setUrl(el, privateUrl);
-    }
+    const { data: privateUrl } = await UrlServer.GET_URL(imgUrl, isMini);
+    setUrl(el, privateUrl);
   } catch (e: unknown) {
     console.error(e);
   }
 }
 
-function isExist(url: string) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = function () {
-      if (img.complete === true) {
-        resolve(true);
-      }
-    };
-    img.onerror = function (e) {
-      resolve(false);
-    };
-  });
-}
 const imgUrlDirective = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
     getImage(el, binding);

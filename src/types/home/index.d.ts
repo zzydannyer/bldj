@@ -15,22 +15,24 @@ interface Basic {
   isLink: '0' | '1'; // 0:否 1:是
   link: string;
 }
-interface TopicPic extends Basic {
+export interface TopicPic extends Basic {
   picUrl: string;
   topicType: string;
   topicName: string;
 }
 
-interface HomeNews extends Basic {}
-interface HomeTopic extends Basic {
+export interface HomeNews extends Basic {
+  type: '1' | '2';
+}
+export interface HomeTopic extends Basic {
   picUrl: string;
 }
-interface HomeSystem extends Basic {}
+export interface HomeSystem extends Basic {}
 
-interface HomeHeadNews extends Basic {
+export interface HomeHeadNews extends Basic {
   picUrl: string;
 }
 
-interface HomeNotice extends Basic {
+export interface HomeNotice extends Basic {
   // 没用的不记录
 }

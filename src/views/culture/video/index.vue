@@ -3,32 +3,25 @@
     <div class="px-2">
       <div class="mx-3.5">
         <van-button
-          type="primary"
           block
           class="button"
           size="small"
           to="uploadMaterials"
+          type="primary"
           >上传素材</van-button
         >
       </div>
 
       <van-search
-        v-model="value"
-        show-action
+        v-model="form.searchValue"
         placeholder="请输入搜索关键词"
+        show-action
         @search="onSearch"
       >
         <template #action>
           <div is-link @click="showPopup">
             <Icon icon="carbon:filter" /><span>高级搜索</span>
           </div>
-          <van-popup
-            v-model:show="show"
-            position="right"
-            :style="{ width: '90%', height: '100%' }"
-          >
-            <AdvancedCrates
-          /></van-popup>
         </template>
       </van-search>
     </div>
@@ -50,11 +43,26 @@
       </div>
     </div>
   </van-pull-refresh>
+
+  <AdvancedCrates v-model:show="show" />
 </template>
 
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
   import AdvancedCrates from '@/views/culture/components/video/advancedSearch.vue';
+
+  const origin: Record<string, any> = {
+    searchValue: ''
+  };
+  const form = reactive(origin);
+
+  function resetForm() {
+    for (const key in origin) {
+      form[key] = origin[key];
+    }
+  }
+
+  const router = useRouter();
   const list = [];
   const text = '沙家邦红色党建活动';
   import { ref } from 'vue';
@@ -62,6 +70,10 @@
   const showPopup = () => {
     show.value = true;
   };
+
+  function onSearch() {
+    console.log('onSearch');
+  }
 </script>
 
 <style lang="scss" scoped>

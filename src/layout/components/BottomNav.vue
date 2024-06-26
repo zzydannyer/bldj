@@ -77,37 +77,26 @@
       </div>
     </section>
     <!-- 底部导航 -->
-    <section class="bottom-nav">
-      <van-grid
-        :border="false"
-        clickable
-        :column-num="2"
-        :safe-area-inset-bottom="true"
-      >
-        <van-grid-item to="/home" @click="visible = false">
-          <van-image
-            class="w-[20PX]"
-            :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')"
-          />
-          <span
-            class="mt-1"
-            :class="isHome ? 'text-[#e20949]' : 'text-[#a9867e]'"
-            >首页</span
-          >
-        </van-grid-item>
-        <van-grid-item to="/mine" @click="visible = false">
-          <van-image
-            class="w-[20PX]"
-            :src="isMine ? useIcon('icon-mine-active') : useIcon('icon-mine')"
-          />
-          <span
-            class="mt-1"
-            :class="isMine ? 'text-[#e20949]' : 'text-[#a9867e]'"
-            >我的</span
-          >
-        </van-grid-item>
-      </van-grid>
-    </section>
+    <van-grid :border="false" class="bottom-nav" clickable :column-num="2">
+      <van-grid-item to="/home" @click="visible = false">
+        <van-image
+          class="w-[20PX]"
+          :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')"
+        />
+        <span class="mt-1" :class="isHome ? 'text-[#e20949]' : 'text-[#a9867e]'"
+          >首页</span
+        >
+      </van-grid-item>
+      <van-grid-item to="/mine" @click="visible = false">
+        <van-image
+          class="w-[20PX]"
+          :src="isMine ? useIcon('icon-mine-active') : useIcon('icon-mine')"
+        />
+        <span class="mt-1" :class="isMine ? 'text-[#e20949]' : 'text-[#a9867e]'"
+          >我的</span
+        >
+      </van-grid-item>
+    </van-grid>
     <!-- 更多菜单 -->
     <section
       class="nav-panel"
@@ -136,7 +125,8 @@
 <style lang="scss" scoped>
   .bottom-nav {
     @apply z-0;
-    padding-bottom: var(--safe-area-inset-bottom);
+    // prettier-ignore
+    height: 80PX;
     --van-grid-item-content-background: linear-gradient(
       to bottom,
       #fce8e6,

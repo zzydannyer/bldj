@@ -12,13 +12,9 @@
         <div is-link @click="showPopup">
           <Icon icon="carbon:filter" /><span>高级搜索</span>
         </div>
-        <van-popup
-          v-model:show="show"
-          position="right"
-          :style="{ width: '90%', height: '100%' }"
-        >
-          <AdvancedCrates
-        /></van-popup>
+    
+          <AdvancedCrates/>
+      
       </template>
     </van-search>
   </div>

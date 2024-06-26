@@ -1,106 +1,106 @@
 <template>
   <div class="pb-64">
-    <van-cell-group inset class="mt-4">
+    <van-cell-group class="mt-4" inset>
       <!-- 媒体标题 -->
       <van-field
         v-model="text"
-        label="媒体标题"
-        placeholder="请输入"
         input-align="left"
+        label="媒体标题"
         label-align="top"
+        placeholder="请输入"
         required
         :rules="[{ required: true, message: '请输入标题' }]"
       />
     </van-cell-group>
 
-    <van-cell-group inset class="mt-4">
+    <van-cell-group class="mt-4" inset>
       <!-- 作者 -->
       <van-field
         v-model="text"
-        label="作者"
-        placeholder="请输入"
         input-align="right"
+        label="作者"
         label-align="left"
+        placeholder="请输入"
         required
         :rules="[{ required: true, message: '请输入作者' }]"
       />
       <!-- 公司 -->
       <van-field
         v-model="text"
-        label="公司"
-        placeholder="请输入"
         input-align="right"
+        label="公司"
         label-align="left"
+        placeholder="请输入"
       />
       <!-- 素材类别 -->
       <van-field
         v-model="result"
+        input-align="right"
         is-link
-        readonly
+        label="素材类别"
         label-align="left"
         name="picker"
-        label="素材类别"
         placeholder="点击选择素材类别"
-        @click="showPicker = true"
-        input-align="right"
+        readonly
         required
         :rules="[{ required: true, message: '请输入素材类型' }]"
+        @click="showPicker = true"
       />
       <van-popup v-model:show="showPicker" position="bottom">
         <van-picker
           :columns="columns"
-          @confirm="onConfirm"
           @cancel="showPicker = false"
+          @confirm="onConfirm"
         />
       </van-popup>
       <!-- 联系方式 -->
       <van-field
         v-model="text"
-        label="联系方式"
-        placeholder="请输入"
         input-align="right"
+        label="联系方式"
         label-align="left"
+        placeholder="请输入"
       />
 
       <!-- 媒体类型 -->
       <van-field
         v-model="result"
+        input-align="right"
         is-link
-        readonly
+        label="媒体类型"
         label-align="left"
         name="picker"
-        label="媒体类型"
         placeholder="点击选择媒体类型"
-        @click="mediaType = true"
-        input-align="right"
+        readonly
         required
         :rules="[{ required: true, message: '请输入媒体类型' }]"
+        @click="mediaType = true"
       />
       <van-popup v-model:show="mediaType" position="bottom">
         <van-picker
           :columns="columns2"
-          @confirm="onMediaConfirm"
           @cancel="mediaType = false"
+          @confirm="onMediaConfirm"
         />
       </van-popup>
     </van-cell-group>
-    <van-cell-group inset class="mt-4">
+    <van-cell-group class="mt-4" inset>
       <van-field
         v-model="message"
-        rows="2"
         autosize
         label="素材简介"
-        type="textarea"
+        label-align="top"
         maxlength="50"
         placeholder="请输入简介"
-        show-word-limit
-        label-align="top"
         required
+        rows="2"
         :rules="[{ required: true, message: '请输入素材简介' }]"
+        show-word-limit
+        type="textarea"
       />
     </van-cell-group>
-    <van-cell-group inset class="mt-4 pb-4">
-      <van-field name="uploader" label="文件上传" label-align="top">
+    <van-cell-group class="mt-4 pb-4" inset>
+      <van-field label="文件上传" label-align="top" name="uploader">
         <template #input>
           <van-uploader v-model="value" />
         </template>
@@ -108,10 +108,10 @@
       <div class="text-xs mt-3 ml-3">限于5张图片每张图片小于2G</div>
     </van-cell-group>
     <div class="grid gap-3 grid-cols-2" style="background-color: transparent">
-      <van-button type="default" to="index" class="greybutton" block
+      <van-button block class="greybutton" to="index" type="default"
         >重置</van-button
       >
-      <van-button type="primary" to="index" class="button" block
+      <van-button block class="button" to="index" type="primary"
         >确认</van-button
       >
     </div>
@@ -119,7 +119,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
   const result = ref('');
   const checked = ref([]);
   const showPicker = ref(false);

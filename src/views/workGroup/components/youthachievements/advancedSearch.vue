@@ -1,40 +1,47 @@
 <template>
   <div class="pb-64">
-    <van-cell-group inset>
-      <!-- 标题 -->
-      <van-field
-        v-model="text"
-        label="标题"
-        input-align="left"
-        label-align="top"
-      />
-
-      <!-- 发布日期 -->
-      <van-field
-        v-model="result"
-        is-link
-        readonly
-        name="datePicker"
-        label="发布日期"
-        placeholder="请选择发布日期"
-        @click="showreleasePicker = true"
-      />
-      <van-popup v-model:show="showreleasePicker" position="bottom">
-        <van-date-picker
-          @confirm="onrleaseConfirm"
-          @cancel="showreleasePicker = false"
+    <van-popup
+      v-model:show="show"
+      position="right"
+      :style="{ width: '90%', height: '100%' }"
+    >
+      <van-cell-group inset>
+        <!-- 标题 -->
+        <van-field
+          v-model="text"
+          input-align="left"
+          label="标题"
+          label-align="top"
         />
-      </van-popup>
 
-      <div class="grid gap-3 grid-cols-2 px-4 mt-10">
-        <van-button type="default" to="index" class="greybutton" block
-          >重置</van-button
-        >
-        <van-button type="primary" to="index" class="button" block
-          >确认</van-button
-        >
-      </div>
-    </van-cell-group>
+        <!-- 发布日期 -->
+        <van-field
+          v-model="result"
+          is-link
+          label="发布日期"
+          name="datePicker"
+          placeholder="请选择发布日期"
+          readonly
+          @click="showreleasePicker = true"
+        />
+
+        <div class="grid gap-3 grid-cols-2 px-4 mt-10">
+          <van-button block class="greybutton" to="index" type="default"
+            >重置</van-button
+          >
+          <van-button block class="button" to="index" type="primary"
+            >确认</van-button
+          >
+        </div>
+      </van-cell-group>
+    </van-popup>
+
+    <van-popup v-model:show="showreleasePicker" position="bottom">
+      <van-date-picker
+        @cancel="showreleasePicker = false"
+        @confirm="onrleaseConfirm"
+      />
+    </van-popup>
   </div>
 </template>
 

@@ -1,30 +1,24 @@
 <script setup lang="ts">
-  import { homeContentList } from '@/api/home';
-  import type { HomeHeadNews, HomeNews, HomeNotice } from '@/types/home';
   import { useImage, useIcon } from '@/utils/assets';
   import { register } from 'swiper/element/bundle';
-  import { useStore } from '@/store';
-  import { storeToRefs } from 'pinia';
-  import { UserType } from '@/constants';
+  // import { useStore } from '@/store';
+  // import { storeToRefs } from 'pinia';
+  // import { UserType } from '@/constants';
   import dayjs from 'dayjs';
   import { DictData } from '@/plugins/dict';
+  import useHomeData from '@/hooks/api/home';
   // Swiper
   register();
   const router = useRouter();
-  const { userInfo } = useStore();
-  const { userType } = storeToRefs(userInfo);
+  // const { userInfo } = useStore();
+  // const { userType } = storeToRefs(userInfo);
 
   // 轮播
   const spaceBetween = 10;
-  const onProgress = (e: any) => {
-    const [swiper, progress] = e.detail;
-    // console.log(progress);
-  };
 
-  const onSlideChange = (e: any) => {
-    // console.log('slide changed');
-  };
-  const swiperList = ref<HomeHeadNews[]>([]);
+  const [homeData, fetchData] = useHomeData();
+
+  const { swiperList, homeNotice, homeNews } = toRefs(homeData);
   // 导航
   const gridItems = [
     {
@@ -60,8 +54,7 @@
   ];
 
   //通知公告
-  const homeNotice = ref<HomeNotice[]>([]);
-  const noticeCards = ref([
+  const noticeCards = [
     {
       color: '#e10101',
       bgColor: '#fffcfc,#fff6f6',
@@ -77,49 +70,18 @@
       bgColor: '#f5fcfe,#e7f4fb',
       bg: useImage('home-card3')
     }
-  ]);
+  ];
 
   //最新新闻
-  function sortNews(a: HomeNews, b: HomeNews) {
-    return (
-      new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
-    );
-  }
-  type News = HomeNews & { type: '1' | '2' };
   const dictData: DictData[] = [
     { label: '集团要闻', value: '1' },
     { label: '基层动态', value: '2' }
   ];
-  const homeNews = ref<News[]>([]);
-  async function getData() {
-    try {
-      const {
-        data: { home_head_news, home_notice, home_jt_news, home_jc_news }
-      } = await homeContentList();
-      // 轮播数据
-      swiperList.value = home_head_news;
-      // 通知公告
-      homeNotice.value = home_notice.slice(0, 3);
-      // 最新新闻
 
-      const jt_news: News[] = home_jt_news.map((item) => ({
-        ...item,
-        type: '1'
-      }));
-      const jc_news: News[] = home_jc_news.map((item) => ({
-        ...item,
-        type: '2'
-      }));
-      homeNews.value = jt_news.concat(jc_news).sort(sortNews);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  onBeforeMount(getData);
+  onBeforeMount(fetchData);
 </script>
 <template>
-  <main class="pb-[200PX] bg-white">
+  <main class="pb-[100PX] bg-white">
     <swiper-container
       :breakpoints="{
         768: {
@@ -132,8 +94,6 @@
       }"
       :slides-per-view="1"
       :space-between="spaceBetween"
-      @swiperprogress="onProgress"
-      @swiperslidechange="onSlideChange"
     >
       <swiper-slide
         v-for="pic in swiperList"
@@ -175,12 +135,13 @@
         is-link
         title="通知公告"
         title-class="home-cell-title"
+        to="/notice/list"
         value="全部"
         value-class="text-[#e20a0a]"
       />
       <section class="mt-2 pl-[16PX] whitespace-nowrap overflow-x-auto">
         <div
-          v-for="(notice, index) in homeNotice"
+          v-for="(notice, index) in homeNotice.slice(0, 3)"
           :key="notice.uid"
           class="notice-card"
           :style="{
@@ -203,6 +164,7 @@
             size="small"
             text="查看详情"
             type="primary"
+            @click="router.push('/detail/notice/' + notice.uid)"
           />
         </div>
       </section>
@@ -213,15 +175,16 @@
         is-link
         title="最新新闻"
         title-class="home-cell-title"
+        to="/news/list"
         value="全部"
         value-class="text-[#e20a0a]"
       />
       <VCard
-        v-for="news in homeNews"
+        v-for="news in homeNews.slice(0, 8)"
         :key="news.uid"
         body-class="h-[80PX] flex flex-col"
         class="van-hairline--bottom van-haptics-feedback"
-        @click="router.push('/newsDetail/' + news.uid)"
+        @click="router.push('/detail/news/' + news.uid)"
       >
         <van-text-ellipsis
           class="text-justify"

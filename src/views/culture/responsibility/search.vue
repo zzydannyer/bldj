@@ -2,11 +2,11 @@
   <div class="m-4">
     <van-search
       v-model="value"
-      show-action
+      class="mx-auto rounded-md"
       placeholder="请输入搜索关键词"
       shape="round"
+      show-action
       @search="onSearch"
-      class="mx-auto rounded-md"
     >
       <template #action>
         <div is-link @click="showPopup">

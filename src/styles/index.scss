@@ -13,6 +13,14 @@ html{
   min-height: 100vh;
   background-color: $body-bg;
 }
+.bb{
+  border: 2PX solid green !important;
+}
+
+.van-pull-refresh {
+  //prettier-ignore
+  height: calc(100% - 425PX) !important;
+}
 
 textarea {
   text-align: justify !important;
@@ -21,10 +29,7 @@ textarea {
 // 基础背景容器
 .container {
   box-sizing: border-box;
-  height: -webkit-fill-available;
-  height: stretch;
-  height: 100%;
-  padding: calc($navbar-height + $body-padding) $body-padding 0;
+  padding: $body-padding;
 
   .van-cell-group {
     margin: 0;
@@ -44,7 +49,7 @@ textarea {
 .detail-container {
   min-height: 90vh;
   background-color: #fff;
-  padding: 16PX 16PX 160PX;
+  padding: 16PX;
 }
 
 // 详情页-图片查看

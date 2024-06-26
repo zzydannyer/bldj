@@ -7,7 +7,11 @@
   import { Icon } from '@iconify/vue';
 
   const route = useRoute();
-  const detailId = route.params.id as string;
+  type RouteParams = {
+    detailId: string;
+    section: string;
+  };
+  const { detailId, section } = route.params as RouteParams;
   const detail = ref<any>({});
   const { $value_to_label, $useDict } = useGlobal<GlobalPropertiesApi>();
 
@@ -15,7 +19,6 @@
     try {
       showLoadingToast({ message: '加载中' });
       const { data } = await DetailServer.GET_CONTENT_VIEW(detailId);
-      console.log('🚀 ~ getDetail ~ data:', data);
       detail.value = data;
     } catch (e) {
       console.error(e);
@@ -29,6 +32,9 @@
 
 <template>
   <main class="detail-container">
+    <div>section: {{ section }}</div>
+    <div>detailId: {{ detailId }}</div>
+
     <div class="v-detail-title">
       <span class="">{{ detail.title }}</span>
     </div>

@@ -2199,7 +2199,7 @@ export default [
             name: 'ResponsibilityDetail',
             path: '/detail',
             component: () =>
-              import('@/views/culture/pages/responsibility/detail.vue'),
+              import('@/views/culture/components/responsibility/detail.vue'),
             meta: {
               title: '详情',
               icon: '#'

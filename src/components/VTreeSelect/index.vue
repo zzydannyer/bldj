@@ -143,24 +143,24 @@
 <template>
   <van-field
     v-model="picked_text"
-    is-link
     :clickable="!disabled && !readonly"
-    :name="name"
-    :readonly="readonly"
+    :disabled="disabled"
+    :input-align="inputAlign"
+    is-link
     :label="label"
+    :label-align="labelAlign"
+    :name="name"
     :placeholder="placeholder"
-    :disaled="disabled"
+    :readonly="readonly"
     :required="required"
     :rules="rules"
-    :input-align="inputAlign"
-    :label-align="labelAlign"
     @click="handleOpen"
   />
-  <van-popup round v-model:show="show" position="bottom" teleport="body">
+  <van-popup v-model:show="show" position="bottom" round teleport="body">
     <section class="van-picker__toolbar">
       <button
-        type="button"
         class="van-picker__cancel van-haptics-feedback"
+        type="button"
         @click="onCancel"
       >
         取消
@@ -172,16 +172,16 @@
       </div>
       <div>
         <button
-          type="button"
           class="van-picker__confirm"
           style="color: var(--van-red); padding-right: 0"
+          type="button"
           @click="onClear"
         >
           清空
         </button>
         <button
-          type="button"
           class="van-picker__confirm van-haptics-feedback"
+          type="button"
           @click="onConfirm"
         >
           确认

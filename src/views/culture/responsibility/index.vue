@@ -7,18 +7,18 @@
     name: 'MediaList'
   });
   const router = useRouter();
-  const active = ref(0);
+  const active = ref('help');
 </script>
 
 <template>
   <van-tabs v-model:active="active" type="card">
-    <van-tab title="党建帮扶" name="help"></van-tab>
-    <van-tab title="消费扶贫" name="consumer"></van-tab>
-    <van-tab title="社会公益" name="welfare"></van-tab>
+    <van-tab name="help" title="党建帮扶"></van-tab>
+    <van-tab name="consumer" title="消费扶贫"></van-tab>
+    <van-tab name="welfare" title="社会公益"></van-tab>
   </van-tabs>
   <Help v-if="active === 'help'" />
-  <Help v-if="active === 'consumer'" />
-  <Help v-if="active === 'welfare'" />
+  <Help v-else-if="active === 'consumer'" />
+  <Help v-else-if="active === 'welfare'" />
 </template>
 
 <style lang="scss" scoped>

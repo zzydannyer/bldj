@@ -1,48 +1,49 @@
 <template>
-  <div class="pb-64">
-    <van-cell-group inset>
-      <!-- 标题 -->
-      <van-field
-        v-model="text"
-        label="标题"
-        input-align="left"
-        label-align="top"
-      />
+  <van-cell-group class="van-safe-area-top" inset>
+    <!-- 标题 -->
+    <van-field
+      v-model="text"
+      input-align="left"
+      label="标题"
+      label-align="top"
+    />
 
-      <!-- 发布日期 -->
-      <van-field
-        v-model="result"
-        is-link
-        readonly
-        name="datePicker"
-        label="发布日期"
-        placeholder="请选择发布日期"
-        @click="showreleasePicker = true"
+    <!-- 发布日期 -->
+    <van-field
+      v-model="result"
+      is-link
+      label="发布日期"
+      name="datePicker"
+      placeholder="请选择发布日期"
+      readonly
+      @click="showreleasePicker = true"
+    />
+    <van-popup v-model:show="showreleasePicker" position="bottom">
+      <van-date-picker
+        @cancel="showreleasePicker = false"
+        @confirm="onrleaseConfirm"
       />
-      <van-popup v-model:show="showreleasePicker" position="bottom">
-        <van-date-picker
-          @confirm="onrleaseConfirm"
-          @cancel="showreleasePicker = false"
-        />
-      </van-popup>
+    </van-popup>
 
-      <div class="grid gap-3 grid-cols-2 px-4 mt-10">
-        <van-button type="default" to="index" class="greybutton" block
-          >重置</van-button
-        >
-        <van-button type="primary" to="index" class="button" block
-          >确认</van-button
-        >
-      </div>
-    </van-cell-group>
-  </div>
+    <div class="grid gap-3 grid-cols-2 px-4 mt-10">
+      <van-button block class="greybutton" to="index" type="default"
+        >重置</van-button
+      >
+      <van-button block class="button" to="index" type="primary"
+        >确认</van-button
+      >
+    </div>
+  </van-cell-group>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
   const result = ref('');
   const checked = ref([]);
 
+  const form = reactive({
+    title: '',
+    date: ''
+  });
   const columns = [
     { text: '党建活动', value: 'Hangzhou' },
     { text: '时政动态', value: 'Ningbo' },

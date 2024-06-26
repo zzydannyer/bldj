@@ -1,69 +1,76 @@
 <template>
-  <div class="pb-64">
-    <van-cell-group inset>
+  <van-popup
+    v-model:show="show"
+    position="right"
+    :style="{ width: '90%', height: '100%' }"
+  >
+    <van-cell-group class="van-safe-area-top" inset>
       <!-- 媒体标题 -->
       <van-field
         v-model="text"
-        label="媒体标题"
         input-align="left"
+        label="媒体标题"
         label-align="top"
       />
       <!-- 作者 -->
       <van-field
         v-model="text"
-        label="作者"
         input-align="left"
+        label="作者"
         label-align="top"
       />
       <!-- 公司 -->
       <van-field
         v-model="text"
-        label="公司"
         input-align="left"
+        label="公司"
         label-align="top"
+        @click="showSelect = true"
       />
       <!-- 素材类别 -->
       <van-field
         v-model="result"
+        input-align="left"
         is-link
-        readonly
+        label="素材类别"
         label-align="top"
         name="picker"
-        label="素材类别"
         placeholder="点击选择素材类别"
+        readonly
         @click="showPicker = true"
-        input-align="left"
       />
-      <van-popup v-model:show="showPicker" position="bottom">
-        <van-picker
-          :columns="columns"
-          @confirm="onConfirm"
-          @cancel="showPicker = false"
-        />
-      </van-popup>
+
       <van-checkbox-group
         v-model="checked"
-        direction="horizontal"
         class="pt-5 pl-4"
+        direction="horizontal"
       >
         <van-checkbox name="优秀资源">优秀资源</van-checkbox>
         <van-checkbox name="推荐资源">推荐资源</van-checkbox>
       </van-checkbox-group>
 
       <div class="grid gap-3 grid-cols-2 px-4 mt-10">
-        <van-button type="default" to="index" class="greybutton" block
+        <van-button block class="greybutton" to="index" type="default"
           >重置</van-button
         >
-        <van-button type="primary" to="index" class="button" block
+        <van-button block class="button" to="index" type="primary"
           >确认</van-button
         >
       </div>
     </van-cell-group>
-  </div>
+  </van-popup>
+
+  <van-popup v-model:show="showPicker" position="bottom">
+    <van-picker
+      :columns="columns"
+      @cancel="showPicker = false"
+      @confirm="onConfirm"
+    />
+  </van-popup>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  const show = defineModel('show', { default: false });
   const result = ref('');
   const checked = ref([]);
   const showPicker = ref(false);
@@ -74,7 +81,7 @@
     { text: '企业文化', value: 'Shaoxing' },
     { text: '工作场景', value: 'Huzhou' }
   ];
-
+  const showSelect = ref(false);
   const onConfirm = ({ selectedOptions }) => {
     result.value = selectedOptions[0]?.text;
     showPicker.value = false;

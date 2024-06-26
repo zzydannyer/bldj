@@ -9,8 +9,6 @@
   // @ts-ignore
   import Treeselect from '@zanmato/vue3-treeselect';
   import '@zanmato/vue3-treeselect/dist/vue3-treeselect.min.css';
-  import { SysOrg } from '@/types/system/sys-org';
-  import { SysUser } from '@/types/system/sys-user';
   import { onClickOutside } from '@vueuse/core';
 
   const {

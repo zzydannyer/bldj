@@ -23,6 +23,8 @@ const flattenRoutes = (routes: any[]): RouteRecordRaw[] => {
   }, []);
 };
 
-const routes: Array<RouteRecordRaw> = flattenRoutes(Object.values(modules).map((module) => module.default));
+const routes: Array<RouteRecordRaw> = flattenRoutes(
+  Object.values(modules).map((module) => module.default)
+);
 
 export default routes;
