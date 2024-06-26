@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-  import AdvancedCrates from '@/views/culture/components/video/advancedSearch.vue';
+  import AdvancedCrates from '@/views/culture/video/advancedSearch.vue';
 
   const origin: Record<string, any> = {
     searchValue: ''
