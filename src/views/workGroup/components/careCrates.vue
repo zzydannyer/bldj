@@ -1,22 +1,18 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import { register } from 'swiper/element/bundle';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+  import { Pagination } from 'swiper/modules';
 
-  register();
-  const spaceBetween = 10;
-  const onProgress = (e: any) => {
-    const [swiper, progress] = e.detail;
-    // console.log(progress);
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index: number, className: string) {
+      return '<span class="' + className + '"></span>';
+    }
   };
-
-  const onSlideChange = (e: any) => {
-    // console.log('slide changed');
-  };
-  import Help from '@/views/culture/components/responsibility/helping.vue';
-  import { getLm } from '@/api';
-  import { useImage } from '@/utils/assets';
-  import { listPublicMediaActivitiesScore } from '@/api/_media';
+  const modules = [Pagination];
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   defineOptions({
     name: 'MediaList'
@@ -43,45 +39,25 @@
       <div>50<span>人</span></div>
       <div>赋能转岗</div>
     </div>
-    <swiper-container
-      class="basis-[120PX] grow-0 shrink-0"
-      :breakpoints="{
-        768: {
-          slidesPerView: 3
-        }
-      }"
-      :centered-slides="true"
-      :pagination="{
-        hideOnClick: false
-      }"
-      :slides-per-view="1"
-      :space-between="spaceBetween"
-      @swiperprogress="onProgress"
-      @swiperslidechange="onSlideChange"
-    >
-      <swiper-slide
-        v-for="i in 10"
-        :key="i"
-        class="swiper-slide"
-        style="width: 375px !important"
-      >
-        1111111212312312312321312312312
-        <!--        <div>-->
-        <!--          11111111111111111-->
-        <!--          <van-space-->
-        <!--            ><Icon icon="bxs:user" /><span>{{ name + i }}</span></van-space-->
-        <!--          >-->
-        <!--          <van-space-->
-        <!--            ><Icon icon="ion:time-outline" class="color1" /><span>{{-->
-        <!--              time-->
-        <!--            }}</span></van-space-->
-        <!--          >-->
-        <!--        </div>-->
-        <!--        <div>上海物资股份有限公司</div>-->
-        <!--        <div>值班经理兼消防员</div>-->
-        <!--        <div>值班经理</div>-->
-      </swiper-slide>
-    </swiper-container>
+
+    <Swiper class="mySwiper" :modules="modules" :pagination="pagination">
+      <SwiperSlide v-for="i in 10" :key="i" class="swiper-slide">
+        <div>
+          11111111111111111
+          <van-space
+            ><Icon icon="bxs:user" /><span>{{ name + i }}</span></van-space
+          >
+          <van-space
+            ><Icon class="color1" icon="ion:time-outline" /><span>{{
+              time
+            }}</span></van-space
+          >
+        </div>
+        <div>上海物资股份有限公司</div>
+        <div>值班经理兼消防员</div>
+        <div>值班经理</div>
+      </SwiperSlide>
+    </Swiper>
   </section>
 </template>
 
@@ -96,5 +72,45 @@
       @apply rounded-md w-[120PX] h-[146PX] center-center flex-col inline-flex;
       background-color: #ecf7ff;
     }
+  }
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .swiper-pagination-bullet-active {
+    color: #fff;
+    background: #007aff;
   }
 </style>
