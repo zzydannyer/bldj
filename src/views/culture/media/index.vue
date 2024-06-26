@@ -1,3 +1,31 @@
+<script setup lang="ts">
+  import { Icon } from '@iconify/vue';
+  import AdvancedSearch from '@/views/culture/media/advancedSearch.vue';
+  import useQueryParams from '@/hooks/queryParams';
+
+  class Params {
+    mediaTitleLike = '';
+    authorLike = '';
+    orgNameLike = '';
+    resourceType = '';
+  }
+  const [queryParams, resetQueryParams] = useQueryParams<Params>(new Params());
+
+  const router = useRouter();
+  const list = [];
+  const text = '沙家邦红色党建活动';
+  import { ref } from 'vue';
+
+  const show = ref(false);
+
+  const showPopup = () => {
+    show.value = true;
+  };
+
+  function onSearch() {
+    console.log('onSearch');
+  }
+</script>
 <template>
   <div class="pt-4 bg-white mt-4">
     <div class="px-2">
@@ -13,7 +41,7 @@
       </div>
 
       <van-search
-        v-model="form.searchValue"
+        v-model="queryParams.params.mediaTitleLike"
         placeholder="请输入搜索关键词"
         show-action
         @search="onSearch"
@@ -44,37 +72,8 @@
     </div>
   </van-pull-refresh>
 
-  <AdvancedCrates v-model:show="show" />
+  <AdvancedSearch v-model:queryParams="queryParams" v-model:show="show" />
 </template>
-
-<script setup lang="ts">
-  import { Icon } from '@iconify/vue';
-  import AdvancedCrates from '@/views/culture/video/advancedSearch.vue';
-
-  const origin: Record<string, any> = {
-    searchValue: ''
-  };
-  const form = reactive(origin);
-
-  function resetForm() {
-    for (const key in origin) {
-      form[key] = origin[key];
-    }
-  }
-
-  const router = useRouter();
-  const list = [];
-  const text = '沙家邦红色党建活动';
-  import { ref } from 'vue';
-  const show = ref(false);
-  const showPopup = () => {
-    show.value = true;
-  };
-
-  function onSearch() {
-    console.log('onSearch');
-  }
-</script>
 
 <style lang="scss" scoped>
   .button {

@@ -124,10 +124,10 @@
     </van-grid>
 
     <van-image
-      class="m-[16PX]"
+      class="m-[16PX] van-haptics-feedback"
       fit="cover"
       :src="useImage('index-bg-yyk')"
-      @click="router.push('/')"
+      @click="router.push('/culture')"
     />
 
     <van-cell-group class="home-cell-group">

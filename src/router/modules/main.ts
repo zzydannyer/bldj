@@ -288,186 +288,6 @@ export default [
             ]
           }
         ]
-      },
-      {
-        name: 'Safe',
-        path: 'safe',
-        component: 'ParentView',
-        meta: {
-          title: '安全稳定',
-          icon: 'discipline_zeroBased'
-        },
-        children: [
-          {
-            name: 'SafeDuty',
-            path: 'safeDuty',
-            component: 'ParentView',
-            meta: {
-              title: '安全责任制',
-              icon: '#'
-            },
-            children: [
-              {
-                name: 'SafeOrg',
-                path: 'SafeOrg',
-                component: 'politics/safe/safeDuty/safeOrg/index',
-                meta: {
-                  title: '组织架构',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'SafeOrgGroup',
-                path: 'SafeOrgGroup',
-                component: 'politics/safe/safeDuty/safeOrg/indexGroup',
-                meta: {
-                  title: '组织架构（查看）',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'SafeProductCert',
-                path: 'safeProductCert',
-                component: 'politics/safe/safeDuty/safeProductCert/index',
-                meta: {
-                  title: '安全生产证书',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'SafeProductCertGroup',
-                path: 'SafeProductCertGroup',
-                component: 'politics/safe/safeDuty/safeProductCert/indexGroup',
-                meta: {
-                  title: '安全生产证书（查看）',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'SafePlan',
-                path: 'SafePlan',
-                component: 'politics/safe/safeDuty/safePlan/index',
-                meta: {
-                  title: '年度计划',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'SafePlanGroup',
-                path: 'SafePlanGroup',
-                component: 'politics/safe/safeDuty/safePlan/indexGroup',
-                meta: {
-                  title: '年度计划（查看）',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'SafeTalk',
-                path: 'safeTalk',
-                component: 'politics/safe/safeDuty/safeTalk/index',
-                meta: {
-                  title: '安全谈话',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'SafeTalkGroup ',
-                path: 'SafeTalkGroup ',
-                component: 'politics/safe/safeDuty/safeTalk/indexGroup',
-                meta: {
-                  title: '安全谈话（查看）',
-                  icon: '#'
-                }
-              }
-            ]
-          },
-          {
-            name: 'SafePropagate',
-            path: 'safePropagate',
-            component: 'ParentView',
-            meta: {
-              title: '安全稳定宣贯',
-              icon: '#'
-            },
-            children: [
-              {
-                name: 'WorkTrend',
-                path: 'workTrend',
-                component: 'public/content/index',
-                meta: {
-                  title: '工作动态',
-                  icon: '#'
-                }
-              }
-            ]
-          },
-          {
-            name: 'Edu_video',
-            path: 'edu_video',
-            component: 'public/video/index',
-            query: '{"videotype": "2"}',
-            meta: {
-              title: '学习宣贯视频',
-              icon: '#'
-            }
-          },
-          {
-            name: 'SysDocument',
-            path: 'sysDocument',
-            component: 'public/content/index',
-            meta: {
-              title: '制度文件',
-              icon: '#'
-            }
-          }
-        ]
-      },
-      {
-        name: 'UnitedFront',
-        path: 'unitedFront',
-        component: 'ParentView',
-        meta: {
-          title: '统战工作',
-          icon: 'alarm'
-        },
-        children: [
-          {
-            name: 'UnitedFrontPerson',
-            path: 'unitedFrontPerson',
-            component: 'politics/unitedFront/unitedFrontPerson/index',
-            meta: {
-              title: '党派人士登记',
-              icon: '#'
-            }
-          },
-          {
-            name: 'UnitedFrontPersonAudit',
-            path: 'unitedFrontPersonAudit',
-            component: 'politics/unitedFront/unitedFrontPersonAudit/index',
-            meta: {
-              title: '党派人士审批',
-              icon: '#'
-            }
-          },
-          {
-            name: 'UnitedFrontInfo',
-            path: 'unitedFrontInfo',
-            component: 'public/content/index',
-            meta: {
-              title: '信息发布',
-              icon: '#'
-            }
-          }
-        ]
-      },
-      {
-        name: 'PartyFile',
-        path: 'partyFile',
-        component: 'public/content/index',
-        meta: {
-          title: '党内法规',
-          icon: 'politics_patorl'
-        }
       }
     ]
   },
@@ -2179,7 +1999,7 @@ export default [
       {
         name: 'UploadMaterials',
         path: 'uploadMaterials',
-        component: () => import('@/views/culture/video/upload.vue'),
+        component: () => import('@/views/culture/media/upload.vue'),
         meta: {
           title: '上传素材',
           icon: '#'
@@ -2196,9 +2016,9 @@ export default [
         }
       },
       {
-        name: 'VideoDetail',
-        path: 'videoDetail',
-        component: () => import('@/views/culture/video/detail.vue'),
+        name: 'MediaDetail',
+        path: 'mediaDetail',
+        component: () => import('@/views/culture/media/detail.vue'),
         meta: {
           title: '详情',
           icon: '#'

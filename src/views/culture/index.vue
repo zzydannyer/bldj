@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type { TabProps, TabsType, TabsProps, TabsInstance } from 'vant';
-  import TabVideo from '@/views/culture/video/index';
-  import TabSocial from '@/views/culture/social';
+  import TabVideo from '@/views/culture/media/index.vue';
+  import TabSocial from '@/views/culture/social/index.vue';
 
   const active = ref<TabProps['name']>('video');
   const ac = ref(0);

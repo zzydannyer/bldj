@@ -17,7 +17,16 @@ function getMediaMain(uid: Numeric) {
   });
 }
 
+// 资源类型
+export function getCategory() {
+  return request<ResData<any>>({
+    url: '/media/mediaMain/category/tree',
+    method: 'GET'
+  });
+}
+
 export default {
   LIST_MEDIA_MAIN: listMediaMain,
-  GET_MEDIA_MAIN: getMediaMain
+  GET_MEDIA_MAIN: getMediaMain,
+  GET_CATEGORY: getCategory
 };
