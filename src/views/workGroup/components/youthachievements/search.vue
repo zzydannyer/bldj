@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-  import AdvancedCrates from '@/views/culture/components/responsibility/advancedSearch.vue';
+  import AdvancedCrates from '@/views/workGroup/components/youthachievements/advancedSearch.vue';
   const list = [];
   const text = '沙家邦红色党建活动';
   import { ref } from 'vue';
