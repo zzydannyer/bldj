@@ -46,6 +46,7 @@
       content: removeHtmlTags(i.content)
     }));
   }
+  const text = '沙家邦红色党建活动';
   onBeforeMount(fetchData);
 </script>
 <template>
@@ -103,7 +104,7 @@
         <SwiperSlide v-for="i in 3" :key="i">
           <div class="flex justify-between">
             <van-space class="text-sm"
-              ><Icon icon="bxs:user" class="iconbg" /><span>{{
+              ><Icon icon="flowbite:home-solid" class="iconyellow" /><span>{{
                 name + i
               }}</span></van-space
             >
@@ -114,13 +115,15 @@
             >
           </div>
           <div class="bt">上海物资股份有限公司</div>
-          <div class="bg">
-            <div>销售金额：</div>
-            <div>2536.24万元</div>
-          </div>
-          <div class="bg">
-            <div>职工人数：</div>
-            <div>26人</div>
+          <div class="justify-between center-center">
+            <div class="bg h-[70PX] grow center-center flex-col">
+              <div>销售金额</div>
+              <div>2536.24万元</div>
+            </div>
+            <div class="bg h-[70PX] grow ml-2 center-center flex-col">
+              <div>职工人数</div>
+              <div>26人</div>
+            </div>
           </div>
         </SwiperSlide>
       </Swiper>
@@ -130,7 +133,7 @@
         <div class="text-3xl font-medium">
           50<span class="text-sm font-normal">人</span>
         </div>
-        <div class="text-base">赋能转岗</div>
+        <div class="text-base">转型创业</div>
         <van-image
           class="w-[80PX] h-[80PX] absolute bottom-0 right-0 opacity-5"
           fit="cover"
@@ -142,7 +145,7 @@
         <SwiperSlide v-for="i in 3" :key="i">
           <div class="flex justify-between">
             <van-space class="text-sm"
-              ><Icon icon="bxs:user" class="iconbg" /><span>{{
+              ><Icon icon="flowbite:home-solid" class="iconyellow" /><span>{{
                 name + i
               }}</span></van-space
             >
@@ -153,11 +156,16 @@
             >
           </div>
           <div class="bt">上海物资股份有限公司</div>
-          <div class="bg">值班经理兼消防员</div>
-          <div class="text-lg text-center">
-            <Icon icon="solar:arrow-down-broken" />
+          <div class="justify-between center-center">
+            <div class="bg h-[70PX] grow center-center flex-col">
+              <div>销售金额</div>
+              <div>2536.24万元</div>
+            </div>
+            <div class="bg h-[70PX] grow ml-2 center-center flex-col">
+              <div>职工人数</div>
+              <div>26人</div>
+            </div>
           </div>
-          <div class="bg">值班经理</div>
         </SwiperSlide>
       </Swiper>
     </section>
@@ -166,11 +174,14 @@
     </section>
     <v-card v-for="i in 10" :key="i" class="mt-3 mx-4">
       <template #title>
-        <van-text-ellipsis :content="text" @click="router.push('/detail')" />
+        <van-text-ellipsis
+          :content="text"
+          @click="router.push('/workGroup/detail')"
+        />
       </template>
       <List :count="i" :name="'name' + i" />
     </v-card>
-    <section class="bg mt-3">
+    <section class="bg mt-4">
       <div class="tit">百暖连心<span class="line"></span></div>
     </section>
     <!--      @click="handleDetail(row.id, row.activitiesId)"-->
@@ -179,7 +190,7 @@
         v-for="(row, index) in cxgzsl"
         :key="index"
         class="flex flex-between gap-2 bg-white px-4 pt-5"
-        @click="router.push('/workGroup/workDetail')"
+        @click="router.push('/workGroup/heartDetail')"
       >
         <img width="100" height="85" v-src="row.imgUrl" class="rounded" />
         <section class="flex-1 text-sm flex-col gap-2">
@@ -207,6 +218,9 @@
       width: 10.5rem !important;
       .iconbg {
         color: #009dff;
+      }
+      .iconyellow {
+        color: #ffad00;
       }
       .bg {
         @apply rounded p-1 text-center;

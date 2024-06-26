@@ -1,12 +1,9 @@
 <template>
-  <van-space class="subtext" :size="2" fill>
-    <Icon icon="solar:user-linear" class="color" /> <span> {{ name }}</span>
+  <van-space class="subtext" :size="2">
+    <Icon icon="octicon:home-24" class="color-green" /> <span> {{ name }}</span>
   </van-space>
-  <van-space class="subtext" :size="2" fill>
+  <van-space class="subtext ml-10" :size="2">
     <Icon icon="ion:time-outline" class="color1" /> <span> {{ time }}</span>
-  </van-space>
-  <van-space class="subtext" :size="2" fill>
-    <Icon icon="tabler:eye-discount" class="color2" /> <span> {{ count }}</span>
   </van-space>
 </template>
 
@@ -33,8 +30,8 @@
     color: #3f3f3f;
     vertical-align: middle;
   }
-  .color {
-    color: rgb(194, 179, 88);
+  .color-green {
+    color: #33c984;
   }
   .color1 {
     color: rgb(0, 110, 225);

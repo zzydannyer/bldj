@@ -1292,6 +1292,24 @@ export default [
         }
       },
       {
+        name: 'detail',
+        path: 'detail',
+        component: () => import('@/views/workGroup/pages/detail.vue'),
+        meta: {
+          title: '立功竞赛详情',
+          icon: ''
+        }
+      },
+      {
+        name: 'HeartDetail',
+        path: 'heartDetail',
+        component: () => import('@/views/workGroup/pages/heartDetail.vue'),
+        meta: {
+          title: '百暖连心详情',
+          icon: ''
+        }
+      },
+      {
         name: 'Index',
         path: 'index',
 
