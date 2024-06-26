@@ -2,11 +2,11 @@
   <div class="m-4">
     <van-search
       v-model="value"
-      class="mx-auto rounded-md"
+      show-action
       placeholder="请输入搜索关键词"
       shape="round"
-      show-action
       @search="onSearch"
+      class="mx-auto rounded-md"
     >
       <template #action>
         <div is-link @click="showPopup">
@@ -26,11 +26,10 @@
 
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-  import AdvancedCrates from '@/views/culture/responsibility/advancedSearch.vue';
+  import AdvancedCrates from '@/views/discipline/components/integrity/advancedSearch.vue';
   const list = [];
   const text = '沙家邦红色党建活动';
   import { ref } from 'vue';
-
   const show = ref(false);
   const showPopup = () => {
     show.value = true;
