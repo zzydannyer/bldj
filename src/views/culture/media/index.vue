@@ -66,7 +66,6 @@
         round
       />
     </section>
-
     <AdvancedSearch
       v-model="queryParams.params.mediaTitleLike"
       @search="onSearch"

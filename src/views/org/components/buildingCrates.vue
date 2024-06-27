@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Search from '@/views/discipline/components/integrity/search.vue';
-  import List from '@/views/discipline/components/integrity/list.vue';
+  import Search from '@/views/culture/social/search.vue';
+  import SocialContent from '@/views/culture/social/content.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
-  const text = '上海市国资委监管企业党支部规范化建设细则';
+  const text = '沙家邦红色党建活动';
   defineOptions({
     name: 'MediaList'
   });
@@ -19,6 +19,6 @@
     <template #title>
       <van-text-ellipsis :content="text" @click="router.push('/detail')" />
     </template>
-    <List :count="i" :name="'name' + i" />
+    <SocialContent :count="i" :name="'name' + i" />
   </v-card>
 </template>

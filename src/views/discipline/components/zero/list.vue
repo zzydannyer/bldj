@@ -1,11 +1,11 @@
 <template>
-  <van-space class="subtext" :size="2" fill>
+  <van-space class="subtext" :size="2">
     <Icon icon="solar:user-linear" class="color" /> <span> {{ name }}</span>
   </van-space>
-  <van-space class="subtext" :size="2" fill>
+  <van-space class="subtext ml-10" :size="2">
     <Icon icon="ion:time-outline" class="color1" /> <span> {{ time }}</span>
   </van-space>
-  <van-space class="subtext" :size="2" fill>
+  <van-space class="subtext ml-10" :size="2">
     <Icon icon="tabler:eye-discount" class="color2" /> <span> {{ count }}</span>
   </van-space>
 </template>
