@@ -8,7 +8,7 @@
   onBeforeMount(fetchData);
 </script>
 <template>
-  <van-pull-refresh v-model="loading" @refresh="fetchData">
+  <van-pull-refresh class="container" v-model="loading" @refresh="fetchData">
     <van-cell-group>
       <van-cell v-for="(item, index) in homeNews" :key="item.uid">
         <template #title>

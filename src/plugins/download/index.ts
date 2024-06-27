@@ -13,7 +13,7 @@ async function printErrMsg(data: any) {
   showFailToast(errMsg);
 }
 
-export async function download(url: string, filename: string) {
+export default async function (url: string, filename: string) {
   try {
     showLoadingToast({
       message: '下载中...'

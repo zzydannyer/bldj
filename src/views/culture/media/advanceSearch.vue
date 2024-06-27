@@ -10,14 +10,21 @@
   }>();
 </script>
 <template>
-  <van-search v-model="searchInput" placeholder="请输入搜索关键词" show-action>
-    <template #left>
-      <van-icon class="mr-2" name="filter-o" @click="show = true" />
-    </template>
-    <template #action>
-      <div @click="emit('search')">搜索</div>
-    </template>
-  </van-search>
+  <form action="/">
+    <van-search
+      type="search"
+      v-model="searchInput"
+      placeholder="请输入搜索关键词"
+      show-action
+    >
+      <template #left>
+        <van-icon class="mr-2" name="filter-o" @click="show = true" />
+      </template>
+      <template #action>
+        <div @click="emit('search')">搜索</div>
+      </template>
+    </van-search>
+  </form>
 
   <van-popup
     v-model:show="show"

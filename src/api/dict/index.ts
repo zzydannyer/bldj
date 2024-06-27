@@ -1,32 +1,21 @@
-import { SysDictData } from '@/types/_system/sysDictData';
 import request from '@/utils/request';
 
-// 查询字典数据列表
-export function listData(params: any): Promise<Res<SysDictData[]>> {
-  return request('get', '/system/dict/data/list', { params });
+export interface DictData {
+  code: string; // 字典项编码
+  name: string; // 字典名称
 }
-
-// 查询字典数据详细
-export function getData(dictCode: number): Promise<Res<SysDictData>> {
-  return request('get', '/system/dict/data/' + dictCode);
+export interface Dict {
+  text: string; // 字典名称
+  value: string; // 字典项编码
 }
-
-// 根据字典类型查询字典数据信息
-export function getDicts(dictType: string): Promise<Res<SysDictData[]>> {
-  return request('get', '/system/dict/data/type/' + dictType);
-}
-
-// 新增字典数据
-export function addData(data: SysDictData): Promise<Res<void>> {
-  return request('post', '/system/dict/data', { data });
-}
-
-// 修改字典数据
-export function updateData(data: SysDictData): Promise<Res<void>> {
-  return request('put', '/system/dict/data', { data });
-}
-
-// 删除字典数据
-export function delData(dictCode: number | number[]): Promise<Res<void>> {
-  return request('delete', '/system/dict/data/' + dictCode);
+// 获取子字典/常量列表 flag: 1. 字典项   2. 常量
+export default function (pCode: string, flag: string) {
+  return request<ResData<DictData[]>>({
+    url: `/manage/dict/dictList`,
+    method: 'get',
+    params: {
+      pCode,
+      flag
+    }
+  });
 }

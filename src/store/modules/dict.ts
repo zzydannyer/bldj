@@ -1,42 +1,30 @@
 import { defineStore } from 'pinia';
-import { DictData } from '@/plugins/dict';
+import { type DictData, type Dict } from '@/api/dict';
+import { stringify, parse } from 'qs';
 
-export default defineStore({
-  id: 'dict',
+export default defineStore('dict', {
+  persist: {
+    key: 'dictData',
+    storage: sessionStorage,
+    paths: ['dictMap'],
+    serializer: {
+      deserialize: parse,
+      serialize: stringify
+    },
+    debug: true
+  },
   state: () => ({
-    dict: [] as any
+    dictMap: new Map<string, Dict[]>()
   }),
   actions: {
-    // 获取字典
-    get_dict(key: string) {
-      if (!key) return null;
-
-      for (const dict of this.dict) {
-        if (dict.key === key) {
-          return dict.value;
-        }
-      }
-
-      return null;
+    HAS(mapKey: string) {
+      return this.dictMap.has(mapKey);
     },
-    // 设置字典
-    set_dict(key: string, value: DictData[]) {
-      if (!key) return;
-      this.dict.push({ key, value });
+    GET(mapKey: string) {
+      return this.dictMap.get(mapKey);
     },
-    // 删除字典
-    rm_dict(key: string) {
-      for (const index in this.dict) {
-        if (this.dict[index].key === key) {
-          this.dict.splice(index as unknown as number, 1);
-          return true;
-        }
-      }
-      return false;
-    },
-    // 清空字典
-    clear_dict() {
-      this.dict = [];
+    SET(mapKey: string, data: Dict[]) {
+      this.dictMap.set(mapKey, data);
     }
   }
 });

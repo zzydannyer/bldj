@@ -5,7 +5,18 @@
   import { useStore } from '@/store';
   import { storeToRefs } from 'pinia';
   import { UserType } from '@/constants';
+  import { useGlobal } from '@/utils';
 
+  const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
+  // const product_type = $useDict([
+  //   'product_type',
+  //   'sys_yes_no',
+  //   'sys_normal_disable',
+  //   'acl_type'
+  // ]);
+  // setTimeout(() => {
+  //   console.log(product_type);
+  // }, 3000);
   const [queryParams, resetQueryParams] = useQueryParams<CultureMediaParams>(
     new CultureMediaParams()
   );
@@ -43,7 +54,7 @@
   onBeforeMount(getOptions);
 </script>
 <template>
-  <main class="mt-2 pb-[100PX] pt-2 bg-white">
+  <main class="mt-2 pb-[600PX] pt-2 bg-white">
     <section class="px-[16PX]">
       <van-button
         block

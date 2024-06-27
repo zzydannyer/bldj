@@ -1,6 +1,4 @@
 <script setup lang="ts" generic="T extends object">
-  import { debounce } from 'lodash';
-  import { QueryParams } from '@/types/params';
 
   defineOptions({
     name: 'VInsetList'
@@ -116,13 +114,13 @@
     padding: 0 $body-padding;
 
     .van-list {
-      display: flex;
-      flex-flow: column nowrap;
-      gap: $list-gap;
+      // display: flex;
+      // flex-flow: column nowrap;
+      // gap: $list-gap;
 
-      .van-cell-group {
-        margin: 0;
-      }
+      // .van-cell-group {
+      //   margin: 0;
+      // }
     }
   }
 </style>
