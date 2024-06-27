@@ -15,7 +15,7 @@
   import { stringify } from 'qs';
   import { formatToken, getToken } from '@/utils/auth';
   import { find, isEmpty, isUndefined } from 'lodash';
-  import { fileMd5 } from '@/plugins/md5';
+  import { fileMd5 } from '@/plugins/md5/md5';
   import { fileCheck } from '@/api/_media';
 
   defineOptions({

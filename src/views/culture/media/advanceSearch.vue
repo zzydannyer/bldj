@@ -1,128 +1,52 @@
 <script setup lang="ts">
-  import { PickerOption } from 'vant';
-  import MediaServer from '@/api/culture/media';
-  import { useStore } from '@/store';
-  import { storeToRefs } from 'pinia';
-  import { UserType } from '@/constants';
-  import { PropType } from 'vue';
+  const show = ref(false);
 
-  const show = defineModel('show', { default: false });
-  const { userInfo } = useStore();
-  const { userType } = storeToRefs(userInfo);
+  const searchInput = defineModel();
 
-  interface QueryParams<T> {
-    params: T;
-    pageNum: number;
-    pageSize: number;
-  }
+  const emit = defineEmits(['search', 'reset']);
 
-  class Params {
-    mediaTitleLike = '';
-    authorLike = '';
-    orgNameLike = '';
-    resourceType = '';
-  }
-  const queryParams = defineModel('queryParams', {
-    type: Object as PropType<QueryParams<Params>>,
-    default: () => new Params()
-  });
-
-  const result = ref('');
-  const checked = ref([]);
-  const showPicker = ref(false);
-  const categoryOption = ref([
-    { text: '党建活动', value: 'Hangzhou' },
-    { text: '时政动态', value: 'Ningbo' },
-    { text: '经营纵横', value: 'Wenzhou' },
-    { text: '企业文化', value: 'Shaoxing' },
-    { text: '工作场景', value: 'Huzhou' }
-  ]);
-  const showSelect = ref(false);
-  const onConfirm = ({ selectedOptions }: PickerOption) => {
-    result.value = selectedOptions[0]?.text;
-    showPicker.value = false;
-  };
-
-  async function getOptions() {
-    const { data } = await MediaServer.GET_CATEGORY();
-    console.log(data);
-    if (userType.value === UserType.Group) {
-      categoryOption.value = data[0].children;
-    }
-  }
-
-  onBeforeMount(getOptions);
+  defineSlots<{
+    default: () => any;
+  }>();
 </script>
 <template>
+  <van-search v-model="searchInput" placeholder="请输入搜索关键词" show-action>
+    <template #left>
+      <van-icon class="mr-2" name="filter-o" @click="show = true" />
+    </template>
+    <template #action>
+      <div @click="emit('search')">搜索</div>
+    </template>
+  </van-search>
+
   <van-popup
     v-model:show="show"
     position="right"
     :style="{ width: '90%', height: '100%' }"
   >
     <van-cell-group class="van-safe-area-top" inset>
-      <!-- 媒体标题 -->
-      <van-field
-        v-model="queryParams.params.mediaTitleLike"
-        input-align="left"
-        label="媒体标题"
-        label-align="top"
-      />
-      <!-- 作者 -->
-      <van-field
-        v-model="queryParams.params.authorLike"
-        input-align="left"
-        label="作者"
-        label-align="top"
-      />
-      <!-- 公司 -->
-      <van-field
-        v-model="queryParams.params.orgNameLike"
-        input-align="left"
-        label="公司"
-        label-align="top"
-        @click="showSelect = true"
-      />
-      <!-- 素材类别 -->
-      <van-field
-        v-model="queryParams.params.resourceType"
-        input-align="left"
-        is-link
-        label="素材类别"
-        label-align="top"
-        name="picker"
-        placeholder="点击选择素材类别"
-        readonly
-        @click="showPicker = true"
-      />
-
-      <van-checkbox-group
-        v-model="checked"
-        class="pt-5 pl-4"
-        direction="horizontal"
-      >
-        <van-checkbox name="isExce">优秀资源</van-checkbox>
-        <van-checkbox name="isRecom">推荐资源</van-checkbox>
-      </van-checkbox-group>
-
-      <div class="grid gap-3 grid-cols-2 px-4 mt-10">
-        <van-button block class="grey-button" to="index" type="default"
-          >重置</van-button
-        >
-        <van-button block class="button" to="index" type="primary"
-          >确认</van-button
-        >
+      <slot />
+      <div class="flex gap-2 p-2">
+        <van-button
+          size="small"
+          block
+          class="grey-button"
+          to="index"
+          type="default"
+          text="重置"
+          @click="emit('reset')"
+        />
+        <van-button
+          size="small"
+          block
+          class="button"
+          to="index"
+          type="primary"
+          text="搜索"
+          @click="emit('search')"
+        />
       </div>
     </van-cell-group>
-  </van-popup>
-
-  <van-popup v-model:show="showPicker" position="bottom">
-    <van-picker
-      :columns="categoryOption"
-      :columns-field-names="{ text: 'text', value: 'id' }"
-      teleport="body"
-      @cancel="extra_2_pop = false"
-      @confirm="onConfirm"
-    />
   </van-popup>
 </template>
 

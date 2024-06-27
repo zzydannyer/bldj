@@ -1,5 +1,9 @@
-import { homeContentList } from '@/api/home';
-import type { HomeHeadNews, HomeNews, HomeNotice } from '@/types/home';
+import {
+  homeContentList,
+  type HomeHeadNews,
+  type HomeNews,
+  type HomeNotice
+} from '@/api/home';
 import { closeToast, showLoadingToast } from 'vant';
 import { Reactive } from 'vue';
 

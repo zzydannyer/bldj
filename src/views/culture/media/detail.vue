@@ -1,3 +1,8 @@
+<script setup lang="ts">
+  const route = useRoute();
+  const { uid } = route.params;
+</script>
+
 <template>
   <div class="pb-64">
     <van-cell-group class="mt-4" inset>
@@ -117,35 +122,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-  const result = ref('');
-  const checked = ref([]);
-  const showPicker = ref(false);
-  const columns = [
-    { text: '党建活动', value: 'Hangzhou' },
-    { text: '时政动态', value: 'Ningbo' },
-    { text: '经营纵横', value: 'Wenzhou' },
-    { text: '企业文化', value: 'Shaoxing' },
-    { text: '工作场景', value: 'Huzhou' }
-  ];
-
-  const onConfirm = ({ selectedOptions }) => {
-    result.value = selectedOptions[0]?.text;
-    showPicker.value = false;
-  };
-
-  const mediaType = ref(false);
-  const columns2 = [
-    { text: '图片', value: 'Picture' },
-    { text: '视频', value: 'Video' }
-  ];
-
-  const onMediaConfirm = ({ selectedOptions }) => {
-    result.value = selectedOptions[0]?.text;
-    mediaType.value = false;
-  };
-</script>
 
 <style lang="scss" scoped>
   .button {

@@ -25,7 +25,7 @@
   import { useGlobal } from '@/utils';
   import MediaReview from './mediaReview.tsx';
   import ResourceType from '@/views/media/resourceType.tsx';
-  import { emitter } from '@/plugins/mitt';
+  import { emitter } from '@/plugins/mitt/index.ts';
   const activitiesName = ref<any>([]);
   const form = reactive<MediaMain>(new MediaMain());
   const route = useRoute();

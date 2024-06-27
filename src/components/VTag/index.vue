@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  import type { DictData } from '@/plugins/dict';
+  import type { DictData } from '@/plugins/dict/dict';
   import type { TagSize, TagType, TagProps } from 'vant';
   import type { PropType } from 'vue';
   import { useGlobal } from '@/utils';

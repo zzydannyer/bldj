@@ -19,7 +19,7 @@ html{
 
 .van-pull-refresh {
   //prettier-ignore
-  height: calc(100% - 425PX) !important;
+  min-height: calc(100% - 425PX) !important;
 }
 
 textarea {

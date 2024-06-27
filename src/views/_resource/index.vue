@@ -6,7 +6,7 @@
     delPublicResourceFile,
     updataIsHomeShow
   } from '@/api/_media/publicResource';
-  import { download } from '@/plugins/download';
+  import { download } from '@/plugins/download/download';
   import useUserInfoStore from '@/store/modules/user';
   import { hasAuth } from '@/utils/auth';
   import { Icon } from '@iconify/vue';

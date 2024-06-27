@@ -1,17 +1,12 @@
 <script setup lang="ts">
   import { useImage, useIcon } from '@/utils/assets';
   import { register } from 'swiper/element/bundle';
-  // import { useStore } from '@/store';
-  // import { storeToRefs } from 'pinia';
-  // import { UserType } from '@/constants';
   import dayjs from 'dayjs';
   import { DictData } from '@/plugins/dict';
   import useHomeData from '@/hooks/api/home';
   // Swiper
   register();
   const router = useRouter();
-  // const { userInfo } = useStore();
-  // const { userType } = storeToRefs(userInfo);
 
   // 轮播
   const spaceBetween = 10;

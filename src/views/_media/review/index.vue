@@ -6,7 +6,7 @@
   import { FormInstance, showConfirmDialog, showSuccessToast } from 'vant';
   import BackDialog from './backDialog.tsx';
   import ResourceType from '@/views/media/resourceType.tsx';
-  import { emitter } from '@/plugins/mitt';
+  import { emitter } from '@/plugins/mitt/index.ts';
 
   defineOptions({
     name: 'MediaReview'

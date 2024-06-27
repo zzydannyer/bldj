@@ -1,107 +1,83 @@
-<script setup lang="ts">
-  import { debounce, pickBy, throttle } from 'lodash';
-  import { isNotEmpty } from '@/utils';
-  import { ComponentPublicInstance } from 'vue';
-  import { emitter } from '@/plugins/mitt';
+<script setup lang="ts" generic="T extends object">
+  import { debounce } from 'lodash';
+  import { QueryParams } from '@/types/params';
 
   defineOptions({
     name: 'VInsetList'
   });
 
   const {
+    keyName = 'uid',
     listFn,
-    queryParams,
-    shows = ['list'],
-    keyName = 'id',
-    rowsFilter
+    listFilter
   } = defineProps({
-    listFn: Function as PropType<any>,
-    queryParams: Object as PropType<any>,
-    shows: Array as PropType<any[]>,
     keyName: String as PropType<string>,
-    rowsFilter: Function as PropType<() => {}>
+    listFn: Function as PropType<any>,
+    listFilter: Function as PropType<() => {}>
   });
-  const route = useRoute();
+
+  const queryParams = defineModel('queryParams', {
+    type: Object as PropType<QueryParams<T>>,
+    default: () => ({
+      params: {},
+      pageSize: 10,
+      pageNum: 1
+    })
+  });
+
+  const loading = defineModel('loading', {
+    type: Boolean,
+    default: false
+  });
+
   const list = ref([]);
-  const listRef = ref();
-  const loading = ref(false);
+  const computedList = computed(() =>
+    listFilter ? listFilter(list.value) : list.value
+  );
+
+  const listRef = ref(null);
+
   const finished = ref(false);
   const refreshing = ref(false);
-  const proxy = getCurrentInstance()?.proxy as ComponentPublicInstance;
 
-  // 记录滚动条位置
-  const app = document.querySelector('#app')!;
+  const listTotal = ref(0);
 
-  onBeforeRouteLeave(() => {});
-
-  // 滚动隐藏头部
-  onActivated(() => {});
-
-  onDeactivated(() => {});
-
-  onMounted(() => emitter.on('refresh', onRefresh));
-
-  onBeforeUnmount(() => emitter.off('refresh'));
-
-  const query = reactive({
-    pageSize: 10,
-    currentPage: 1
-  });
-
-  const listClass = computed(() => {
-    const showsCopy = [...shows];
-    return showsCopy.sort().join('-');
-  });
-
-  const _total = ref(0);
-
-  /**
-   * @description 加载数据
-   */
-  const onLoad = debounce(async () => {
+  async function onLoad() {
     try {
-      const filteEmpty = pickBy(toRaw(queryParams), isNotEmpty);
-      const params = Object.assign({}, query, filteEmpty);
-      const { rows, total } = await listFn(params);
-      console.log('rows', rows);
-      if (!rows) throw new Error('请求失败');
-      // 刷新前列表清空
+      console.log(666);
+      loading.value = true;
+      const { rows, total } = await listFn(queryParams.value);
+
       if (refreshing.value) {
         list.value = [];
         refreshing.value = false;
       }
 
       list.value = list.value.concat(rows);
-      _total.value = total;
+      listTotal.value = total;
 
-      if (list.value.length >= _total.value) {
+      if (list.value.length >= listTotal.value) {
         finished.value = true;
       } else {
-        query.currentPage += 1;
+        queryParams.value.pageNum += 1;
       }
     } catch (e) {
+      console.error(e);
       finished.value = true;
     } finally {
       loading.value = false;
     }
-  }, 1000);
+  }
 
-  /**
-   * @description 刷新数据
-   */
   const onRefresh = () => {
     refreshing.value = true;
-    // 清空列表数据
     finished.value = false;
-    // 重新加载数据
-    query.currentPage = 1;
-    // 将 loading 设置为 true，表示处于加载状态
-    loading.value = true;
+    queryParams.value.pageNum = 1;
     onLoad();
   };
 
   defineSlots<{
-    default: (item: any) => any;
+    row: (row: any, index: number) => any;
     list: (list: any) => any;
   }>();
 
@@ -112,12 +88,7 @@
 </script>
 
 <template>
-  <van-pull-refresh
-    ref="listRef"
-    v-model="refreshing"
-    :class="listClass"
-    @refresh="onRefresh"
-  >
+  <van-pull-refresh ref="listRef" v-model="refreshing" @refresh="onRefresh">
     <van-list
       v-model:loading="loading"
       error-text="请求失败，请稍后重试"
@@ -125,42 +96,24 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <slot :list="list" name="list">
+      <slot :list="computedList" name="list">
         <van-cell-group
-          v-for="(row, index) in list"
+          v-for="(row, index) in computedList"
           :key="row[keyName] ?? index"
           :border="true"
           :inset="true"
         >
-          <slot :index="index" :row="row" />
+          <slot :index="index" :row="row" name="row" />
         </van-cell-group>
       </slot>
     </van-list>
   </van-pull-refresh>
-  <van-back-top teleport="body" z-index="10" />
+  <van-back-top teleport="body" z-index="9" />
 </template>
 
 <style lang="scss" scoped>
   .van-pull-refresh {
-    min-height: -webkit-fill-available;
-    padding: $body-padding $body-padding 0;
-    &.dropmenu-search {
-      padding: calc($search-height + $dropmenu-height + $body-padding)
-        $body-padding 0;
-    }
-
-    &.search-tabs {
-      padding: calc($search-height + $tabs-height + $body-padding) $body-padding
-        0;
-    }
-
-    &.search {
-      padding: calc($search-height + $body-padding) $body-padding 0;
-    }
-
-    &.dropmenu {
-      padding: calc($dropmenu-height + $body-padding) $body-padding 0;
-    }
+    padding: 0 $body-padding;
 
     .van-list {
       display: flex;

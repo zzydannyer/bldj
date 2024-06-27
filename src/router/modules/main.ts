@@ -2017,7 +2017,7 @@ export default [
       },
       {
         name: 'MediaDetail',
-        path: 'mediaDetail',
+        path: 'mediaDetail/:uid',
         component: () => import('@/views/culture/media/detail.vue'),
         meta: {
           title: '详情',

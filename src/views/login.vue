@@ -7,7 +7,7 @@
     showSuccessToast
   } from 'vant';
   import { useIcon } from '@/utils/assets';
-  import { encrypt } from '@/plugins/encrypt';
+  import { encrypt } from '@/plugins/encrypt/encrypt';
   import { setToken, getToken } from '@/utils/auth';
   import { LoginRes } from '@/types/user';
   import AuthServer from '@/api/login';
