@@ -7,10 +7,9 @@
     showSuccessToast
   } from 'vant';
   import { useIcon } from '@/utils/assets';
-  import { encrypt } from '@/plugins/encrypt/encrypt';
+  import { encrypt } from '@/plugins/encrypt';
   import { setToken, getToken } from '@/utils/auth';
-  import { LoginRes } from '@/types/user';
-  import AuthServer from '@/api/login';
+  import AuthServer, { LoginRes } from '@/api/login';
 
   const route = useRoute();
   const router = useRouter();

@@ -24,7 +24,7 @@ export interface MediaMain {
 
 // 查询【媒体资料库】主列表
 function listMediaMain(params: CultureMediaParams) {
-  return request<MediaMain[]>({
+  return request<ResData<MediaMain[]>>({
     url: '/media/mediaMain/list',
     method: 'GET',
     params

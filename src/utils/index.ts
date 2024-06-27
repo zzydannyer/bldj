@@ -1,4 +1,4 @@
-import { DictData } from '@/plugins/dict/dict';
+import { DictData } from '@/plugins/dict';
 import { isArray, isObject, isNull, isUndefined, isString } from 'lodash';
 import { stringify } from 'qs';
 

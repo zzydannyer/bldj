@@ -15,8 +15,6 @@
   import { stringify } from 'qs';
   import { formatToken, getToken } from '@/utils/auth';
   import { find, isEmpty, isUndefined } from 'lodash';
-  import { fileMd5 } from '@/plugins/md5/md5';
-  import { fileCheck } from '@/api/_media';
 
   defineOptions({
     name: 'VUploader'
@@ -147,36 +145,6 @@
     }
   };
 
-  // 上传文件查重
-  const checkFileExist = async (file: any, index: number) => {
-    const md5 = await fileMd5(file.file);
-    const md5File = fileList.value.find((item) => item.md5 === md5);
-    if (md5File) return true;
-
-    file.md5 = md5;
-    try {
-      const resp = await fileCheck(md5, file.file.size);
-      const duplicateFile = resp.data;
-      if (!duplicateFile) {
-        return false;
-      }
-      // 检测重复文件列表的ossId在不在fileList中，如果存在则阻止上传
-      if (find(fileList.value, { ossId: duplicateFile.ossId })) {
-        return true;
-      }
-      // 如果mainId存在并且不在fileList中，则添加到fileList中
-      if (httpParams?.mediaId == duplicateFile.id) {
-        // 直接回显图片
-        fileList.value[index] = duplicateFile;
-        return false;
-      }
-    } catch (error: any) {
-      throw new Error(error.message);
-    }
-
-    return false;
-  };
-
   /**
    * @description: 上传方法
    */
@@ -189,12 +157,6 @@
   ) => {
     try {
       // 检测文件是否已存在
-      const exist = await checkFileExist(file, detail.index);
-      if (exist) {
-        showFailToast('文件已存在');
-        onDelete(file, detail);
-        return;
-      }
       if (url === 'media') {
         // 检测媒体标题是否存在
         if (!projectname) {
@@ -222,7 +184,7 @@
         code,
         data: resData,
         msg
-      } = (await instance.post(uploadUrl.value, params, config)) as Res<any>;
+      } = await instance.post(uploadUrl.value, params, config);
 
       if (code !== 200) {
         fileList.value.splice(detail.index, 1);

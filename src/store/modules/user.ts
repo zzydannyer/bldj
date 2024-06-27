@@ -4,7 +4,7 @@ import { rmToken } from '@/utils/auth';
 import { sessionKey } from '@/constants';
 import { showSuccessToast } from 'vant';
 import { UserType } from '@/constants';
-import type { UserInfo } from '@/types/user';
+import type { UserInfo } from '@/api/login';
 
 export default defineStore('user', {
   persist: {

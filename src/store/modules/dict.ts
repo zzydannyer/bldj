@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { DictData } from '@/plugins/dict/dict';
+import { DictData } from '@/plugins/dict';
 
 export default defineStore({
   id: 'dict',
