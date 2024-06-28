@@ -73,8 +73,8 @@
   <div class="mt-4 mb-4 pb-20">
     <van-grid :border="false" :column-num="2" :gutter="20">
       <van-grid-item class="topbg">
-        <div class="text-left w-full">会议</div>
-        <div class="w-full text-center"><span>54</span>场</div>
+        <div class="text-left w-full" style="margin-top: -10px">会议</div>
+        <div class="w-full text-center"><span class="text-2xl">54</span>场</div>
         <div class="text-xs w-full">
           <span>上季度：30</span><span>环比增长：40%</span>
         </div></van-grid-item

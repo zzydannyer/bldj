@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Eight from '@/views/discipline/components/zero/eight.vue';
+  import Party from '@/views/discipline/components/integrity/party.vue';
+  import Supervision from '@/views/discipline/components/integrity/supervision.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   defineOptions({
     name: 'MediaList'
@@ -9,24 +10,9 @@
   const router = useRouter();
   const active = ref<string>('');
 </script>
-<template>
-  <van-tabs
-    v-model:active="active"
-    type="card"
-    swipe-threshold="2"
-    :scrollspy="true"
-  >
-    <van-tab title="落实中央八项规定精神" name="eight"></van-tab>
-    <van-tab title="深化“四责协同" name="four"></van-tab>
-    <van-tab title="廉政风险防控" name="government"></van-tab>
-  </van-tabs>
-  <Eight v-if="active === 'eight'" />
-  <Four v-if="active === 'four'" />
-  <Government v-if="active === 'government'" />
-</template>
+<template>统计考核</template>
 
 <style lang="scss" scoped>
-  //青年思想引领、全面从严治团、青年岗位建功、服务青年成才、页面一样
   $baseColor: rgb(225, 1, 1);
   $borderColor: #e2e2e2;
   $textColor: #777;
