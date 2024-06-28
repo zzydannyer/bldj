@@ -17,6 +17,24 @@ export default [
         }
       },
       {
+        name: 'Detail',
+        path: 'pages/detail',
+        component: () => import('@/views/politics/pages/detail.vue'),
+        meta: {
+          title: '详情',
+          icon: ''
+        }
+      },
+      {
+        name: 'Execute',
+        path: 'pages/execute',
+        component: () => import('@/views/politics/pages/execute.vue'),
+        meta: {
+          title: '详情',
+          icon: ''
+        }
+      },
+      {
         name: 'TopicSys',
         path: 'topicSys',
         component: 'ParentView',
@@ -603,173 +621,13 @@ export default [
         }
       },
       {
-        name: 'OrgBuild',
-        path: 'orgBuild',
-        component: 'ParentView',
+        name: 'AddMeeting',
+        path: 'addMeeting',
+        component: () => import('@/views/org/pages/addMeeting.vue'),
         meta: {
-          title: '党组织规范化建设',
-          icon: 'org_orgBuild'
-        },
-        children: [
-          {
-            name: 'Manage',
-            path: 'manage',
-            component: 'ParentView',
-            meta: {
-              title: '组织设置和管理',
-              icon: '#'
-            },
-            children: [
-              {
-                name: 'OrgSetting',
-                path: 'orgSetting',
-                component: 'org/orgBuild/manage/orgSetting',
-                meta: {
-                  title: '组织架构设置',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'PartyBuild',
-                path: 'partyBuild',
-                component: 'org/orgBuild/manage/partyBuild',
-                meta: {
-                  title: '党务干部队伍建设',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'Institution',
-                path: 'institution',
-                component: 'public/content/index',
-                meta: {
-                  title: '党建实务',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'Notice',
-                path: 'notice',
-                component: 'public/content/index',
-                meta: {
-                  title: '通知公告',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'Election',
-                path: 'election',
-                component: 'org/orgBuild/manage/election',
-                meta: {
-                  title: '换届选举',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'ElectionAudit',
-                path: 'electionAudit',
-                component: 'org/orgBuild/manage/electionAudit',
-                meta: {
-                  title: '换届选举审核',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'ElectionMonitor',
-                path: 'electionMonitor',
-                component: 'org/orgBuild/manage/electionMonitor',
-                meta: {
-                  title: '换届选举监控',
-                  icon: '#'
-                }
-              },
-              {
-                name: 'PartySeal',
-                path: 'partySeal',
-                component: 'org/orgBuild/partySeal/index',
-                meta: {
-                  title: '党建入章',
-                  icon: '#'
-                }
-              }
-            ]
-          },
-          {
-            name: 'MeetingLesson',
-            path: 'meetingLesson',
-            component: 'org/orgBuild/meetingLesson/index',
-            meta: {
-              title: '三会一课',
-              icon: '#'
-            }
-          },
-          {
-            name: 'ClassStatisticalEvaluation',
-            path: 'classStatisticalEvaluation',
-
-            component: 'think/classStatisticalEvaluation/index',
-            meta: {
-              title: '三会一课统计考核',
-              icon: '#'
-            }
-          },
-          {
-            name: 'OrgLife',
-            path: 'orgLife',
-            component: 'org/orgBuild/orgLife/index',
-            meta: {
-              title: '组织生活会',
-              icon: '#'
-            }
-          },
-          {
-            name: 'StatisticTheme',
-            path: 'statisticTheme',
-
-            component: 'org/orgBuild/themePartyDay/statistic',
-            meta: {
-              title: '主题党日统计考核',
-              icon: '#'
-            }
-          },
-          {
-            name: 'StatisticsLife',
-            path: 'statisticsLife',
-
-            component: 'think/statisticsLife/index',
-            meta: {
-              title: '组织生活会统计考核',
-              icon: '#'
-            }
-          },
-          {
-            name: 'DemocraticLife',
-            path: 'democraticLife',
-            component: 'org/orgBuild/democraticLife/index',
-            meta: {
-              title: '民主生活会',
-              icon: '#'
-            }
-          },
-          {
-            name: 'DemocraticAudit',
-            path: 'democraticAudit',
-            component: 'think/democraticAudit/index',
-            meta: {
-              title: '民主生活会审核',
-              icon: '#'
-            }
-          },
-          {
-            name: 'ThemePartyDay',
-            path: 'themePartyDay',
-            component: 'org/orgBuild/themePartyDay/index',
-            meta: {
-              title: '主题党日',
-              icon: '#'
-            }
-          }
-        ]
+          title: '新增会议',
+          icon: '#'
+        }
       },
       {
         name: 'Member',

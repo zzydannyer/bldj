@@ -13,7 +13,6 @@
     <div class="v-card-title" v-if="$slots.title">
       <slot name="title"></slot>
     </div>
-
     <div class="v-card-body" :class="bodyClass" :style="bodyStyle">
       <slot></slot>
     </div>

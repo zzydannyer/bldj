@@ -73,13 +73,25 @@
   <div class="mt-4 mb-4 pb-20">
     <van-grid :border="false" :column-num="2" :gutter="20">
       <van-grid-item class="topbg">
-        <div class="text-left w-full" style="margin-top: -10px">会议</div>
-        <div class="w-full text-center"><span class="text-2xl">54</span>场</div>
-        <div class="text-xs w-full">
-          <span>上季度：30</span><span>环比增长：40%</span>
+        <div class="text-left w-full tit">会议</div>
+        <div class="w-full text-center">
+          <span class="text-2xl digital">54</span>场
+        </div>
+        <div class="text-xs w-full bottom">
+          <div>上季度：<span class="digital">30</span></div>
+          <div class="mt-1">环比增长：<span class="digital">40%</span></div>
         </div></van-grid-item
       >
-      <van-grid-item class="topbg"> </van-grid-item>
+      <van-grid-item class="topbg">
+        <div class="text-left w-full tit">议题</div>
+        <div class="w-full text-center">
+          <span class="text-2xl digital">27</span>场
+        </div>
+        <div class="text-xs w-full bottom">
+          <div>上季度：<span class="digital">30</span></div>
+          <div class="mt-1">环比增长：<span class="digital">40%</span></div>
+        </div></van-grid-item
+      >
     </van-grid>
     <section class="card">
       <div class="titbg">
@@ -161,7 +173,16 @@
       border-radius: $border-radius;
       border: solid 1px #fcc7c7;
     }
-    //@apply rounded-lg h-[100PX] w-[50%] overflow-hidden mt-4;
+    .tit {
+      margin-top: -10px;
+    }
+    .digital {
+      color: #ff4a27;
+    }
+    .bottom {
+      @apply mt-2 pt-2;
+      border-top: solid 1px #ffbea6;
+    }
     --van-grid-item-content-background: #fce2dd;
   }
 </style>

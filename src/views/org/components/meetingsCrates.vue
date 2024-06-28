@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Party from '@/views/discipline/components/integrity/party.vue';
-  import Supervision from '@/views/discipline/components/integrity/supervision.vue';
+  import All from '@/views/culture/social/helping.vue';
+  import Group from '@/views/culture/social/helping.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   defineOptions({
     name: 'MediaList'
@@ -11,24 +11,42 @@
   const active = ref<string>('');
 </script>
 <template>
-  <van-tabs
-    v-model:active="active"
-    type="card"
-    swipe-threshold="3"
-    :scrollspy="true"
-  >
-    <van-tab title="全部" name="party"></van-tab>
-    <van-tab title="党小组" name="supervision"></van-tab>
-    <van-tab title="党支部" name="supervision"></van-tab>
-    <van-tab title="支部党员" name="supervision"></van-tab>
-    <van-tab title="党课" name="supervision"></van-tab>
-  </van-tabs>
-  <Party v-if="active === 'party'" />
-  <Supervision v-if="active === 'supervision'" />
+  <main class="mt-2 pb-[600PX] pt-2">
+    <section class="px-[16PX]">
+      <van-button
+        block
+        class="button"
+        size="small"
+        to="/org/addMeeting"
+        type="primary"
+        text="新增"
+        round
+      />
+    </section>
+
+    <van-tabs
+      v-model:active="active"
+      type="card"
+      swipe-threshold="3"
+      :scrollspy="true"
+    >
+      <van-tab title="全部" name="all"></van-tab>
+      <van-tab title="党小组" name="group"></van-tab>
+      <van-tab title="党支部" name="branch"></van-tab>
+      <van-tab title="支部党员" name="member"></van-tab>
+      <van-tab title="党课" name="lecture"></van-tab>
+    </van-tabs>
+    <All v-if="active === 'all'" />
+    <Group v-if="active === 'group'" />
+  </main>
 </template>
 
 <style lang="scss" scoped>
-  //青年思想引领、全面从严治团、青年岗位建功、服务青年成才、页面一样
+  .button {
+    @apply font-bold;
+    --van-button-primary-background: #e22001;
+    --van-button-primary-border-color: #e22001;
+  }
   $baseColor: rgb(225, 1, 1);
   $borderColor: #e2e2e2;
   $textColor: #777;
