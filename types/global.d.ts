@@ -1,7 +1,7 @@
 import type { FunctionalComponent } from 'vue';
 import type { ECharts } from 'echarts';
 import type { IconifyIcon } from '@iconify/vue';
-import { toLabel } from '@/utils';
+import { parseDict } from '@/utils';
 import { parse } from '@/utils/date';
 import { type download } from '@/plugins/download/download';
 import type { IconifyIcon } from '@iconify/vue';

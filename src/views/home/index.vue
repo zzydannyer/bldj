@@ -2,7 +2,7 @@
   import { useImage, useIcon } from '@/utils/assets';
   import { register } from 'swiper/element/bundle';
   import dayjs from 'dayjs';
-  import { DictData } from '@/api/dict';
+  import type { Dict } from '@/api/dict';
   import useHomeData from '@/hooks/api/home';
   // Swiper
   register();
@@ -68,9 +68,9 @@
   ];
 
   //最新新闻
-  const dictData: DictData[] = [
-    { label: '集团要闻', value: '1' },
-    { label: '基层动态', value: '2' }
+  const dictData: Dict[] = [
+    { text: '集团要闻', value: '1' },
+    { text: '基层动态', value: '2' }
   ];
 
   onBeforeMount(fetchData);
@@ -164,7 +164,6 @@
         </div>
       </section>
     </van-cell-group>
-
     <van-cell-group class="home-cell-group mt-4">
       <van-cell
         is-link
@@ -187,7 +186,7 @@
           rows="2"
         />
         <div class="between-end mt-auto">
-          <v-tag :dictData="dictData" plain :value="news.type" />
+          <v-tag :dict-data="dictData" plain :value="news.type" />
           <span class="v-icon-text">
             <van-icon name="clock-o" />
             {{ dayjs(news.releaseDate).format('YY-MM-DD') }}

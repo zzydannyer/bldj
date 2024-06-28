@@ -32,6 +32,7 @@ export const transParams = (params: any) => stringify(params, { encode: true });
 
 // 回显数据字典
 export function parseDict(dicts: Dict[], value?: Numeric) {
+  console.log('🚀 ~ parseDict ~ dicts: Dict[], value?: Numeric:', dicts, value);
   return dicts.find((dict) => dict.value === value)?.text;
 }
 

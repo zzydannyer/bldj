@@ -3,7 +3,7 @@
     class="v-plain-button"
     :class="border ? 'show-border' : ''"
     :type="type"
-    :color="bg_color[type]"
+    :color="BgColor[type]"
     :size="size"
     :round="round"
     :text="text"
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-  import { text_color, bg_color, border_color } from '@/constants';
+  import { TextColor, BgColor, BorderColor } from '@/constants';
   import { ButtonSize } from 'vant';
 
   defineOptions({
@@ -25,14 +25,16 @@
     border = false,
     text
   } = defineProps({
-    type: String as PropType<'success' | 'info' | 'danger' | 'warning' | 'primary' | 'default'>,
+    type: String as PropType<
+      'success' | 'info' | 'danger' | 'warning' | 'primary' | 'default'
+    >,
     size: String as PropType<ButtonSize>,
     border: Boolean as PropType<boolean>,
     round: Boolean as PropType<boolean>,
     text: String
   });
-  const borderColor = computed(() => border_color[type]);
-  const textColor = computed(() => text_color[type]);
+  const borderColor = computed(() => BorderColor[type]);
+  const textColor = computed(() => TextColor[type]);
 </script>
 
 <style lang="scss" scoped>

@@ -2,57 +2,53 @@
   <van-tag
     :class="border ? 'v-plain-tag' : ''"
     :closeable="closeable"
-    :color="bg_color[_type]"
+    :color="color"
     :mark="mark"
     :plain="plain"
     :round="round"
     :size="size"
-    :text-color="textColor ?? text_color[_type]"
-    :type="_type"
+    :text-color="textColor ?? TextColor[type]"
+    :type="type"
   >
-    {{ labelValue?.label }}
+    {{ label }}
   </van-tag>
 </template>
 
 <script setup lang="ts">
-  import type { DictData } from '@/api/dict';
-  import type { TagSize, TagType, TagProps } from 'vant';
-  import type { PropType } from 'vue';
+  import type { Dict } from '@/api/dict';
+  import type { TagProps } from 'vant';
   import { useGlobal } from '@/utils';
-  import { border_color, bg_color, text_color } from '@/constants';
+  import { BorderColor, BgColor, TextColor } from '@/constants';
 
   defineOptions({
     name: 'VTag'
   });
   const { $parseDict } = useGlobal<GlobalPropertiesApi>();
 
-  const {
-    dictData = [],
-    value = '',
-    border = true,
-    type = 'primary'
-  } = defineProps({
-    // 数据
-    dictData: Object as PropType<DictData[]>,
-    // 当前的值
-    value: String as PropType<string>,
-    tagClass: String as PropType<string>,
-    type: String as PropType<TagType>,
-    size: String as PropType<TagSize>,
-    mark: Boolean as PropType<TagProps['mark']>,
-    plain: Boolean as PropType<TagProps['plain']>,
-    round: Boolean as PropType<TagProps['round']>,
-    color: String as PropType<TagProps['color']>,
-    textColor: String as PropType<TagProps['textColor']>,
-    closeable: Boolean as PropType<TagProps['closeable']>,
-    border: Boolean as PropType<boolean>
+  type Props = TagProps & {
+    dictData: Dict[];
+    value: string;
+    tagClass: string;
+    border: boolean;
+  };
+  const props = withDefaults(defineProps<Props>(), {
+    tagClass: '',
+    dictData: () => [],
+    value: '',
+    type: 'primary',
+    border: false,
+    closeable: false,
+    mark: false,
+    plain: false,
+    round: false,
+    size: 'medium'
   });
 
-  const labelValue = computed(() => {
-    return $parseDict(dictData, value);
+  const label = computed(() => {
+    return $parseDict(props.dictData, props.value);
   });
-  const _type = computed(() => type);
-  const borderColor = computed(() => border_color[_type.value]);
+  const borderColor = computed(() => BorderColor[props.type]);
+  const color = computed(() => props.color ?? BgColor[props.type]);
 </script>
 
 <style>

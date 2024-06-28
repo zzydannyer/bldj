@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { text_color, bg_color, border_color } from '@/constants';
+  import { TextColor, BgColor, BorderColor } from '@/constants';
   import { TagProps, TagSize } from 'vant';
 
   defineOptions({
@@ -23,15 +23,15 @@
     // closeable: boolean;
   });
 
-  const borderColor = computed(() => border_color[type]);
+  const borderColor = computed(() => BorderColor[type]);
 </script>
 
 <template>
   <van-tag
     :class="border ? 'v-plain-tag' : ''"
-    :color="bg_color[type]"
+    :color="BgColor[type]"
     :size="size"
-    :text-color="text_color[type]"
+    :text-color="TextColor[type]"
   >
     <slot />
   </van-tag>
