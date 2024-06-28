@@ -28,7 +28,7 @@
 <template>
   <section class="bg">
     <div class="tit">劳模风采<span class="line"></span></div>
-    <section class="mt-2 pl-[16PX] whitespace-nowrap overflow-x-auto pt-2">
+    <section class="mt-2 pl-4 whitespace-nowrap overflow-x-auto pt-2">
       <div
         v-for="(notice, index) in 10"
         :key="index"

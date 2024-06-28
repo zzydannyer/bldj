@@ -24,8 +24,7 @@
   import { Work, WorkFeedback } from '@/types/_media/task';
 
   const route = useRoute();
-  const { $useDict, $parse, $value_to_label } =
-    useGlobal<GlobalPropertiesApi>();
+  const { $useDict, $parse, $parseDict } = useGlobal<GlobalPropertiesApi>();
   const { id } = route.params;
   const detail = ref<Work>({});
   const remark = ref('');
@@ -176,7 +175,7 @@
           <template #label>任务类型</template>
           <template #input>
             <span>
-              {{ $value_to_label(work_release_type, detail.workType) }}
+              {{ $parseDict(work_release_type, detail.workType) }}
             </span>
           </template>
         </van-field>

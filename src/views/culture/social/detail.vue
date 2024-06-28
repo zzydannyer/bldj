@@ -10,7 +10,7 @@
   const noticeId = route.params.noticeId;
   z;
   const detail = ref<SysNotice>();
-  const { $value_to_label, $useDict } = useGlobal<GlobalPropertiesApi>();
+  const { $parseDict, $useDict } = useGlobal<GlobalPropertiesApi>();
   const { sys_notice_type } = $useDict('sys_notice_type');
   const getDetail = async () => {
     try {

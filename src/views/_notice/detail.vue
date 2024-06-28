@@ -8,7 +8,7 @@
   const route = useRoute();
   const noticeId = route.params.noticeId;
   const detail = ref<SysNotice>();
-  const { $value_to_label, $useDict } = useGlobal<GlobalPropertiesApi>();
+  const { $parseDict, $useDict } = useGlobal<GlobalPropertiesApi>();
   const { sys_notice_type } = $useDict('sys_notice_type');
   const getDetail = async () => {
     try {
@@ -33,7 +33,7 @@
     <div class="indent-7" v-html="detail?.noticeContent" />
     <div class="my-4">备注：{{ detail?.remark ?? '无' }}</div>
     <div class="text-right">
-      <div>{{ $value_to_label(sys_notice_type, detail?.noticeType) }}</div>
+      <div>{{ $parseDict(sys_notice_type, detail?.noticeType) }}</div>
       <div class="text-xs text-gray-700">
         {{ formatDate(detail?.createTime) }}
       </div>

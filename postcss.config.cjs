@@ -34,11 +34,7 @@ module.exports = {
       exclude: [/node_modules/],
       include: [/src/],
       viewportWidth(file) {
-        let bool = false;
-        excludes.forEach((tar) => {
-          if (file.includes(tar)) bool = true;
-        });
-        return bool ? 375 : 750;
+        return excludes.some((tar) => file.includes(tar));
       }
     }
   }

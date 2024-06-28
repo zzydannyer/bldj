@@ -35,7 +35,7 @@
     class="top-nav"
     fixed
     :left-arrow="showLeftArrow"
-    placeholder
+    :placeholder="true"
     safe-area-inset-top
     :title="title"
     z-index="3"
@@ -46,7 +46,7 @@
 
 <style lang="scss" scoped>
   .top-nav {
-    @apply w-full text-center text-white font-semibold;
+    @apply font-semibold;
     // prettier-ignore
     --van-nav-bar-height:45PX;
     --van-nav-bar-icon-color: #fff;
@@ -55,7 +55,5 @@
     --van-nav-bar-background: url('@/assets/images/topnav-bg.png') no-repeat
         center bottom / 100% auto,
       #e10101;
-    // top: constant(safe-area-inset-top);
-    // margin-top: env(safe-area-inset-top);
   }
 </style>

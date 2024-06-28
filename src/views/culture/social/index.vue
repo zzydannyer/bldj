@@ -12,13 +12,16 @@
 
 <template>
   <van-tabs v-model:active="active" type="card">
-    <van-tab name="help" title="党建帮扶"></van-tab>
-    <van-tab name="consumer" title="消费扶贫"></van-tab>
-    <van-tab name="welfare" title="社会公益"></van-tab>
+    <van-tab name="help" title="党建帮扶">
+      <Help />
+    </van-tab>
+    <van-tab name="consumer" title="消费扶贫">
+      <Help />
+    </van-tab>
+    <van-tab name="welfare" title="社会公益">
+      <Help />
+    </van-tab>
   </van-tabs>
-  <Help v-if="active === 'help'" />
-  <Help v-else-if="active === 'consumer'" />
-  <Help v-else-if="active === 'welfare'" />
 </template>
 
 <style lang="scss" scoped>
@@ -27,7 +30,7 @@
   $borderColor: #e2e2e2;
   $textColor: #777;
   :deep(.van-tabs__wrap) {
-    margin-top: 30px;
+    margin-top: 10px;
     border-radius: 10px;
     padding: 3px 0;
     overflow: hidden;

@@ -2,25 +2,30 @@
 @import 'global.scss';
 
 html,body{
-  width: 100vw !important;
-  height: 100vh !important;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+  // height: 100vh;
   // IOS禁止回弹
   // overscroll-behavior: none;
   // user-select: none;
 }
 
 #app{
-  overflow-y: auto;
-  min-height: 100%;
   background-color: $body-bg;
+  // height: 100dvh;
 }
+
+.van-config-provider {
+  // height: -webkit-fill-available;
+}
+
 .bb{
   border: 2PX solid green !important;
 }
 
 .van-pull-refresh {
   //prettier-ignore
-  height: calc(100% - 125PX) !important;
 }
 
 textarea {
@@ -36,11 +41,7 @@ textarea {
   }
 }
 
-.van-config-provider {
-  height: -webkit-fill-available;
-}
 
-// ****************************************************************************************************
 // 详情页
 .detail-container {
   min-height: 90vh;
@@ -82,7 +83,6 @@ textarea {
   }
 }
 
-// ****************************************************************************************************
 // 资源素材文件名称
 .preview-cover {
   position: absolute;
@@ -98,9 +98,6 @@ textarea {
   align-items: center;
   justify-content: center;
 }
-
-
-// ****************************************************************************************************
 @mixin title-line {
   content: '';
   display: block;
@@ -139,8 +136,6 @@ textarea {
   //   height: 60%;
   // }
 }
-
-// *****************************************************************************
 // 搜索框下面drop菜单阴影
 .van-dropdown-menu {
   --van-dropdown-menu-shadow: none;
@@ -170,19 +165,13 @@ textarea {
   top: $navbar-height;
 }
 
-// ****************************************************************************************************
 // 隐藏滚动条
 ::-webkit-scrollbar {
   display: none;
+  width: 0;
+  background: transparent;
 }
 
-::-webkit-scrollbar-track {
-  display: none;
-}
-
-::-webkit-scrollbar-thumb {
-  display: none;
-}
 // 级联样式
 .van-cascader .van-cascader__title {
   flex: 1;
@@ -256,4 +245,30 @@ div.van-empty {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* fade-slide */
+.fade-slide-leave-active,
+.fade-slide-enter-active {
+  transition: all 0.3s;
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }

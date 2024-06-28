@@ -1,4 +1,4 @@
-import { DictData } from '@/plugins/dict';
+import { Dict } from '@/api/dict';
 import { isArray, isObject, isNull, isUndefined, isString } from 'lodash';
 import { stringify } from 'qs';
 
@@ -30,30 +30,17 @@ export const isNotEmpty = (value: any) => !isEmpty(value);
  */
 export const transParams = (params: any) => stringify(params, { encode: true });
 
-// 验证是否为blob格式
-export const blobValidate = (data: unknown) => data instanceof Blob;
-
-export const value_to_dict = (dicts: DictData[], value?: Numeric) =>
-  dicts.find((dict: DictData) => dict.value === value);
 // 回显数据字典
-export const value_to_label = (dicts: DictData[], value?: Numeric) =>
-  value_to_dict(dicts, value)?.label;
+export function parseDict(dicts: Dict[], value?: Numeric) {
+  return dicts.find((dict) => dict.value === value)?.text;
+}
 
 // 获取实例中全局property
-export const useGlobal = <T>() => {
+export function useGlobal<T>() {
   const {
     appContext: {
       config: { globalProperties }
     }
   } = getCurrentInstance()!;
   return globalProperties as T;
-};
-
-export const useErrorHandler = () => {
-  const {
-    appContext: {
-      config: { errorHandler }
-    }
-  } = getCurrentInstance()!;
-  return errorHandler;
-};
+}

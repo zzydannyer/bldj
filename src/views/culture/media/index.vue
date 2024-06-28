@@ -55,7 +55,7 @@
 </script>
 <template>
   <main class="mt-2 pb-[600PX] pt-2 bg-white">
-    <section class="px-[16PX]">
+    <section class="px-4">
       <van-button
         block
         class="button"

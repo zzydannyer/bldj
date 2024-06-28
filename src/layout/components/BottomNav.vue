@@ -10,6 +10,8 @@
   const curItem = ref('');
   const curIndex = ref(0);
 
+  const active = ref(0);
+
   const visible = ref(false);
   const isHome = computed(() => route.path === '/home');
   const isMine = computed(() => route.path === '/mine');
@@ -58,84 +60,88 @@
 </script>
 
 <template>
-  <section
-    class="mask-layer"
-    :style="{
-      opacity: visible ? 1 : 0,
-      pointerEvents: visible ? 'auto' : 'none'
-    }"
-    @click.self="visible = false"
-  />
-  <section class="w-full z-[5] fixed left-0 bottom-0">
-    <!-- 中间更多菜单按钮 -->
-    <section class="nav-trigger" @click="visible = !visible">
-      <div :class="[isMore ? 'more-bg' : 'more-border', 'nav-more']">
-        <img
-          class="nav-icon-more"
-          :src="isMore ? useIcon('nav-more-active') : useIcon('nav-more')"
-        />
-      </div>
-    </section>
-    <!-- 底部导航 -->
-    <van-grid :border="false" class="bottom-nav" clickable :column-num="2">
-      <van-grid-item to="/home" @click="visible = false">
+  <van-overlay :show="visible" @click="visible = false" />
+  <!-- 底部导航 -->
+  <van-tabbar
+    route
+    v-model="active"
+    active-color="#e20949"
+    :placeholder="true"
+    z-index="2"
+    :safe-area-inset-bottom="false"
+  >
+    <van-tabbar-item replace to="/home">
+      <template #icon="props">
         <van-image
           class="w-[20PX]"
-          :src="isHome ? useIcon('icon-home-active') : useIcon('icon-home')"
+          :src="
+            props.active ? useIcon('icon-home-active') : useIcon('icon-home')
+          "
         />
-        <span class="mt-1" :class="isHome ? 'text-[#e20949]' : 'text-[#a9867e]'"
-          >首页</span
-        >
-      </van-grid-item>
-      <van-grid-item to="/mine" @click="visible = false">
+      </template>
+      <span>首页</span>
+    </van-tabbar-item>
+    <van-tabbar-item replace to="/mine">
+      <template #icon="props">
         <van-image
-          class="w-[20PX]"
-          :src="isMine ? useIcon('icon-mine-active') : useIcon('icon-mine')"
+          class="w-[18PX]"
+          :src="
+            props.active ? useIcon('icon-mine-active') : useIcon('icon-mine')
+          "
         />
-        <span class="mt-1" :class="isMine ? 'text-[#e20949]' : 'text-[#a9867e]'"
-          >我的</span
-        >
-      </van-grid-item>
-    </van-grid>
-    <!-- 更多菜单 -->
-    <section
-      class="nav-panel"
-      :class="{
-        visible: visible
-      }"
-    >
-      <span
-        v-for="(route, index) in moreList"
-        :key="route.path"
-        class="nav-text"
-        @click="changeRoute(route.path, index)"
-      >
-        {{ route.meta?.title }}
-      </span>
-      <div
-        class="nav-panel-active"
-        :style="{
-          transform: `translateX(-50%) rotate(${rotates[curIndex]}deg)`
-        }"
+      </template>
+      <span>我的</span>
+    </van-tabbar-item>
+  </van-tabbar>
+  <!-- 中间更多菜单按钮 -->
+  <section class="nav-trigger" @click="visible = !visible">
+    <div :class="[isMore ? 'more-bg' : 'more-border', 'nav-more']">
+      <img
+        class="nav-icon-more"
+        :src="isMore ? useIcon('nav-more-active') : useIcon('nav-more')"
       />
-    </section>
+    </div>
+  </section>
+  <!-- 更多菜单 -->
+  <section
+    class="nav-panel"
+    :class="{
+      visible: visible
+    }"
+  >
+    <span
+      v-for="(route, index) in moreList"
+      :key="route.path"
+      class="nav-text"
+      @click="changeRoute(route.path, index)"
+    >
+      {{ route.meta?.title }}
+    </span>
+    <div
+      class="nav-panel-active"
+      :style="{
+        transform: `translateX(-50%) rotate(${rotates[curIndex]}deg)`
+      }"
+    />
   </section>
 </template>
 
 <style lang="scss" scoped>
-  .bottom-nav {
-    @apply z-0;
+  :deep(.van-tabbar) {
     // prettier-ignore
-    height: 80PX;
-    --van-grid-item-content-background: linear-gradient(
+    --van-tabbar-height: 70PX;
+    --van-tabbar-background: linear-gradient(to bottom, #fce8e6, #fff);
+    --van-tabbar-item-active-background: linear-gradient(
       to bottom,
       #fce8e6,
       #fff
     );
-    box-shadow: #fff0 0px 0px 1px;
+  }
+  .layout {
+    @apply fixed bottom-[70PX] left-1/2 transform -translate-x-1/2 translate-y-1/2;
   }
   .nav-trigger {
-    @apply z-1 w-[70PX] h-[70PX] bg-white rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+    @apply z-[3] layout w-[70PX] h-[70PX] bg-white rounded-full;
     .nav-more {
       @apply absolute-center w-[90%] h-[90%] rounded-full;
       .nav-icon-more {
@@ -151,7 +157,7 @@
     }
   }
   .nav-panel {
-    @apply z-[-1] w-0 h-0 rounded-full top-0 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 transition-all duration-300 ease-in-out overflow-hidden;
+    @apply z-[1] layout w-0 h-0 rounded-full transform transition-all duration-300 ease-in-out overflow-hidden;
     background-image: radial-gradient(circle, #ff4f22, #e10101);
   }
   .nav-panel.visible {
@@ -189,15 +195,5 @@
       top: 36%;
       right: 6%;
     }
-  }
-  .mask-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 4;
-    transition: all 0.3s;
   }
 </style>

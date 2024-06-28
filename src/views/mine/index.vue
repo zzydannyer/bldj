@@ -5,7 +5,7 @@
   const router = useRouter();
 </script>
 <template>
-  <main class="px-[16PX]">
+  <main class="px-4">
     <div class="my-bg">
       <van-space>
         <van-image
@@ -77,7 +77,7 @@
     }
   }
   .my-bg {
-    @apply bg-no-repeat flex -mx-[16PX] px-[16PX] py-[20PX] items-center;
+    @apply bg-no-repeat flex -mx-4 px-4 py-[20PX] items-center;
     // padding-top: env(safe-area-inset-top);
     // prettier-ignore
     height: calc(150PX + env(safe-area-inset-top));

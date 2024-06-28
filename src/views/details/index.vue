@@ -13,7 +13,7 @@
   };
   const { detailId, section } = route.params as RouteParams;
   const detail = ref<any>({});
-  const { $value_to_label, $useDict } = useGlobal<GlobalPropertiesApi>();
+  const { $parseDict, $useDict } = useGlobal<GlobalPropertiesApi>();
 
   async function getDetail() {
     try {

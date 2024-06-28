@@ -125,7 +125,7 @@
           name="clueContent"
         />
 
-        <van-cell-group inset class="mt-[16PX]">
+        <van-cell-group inset class="mt-4">
           <v-tree-select
             v-model="form.linkUser"
             placeholder="请选择联系人"

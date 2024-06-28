@@ -10,7 +10,7 @@
 </script>
 <template>
   <div class="v-card">
-    <div class="v-card-title">
+    <div class="v-card-title" v-if="$slots.title">
       <slot name="title"></slot>
     </div>
 
@@ -20,14 +20,6 @@
   </div>
 </template>
 <style lang="scss" scoped>
-  /* .v-card {
-  overflow: hidden;
-  padding: $body-padding;
-  border-radius: $border-radius;
-  background-color: $background-color;
-  background-clip: padding-box;
-  box-shadow: 0 4px 6px -1px #e0f2fe;
-} */
   .v-card-title {
     @apply text-sm font-bold pb-2 pt-1;
     border-bottom: 1px solid #eee;

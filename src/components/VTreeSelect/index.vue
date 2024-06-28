@@ -189,7 +189,7 @@
       </div>
     </section>
 
-    <section class="p-[16PX] h-[400PX] overflow-auto">
+    <section class="p-4 h-[400PX] overflow-auto">
       <MyTreeSelect
         v-model="picked"
         v-bind="$attrs"

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  import type { DictData } from '@/plugins/dict';
+  import type { DictData } from '@/api/dict';
   import type { TagSize, TagType, TagProps } from 'vant';
   import type { PropType } from 'vue';
   import { useGlobal } from '@/utils';
@@ -24,13 +24,13 @@
   defineOptions({
     name: 'VTag'
   });
-  const { $value_to_label, $value_to_dict } = useGlobal<GlobalPropertiesApi>();
+  const { $parseDict } = useGlobal<GlobalPropertiesApi>();
 
   const {
     dictData = [],
     value = '',
     border = true,
-    type
+    type = 'primary'
   } = defineProps({
     // 数据
     dictData: Object as PropType<DictData[]>,
@@ -48,10 +48,10 @@
     border: Boolean as PropType<boolean>
   });
 
-  const labelValue = computed(() => $value_to_dict(dictData, value));
-  const _type = computed(
-    () => labelValue.value?.elTagType || type || 'primary'
-  );
+  const labelValue = computed(() => {
+    return $parseDict(dictData, value);
+  });
+  const _type = computed(() => type);
   const borderColor = computed(() => border_color[_type.value]);
 </script>
 

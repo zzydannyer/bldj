@@ -6,8 +6,7 @@
   import { useGlobal } from '@/utils';
   import { getWorkMain } from '@/api/_media/taskRelease';
 
-  const { $useDict, $parse, $value_to_label } =
-    useGlobal<GlobalPropertiesApi>();
+  const { $useDict, $parse, $parseDict } = useGlobal<GlobalPropertiesApi>();
   const { work_release_type, feedback_status, work_type_code } = $useDict(
     'work_release_type',
     'feedback_status',
@@ -36,13 +35,13 @@
       <van-field>
         <template #label>类型</template>
         <template #input>
-          {{ $value_to_label(work_type_code, detailList.typeCode) }}
+          {{ $parseDict(work_type_code, detailList.typeCode) }}
         </template>
       </van-field>
       <van-field>
         <template #label>任务类型</template>
         <template #input>
-          {{ $value_to_label(work_release_type, detailList.workType) }}
+          {{ $parseDict(work_release_type, detailList.workType) }}
         </template>
       </van-field>
       <van-field>

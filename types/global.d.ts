@@ -44,7 +44,6 @@ declare global {
     // 查询字典
     $useDict: typeof useDict;
     $parse: typeof parse;
-    $value_to_label: typeof value_to_label;
-    $value_to_dict: typeof value_to_dict;
+    $parseDict: typeof parseDict;
   }
 }

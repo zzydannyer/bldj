@@ -1,8 +1,12 @@
 <template>
   <TopNav />
-
-  <RouterView />
-
+  <router-view v-slot="{ Component, route }">
+    <transition name="fade-slide" appear>
+      <keep-alive>
+        <component :is="Component" :key="route.name" />
+      </keep-alive>
+    </transition>
+  </router-view>
   <BottomNav />
 </template>
 

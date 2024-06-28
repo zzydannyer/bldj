@@ -13,8 +13,7 @@
   } from '@/types/_media/task';
   import { useGlobal } from '@/utils';
   import { join } from 'lodash';
-  const { $useDict, $parse, $value_to_label } =
-    useGlobal<GlobalPropertiesApi>();
+  const { $useDict, $parse, $parseDict } = useGlobal<GlobalPropertiesApi>();
   const { work_release_type } = $useDict(
     'work_release_type',
     'feedback_status',
@@ -61,7 +60,7 @@
         <van-field>
           <template #label>类型</template>
           <template #input>
-            {{ $value_to_label(work_release_type, work.workType) }}
+            {{ $parseDict(work_release_type, work.workType) }}
           </template>
         </van-field>
         <van-field>

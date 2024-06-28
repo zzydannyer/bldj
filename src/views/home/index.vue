@@ -2,7 +2,7 @@
   import { useImage, useIcon } from '@/utils/assets';
   import { register } from 'swiper/element/bundle';
   import dayjs from 'dayjs';
-  import { DictData } from '@/plugins/dict';
+  import { DictData } from '@/api/dict';
   import useHomeData from '@/hooks/api/home';
   // Swiper
   register();
@@ -119,7 +119,7 @@
     </van-grid>
 
     <van-image
-      class="m-[16PX] van-haptics-feedback"
+      class="m-4 van-haptics-feedback"
       fit="cover"
       :src="useImage('index-bg-yyk')"
       @click="router.push('/culture')"
@@ -134,7 +134,7 @@
         value="全部"
         value-class="text-[#e20a0a]"
       />
-      <section class="mt-2 pl-[16PX] whitespace-nowrap overflow-x-auto">
+      <section class="mt-2 pl-4 whitespace-nowrap overflow-x-auto">
         <div
           v-for="(notice, index) in homeNotice.slice(0, 3)"
           :key="notice.uid"
