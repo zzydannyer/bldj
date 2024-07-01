@@ -1,7 +1,7 @@
 import { Dict } from '@/api/dict';
 import { isArray, isObject, isNull, isUndefined, isString } from 'lodash';
 import { stringify } from 'qs';
-
+import Constants from '@/constants';
 /**
  * @description 检测是否为 undefined null [] {} ''
  * @param value
@@ -32,7 +32,6 @@ export const transParams = (params: any) => stringify(params, { encode: true });
 
 // 回显数据字典
 export function parseDict(dicts: Dict[], value?: Numeric) {
-  console.log('🚀 ~ parseDict ~ dicts: Dict[], value?: Numeric:', dicts, value);
   return dicts.find((dict) => dict.value === value)?.text;
 }
 
@@ -45,3 +44,17 @@ export function useGlobal<T>() {
   } = getCurrentInstance()!;
   return globalProperties as T;
 }
+
+function isLink(str: string) {
+  const linkRegex =
+    /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
+  return linkRegex.test(str);
+}
+
+function isPrivateUrl(src: string) {
+  return isLink(src) && src.includes(Constants.PRIVATE_URL_PREFIX);
+}
+export default {
+  isLink,
+  isPrivateUrl
+};

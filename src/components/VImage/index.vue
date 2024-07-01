@@ -4,7 +4,14 @@
   import Utils from '@/utils';
   import defaultImage from '@/assets/images/default.png?url';
 
-  type DefaultImageProps = ImageProps & { private: boolean; mini: boolean };
+  defineOptions({
+    name: 'VImage'
+  });
+
+  type DefaultImageProps = Partial<ImageProps> & {
+    private: boolean;
+    mini: boolean;
+  };
 
   const props = withDefaults(defineProps<DefaultImageProps>(), {
     src: '',
@@ -37,28 +44,32 @@
     }
   }
 
-  async function checkImage(src: string) {
-    const image = new Image();
-    image.src = src;
+  function checkImage(src: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.src = src;
 
-    image.onload = () => {
-      Promise.resolve();
-    };
-    image.onerror = () => {
-      console.log('error');
-      Promise.reject();
-    };
+      image.onload = () => {
+        resolve();
+      };
+      image.onerror = () => {
+        reject();
+      };
+    });
   }
 </script>
 
 <template>
-  {{ bindUrl }}
-  <van-loading type="spinner" size="20" v-if="fetching" />
-  <van-image v-bind="props" :src="bindUrl">
-    <template #loading>
-      <van-loading type="spinner" size="20" />
-    </template>
-  </van-image>
+  <div>
+    {{ bindUrl }}
+    <van-loading type="spinner" size="20" v-if="fetching" />
+    <van-image v-bind="props" :src="bindUrl">
+      <template #loading>
+        <van-loading type="spinner" size="20" />
+      </template>
+    </van-image>
+    {{ fetching }}
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

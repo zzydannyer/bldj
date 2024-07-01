@@ -1,6 +1,7 @@
 import type { App, DirectiveBinding } from 'vue';
 import { isObject } from 'lodash';
 import UrlServer from '@/api/privateUrl';
+import Utils from '@/utils';
 
 // const generatePrivateUrl = async function (url, seconds = 180) {
 //   try {
@@ -19,11 +20,6 @@ import UrlServer from '@/api/privateUrl';
 //     return Promise.reject(e);
 //   }
 // };
-function isLink(str: string) {
-  const linkRegex =
-    /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
-  return linkRegex.test(str);
-}
 
 function setUrl(el: HTMLElement, url: string) {
   if (el.tagName.toLowerCase() === 'img') {
@@ -41,7 +37,7 @@ function setUrl(el: HTMLElement, url: string) {
 async function getImage(el: HTMLElement, binding: DirectiveBinding) {
   const imgUrl = binding.value;
   const isMini = binding.arg === 'mini';
-  if (!imgUrl || !isLink(imgUrl)) return;
+  if (!imgUrl || !Utils.isLink(imgUrl)) return;
 
   try {
     const { data: privateUrl } = await UrlServer.GET_URL(imgUrl, isMini);

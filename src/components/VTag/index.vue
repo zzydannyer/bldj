@@ -47,6 +47,7 @@
   const label = computed(() => {
     return $parseDict(props.dictData, props.value);
   });
+  
   const borderColor = computed(() => BorderColor[props.type]);
   const color = computed(() => props.color ?? BgColor[props.type]);
 </script>
