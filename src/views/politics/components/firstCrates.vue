@@ -155,7 +155,7 @@
     @apply rounded-md overflow-hidden  m-4 bg-white;
     .titbg {
       background-image: linear-gradient(to bottom, #fed6c8 30%, #fff 100%);
-      line-height: 80px;
+      line-height: 50px;
     }
     .table-head {
       @apply text-xs font-medium mx-2 rounded-full text-center table-auto;

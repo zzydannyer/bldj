@@ -32,14 +32,14 @@
         </tr>
         <tr>
           <td>联华超市营运中心党委</td>
-          <td></td>
+          <td><span class="box" style="--bgColor: #ffc671"></span></td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
           <td>联家超市公司党委</td>
-          <td></td>
+          <td><span class="box" style="--bgColor: #ef5960"></span></td>
           <td></td>
           <td></td>
           <td></td>
@@ -83,8 +83,9 @@
       @apply bg-slate-50;
     }
     .box {
+      --bgColor: #66d877;
       @apply w-[15PX] h-[15PX] rounded inline-block;
-      background-color: #66d877;
+      background-color: var(--bgColor);
     }
   }
 </style>

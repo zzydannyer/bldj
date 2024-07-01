@@ -12,7 +12,6 @@
   const active = ref<string>('');
   import { createApp } from 'vue';
   import { Collapse, CollapseItem } from 'vant';
-
   const app = createApp();
   app.use(Collapse);
   app.use(CollapseItem);
@@ -28,6 +27,7 @@
   function initChart() {
     const myChart = echarts.init(chartRef.value);
     const option = {
+      color: ['#3b98ff', '#fc765f', '#17d2d8'],
       tooltip: {
         trigger: 'item'
       },
@@ -42,6 +42,7 @@
           name: 'Access From',
           type: 'pie',
           radius: ['50%', '70%'],
+          center: ['50%', '35%'],
           avoidLabelOverlap: false,
           label: {
             show: false,
@@ -73,7 +74,7 @@
   <div class="mt-4 mb-4 pb-20">
     <van-grid :border="false" :column-num="2" :gutter="20">
       <van-grid-item class="topbg">
-        <div class="text-left w-full tit">会议</div>
+        <div class="text-left w-full tit font-medium">会议</div>
         <div class="w-full text-center">
           <span class="text-2xl digital">54</span>场
         </div>
@@ -83,7 +84,7 @@
         </div></van-grid-item
       >
       <van-grid-item class="topbg">
-        <div class="text-left w-full tit">议题</div>
+        <div class="text-left w-full tit font-medium">议题</div>
         <div class="w-full text-center">
           <span class="text-2xl digital">27</span>场
         </div>
@@ -155,7 +156,7 @@
     @apply rounded-md overflow-hidden  m-4 bg-white;
     .titbg {
       background-image: linear-gradient(to bottom, #fed6c8 30%, #fff 100%);
-      line-height: 80px;
+      line-height: 50px;
     }
     .table-head {
       @apply text-xs font-medium mx-2 rounded-full text-center table-auto w-[95%];

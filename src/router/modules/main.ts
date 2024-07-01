@@ -630,6 +630,15 @@ export default [
         }
       },
       {
+        name: 'DetailMeeting',
+        path: 'detailMeeting',
+        component: () => import('@/views/org/pages/detailMeeting.vue'),
+        meta: {
+          title: '新增会议',
+          icon: '#'
+        }
+      },
+      {
         name: 'Member',
         path: 'member',
         component: 'ParentView',

@@ -6,7 +6,7 @@
   import { storeToRefs } from 'pinia';
   import { UserType } from '@/constants';
   import { useGlobal } from '@/utils';
-
+  import { useImage } from '@/utils/assets';
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
   // const product_type = $useDict([
   //   'product_type',
@@ -133,10 +133,7 @@
             class="sub-content"
             @click="router.push('/culture/mediaDetail')"
           >
-            <van-image
-              fit="cover"
-              src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
-            />
+            <van-image fit="cover" :src="useImage('default')" />
             <van-text-ellipsis :content="text" />
             <div class="v-icon-text">2023-07-12 10:22</div>
           </div>
