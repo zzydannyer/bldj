@@ -30,6 +30,7 @@
     "vue": "^3.4.27",
     "vue-router": "^4.3.2",
     "vue-slider-component": "4.1.0-beta.7",
+    "vue-sticker-table": "^3.0.2",
     "vue-waterfall-plugin-next": "^2.4.3",
     "xgplayer": "^3.0.18"
   },

@@ -4,62 +4,176 @@
   import Party from '@/views/discipline/components/integrity/party.vue';
   import Supervision from '@/views/discipline/components/integrity/supervision.vue';
   import Search from '@/views/culture/social/search.vue';
+  import StickerTable from 'vue-sticker-table';
+
   const { $parse } = useGlobal<GlobalPropertiesApi>();
+
   defineOptions({
     name: 'MediaList'
   });
   const router = useRouter();
   const active = ref<string>('');
+  const layout = 'fixed';
+  const immediate = true;
+  const scrolls = {};
+  const source = [
+    {
+      materialName: ' 联华股份党委',
+      one: 1,
+      two: 2,
+      three: 2,
+      four: 3
+    },
+    {
+      materialName: ' 联华超市营运中心党委',
+      jModel: '张三',
+      OrderQty: 200.0,
+      description: 6017.7,
+      lineType: '项目计划'
+    },
+    {
+      materialName: ' 联家超市公司党委',
+      jModel: '张三',
+      OrderQty: 200.0,
+      description: 6017.7,
+      lineType: '项目计划'
+    },
+    {
+      materialName: ' 华联吉买盛党委',
+      jModel: '张三',
+      OrderQty: 200.0,
+      description: 6017.7,
+      lineType: '项目计划'
+    }
+  ];
+  const loadData = () => {
+    return [...source];
+  };
+  const customRow = (record: any, index: any) => ({
+    on: {
+      click: () => {
+        console.log(record, index);
+      }
+    }
+  });
+  const columns = [
+    {
+      title: '名称',
+      width: 130,
+      fixed: 'left' as 'left',
+      scopedSlots: { customRender: 'name' }
+    },
+    {
+      title: '第一季度',
+      dataIndex: 'one',
+      ellipsis: true,
+      width: 150,
+      scopedSlots: { customRender: 'season' }
+    },
+    {
+      title: '第二季度',
+      dataIndex: 'two',
+      width: 95,
+      scopedSlots: { customRender: 'season' }
+    },
+    {
+      title: '第三季度',
+      dataIndex: 'three',
+      ellipsis: true,
+      width: 140,
+      scopedSlots: { customRender: 'season' }
+    },
+    {
+      title: '第四季度',
+      dataIndex: 'four',
+      width: 120,
+      scopedSlots: { customRender: 'season' }
+    }
+  ];
 </script>
 <template>
   <Search />
   <div class="card bg-white">
+    <sticker-table
+      :layout="layout"
+      :columns="columns"
+      :scrolls="scrolls"
+      :loadData="loadData"
+      :customRow="customRow"
+      :immediate="immediate"
+      rowKey="uuid"
+    >
+      <!--    <template #serial="{ rowIndex }">-->
+      <!--      {{ rowIndex + 1 }}-->
+      <!--    </template>-->
+      <template #name="{ source }">
+        <span>{{ source.materialName }}</span>
+      </template>
+      <template #season="{ source, column }">
+        <span
+          class="box"
+          :style="{
+            '--bgColor':
+              source[column.dataIndex] === 1
+                ? 'red'
+                : source[column.dataIndex] === 2
+                  ? 'yellow'
+                  : source[column.dataIndex] === 3
+                    ? 'blue'
+                    : 'green'
+          }"
+        ></span>
+      </template>
+    </sticker-table>
+  </div>
+
+  <div class="card bg-white">
     <div class="v-full overflow-x-auto">
       <table class="border-collapse border border-slate-400">
         <tr>
-          <th></th>
+          <th class="fixed-column"></th>
           <th>第一季度</th>
           <th>第二季度</th>
           <th>第三季度</th>
           <th>第四季度</th>
         </tr>
         <tr>
-          <td>联华股份党委</td>
+          <td class="fixed-column">联华股份党委</td>
           <td><span class="box"></span></td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
-          <td>联华超市营运中心党委</td>
+          <td class="fixed-column">联华超市营运中心党委</td>
           <td><span class="box" style="--bgColor: #ffc671"></span></td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
-          <td>联家超市公司党委</td>
+          <td class="fixed-column">联家超市公司党委</td>
           <td><span class="box" style="--bgColor: #ef5960"></span></td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
-          <td>华联吉买盛党委</td>
+          <td class="fixed-column">华联吉买盛党委</td>
           <td></td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
-          <td>联华快客便利党委</td>
+          <td class="fixed-column">联华快客便利党委</td>
           <td></td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
-          <td>联华快客便利党委</td>
+          <td class="fixed-column">联华快客便利党委</td>
           <td></td>
           <td></td>
           <td></td>
@@ -75,9 +189,14 @@
     @apply rounded p-4 m-4 text-xs;
   }
   table {
+    border-collapse: collapse;
+    width: 100%;
     th,
     td {
-      @apply border border-solid border-gray-200 leading-8 whitespace-nowrap px-4 leading-8 text-center;
+      @apply leading-8 whitespace-nowrap px-4 leading-8 text-center;
+      border: 1px solid black;
+      min-width: 100px;
+      text-align: left;
     }
     th {
       @apply bg-slate-50;
@@ -86,6 +205,18 @@
       --bgColor: #66d877;
       @apply w-[15PX] h-[15PX] rounded inline-block;
       background-color: var(--bgColor);
+    }
+    .fixed-column {
+      position: -webkit-sticky; /* Safari */
+      position: sticky;
+      left: 0;
+      background-color: #f9f9f9;
+      z-index: 1; /* 确保固定列在其他内容之上 */
+    }
+
+    td:nth-child(1),
+    th:nth-child(1) {
+      border-left: solid 1px #e2eaee;
     }
   }
 </style>
