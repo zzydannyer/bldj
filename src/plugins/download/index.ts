@@ -2,15 +2,13 @@ import axios from 'axios';
 import { saveAs } from 'file-saver';
 import { parse } from 'qs';
 import request from '@/utils/request';
-import { ErrorCode } from '@/constants';
-import { transParams } from '@/utils';
+import Utils from '@/utils';
 import { showLoadingToast, closeToast, showFailToast } from 'vant';
 
 async function printErrMsg(data: any) {
   const resText = await data.text();
   const { code, msg }: any = parse(resText);
-  const errMsg = (ErrorCode[code] as string) || msg || ErrorCode[-1];
-  showFailToast(errMsg);
+  showFailToast(msg);
 }
 
 export default async function (url: string, filename: string) {

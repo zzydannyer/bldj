@@ -2,14 +2,13 @@ import type { App } from 'vue';
 import { createRouter, createWebHistory, Router } from 'vue-router';
 import routes from './routes';
 import { getToken } from '@/utils/auth';
+import Constants from '@/constants';
 
 const router: Router = createRouter({
   history: createWebHistory(), // history 模式则使用 createWebHistory()
   routes,
   strict: true
 });
-
-const whiteList = ['/login'];
 
 router.beforeEach(async (to, from, next) => {
   const { path } = to;
@@ -19,7 +18,7 @@ router.beforeEach(async (to, from, next) => {
   if (token) {
     next();
   } else {
-    whiteList.includes(path) ? next() : next('/login');
+    Constants.WhiteList.includes(path) ? next() : next('/login');
   }
 });
 

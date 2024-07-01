@@ -41,7 +41,7 @@
       v-if="showSearch"
       v-model="searchVal"
       :clearable="false"
-      :placeholder="props.placeholder"
+      :placeholder="placeholder"
       shape="round"
       show-action
       @search="emits('handleSearch')"

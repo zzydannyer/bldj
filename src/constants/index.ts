@@ -1,6 +1,6 @@
-export const sessionKey = 'user-info';
+export const SessionKey = 'user-info';
 export const TokenKey = 'Admin-Token';
-export const whiteList = ['/refreshToken', '/login'];
+export const WhiteList = [, '/login'];
 
 export enum TextColor {
   success = '#67c23a',
@@ -29,19 +29,6 @@ export enum BorderColor {
   default = '#dcdfe6'
 }
 
-export const fileType: Record<
-  string,
-  { type: 'file' | 'image' | 'video'; name: string }
-> = {
-  1: { type: 'file', name: '文件' },
-  2: { type: 'image', name: '图片' },
-  3: { type: 'video', name: '视频' }
-};
-
-export enum RouteLinks {
-  Politics = '政治建设'
-}
-
 export enum ResCode {
   Ok = 200,
   Unauthorized = 401,
@@ -51,21 +38,12 @@ export enum ResCode {
   BadGateway = 502
 }
 
-export const ErrorCode: { [key: number]: string } = {
-  [ResCode.Unauthorized]: '认证失败，无法访问系统资源',
-  [ResCode.Forbidden]: '当前操作没有权限',
-  [ResCode.NotFound]: '访问资源不存在',
-  [ResCode.InternalServerError]: '系统未知错误，请反馈给管理员',
-  [ResCode.BadGateway]: '系统未知错误，请反馈给管理员',
-  [-1]: '系统未知错误，请反馈给管理员'
-};
-
 export enum UserType {
   Group = '集团',
   Grassroots = '基层',
   Unknown = '未知'
 }
-export enum CHANNEL_ID {
+export enum ChannelId {
   '党建事务' = '25d22599ea7d489fa2b63520e71b239f',
   '通知公告' = 'eb17fd4dab2045db992b3beb369fc9a5',
   '党纪宣贯' = '8f42ecf773714fa09348d2c2361aff26',
@@ -80,9 +58,16 @@ export enum CHANNEL_ID {
   '社会责任工作动态' = 'fa64c453a9914f76bf6c5974000df495'
 }
 
-const PRIVATE_URL_PREFIX = 'blgroup-dj.obs.cn-east-3.myhuaweicloud.com';
+const PrivateUrlPrefix = 'blgroup-dj.obs.cn-east-3.myhuaweicloud.com';
 
 export default {
-  CHANNEL_ID,
-  PRIVATE_URL_PREFIX
+  SessionKey,
+  TokenKey,
+  WhiteList,
+  TextColor,
+  BgColor,
+  BorderColor,
+  ResCode,
+  ChannelId,
+  PrivateUrlPrefix
 };

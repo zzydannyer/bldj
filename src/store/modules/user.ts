@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
 import { stringify, parse } from 'qs';
 import { rmToken } from '@/utils/auth';
-import { sessionKey } from '@/constants';
+import { SessionKey } from '@/constants';
 import { showSuccessToast } from 'vant';
 import { UserType } from '@/constants';
 import type { UserInfo } from '@/api/login';
 
 export default defineStore('user', {
   persist: {
-    key: sessionKey,
+    key: SessionKey,
     storage: sessionStorage,
     paths: ['permissions', 'roles', 'user', 'party'],
     serializer: {

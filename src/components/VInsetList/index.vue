@@ -1,21 +1,19 @@
-<script setup lang="ts" generic="T extends object">
-
+<script setup lang="ts">
   defineOptions({
     name: 'VInsetList'
   });
 
-  const {
-    keyName = 'uid',
-    listFn,
-    listFilter
-  } = defineProps({
-    keyName: String as PropType<string>,
-    listFn: Function as PropType<any>,
-    listFilter: Function as PropType<() => {}>
-  });
+  const props = withDefaults(
+    defineProps<{
+      keyName: string;
+      listFn: Function;
+      listFilter?: Function;
+    }>(),
+    { keyName: 'uid' }
+  );
 
   const queryParams = defineModel('queryParams', {
-    type: Object as PropType<QueryParams<T>>,
+    type: Object,
     default: () => ({
       params: {},
       pageSize: 10,
@@ -30,7 +28,7 @@
 
   const list = ref([]);
   const computedList = computed(() =>
-    listFilter ? listFilter(list.value) : list.value
+    props.listFilter ? props.listFilter(list.value) : list.value
   );
 
   const listRef = ref(null);
@@ -43,7 +41,7 @@
   async function onLoad() {
     try {
       loading.value = true;
-      const { rows, total } = await listFn(queryParams.value);
+      const { rows, total } = await props.listFn(queryParams.value);
 
       if (refreshing.value) {
         list.value = [];
@@ -66,12 +64,12 @@
     }
   }
 
-  const onRefresh = () => {
+  function onRefresh() {
     refreshing.value = true;
     finished.value = false;
     queryParams.value.pageNum = 1;
     onLoad();
-  };
+  }
 
   defineSlots<{
     row: (row: any, index: number) => any;

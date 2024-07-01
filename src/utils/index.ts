@@ -1,7 +1,7 @@
 import { Dict } from '@/api/dict';
 import { isArray, isObject, isNull, isUndefined, isString } from 'lodash';
 import { stringify } from 'qs';
-import Constants from '@/constants';
+import Constants, { ResCode } from '@/constants';
 /**
  * @description 检测是否为 undefined null [] {} ''
  * @param value
@@ -52,9 +52,10 @@ function isLink(str: string) {
 }
 
 function isPrivateUrl(src: string) {
-  return isLink(src) && src.includes(Constants.PRIVATE_URL_PREFIX);
+  return isLink(src) && src.includes(Constants.PrivateUrlPrefix);
 }
+
 export default {
   isLink,
-  isPrivateUrl
+  isPrivateUrl,
 };

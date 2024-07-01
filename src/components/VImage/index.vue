@@ -60,16 +60,12 @@
 </script>
 
 <template>
-  <div>
-    {{ bindUrl }}
-    <van-loading type="spinner" size="20" v-if="fetching" />
-    <van-image v-bind="props" :src="bindUrl">
-      <template #loading>
-        <van-loading type="spinner" size="20" />
-      </template>
-    </van-image>
-    {{ fetching }}
-  </div>
+  <van-loading type="spinner" size="20" v-if="fetching" />
+  <van-image v-bind="props" :src="bindUrl">
+    <template #loading>
+      <van-loading type="spinner" size="20" />
+    </template>
+  </van-image>
 </template>
 
 <style lang="scss" scoped></style>

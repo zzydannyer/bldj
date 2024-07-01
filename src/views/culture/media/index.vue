@@ -1,60 +1,37 @@
 <script setup lang="ts">
   import AdvancedSearch from '@/views/culture/media/advanceSearch.vue';
-  import useQueryParams from '@/hooks/queryParams';
-  import MediaServer, { CultureMediaParams } from '@/api/culture/media';
+  import MediaServer, {
+    CultureMediaParams,
+    MediaMain
+  } from '@/api/culture/media';
   import { useStore } from '@/store';
   import { storeToRefs } from 'pinia';
-  import { UserType } from '@/constants';
   import { useGlobal } from '@/utils';
+  import Hooks from '@/hooks';
 
   const { $useDict, $parse } = useGlobal<GlobalPropertiesApi>();
-  // const product_type = $useDict([
-  //   'product_type',
-  //   'sys_yes_no',
-  //   'sys_normal_disable',
-  //   'acl_type'
-  // ]);
-  // setTimeout(() => {
-  //   console.log(product_type);
-  // }, 3000);
-  const [queryParams, resetQueryParams] = useQueryParams<CultureMediaParams>(
-    new CultureMediaParams()
-  );
-
   const router = useRouter();
-
-  const text = '沙家邦红色党建活动';
   const { userInfo } = useStore();
   const { userType } = storeToRefs(userInfo);
 
-  const loading = ref(false);
+  const [categoryOption, getOptions] = Hooks.useCategory(userType.value);
+  const [queryParams, resetQueryParams] =
+    Hooks.useQueryParams<CultureMediaParams>(new CultureMediaParams());
+  const { list, loading, refreshing, finished, onLoad, onRefresh } =
+    Hooks.useList<CultureMediaParams, MediaMain>(
+      queryParams,
+      MediaServer.LIST_MEDIA_MAIN
+    );
+
+  const listRef = ref(null);
 
   const checked = ref([]);
-  const categoryOption = ref([]);
-
-  const listRef = ref();
-  function onSearch() {
-    listRef.value.onRefresh();
-  }
-  async function getOptions() {
-    const { data } = await MediaServer.GET_CATEGORY();
-
-    switch (userType.value) {
-      case UserType.Group:
-        categoryOption.value = data[0].children;
-        break;
-      case UserType.Grassroots:
-        categoryOption.value = data[1].children;
-        break;
-      default:
-        categoryOption.value = [];
-    }
-  }
 
   onBeforeMount(getOptions);
 </script>
 <template>
-  <main class="mt-2 pb-[600PX] pt-2 bg-white">
+  <main class="mt-2 pt-2 bg-white">
+    {{ checked }}
     <section class="px-4">
       <van-button
         block
@@ -68,7 +45,7 @@
     </section>
     <AdvancedSearch
       v-model="queryParams.params.mediaTitleLike"
-      @search="onSearch"
+      @search="onRefresh"
       @reset="resetQueryParams"
     >
       <!-- 媒体标题 -->
@@ -120,33 +97,29 @@
       </van-checkbox-group>
     </AdvancedSearch>
 
-    <v-inset-list
-      ref="listRef"
-      v-model:loading="loading"
-      :listFn="MediaServer.LIST_MEDIA_MAIN"
-    >
-      <template #list="{ list }">
-        <div class="grid gap-2 grid-cols-2">
+    <van-pull-refresh ref="listRef" v-model="refreshing" @refresh="onRefresh">
+      <van-list
+        v-model:loading="loading"
+        error-text="请求失败，请稍后重试"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
+        <section class="grid gap-2 grid-cols-2 px-4">
           <div
-            v-for="item in list"
-            :key="item.uid"
             class="sub-content"
-            @click="router.push('/culture/mediaDetail')"
+            v-for="row in list"
+            :key="row.uid"
+            @click="router.push('/culture/mediaDetail/' + row.uid)"
           >
-            <VImage
-              :src="'https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg'"
-            />
-            666
-            <van-image
-              fit="cover"
-              src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
-            />
-            <van-text-ellipsis :content="item.mediaTitle" />
-            <div class="v-icon-text">{{ $parse(item.submitTime) }}</div>
+            <VImage :src="row.fileList?.[0]?.url" />
+            <van-text-ellipsis :content="row.mediaTitle" />
+            <div class="v-icon-text">{{ $parse(row.submitTime) }}</div>
           </div>
-        </div>
-      </template>
-    </v-inset-list>
+        </section>
+      </van-list>
+    </van-pull-refresh>
+    <van-back-top teleport="body" z-index="9" />
   </main>
 </template>
 

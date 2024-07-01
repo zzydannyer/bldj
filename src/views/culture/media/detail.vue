@@ -1,6 +1,15 @@
 <script setup lang="ts">
+  import MediaServer, { MediaMain } from '@/api/culture/media';
   const route = useRoute();
-  const { uid } = route.params;
+  const uid = route.params.uid as string;
+
+  const detail = ref<MediaMain>(new MediaMain());
+  async function getDetail() {
+    const { data } = await MediaServer.GET_MEDIA_MAIN(uid);
+    detail.value = data;
+  }
+
+  onBeforeMount(getDetail);
 </script>
 
 <template>
@@ -8,7 +17,7 @@
     <van-cell-group class="mt-4" inset>
       <!-- 媒体标题 -->
       <van-field
-        v-model="text"
+        v-model="detail.mediaTitle"
         input-align="left"
         label="媒体标题"
         label-align="top"
@@ -21,7 +30,7 @@
     <van-cell-group class="mt-4" inset>
       <!-- 作者 -->
       <van-field
-        v-model="text"
+        v-model="detail.author"
         input-align="right"
         label="作者"
         label-align="left"
@@ -31,33 +40,25 @@
       />
       <!-- 公司 -->
       <van-field
-        v-model="text"
+        v-model="detail.orgName"
         input-align="right"
         label="公司"
         label-align="left"
         placeholder="请输入"
       />
       <!-- 素材类别 -->
-      <van-field
-        v-model="result"
-        input-align="right"
-        is-link
+      <v-picker
         label="素材类别"
-        label-align="left"
-        name="picker"
-        placeholder="点击选择素材类别"
-        readonly
-        required
-        :rules="[{ required: true, message: '请输入素材类型' }]"
-        @click="showPicker = true"
+        label-align="top"
+        input-align="left"
+        placeholder="搜索素材类别"
+        v-model="detail.resourceType"
+        :columns="categoryOption"
+        :columns-field-names="{
+          text: 'label',
+          value: 'id'
+        }"
       />
-      <van-popup v-model:show="showPicker" position="bottom">
-        <van-picker
-          :columns="columns"
-          @cancel="showPicker = false"
-          @confirm="onConfirm"
-        />
-      </van-popup>
       <!-- 联系方式 -->
       <van-field
         v-model="text"

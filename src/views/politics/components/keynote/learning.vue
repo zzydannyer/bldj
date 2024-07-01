@@ -3,7 +3,7 @@
   import { Icon } from '@iconify/vue';
   import AdvancedSearch from '@/views/culture/media/advanceSearch.vue';
   import List from '@/views/politics/components/keynote/list.vue';
-  import useQueryParams from '@/hooks/queryParams.ts';
+  import useQueryParams from '@/hooks/common/useQueryParams';
   import { CultureMediaParams } from '@/api/culture/media.ts';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   const [queryParams, resetQueryParams] = useQueryParams<CultureMediaParams>(

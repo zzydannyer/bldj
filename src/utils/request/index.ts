@@ -9,7 +9,7 @@ import axios, {
 import { stringify } from 'qs';
 import useUserInfoStore from '@/store/modules/user';
 import { getToken, formatToken } from '@/utils/auth';
-import { ResCode, ErrorCode } from '@/constants';
+import { ResCode, WhiteList } from '@/constants';
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 // 数组格式参数序列化（https://github.com/axios/axios/issues/5142）
 const defaultConfig: AxiosRequestConfig = {
@@ -27,26 +27,9 @@ const defaultConfig: AxiosRequestConfig = {
 
 const instance: AxiosInstance = axios.create(defaultConfig);
 
-function getErrorMessage(arg: number | string): string {
-  if (typeof arg === 'number') {
-    return ErrorCode[arg] || ErrorCode[-1];
-  } else {
-    if (arg == 'Network Error') {
-      return '后端接口连接异常';
-    } else if (arg.includes('timeout')) {
-      return '系统接口请求超时';
-    } else if (arg.includes('Request failed with status code')) {
-      return '系统接口' + arg.substring(arg.length - 3) + '异常';
-    } else {
-      return arg;
-    }
-  }
-}
-
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const whiteList = ['/login'];
-    if (whiteList.some((url) => config.url === url)) {
+    if (WhiteList.some((url) => config.url === url)) {
       return config;
     }
     const token = getToken();
@@ -63,18 +46,16 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
     const code = response.data.code;
-    const msg: string = response.data.msg || getErrorMessage(code);
-    if (code in ResCode && code !== ResCode.Ok) {
+    const msg = response.data.msg;
+
+    if (code !== ResCode.Ok) {
       code === ResCode.Unauthorized && useUserInfoStore().LOGOUT();
       return Promise.reject(msg);
     } else {
       return Promise.resolve(response.data);
     }
   },
-  (error: AxiosError) => {
-    const msg: string = getErrorMessage(error.message);
-    return Promise.reject(msg);
-  }
+  (error: AxiosError) => Promise.reject(error.message)
 );
 
 function request<D>(config: AxiosRequestConfig): Promise<D>;

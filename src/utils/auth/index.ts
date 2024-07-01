@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import useUserInfoStore from '@/store/modules/user';
 import { parse } from 'qs';
-import { sessionKey, TokenKey } from '@/constants';
+import { SessionKey, TokenKey } from '@/constants';
 import { isString, includes } from 'lodash';
 
 export function getToken() {
