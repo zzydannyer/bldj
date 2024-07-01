@@ -17,7 +17,7 @@
         block
         class="button"
         size="small"
-        to="/org/addMeeting"
+        to="/org/detailMeeting"
         type="primary"
         text="新增"
         round
@@ -51,7 +51,7 @@
   $borderColor: #e2e2e2;
   $textColor: #777;
   :deep(.van-tabs__wrap) {
-    margin-top: 30px;
+    margin-top: 20px;
     border-radius: 10px;
     padding: 3px 0;
     overflow: hidden;

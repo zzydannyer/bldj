@@ -45,13 +45,12 @@
     <Supervision v-if="active === 'supervision'" />
   </main>
 </template>
-
 <style lang="scss" scoped>
   $baseColor: rgb(225, 1, 1);
   $borderColor: #e2e2e2;
   $textColor: #777;
   :deep(.van-tabs__wrap) {
-    margin-top: 30px;
+    margin-top: 20px;
     border-radius: 10px;
     padding: 3px 0;
     overflow: hidden;
@@ -107,7 +106,7 @@
       right: -10px;
       z-index: 1;
       color: #fff;
-      font-size: 70px;
+      font-size: 40px;
     }
   }
 </style>

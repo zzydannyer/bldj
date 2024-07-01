@@ -47,7 +47,7 @@
             autosize
             type="textarea"
             maxlength="50"
-            placeholder="请输入留言"
+            placeholder="请输入反馈内容"
             show-word-limit
             label-align="top"
           />
@@ -73,7 +73,7 @@
         size="small"
         to="uploadMaterials"
         type="primary"
-        text="详情"
+        text="提交"
         round
       />
     </section>

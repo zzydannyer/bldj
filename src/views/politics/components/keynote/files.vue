@@ -14,11 +14,7 @@
   <div class="pb-40">
     <Search />
     <section class="card">
-      <van-text-ellipsis
-        :content="text"
-        @click="router.push('pages/execute')"
-        rows="2"
-      />
+      <van-text-ellipsis :content="text" rows="2" />
       <div class="text-sm mt-2">责任部室：党委办公室（巡察办）</div>
       <div class="text-sm mt-2">
         下达:<span class="color-blue">16</span> 反馈:<span class="color-purple"
@@ -39,7 +35,7 @@
           block
           class="button mt-4 w-[48%]"
           size="small"
-          to="uploadMaterials"
+          to="pages/detail"
           type="primary"
           text="详情"
           round
@@ -48,11 +44,10 @@
           block
           class="button-zx mt-4 w-[48%]"
           size="small"
-          to="uploadMaterials"
+          to="pages/execute"
           type="primary"
           text="执行"
           round
-          @click="router.push('pages/execute')"
         />
       </div>
     </section>

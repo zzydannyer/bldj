@@ -187,7 +187,7 @@
       right: -10px;
       z-index: 1;
       color: #fff;
-      font-size: 70px;
+      font-size: 35px;
     }
   }
   .v-card-title {

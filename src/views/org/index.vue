@@ -10,24 +10,18 @@
 <template>
   <van-tabs
     v-model:active="active"
-    class="menu z-[3]"
-    :offset-top="200"
+    class="menu"
+    :offset-top="45"
     sticky
     @click-tab="handleClick"
   >
-    <van-tab name="frame" title="组织架构"></van-tab>
-    <van-tab name="building" title="党建实务"></van-tab>
-    <van-tab name="notice" title="通知公告"></van-tab>
-    <van-tab name="entering" title="党建入章"></van-tab>
-    <van-tab name="meetings" title="三会一课"></van-tab>
-    <van-tab name="transition" title="换届选举"></van-tab>
+    <van-tab name="frame" title="组织架构"><FrameCrates /></van-tab>
+    <van-tab name="building" title="党建实务"><BuildingCrates /></van-tab>
+    <van-tab name="notice" title="通知公告"><NoticeCrates /></van-tab>
+    <van-tab name="entering" title="党建入章"><EnteringCrates /></van-tab>
+    <van-tab name="meetings" title="三会一课"><MeetingsCrates /></van-tab>
+    <van-tab name="transition" title="换届选举"><TransitionCrates /></van-tab>
   </van-tabs>
-  <FrameCrates v-if="active === 'frame'" />
-  <BuildingCrates v-if="active === 'building'" />
-  <NoticeCrates v-if="active === 'notice'" />
-  <EnteringCrates v-if="active === 'entering'" />
-  <MeetingsCrates v-if="active === 'meetings'" />
-  <TransitionCrates v-if="active === 'transition'" />
 </template>
 <style lang="scss" scoped>
   .menu {
