@@ -12,10 +12,11 @@ import VCascader from '@/components/VCascader/index.vue';
 import VMultiPicker from '@/components/VMultiPicker/index.vue';
 import VDatePicker from '@/components/VDatePicker/index.vue';
 import VAreaPicker from '@/components/VAreaPicker/index.vue';
+import VImage from '@/components/VImage/index.vue';
 
 const components: Component[] = [
   VCard,
-  VInsetList,
+  VInsetList as Component,
   VSearch,
   VUploader,
   VPreview,
@@ -27,12 +28,10 @@ const components: Component[] = [
   VMultiPicker,
   VDatePicker,
   VAreaPicker,
+  VImage
 ];
 
-/**
- * @description 注册全局组件
- * @param app
- */
+// 注册全局组件
 const install = (app: App) => {
   components.forEach((component) => app.component(component.name!, component));
 };

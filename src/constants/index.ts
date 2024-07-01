@@ -65,7 +65,7 @@ export enum UserType {
   Grassroots = '基层',
   Unknown = '未知'
 }
-export enum ChannelId {
+export enum CHANNEL_ID {
   '党建事务' = '25d22599ea7d489fa2b63520e71b239f',
   '通知公告' = 'eb17fd4dab2045db992b3beb369fc9a5',
   '党纪宣贯' = '8f42ecf773714fa09348d2c2361aff26',
@@ -79,3 +79,10 @@ export enum ChannelId {
   '服务青年成才' = '26648d4b4f6c4ca7a48a4f60db8b97c9',
   '社会责任工作动态' = 'fa64c453a9914f76bf6c5974000df495'
 }
+
+const PRIVATE_URL_PREFIX = 'blgroup-dj.obs.cn-east-3.myhuaweicloud.com';
+
+export default {
+  CHANNEL_ID,
+  PRIVATE_URL_PREFIX
+};

@@ -42,7 +42,6 @@
 
   async function onLoad() {
     try {
-      console.log(666);
       loading.value = true;
       const { rows, total } = await listFn(queryParams.value);
 
