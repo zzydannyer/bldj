@@ -12,6 +12,7 @@ declare module 'vue' {
     TreeSelect: typeof import('./../src/components/VTreeSelect/treeSelect.vue')['default']
     VanBackTop: typeof import('vant/es')['BackTop']
     VanButton: typeof import('vant/es')['Button']
+    VanCalendar: typeof import('vant/es')['Calendar']
     VanCascader: typeof import('vant/es')['Cascader']
     VanCell: typeof import('vant/es')['Cell']
     VanCellGroup: typeof import('vant/es')['CellGroup']

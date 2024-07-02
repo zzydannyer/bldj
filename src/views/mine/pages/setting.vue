@@ -3,6 +3,11 @@
   import { useIcon } from '@/utils/assets';
   const router = useRouter();
   const form = ref({ code: '' });
+  const showCalendar = ref(false);
+  const onConfirm = (date) => {
+    result.value = `${date.getMonth() + 1}/${date.getDate()}`;
+    showCalendar.value = false;
+  };
 </script>
 <template>
   <van-cell-group>
@@ -25,26 +30,51 @@
       :rules="[{ required: true, message: '请选择类型' }]"
     />
   </van-cell-group>
+
+  <van-cell-group class="mt-3">
+    <!-- 头像 -->
+    <van-field v-model="text" label="头像" input-align="right" />
+    <!-- 姓名 -->
+    <van-field v-model="tel" type="tel" label="姓名" input-align="right" />
+    <!-- 出生日期 -->
+
+    <van-field
+      v-model="result"
+      is-link
+      readonly
+      name="calendar"
+      label="出生日期"
+      @click="showCalendar = true"
+      input-align="right"
+    />
+    <van-calendar v-model:show="showCalendar" @confirm="onConfirm" />
+
+    <!-- 手机号码 -->
+    <van-field
+      v-model="tel"
+      type="tel"
+      label="手机号码"
+      input-align="right"
+      required
+    />
+    <!-- 地址 -->
+    <van-field v-model="text" label="地址" input-align="right" />
+  </van-cell-group>
+  <div class="p-4">
+    <van-button
+      block
+      class="button"
+      size="small"
+      to="uploadMaterials"
+      type="primary"
+      text="保存"
+    />
+  </div>
 </template>
 <style lang="scss" scoped>
-  .my-bg {
-    @apply w-full h-[150PX] bg-no-repeat flex pt-12 pl-7;
-    background-image: url('@/assets/images/bg.png');
-    background-size: 100% 100%;
-    .avatar-bg {
-      @apply w-[55PX] h-[55PX] bg-white;
-      .avatar {
-        @apply w-[27PX] h-[27PX] text-red-600;
-      }
-    }
-    .right-text {
-      @apply h-[40PX] mt-2 ml-2;
-    }
-    .text-tit {
-      @apply text-base text-white font-medium;
-    }
-    .text-b {
-      @apply text-sm text-white;
-    }
+  .button {
+    @apply font-bold;
+    --van-button-primary-background: #e22001;
+    --van-button-primary-border-color: #e22001;
   }
 </style>

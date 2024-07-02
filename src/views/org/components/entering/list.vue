@@ -1,18 +1,15 @@
 <template>
-  <van-space class="subtext" :size="2" fill>
-    <Icon icon="solar:user-linear" class="color" /> <span> {{ name }}</span>
+  <van-space class="subtext" :size="2">
+    <Icon icon="mingcute:government-line" class="color2" />
+    <span> {{ name }}</span>
   </van-space>
-  <van-space class="subtext" :size="2" fill>
+  <van-space class="subtext ml-10" :size="2">
     <Icon icon="ion:time-outline" class="color1" /> <span> {{ time }}</span>
-  </van-space>
-  <van-space class="subtext" :size="2" fill>
-    <Icon icon="tabler:eye-discount" class="color2" /> <span> {{ count }}</span>
   </van-space>
 </template>
 
 <script setup lang="ts">
   import { Icon } from '@iconify/vue';
-
   const props = withDefaults(
     defineProps<{
       name: string;
@@ -26,7 +23,6 @@
     }
   );
 </script>
-
 <style lang="scss" scoped>
   .subtext {
     @apply text-xs my-1.5;

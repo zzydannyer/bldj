@@ -215,7 +215,7 @@
     border: solid 1px #efefef;
     .swiper-slide {
       @apply h-[170PX] block text-xs pl-4 text-left;
-      width: 10.5rem !important;
+      width: 10.8rem !important;
       .iconbg {
         color: #009dff;
       }
@@ -290,17 +290,18 @@
       @apply m-1 w-8 h-0.5 absolute rounded-sm;
       background-color: #ff2600;
       left: -4px;
-      bottom: -12px;
+      bottom: -3px;
     }
   }
   .card_heart {
-    @apply p-0 pb-4;
+    @apply p-0 pb-4 mt-2;
   }
   .detail {
-    @apply text-xs mt-1 flex;
-    color: #5e5e5e;
+    @apply text-xs mt-1;
+    color: #8c8c8c;
   }
   .link {
     @apply text-xs mt-2;
+    color: #8c8c8c;
   }
 </style>

@@ -1,8 +1,13 @@
 <script setup lang="ts">
   import { useGlobal } from '@/utils';
   import { Icon } from '@iconify/vue';
-  import Party from '@/views/discipline/components/integrity/party.vue';
-  import Supervision from '@/views/discipline/components/integrity/supervision.vue';
+  import Business from '@/views/org/components/entering/business.vue';
+  import Directorate from '@/views/org/components/entering/directorate.vue';
+  import FrameCrates from '@/views/org/components/frameCrates.vue';
+  import MeetingsCrates from '@/views/org/components/meetingsCrates.vue';
+  import NoticeCrates from '@/views/org/components/noticeCrates.vue';
+  import BuildingCrates from '@/views/org/components/buildingCrates.vue';
+  import TransitionCrates from '@/views/org/components/transitionCrates.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   defineOptions({
     name: 'MediaList'
@@ -38,11 +43,9 @@
       swipe-threshold="3"
       :scrollspy="true"
     >
-      <van-tab title="完成工商备案" name="party"></van-tab>
-      <van-tab title="通过董事会" name="supervision"></van-tab>
+      <van-tab title="完成工商备案" name="business"><Business /></van-tab>
+      <van-tab title="通过董事会" name="directorate"><Directorate /></van-tab>
     </van-tabs>
-    <Party v-if="active === 'party'" />
-    <Supervision v-if="active === 'supervision'" />
   </main>
 </template>
 <style lang="scss" scoped>
@@ -50,18 +53,16 @@
   $borderColor: #e2e2e2;
   $textColor: #777;
   :deep(.van-tabs__wrap) {
-    margin-top: 20px;
+    margin-top: 15px;
     border-radius: 10px;
     padding: 3px 0;
     overflow: hidden;
     .van-tabs__nav--card {
       border: 1px solid $borderColor;
     }
-
     .van-tab--card.van-tab--active {
       background-color: $baseColor;
     }
-
     .van-tab__text {
       color: $textColor;
     }

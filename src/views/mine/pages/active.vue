@@ -5,19 +5,29 @@
 
   const router = useRouter();
   const form = ref({ code: '' });
-  const time = ref('');
   const resourceType = ref('');
   const name = ref('');
+  const result = ref('');
+  const showCalendar = ref(false);
+  const onConfirm = (date) => {
+    result.value = `${date.getMonth() + 1}/${date.getDate()}`;
+    showCalendar.value = false;
+  };
 </script>
 <template>
   <div class="bg-white pt-3 h-dvh">
-    <v-icon-text-picker
-      v-model="time"
-      label="选择日期"
-      placeholder="请选择选择日期"
+    <van-field
+      v-model="result"
+      is-link
+      readonly
+      name="calendar"
+      label="日期"
+      placeholder="点击选择日期"
+      @click="showCalendar = true"
     />
+    <van-calendar v-model:show="showCalendar" @confirm="onConfirm" />
 
-    <div class="flex justify-center bt pt-6 mt-6">
+    <div class="flex justify-center bt pt-6 mt-4">
       <table
         class="border-collapse border-gray-400 w-[90%] text-center text-xs"
       >
@@ -41,7 +51,7 @@
 </template>
 <style lang="scss" scoped>
   .bt {
-    border-top: solid 20px #f5f5f5;
+    border-top: solid 12px #f5f5f5;
   }
 
   table {
