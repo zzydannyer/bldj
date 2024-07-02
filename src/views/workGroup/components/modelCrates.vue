@@ -40,7 +40,7 @@
           fit="cover"
           :src="useImage('pic')"
         />
-        <van-text-ellipsis :content="'陶依嘉'" rows="1" />
+        <van-text-ellipsis :content="'陶依嘉'" rows="1" class="text-sm" />
         <span class="v-icon-text">
           <div class="text2">上海市劳模规范</div>
         </span>
@@ -62,7 +62,7 @@
       <img v-src="row.imgUrl" class="rounded" height="85" width="100" />
       <section class="flex-1 text-sm flex-col gap-2">
         <div class="w-full">
-          <van-text-ellipsis :content="row.name" rows="1" />
+          <van-text-ellipsis :content="row.name" rows="1" class="text-sm" />
         </div>
         <van-text-ellipsis
           class="text-xs detail"
@@ -89,17 +89,18 @@
   .tit {
     @apply relative ml-4 leading-8 font-medium text-base;
     .line {
-      @apply m-1 w-8 h-0.5 absolute rounded-sm;
+      @apply m-1 w-7 h-0.5 absolute rounded-sm;
       background-color: #ff2600;
       left: -4px;
-      bottom: -12px;
+      bottom: -3px;
     }
   }
   .detail {
-    @apply text-xs mt-1 flex;
-    color: #5e5e5e;
+    @apply text-xs mt-1;
+    color: #8c8c8c;
   }
   .link {
     @apply text-xs mt-2;
+    color: #8c8c8c;
   }
 </style>
