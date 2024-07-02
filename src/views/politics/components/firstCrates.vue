@@ -30,8 +30,6 @@
     <div class="titbg">
       <span class="pl-4 font-medium">年统计信息</span>
     </div>
-    <!--    <Search />-->
-
     <van-field
       v-model="result"
       is-link
@@ -156,11 +154,13 @@
     .titbg {
       background-image: linear-gradient(to bottom, #fed6c8 30%, #fff 100%);
       line-height: 50px;
+      color: #5a5a5b;
     }
     .table-head {
       @apply text-xs font-medium mx-2 rounded-full text-center table-auto;
       background-color: #f9f9f9;
       line-height: 30px;
+      color: #5a5a5b;
     }
 
     .table-body {

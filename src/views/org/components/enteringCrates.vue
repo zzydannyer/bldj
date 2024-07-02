@@ -3,11 +3,6 @@
   import { Icon } from '@iconify/vue';
   import Business from '@/views/org/components/entering/business.vue';
   import Directorate from '@/views/org/components/entering/directorate.vue';
-  import FrameCrates from '@/views/org/components/frameCrates.vue';
-  import MeetingsCrates from '@/views/org/components/meetingsCrates.vue';
-  import NoticeCrates from '@/views/org/components/noticeCrates.vue';
-  import BuildingCrates from '@/views/org/components/buildingCrates.vue';
-  import TransitionCrates from '@/views/org/components/transitionCrates.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   defineOptions({
     name: 'MediaList'
@@ -16,10 +11,10 @@
   const active = ref<string>('');
 </script>
 <template>
-  <main class="mt-4">
+  <main class="mt-4 mb-4">
     <van-grid :border="false" :column-num="2" :gutter="20">
       <van-grid-item class="topbg" style="--bgColor: #e4f3fd">
-        <div class="w-full text-center">
+        <div class="w-full text-center text-xs text-slate-500">
           <span class="text-2xl digital">54</span> 家
         </div>
         <div class="w-full tit text-center text-sm">完成工商备案</div>
@@ -28,7 +23,7 @@
         </div>
       </van-grid-item>
       <van-grid-item class="topbg" style="--bgColor: #fff1e9">
-        <div class="w-full text-center">
+        <div class="w-full text-center text-xs text-slate-500">
           <span class="text-2xl digital-blue">27</span> 家
         </div>
         <div class="w-full tit text-center text-sm">通过董事会</div>
@@ -106,8 +101,11 @@
       @apply absolute;
       right: -10px;
       z-index: 1;
-      color: #fff;
-      font-size: 40px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 36px;
+    }
+    .tit {
+      @apply text-xs;
     }
   }
 </style>

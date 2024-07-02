@@ -16,18 +16,14 @@
   <van-tabs
     v-model:active="active"
     type="card"
-    swipe-threshold="3"
-    :scrollspy="true"
+    swipe-threshold="4"
+    :offset-top="90"
   >
-    <van-tab title="会议文件" name="files"></van-tab>
-    <van-tab title="重点工作" name="key"></van-tab>
-    <van-tab title="专项工作" name="special"></van-tab>
-    <van-tab title="工作提示" name="tip"></van-tab>
+    <van-tab title="会议文件" name="files"> <File /></van-tab>
+    <van-tab title="重点工作" name="key"><Key /></van-tab>
+    <van-tab title="专项工作" name="special"><Special /></van-tab>
+    <van-tab title="工作提示" name="tip"><Tip /></van-tab>
   </van-tabs>
-  <File v-if="active === 'files'" />
-  <Key v-if="active === 'key'" />
-  <Special v-if="active === 'special'" />
-  <Tip v-if="active === 'tip'" />
 </template>
 
 <style lang="scss" scoped>

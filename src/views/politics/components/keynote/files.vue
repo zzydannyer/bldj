@@ -14,7 +14,7 @@
   <div class="pb-40">
     <Search />
     <section class="card">
-      <van-text-ellipsis :content="text" rows="2" />
+      <van-text-ellipsis :content="text" rows="2" class="text-sm" />
       <div class="text-xs mt-2">责任部室：党委办公室（巡察办）</div>
       <div class="text-xs mt-2">
         下达:<span class="color-blue">16</span> 反馈:<span class="color-purple"
@@ -56,6 +56,7 @@
         :content="text"
         @click="router.push('/detail')"
         rows="2"
+        class="text-sm"
       />
       <div class="text-xs mt-2">责任部室：党委办公室（巡察办）</div>
       <div class="text-xs mt-2">

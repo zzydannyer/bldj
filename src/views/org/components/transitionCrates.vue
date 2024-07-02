@@ -11,10 +11,13 @@
   const active = ref<string>('');
 </script>
 <template>
-  <main class="bg-white pt-2 pb-40">
+  <main class="pt-4 pb-40">
     <van-grid :border="false" :column-num="3" :gutter="16">
       <van-grid-item class="topbg" style="--bgColor: #e5f4fd">
-        <div class="w-full text-center" style="z-index: 1">
+        <div
+          class="w-full text-center text-xs text-slate-500"
+          style="z-index: 1"
+        >
           <span class="text-2xl digital-blue">54</span> 家
         </div>
         <div class="w-full tit text-center text-sm" style="z-index: 1">
@@ -25,7 +28,10 @@
         </div>
       </van-grid-item>
       <van-grid-item class="topbg" style="--bgColor: #fef1e9">
-        <div class="w-full text-center" style="z-index: 1">
+        <div
+          class="w-full text-center text-xs text-slate-500"
+          style="z-index: 1"
+        >
           <span class="text-2xl digital-yellow">27</span> 家
         </div>
         <div class="w-full tit text-center text-sm" style="z-index: 1">
@@ -36,7 +42,10 @@
         </div>
       </van-grid-item>
       <van-grid-item class="topbg" style="--bgColor: #ffe8e9">
-        <div class="w-full text-center" style="z-index: 1">
+        <div
+          class="w-full text-center text-xs text-slate-500"
+          style="z-index: 1"
+        >
           <span class="text-2xl digital">27</span> 家
         </div>
         <div class="w-full tit text-center text-sm" style="z-index: 1">
@@ -47,7 +56,7 @@
         </div>
       </van-grid-item>
     </van-grid>
-    <section class="mt-6">
+    <section class="mt-4">
       <div class="v-card">
         <div class="v-card-title">中共百联集团有限公司总部</div>
         <div class="v-card-body" :class="bodyClass" :style="bodyStyle">
@@ -186,8 +195,11 @@
       @apply absolute;
       right: -10px;
       z-index: 1;
-      color: #fff;
+      color: rgba(255, 255, 255, 0.9);
       font-size: 35px;
+    }
+    .tit {
+      @apply text-xs;
     }
   }
   .v-card-title {

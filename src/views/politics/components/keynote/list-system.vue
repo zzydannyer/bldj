@@ -1,15 +1,22 @@
 <template>
   <van-space class="subtext" :size="2" fill>
-    <Icon icon="ant-design:home-outlined" class="color-green" />
-    <span> 填报单位：{{ name }}</span>
+    <Icon
+      icon="carbon:web-services-task-definition-version"
+      class="color-green"
+    />
+    <span> 版本号：{{ name }}</span>
   </van-space>
   <van-space class="subtext" :size="2" fill>
-    <Icon icon="ph:paper-plane-tilt-light" class="color-cyan" />
-    <span> 学习方式：{{ time }}</span>
+    <Icon icon="hugeicons:solar-system" class="color-cyan" />
+    <span> 制度类型：{{ time }}</span>
   </van-space>
   <van-space class="subtext" :size="2" fill>
-    <Icon icon="iwwa:year" class="color-light-blue" />
-    <span> 学习年月：{{ count }}</span>
+    <Icon icon="mingcute:department-line" class="color-light-blue" />
+    <span> 制定部门：{{ count }}</span>
+  </van-space>
+  <van-space class="subtext" :size="2" fill>
+    <Icon icon="mage:file-2" class="color-yellow" />
+    <span> 文件状态：{{ count }}</span>
   </van-space>
   <van-space class="subtext" :size="2" fill>
     <Icon icon="ion:time-outline" class="color-purple" />
@@ -51,5 +58,8 @@
   }
   .color-purple {
     color: #83a8fd;
+  }
+  .color-yellow {
+    color: #ff815a;
   }
 </style>

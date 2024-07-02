@@ -3,7 +3,7 @@
   import { Icon } from '@iconify/vue';
   import * as echarts from 'echarts';
 
-  import Learning from '@/views/politics/components/keynote/learning.vue';
+  import Learning from '@/views/politics/components/keynote/system.vue';
   const { $parse } = useGlobal<GlobalPropertiesApi>();
   defineOptions({
     name: 'MediaList'
@@ -75,22 +75,30 @@
     <van-grid :border="false" :column-num="2" :gutter="20">
       <van-grid-item class="topbg">
         <div class="text-left w-full tit font-medium">会议</div>
-        <div class="w-full text-center">
+        <div class="w-full text-center text-slate-500">
           <span class="text-2xl digital">54</span>场
         </div>
         <div class="text-xs w-full bottom">
-          <div>上季度：<span class="digital">30</span></div>
-          <div class="mt-1">环比增长：<span class="digital">40%</span></div>
+          <div class="text-slate-500">
+            上季度：<span class="digital">30</span>
+          </div>
+          <div class="mt-1 text-slate-500">
+            环比增长：<span class="digital">40%</span>
+          </div>
         </div></van-grid-item
       >
       <van-grid-item class="topbg">
         <div class="text-left w-full tit font-medium">议题</div>
-        <div class="w-full text-center">
+        <div class="w-full text-center text-slate-500">
           <span class="text-2xl digital">27</span>场
         </div>
         <div class="text-xs w-full bottom">
-          <div>上季度：<span class="digital">30</span></div>
-          <div class="mt-1">环比增长：<span class="digital">40%</span></div>
+          <div class="text-slate-500">
+            上季度：<span class="digital">30</span>
+          </div>
+          <div class="mt-1 text-slate-500">
+            环比增长：<span class="digital">40%</span>
+          </div>
         </div></van-grid-item
       >
     </van-grid>
@@ -158,13 +166,14 @@
     @apply rounded-md overflow-hidden  m-4 bg-white;
     .titbg {
       background-image: linear-gradient(to bottom, #fed6c8 30%, #fff 100%);
-      line-height: 50px;
+      line-height: 45px;
+      color: #5a5a5b;
     }
     .table-head {
       @apply text-xs font-medium mx-2 rounded-full text-center table-auto w-[95%];
       line-height: 50px;
       th {
-        background-color: #f9f9f9;
+        background-color: #f7f7f7;
         line-height: 30px;
       }
       td {
@@ -179,6 +188,7 @@
     }
     .tit {
       margin-top: -10px;
+      color: #5a5a5b;
     }
     .digital {
       color: #ff4a27;
