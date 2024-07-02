@@ -15,8 +15,8 @@
     <Search />
     <section class="card">
       <van-text-ellipsis :content="text" rows="2" />
-      <div class="text-sm mt-2">责任部室：党委办公室（巡察办）</div>
-      <div class="text-sm mt-2">
+      <div class="text-xs mt-2">责任部室：党委办公室（巡察办）</div>
+      <div class="text-xs mt-2">
         下达:<span class="color-blue">16</span> 反馈:<span class="color-purple"
           >16</span
         >
@@ -25,8 +25,8 @@
         >
         未完成:<span class="color-red">16</span>
       </div>
-      <div class="text-sm mt-2">状态：<span class="color-red">督查</span></div>
-      <van-space class="text-sm mt-3 color-grey" :size="2">
+      <div class="text-xs mt-2">状态：<span class="color-red">督查</span></div>
+      <van-space class="text-xs mt-3 color-grey" :size="2">
         <Icon icon="ion:time-outline" />
         <span> 2024-01-26 - 2024-02-25</span>
       </van-space>
@@ -57,8 +57,8 @@
         @click="router.push('/detail')"
         rows="2"
       />
-      <div class="text-sm mt-2">责任部室：党委办公室（巡察办）</div>
-      <div class="text-sm mt-2">
+      <div class="text-xs mt-2">责任部室：党委办公室（巡察办）</div>
+      <div class="text-xs mt-2">
         下达:<span class="color-blue">16</span> 反馈:<span class="color-purple"
           >16</span
         >
@@ -67,8 +67,8 @@
         >
         未完成:<span class="color-red">16</span>
       </div>
-      <div class="text-sm mt-2">状态：<span class="color-red">督查</span></div>
-      <van-space class="text-sm mt-3 color-grey" :size="2">
+      <div class="text-xs mt-2">状态：<span class="color-red">督查</span></div>
+      <van-space class="text-xs mt-3 color-grey" :size="2">
         <Icon icon="ion:time-outline" />
         <span> 2024-01-26 - 2024-02-25</span>
       </van-space>

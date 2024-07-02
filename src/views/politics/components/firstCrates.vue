@@ -45,13 +45,13 @@
       <van-date-picker @confirm="onConfirm" @cancel="showPicker = false" />
     </van-popup>
 
-    <table class="table-head mt-3">
+    <table class="table-head mt-3 block">
       <thead>
         <tr>
           <th style="width: 35%">填报单位名称</th>
           <th style="width: 20%">学习次数</th>
           <th style="width: 20%">参与人数</th>
-          <th style="width: 25%">未填报/已提交</th>
+          <th style="width: 30%">未填报/已提交</th>
         </tr>
       </thead>
     </table>
@@ -160,7 +160,7 @@
     .table-head {
       @apply text-xs font-medium mx-2 rounded-full text-center table-auto;
       background-color: #f9f9f9;
-      line-height: 50px;
+      line-height: 30px;
     }
 
     .table-body {

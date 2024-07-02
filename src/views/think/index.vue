@@ -7,16 +7,14 @@
 <template>
   <van-tabs
     v-model:active="active"
-    class="menu z-[3]"
-    :offset-top="200"
+    class="menu z-[1]"
+    :offset-top="45"
     sticky
     @click-tab="handleClick"
   >
-    <van-tab name="study" title="学习记录"></van-tab>
-    <van-tab name="statistics" title="统计考核"></van-tab>
+    <van-tab name="study" title="学习记录"><StudyCrates /></van-tab>
+    <van-tab name="statistics" title="统计考核"><StatisticsCrates /></van-tab>
   </van-tabs>
-  <StudyCrates v-if="active === 'study'" />
-  <StatisticsCrates v-if="active === 'statistics'" />
 </template>
 <style lang="scss" scoped>
   .menu {

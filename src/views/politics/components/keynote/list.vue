@@ -8,7 +8,7 @@
     <span> 学习方式：{{ time }}</span>
   </van-space>
   <van-space class="subtext" :size="2" fill>
-    <Icon icon="arcticons:studyplus" class="color-light-blue" />
+    <Icon icon="iwwa:year" class="color-light-blue" />
     <span> 学习年月：{{ count }}</span>
   </van-space>
   <van-space class="subtext" :size="2" fill>

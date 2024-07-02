@@ -59,7 +59,7 @@
   const columns = [
     {
       title: '名称',
-      width: 130,
+      width: 150,
       fixed: 'left' as 'left',
       scopedSlots: { customRender: 'name' }
     },
@@ -67,26 +67,26 @@
       title: '第一季度',
       dataIndex: 'one',
       ellipsis: true,
-      width: 150,
+      width: 75,
       scopedSlots: { customRender: 'season' }
     },
     {
       title: '第二季度',
       dataIndex: 'two',
-      width: 95,
+      width: 75,
       scopedSlots: { customRender: 'season' }
     },
     {
       title: '第三季度',
       dataIndex: 'three',
       ellipsis: true,
-      width: 140,
+      width: 75,
       scopedSlots: { customRender: 'season' }
     },
     {
       title: '第四季度',
       dataIndex: 'four',
-      width: 120,
+      width: 75,
       scopedSlots: { customRender: 'season' }
     }
   ];
@@ -115,72 +115,16 @@
           :style="{
             '--bgColor':
               source[column.dataIndex] === 1
-                ? 'red'
+                ? '#66d877'
                 : source[column.dataIndex] === 2
-                  ? 'yellow'
+                  ? '#ffc671'
                   : source[column.dataIndex] === 3
-                    ? 'blue'
-                    : 'green'
+                    ? '#ef5960'
+                    : '#ef5960'
           }"
         ></span>
       </template>
     </sticker-table>
-  </div>
-
-  <div class="card bg-white">
-    <div class="v-full overflow-x-auto">
-      <table class="border-collapse border border-slate-400">
-        <tr>
-          <th class="fixed-column"></th>
-          <th>第一季度</th>
-          <th>第二季度</th>
-          <th>第三季度</th>
-          <th>第四季度</th>
-        </tr>
-        <tr>
-          <td class="fixed-column">联华股份党委</td>
-          <td><span class="box"></span></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td class="fixed-column">联华超市营运中心党委</td>
-          <td><span class="box" style="--bgColor: #ffc671"></span></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td class="fixed-column">联家超市公司党委</td>
-          <td><span class="box" style="--bgColor: #ef5960"></span></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td class="fixed-column">华联吉买盛党委</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td class="fixed-column">联华快客便利党委</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td class="fixed-column">联华快客便利党委</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-    </div>
   </div>
 </template>
 
@@ -196,27 +140,17 @@
       @apply leading-8 whitespace-nowrap px-4 leading-8 text-center;
       border: 1px solid black;
       min-width: 100px;
-      text-align: left;
+      text-align: center !important;
+      color: #5f5f5f;
     }
     th {
       @apply bg-slate-50;
+      color: #5f5f5f;
     }
     .box {
       --bgColor: #66d877;
       @apply w-[15PX] h-[15PX] rounded inline-block;
       background-color: var(--bgColor);
-    }
-    .fixed-column {
-      position: -webkit-sticky; /* Safari */
-      position: sticky;
-      left: 0;
-      background-color: #f9f9f9;
-      z-index: 1; /* 确保固定列在其他内容之上 */
-    }
-
-    td:nth-child(1),
-    th:nth-child(1) {
-      border-left: solid 1px #e2eaee;
     }
   }
 </style>

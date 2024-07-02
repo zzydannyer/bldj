@@ -1,5 +1,5 @@
 <template>
-  <div class="m-4">
+  <div class="m-4 mt-3">
     <van-search
       v-model="value"
       class="mx-auto rounded-md"
@@ -9,7 +9,7 @@
       @search="onSearch"
     >
       <template #action>
-        <div is-link>
+        <div>
           <van-button type="primary" size="small" class="button-search"
             >搜索</van-button
           >

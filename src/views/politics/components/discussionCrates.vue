@@ -98,7 +98,9 @@
       <div class="titbg">
         <span class="pl-4 font-medium">制度分类</span>
       </div>
-      <div><div class="w-full h-[200PX]" ref="chartRef"></div></div>
+      <div>
+        <div class="w-[90vw] h-[200PX] mx-auto" ref="chartRef"></div>
+      </div>
     </section>
     <section class="card pb-2">
       <div class="titbg">
@@ -163,6 +165,7 @@
       line-height: 50px;
       th {
         background-color: #f9f9f9;
+        line-height: 30px;
       }
       td {
         @apply leading-10 font-normal;
