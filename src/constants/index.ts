@@ -60,6 +60,12 @@ export enum ChannelId {
 
 const PrivateUrlPrefix = 'blgroup-dj.obs.cn-east-3.myhuaweicloud.com';
 
+const MediaTypes = [
+  { text: '图片', value: '1' },
+  { text: '视频', value: '2' },
+  { text: '音频', value: '3' }
+];
+
 export default {
   SessionKey,
   TokenKey,
@@ -69,5 +75,6 @@ export default {
   BorderColor,
   ResCode,
   ChannelId,
-  PrivateUrlPrefix
+  PrivateUrlPrefix,
+  MediaTypes
 };

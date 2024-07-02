@@ -3,7 +3,7 @@ import type { ECharts } from 'echarts';
 import type { IconifyIcon } from '@iconify/vue';
 import { parseDict } from '@/utils';
 import { parse } from '@/utils/date';
-import { type download } from '@/plugins/download/download';
+import { type download } from '@/plugins/download/index';
 import type { IconifyIcon } from '@iconify/vue';
 import type { RouteComponent, RouteLocationNormalized } from 'vue-router';
 import type { useDict } from '@/plugins/dict/dict';

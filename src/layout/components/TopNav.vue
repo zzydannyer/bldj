@@ -13,8 +13,12 @@
       return '';
     }
   });
-  const back = computed<string>(() => {
-    return history?.state?.back ?? '';
+
+  const isHome = computed(() => route.path === '/home');
+  const isMine = computed(() => route.path === '/mine');
+  const isMore = computed(() => route.meta?.more);
+  const showBackBtn = computed<boolean>(() => {
+    return !!history?.state?.back || !isHome || !isMine || !isMore;
   });
 
   const showLeftArrow = computed<boolean>(() => {
@@ -41,7 +45,11 @@
     z-index="3"
     @click-left="onClickLeft"
     @click-right="onClickRight"
-  />
+  >
+    <template #left>
+      <van-icon v-if="showBackBtn" name="arrow-left" @click="onClickLeft" />
+    </template>
+  </van-nav-bar>
 </template>
 
 <style lang="scss" scoped>

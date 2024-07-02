@@ -20,13 +20,11 @@
     name: 'VUploader'
   });
 
-  // ***********************************************************************
   const { $download } = useGlobal<GlobalPropertiesApi>();
   // 本组件绑定值
   const modelValue = defineModel<any[]>();
   // 文件重复下标
   const subscript = ref(1);
-  // ***********************************************************************
   const show = ref(false);
   const flag = ref(false);
   const iconSize = '24';

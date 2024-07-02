@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="T extends string | number">
+<script setup lang="ts" generic="T extends Numeric">
   import { FieldRule, PickerOption } from 'vant';
   import { PropType } from 'vue';
 
@@ -32,7 +32,9 @@
 
   const flatOption = computed(() => flatFn(options));
   const picked_text = computed(() => {
-    return flatOption.value.find((i) => i[value.value] === modelValue.value)?.[text.value];
+    return flatOption.value.find((i) => i[value.value] === modelValue.value)?.[
+      text.value
+    ];
   });
 
   watch(
@@ -91,7 +93,14 @@
     @clear="emits('clear')"
   />
   <van-popup round v-model:show="show" position="bottom" teleport="body">
-    <van-cascader v-model="picked" :title="label" :closeable="false" :options="options" :field-names="fieldNames" @finish="onFinish" />
+    <van-cascader
+      v-model="picked"
+      :title="label"
+      :closeable="false"
+      :options="options"
+      :field-names="fieldNames"
+      @finish="onFinish"
+    />
   </van-popup>
 </template>
 

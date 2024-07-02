@@ -14,8 +14,8 @@
     set: () => {}
   });
   const show = ref(false);
-  const modelValue = defineModel<Array<string | number>>();
-  const checked = ref<Array<string | number>>([]);
+  const modelValue = defineModel<Array<Numeric>>();
+  const checked = ref<Array<Numeric>>([]);
 
   // ****************************************************************************************************
   // props
@@ -105,13 +105,27 @@
   });
 </script>
 <template>
-  <van-field :required="required" v-model="checked_text" is-link readonly :label="label" @click="show = true" :rules="rules" :disabled="disabled">
+  <van-field
+    :required="required"
+    v-model="checked_text"
+    is-link
+    readonly
+    :label="label"
+    @click="show = true"
+    :rules="rules"
+    :disabled="disabled"
+  >
     <template #input>
       <v-plain-tag size="large" type="primary" v-if="modelValue!?.length > 0">
         {{ columns.find((i) => i[value] === modelValue![0])?.[text] }}
       </v-plain-tag>
-      <v-plain-tag size="large" type="primary" v-if="modelValue!?.length > 1"> +{{ modelValue!?.length - 1 }} </v-plain-tag>
-      <span v-if="modelValue!?.length === 0 || !modelValue" style="color: var(--van-gray-5)">
+      <v-plain-tag size="large" type="primary" v-if="modelValue!?.length > 1">
+        +{{ modelValue!?.length - 1 }}
+      </v-plain-tag>
+      <span
+        v-if="modelValue!?.length === 0 || !modelValue"
+        style="color: var(--van-gray-5)"
+      >
         {{ placeholder }}
       </span>
     </template>
@@ -119,20 +133,53 @@
 
   <van-popup v-model:show="show" round position="bottom" teleport="body">
     <div class="van-picker__toolbar">
-      <button type="button" class="van-picker__cancel van-haptics-feedback" @click="onCancel">取消</button>
-      <van-search class="p-0 flex-1" v-show="searchshow" v-model="searchVal" :placeholder="searchPlaceholder" left-icon="" @click.stop />
+      <button
+        type="button"
+        class="van-picker__cancel van-haptics-feedback"
+        @click="onCancel"
+      >
+        取消
+      </button>
+      <van-search
+        class="p-0 flex-1"
+        v-show="searchshow"
+        v-model="searchVal"
+        :placeholder="searchPlaceholder"
+        left-icon=""
+        @click.stop
+      />
       <div>
-        <button type="button" class="van-picker__confirm" style="color: var(--van-red); padding-right: 0" @click="onClear">清空</button>
-        <button type="button" class="van-picker__confirm van-haptics-feedback" @click="onConfirm">确认</button>
+        <button
+          type="button"
+          class="van-picker__confirm"
+          style="color: var(--van-red); padding-right: 0"
+          @click="onClear"
+        >
+          清空
+        </button>
+        <button
+          type="button"
+          class="van-picker__confirm van-haptics-feedback"
+          @click="onConfirm"
+        >
+          确认
+        </button>
       </div>
     </div>
 
     <van-divider style="margin: 0"></van-divider>
     <section class="bg-blue-100">
-      <div v-if="checked.length" style="padding: var(--van-cell-vertical-padding) var(--van-padding-md)">
+      <div
+        v-if="checked.length"
+        style="padding: var(--van-cell-vertical-padding) var(--van-padding-md)"
+      >
         <van-text-ellipsis
           rows="1"
-          :content="checked.map((id) => columns.find((i) => i[value] === id)?.[text]).join('，')"
+          :content="
+            checked
+              .map((id) => columns.find((i) => i[value] === id)?.[text])
+              .join('，')
+          "
           :expand-text="`共${checked.length}人`"
           collapse-text="收起"
         />
@@ -150,9 +197,20 @@
           v-slot="{ item, index }"
           :key="forceUpdate"
         > -->
-        <van-cell clickable :key="index" :title="item[text]" @click="toggle(index)">
+        <van-cell
+          clickable
+          :key="index"
+          :title="item[text]"
+          @click="toggle(index)"
+        >
           <template #right-icon>
-            <van-checkbox :name="item[value]" :ref="(el: any) => (checkboxRefs[index] = el)" label-position="left" icon-size="16px" @click.stop />
+            <van-checkbox
+              :name="item[value]"
+              :ref="(el: any) => (checkboxRefs[index] = el)"
+              label-position="left"
+              icon-size="16px"
+              @click.stop
+            />
           </template>
         </van-cell>
         <!-- </InfiniteList> -->

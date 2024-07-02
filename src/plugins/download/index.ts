@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { saveAs } from 'file-saver';
 import { parse } from 'qs';
+import { isUndefined } from 'lodash';
 import request from '@/utils/request';
 import Utils from '@/utils';
 import { showLoadingToast, closeToast, showFailToast } from 'vant';
@@ -11,18 +12,39 @@ async function printErrMsg(data: any) {
   showFailToast(msg);
 }
 
-export default async function (url: string, filename: string) {
+const baseURL = import.meta.env.VITE_APP_BASE_API;
+export default async function (ossKey: string, filename: string) {
   try {
-    showLoadingToast({
-      message: '下载中...'
-    });
+    showLoadingToast('正在下载，请稍候');
+    var url = '';
+    let params = {};
+    if (isUndefined(filename)) {
+      url = baseURL + '/manage/oss/download/' + ossKey;
+    } else {
+      url = baseURL + '/manage/oss/download';
+      params = {
+        filename: filename,
+        url: ossKey
+      };
+    }
 
-    const { data }: { data: BlobPart } = await axios.get(url, {
-      responseType: 'blob'
-    });
+    // axios({
+    //   method: 'get',
+    //   url: url,
+    //   responseType: 'blob',
+    //   params: params,
+    //   headers: { 'Authorization': 'Bearer ' + getToken() }
+    // }).then(async (res) => {
+    //   const isLogin = await blobValidate(res.data);
+    //   if (isLogin) {
+    //     const blob = new Blob([res.data], { type: 'application/octet-stream' })
+    //     this.saveAs(blob, decodeURI(res.headers['download-filename']))
+    //   } else {
+    //     this.printErrMsg(res.data);
+    //   }
   } catch (e) {
     console.error(e);
-    showFailToast('下载文件出现错误，请联系管理员！');
+    showFailToast('下载文件出现错误!');
   } finally {
     closeToast();
   }

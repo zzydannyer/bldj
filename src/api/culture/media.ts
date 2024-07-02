@@ -47,6 +47,7 @@ export class MediaMain {
   resourceType = '';
   submitTime = '';
   uid = '';
+  tel = '';
   fileList?: MediaFile[];
   audits?: MediaAudits[];
 }

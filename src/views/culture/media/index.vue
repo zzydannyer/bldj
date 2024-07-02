@@ -14,24 +14,45 @@
   const { userInfo } = useStore();
   const { userType } = storeToRefs(userInfo);
 
-  const [categoryOption, getOptions] = Hooks.useCategory(userType.value);
+  const searchRef = ref();
+  const listRef = ref();
+
   const [queryParams, resetQueryParams] =
     Hooks.useQueryParams<CultureMediaParams>(new CultureMediaParams());
+
+  const checked = ref([]);
+
   const { list, loading, refreshing, finished, onLoad, onRefresh } =
     Hooks.useList<CultureMediaParams, MediaMain>(
       queryParams,
       MediaServer.LIST_MEDIA_MAIN
     );
 
-  const listRef = ref(null);
+  function handleQuery() {
+    onRefresh();
+    searchRef.value?.close();
+  }
+  function resetQuery() {
+    resetQueryParams();
+    checked.value = [];
+    searchRef.value?.close();
+  }
 
-  const checked = ref([]);
+  const computedList = computed(() => {
+    return list.value.filter((item) => {
+      return checked.value.every((checkbox) => item[checkbox] === '1');
+    });
+  });
 
-  onBeforeMount(getOptions);
+  const [categoryOption, getOptions] = Hooks.useCategory();
+
+  onBeforeMount(() => {
+    getOptions();
+    handleQuery();
+  });
 </script>
 <template>
   <main class="mt-2 pt-2 bg-white">
-    {{ checked }}
     <section class="px-4">
       <van-button
         block
@@ -44,9 +65,10 @@
       />
     </section>
     <AdvancedSearch
+      ref="searchRef"
       v-model="queryParams.params.mediaTitleLike"
-      @search="onRefresh"
-      @reset="resetQueryParams"
+      @search="handleQuery"
+      @reset="resetQuery"
     >
       <!-- 媒体标题 -->
       <van-field
@@ -108,7 +130,7 @@
         <section class="grid gap-2 grid-cols-2 px-4">
           <div
             class="sub-content"
-            v-for="row in list"
+            v-for="row in computedList"
             :key="row.uid"
             @click="router.push('/culture/mediaDetail/' + row.uid)"
           >

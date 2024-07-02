@@ -1,4 +1,4 @@
-import { Dict } from '@/api/dict';
+import { Dict, DictData } from '@/api/dict';
 import { isArray, isObject, isNull, isUndefined, isString } from 'lodash';
 import { stringify } from 'qs';
 import Constants, { ResCode } from '@/constants';
@@ -31,8 +31,23 @@ export const isNotEmpty = (value: any) => !isEmpty(value);
 export const transParams = (params: any) => stringify(params, { encode: true });
 
 // 回显数据字典
-export function parseDict(dicts: Dict[], value?: Numeric) {
-  return dicts.find((dict) => dict.value === value)?.text;
+export function parseDict(
+  dicts: any[],
+  dictValue?: Numeric,
+  columnsFieldNames = {
+    value: 'value',
+    text: 'text'
+  }
+) {
+  if (!dicts || !dicts.length || !dictValue) return dictValue;
+  const text = columnsFieldNames?.text ?? 'text';
+  const value = columnsFieldNames?.value ?? 'value';
+  for (const dict of dicts) {
+    if (dict[value] == dictValue) {
+      return dict[text];
+    }
+  }
+  return dictValue;
 }
 
 // 获取实例中全局property
@@ -57,5 +72,5 @@ function isPrivateUrl(src: string) {
 
 export default {
   isLink,
-  isPrivateUrl,
+  isPrivateUrl
 };

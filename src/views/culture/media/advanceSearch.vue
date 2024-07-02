@@ -5,23 +5,45 @@
 
   const emit = defineEmits(['search', 'reset']);
 
+  function handleKeyUp(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      emit('search');
+    }
+  }
+
+  function onListener() {
+    document.addEventListener('keyup', handleKeyUp);
+  }
+  function offListener() {
+    document.removeEventListener('keyup', handleKeyUp);
+  }
+
+
+
+  onBeforeMount(onListener);
+  onBeforeUnmount(offListener);
+
   defineSlots<{
     default: () => any;
   }>();
+
+  defineExpose({
+    close: () => {
+      show.value = false;
+    }
+  });
 </script>
 <template>
   <form action="/">
     <van-search
-      type="search"
       v-model="searchInput"
       placeholder="请输入搜索关键词"
       show-action
+      @clear="emit('search')"
     >
-      <template #left>
-        <van-icon class="mr-2" name="filter-o" @click="show = true" />
-      </template>
       <template #action>
-        <div @click="emit('search')">搜索</div>
+        <van-icon class="mr-2 text-lg" name="filter-o" @click="show = true" />
       </template>
     </van-search>
   </form>

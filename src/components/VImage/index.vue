@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { ImageProps } from 'vant';
+  import type { ImageProps } from 'vant';
   import UrlServer from '@/api/privateUrl';
   import Utils from '@/utils';
   import defaultImage from '@/assets/images/default.png?url';
